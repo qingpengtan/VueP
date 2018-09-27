@@ -13,8 +13,8 @@
                 <el-row :gutter="20">
                     <el-col :span="8" v-show="isEdit">
                         <el-form-item label="用户名">
-                            <div style="font-size:14px;color:#999;height:20px;line-height:20px">某某(X3503211558224)</div>
-                            <div style="font-size:12px;color:#999;height:12px;line-height:12px"> 2018-20-20</div>
+                            <div style="font-size:14px;color:#999;height:20px;line-height:20px">{{form.userName}}({{form.userUuid}})</div>
+                            <div style="font-size:12px;color:#999;height:12px;line-height:12px"> {{form.createTime}}</div>
                         </el-form-item>
                     </el-col>
                     <el-col :span="8" v-show="!isEdit">
@@ -108,7 +108,7 @@
                         <div class="crop-demo-btn">选择图片
                             <input class="crop-input" type="file" name="image" accept="image/*" @change="setImage" />
                         </div>
-                    </div>
+                        </div>
                 </el-form-item>
 
                 <el-dialog title="裁剪图片" :visible.sync="dialogVisible" width="30%">
@@ -157,7 +157,8 @@ export default {
         address: "",
         status: "",
         userTag: [],
-        createTime: ""
+        createTime: "",
+        userUuid:"",
       },
       errorMsg: "",
       rules: {
@@ -176,6 +177,8 @@ export default {
     VueCropper
   },
   created() {
+   
+
     this.cropImg = this.defaultSrc;
 
     let result = this.$route.query;
@@ -191,17 +194,18 @@ export default {
       this.form.sex = result.sex;
       this.form.age = result.age;
       this.form.roleId = result.roleId + "";
-      this.form.province = [result.province, result.city, ""];
+      this.form.province = [result.provinceV, result.cityV, ""];
       this.form.address = result.address;
-      this.form.status = result.status;
+      this.form.status = result.status == 1000 ? true : false;
       this.form.userTag = result.userTag.split(",");
       this.form.createTime = result.createTime;
+      this.form.userUuid = result.userUuid;
     }
   },
   methods: {
     onSubmit(formName) {
       this.$refs[formName].validate(valid => {
-        if (true) {
+        if (valid) {
           let params = {
             userName: this.form.userName,
             userPhone: this.form.userPhone,
@@ -212,21 +216,20 @@ export default {
             province: this.form.province[0],
             city: this.form.province[1],
             address: this.form.address,
-            status: this.form.status,
-            userTag: this.form.userTag.join(",")
+            status: this.form.status ? 1000 : 2000,
+            userTag: this.form.userTag.join(","),
+            userUuid: this.form.userUuid,
           };
 
-          this.$http
-            .http("/sys/user/save", params)
-            .then(res => {
-              if (res.code == 1) {
-                this.$message.success("提交成功！");
-              } else {
-                this.errorMsg = res.msg;
-              }
-            });
+          this.$http.http("/sys/user/save", params).then(res => {
+            if (res.code == 1) {
+              this.$message.success("提交成功！");
+            } else {
+              this.errorMsg = res.msg;
+            }
+          });
         } else {
-          this.$message.success("提交失败！");
+          this.$message.error("提交失败！");
         }
       });
     },

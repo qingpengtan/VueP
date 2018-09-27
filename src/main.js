@@ -68,6 +68,29 @@ axios.interceptors.response.use(response => {
     return Promise.resolve(err)
 })
 
+
+Vue.filter("emptyValue", function (value) {
+    if(StringUtils.isEmpty(value)){
+        return "";
+    }else{
+        return value;
+    }
+});
+
+Vue.filter("statusFilter", function (value) {
+
+    if(value == 1000){
+        return "正常";
+    }else if(value ==2000){
+        return "禁用";
+    }else if(StringUtils.isEmpty(value)){
+        return "";
+    }else{
+        return value;
+    }
+
+});
+
 new Vue({
     router,
     render: h => h(App)

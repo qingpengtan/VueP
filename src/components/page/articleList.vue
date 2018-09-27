@@ -20,13 +20,17 @@
       <el-table :data="tableData" border style="width: 100%">
         <el-table-column prop="articleTitle" label="标题">
         </el-table-column>
-        <el-table-column prop="content" label="内容">
+        <el-table-column label="用户">
+          <template scope="scope">
+            <p>{{scope.row.userPhone}}/{{ scope.row.userName | emptyValue }}</p>
+          </template>
         </el-table-column>
-        <el-table-column prop="status" label="状态">
+        <el-table-column prop="articleTag" label="文章类型">
         </el-table-column>
-        <el-table-column prop="user" label="用户">
-        </el-table-column>
-        <el-table-column prop="articleType" label="文章类型">
+        <el-table-column label="状态">
+          <template scope="scope">
+            <p>{{ scope.row.status | statusFilter }}</p>
+          </template>
         </el-table-column>
         <el-table-column prop="createTime" label="发表时间">
         </el-table-column>
@@ -69,11 +73,9 @@ export default {
   created() {
     // this.getData();
     var that = this;
-    this.$http
-      .http("/sys/article/list", {})
-      .then(function(res) {
-        that.tableData = res.data;
-      });
+    this.$http.http("/sys/article/list", {}).then(function(res) {
+      that.tableData = res.data;
+    });
   },
   methods: {
     // 分页导航

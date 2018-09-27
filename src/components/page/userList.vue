@@ -20,22 +20,31 @@
       <el-table :data="tableData" border style="width: 100%">
         <el-table-column label="编号/用户名">
           <template scope="scope">
-            <p>{{ scope.row.userUuid +"/"+ scope.row.userName}}</p>
+            <p>{{ scope.row.userUuid}}/{{scope.row.userName | emptyValue}}</p>
           </template>
         </el-table-column>
         <el-table-column prop="userPhone" label="电话">
         </el-table-column>
         <el-table-column prop="roleId" label="角色">
         </el-table-column>
-        <el-table-column prop="sex" label="性别/年龄/出生日期">
+        <el-table-column label="性别/年龄/出生日期">
+          <template scope="scope">
+            <p>{{ scope.row.sex | emptyValue}}/{{ scope.row.age | emptyValue}}/{{scope.row.birthday | emptyValue}}</p>
+          </template>
         </el-table-column>
-        <el-table-column prop="province" label="省份/城市">
+        <el-table-column label="省份/城市">
+          <template scope="scope">
+            <p>{{ scope.row.province | emptyValue }}/{{scope.row.city | emptyValue}}</p>
+          </template>
         </el-table-column>
         <el-table-column prop="address" label="详细住址">
         </el-table-column>
         <el-table-column prop="userTag" label="用户标签">
         </el-table-column>
-        <el-table-column prop="status" label="状态">
+        <el-table-column label="状态">
+          <template scope="scope">
+            <p>{{ scope.row.status | statusFilter }}</p>
+          </template>
         </el-table-column>
         <el-table-column prop="createTime" label="创建时间">
         </el-table-column>
@@ -72,19 +81,17 @@ export default {
       tableData: [],
       cur_page: 1,
       select_word: "",
-      delVisible:false,
+      delVisible: false,
       is_search: false,
       idx: -1
     };
   },
   created() {
     // this.getData();
-    this.$http
-      .http("/sys/user/list",{})
-      .then((res) =>{
-        console.log(res);
-        this.tableData = res.data;
-      });
+    this.$http.http("/sys/user/list", {}).then(res => {
+      console.log(res);
+      this.tableData = res.data;
+    });
   },
   methods: {
     // 分页导航
@@ -93,8 +100,8 @@ export default {
       this.getData();
     },
 
-    addUser(){
-      this.$router.push({path:'/sys/form'})
+    addUser() {
+      this.$router.push({ path: "/sys/form" });
     },
     search() {
       this.is_search = true;
