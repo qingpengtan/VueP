@@ -18,7 +18,7 @@
                                     </span>
                                     <el-dropdown-menu slot="dropdown">
                                         <el-dropdown-item>个人中心</el-dropdown-item>
-                                        <el-dropdown-item @click="loginOut()">退出登录</el-dropdown-item>
+                                        <el-dropdown-item @click.native="loginOut()">退出登录</el-dropdown-item>
 
                                     </el-dropdown-menu>
                             </el-dropdown>
@@ -73,7 +73,7 @@ export default {
   methods: {
     loginOut() {
       localStorage.clear();
-      this.$router.push("/");
+      this.$router.push("/user-login");
     }
   }
 };
