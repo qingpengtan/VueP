@@ -38,22 +38,21 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$axios
-            .post(
-              "/sys/user/login",
-              this.$qs.stringify({
-                userName: this.ruleForm.username,
-                password: this.ruleForm.password
-              })
-            )
+          this.$http
+            .http("/sys/user/login", {
+              userName: this.ruleForm.username,
+              password: this.ruleForm.password
+            })
             .then(res => {
-              if (res.data.code == 1) {
-                localStorage.setItem("ms_username", that.ruleForm.username);
-                // localStorage.setItem("ms_role","sys")
+              if (res.code == 1) {
+                localStorage.setItem("x_token", res.data.token);
+                localStorage.setItem("x_userName", res.data.userName);
+                localStorage.setItem("x_userPhone", res.data.userPhone);
+                localStorage.setItem("x_role", res.data.role);
                 this.$router.push("/sys");
               } else {
-                console.log(res.data.msg);
-                this.errorMsg = res.data.msg;
+                console.log(res.msg);
+                this.errorMsg = res.msg;
               }
             });
         } else {

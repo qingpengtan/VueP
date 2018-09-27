@@ -184,64 +184,47 @@ export default {
       this.isEdit = false;
     } else {
       this.isEdit = true;
+      this.form.userName = result.userName;
+      this.form.userUuid = result.userUuid;
+      this.form.userPhone = result.userPhone;
+      this.form.birthday = result.birthday;
+      this.form.sex = result.sex;
+      this.form.age = result.age;
+      this.form.roleId = result.roleId + "";
+      this.form.province = [result.province, result.city, ""];
+      this.form.address = result.address;
+      this.form.status = result.status;
+      this.form.userTag = result.userTag.split(",");
+      this.form.createTime = result.createTime;
     }
-    this.form.userName = result.userName;
-    this.form.userUuid = result.userUuid;
-    this.form.userPhone = result.userPhone;
-    this.form.birthday = result.birthday;
-    this.form.sex = result.sex;
-    this.form.age = result.age;
-    this.form.roleId = result.roleId+"";
-    this.form.province = [ result.province,result.city,""];
-    this.form.address = result.address;
-    this.form.status = result.status;
-    this.form.userTag = result.userTag.split(',');
-    this.form.createTime = result.createTime;
   },
   methods: {
     onSubmit(formName) {
       this.$refs[formName].validate(valid => {
         if (true) {
-            let params = {
-              userName: this.form.userName,
-              userPhone:this.form.userPhone,
-              birthday: this.form.birthday,
-              sex: this.form.sex,
-              age: this.form.age,
-              roleId: this.form.roleId,
-              province: this.form.province[0],
-              city:this.form.province[1],
-              address: this.form.address,
-              status: this.form.status,
-              userTag: this.form.userTag.join(",")
-            };
-        //   let params = {
-        //     userName: "星空",
-        //     userPhone: "13030860591",
-        //     birthday: "2018-09-27",
-        //     sex: "男",
-        //     age: "13",
-        //     roleId: "3",
-        //     province: "津30100",
-        //     city: "津30000",
-        //     address: "某某街道",
-        //     status: "1000",
-        //     userTag: "java,web"
-        //   };
-        console.log(params)
-        
-          this.$axios
-            .post("/sys/user/save", this.$qs.stringify(params))
+          let params = {
+            userName: this.form.userName,
+            userPhone: this.form.userPhone,
+            birthday: this.form.birthday,
+            sex: this.form.sex,
+            age: this.form.age,
+            roleId: this.form.roleId,
+            province: this.form.province[0],
+            city: this.form.province[1],
+            address: this.form.address,
+            status: this.form.status,
+            userTag: this.form.userTag.join(",")
+          };
+
+          this.$http
+            .http("/sys/user/save", params)
             .then(res => {
-              if (res.data.code == 1) {
-                // localStorage.setItem("ms_username", that.ruleForm.username);
+              if (res.code == 1) {
+                this.$message.success("提交成功！");
               } else {
-                console.log(res.data.msg);
-                this.errorMsg = res.data.msg;
+                this.errorMsg = res.msg;
               }
             });
-
-          this.$message.success("提交成功！");
         } else {
           this.$message.success("提交失败！");
         }

@@ -11,13 +11,24 @@ body,
     height: 100%;
     overflow: hidden;
 }
+li{
+    list-style: none;
+}
+#app{
+    overflow-y: auto!important;
+}
 
 body {
-    font-family: 'PingFang SC', "Helvetica Neue", Helvetica, "microsoft yahei", arial, STHeiTi, sans-serif;
+    background: #eeeeee;
+    font-family: Chinese Quote, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, 'PingFang SC', "Helvetica Neue", Helvetica, "microsoft yahei", arial, STHeiTi, sans-serif;
+    color: #555555;
+    font-size: 14px;
+    letter-spacing: 1px;
 }
 
 a {
-    text-decoration: none
+    text-decoration: none;
+    color: #555555;
 }
 
 .content-box {

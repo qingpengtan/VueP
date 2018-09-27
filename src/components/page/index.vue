@@ -198,9 +198,6 @@ export default {
 
 
 <style scoped>
-#app {
-  overflow: scroll !important;
-}
 
 .layout-main {
   width: 1260px;

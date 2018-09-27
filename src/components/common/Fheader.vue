@@ -4,23 +4,31 @@
             <div class="header-main">
 
                 <div class="header-navbar">
-                    <img class="header-left" src="../../assets/logo.gif" />
-                    <div style="background:red;height:64px;float:left;width:auto">
+                    <router-link to='/'>
+                        <img class="header-left" src="../../assets/logo.gif" />
+                    </router-link>
 
-                    </div>
-                    <div class="header-right">
-                        <!-- <span class="avatar right-span">
-                            <span>
-                                <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="avatar">
+                        <div class="header-right">
+                            <el-dropdown trigger="click">
+                                <span class="avatar right-span" v-show="loginStatus">
+                                    <span>
+                                        <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="avatar">
+                                    </span>
+                                        <span class="antd-pro-components-global-header-index-name">{{userName}}</span>
+                                    </span>
+                                    <el-dropdown-menu slot="dropdown">
+                                        <el-dropdown-item>个人中心</el-dropdown-item>
+                                        <el-dropdown-item @click="loginOut()">退出登录</el-dropdown-item>
+
+                                    </el-dropdown-menu>
+                            </el-dropdown>
+
+                            <span class="right-span" v-show="!loginStatus">
+                                <router-link to='/user-login'>
+                                    <el-button type="primary" plain>登录</el-button>
+                                </router-link>
                             </span>
-                            <span class="antd-pro-components-global-header-index-name">Serati Ma</span>
-                        </span> -->
-                        <span class="right-span">
-                            <router-link to='/user-login'>
-                                <el-button type="primary" plain>登录</el-button>
-                            </router-link>
-                        </span>
-                    </div>
+                        </div>
                 </div>
             </div>
 
@@ -28,7 +36,9 @@
 
         <div class="header-content">
             <ul>
-                <li>首页</li>
+                <li>
+                    <router-link to='/'>首页</router-link>
+                </li>
                 <li>日志</li>
                 <li>论坛</li>
                 <li>音乐</li>
@@ -42,9 +52,33 @@
 </template>
 
 <script>
-export default {};
+import StringUtils from "../../utils/StringUtils.js";
+
+export default {
+  name: "fhead",
+  data() {
+    return {
+      loginStatus: false,
+      userName: ""
+    };
+  },
+  created() {
+    this.loginStatus = StringUtils.isEmpty(localStorage.getItem("x_token"))
+      ? false
+      : true;
+    if (this.loginStatus) {
+      this.userName = localStorage.getItem("x_userPhone");
+    }
+  },
+  methods: {
+    loginOut() {
+      localStorage.clear();
+      this.$router.push("/");
+    }
+  }
+};
 </script>
-<style>
+<style scoped>
 .layout-header {
   width: 100%;
   height: auto;
@@ -81,7 +115,7 @@ export default {};
   min-height: 50px;
   line-height: 50px;
   padding: 0 32px;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
 }
 
 .header-left {
@@ -90,7 +124,6 @@ export default {};
   height: 64px;
   line-height: 64px;
   transition: all 0.3s, padding 0s;
-  background: burlywood;
   width: 68px;
   height: 64px;
   display: inline-block;

@@ -92,14 +92,13 @@ export default {
               articleTag: this.form.articleTag,
               status: this.form.status,
             };
-          this.$axios
-            .post("/sys/article/save", this.$qs.stringify(params))
+          this.$http
+            .http("/sys/article/save", params)
             .then(res => {
-              if (res.data.code == 1) {
+              if (res.code == 1) {
                 // localStorage.setItem("ms_username", that.ruleForm.username);
               } else {
-                console.log(res.data.msg);
-                this.errorMsg = res.data.msg;
+                this.errorMsg = res.msg;
               }
             });
 

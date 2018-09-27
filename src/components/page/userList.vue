@@ -79,12 +79,11 @@ export default {
   },
   created() {
     // this.getData();
-    var that = this;
-    this.$axios
-      .post("/sys/user/list", this.$qs.stringify({}))
-      .then(function(res) {
-        that.tableData = res.data.data;
-        console.log(that.tableData);
+    this.$http
+      .http("/sys/user/list",{})
+      .then((res) =>{
+        console.log(res);
+        this.tableData = res.data;
       });
   },
   methods: {
