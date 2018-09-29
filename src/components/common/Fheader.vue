@@ -52,7 +52,7 @@
       </ul>
     </div>
 
-    <el-dialog title="记录说说" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+    <el-dialog title="说说记录" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
       <el-input type="textarea" v-model="content" :rows="5" placeholder="记录美好生活">
       </el-input>
       <span slot="footer" class="dialog-footer">
@@ -89,6 +89,9 @@ export default {
       done();
     },
     publish() {
+      if(this.content.trim() == ''){
+        return;
+      }
       this.$http
         .http("/index/save", { content: this.content })
         .then(res => {

@@ -66,7 +66,12 @@ axios.interceptors.response.use(response => {
             path: "/403"
         });
     } else if (code == 500100) {
-        new Vue().$message.warning(msg);
+        new Vue().$message({
+            showClose: true,
+            duration:10000,
+            message: msg,
+            type: 'warning'
+        });
     }
     return response
 }, err => {

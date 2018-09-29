@@ -1,53 +1,45 @@
 <template>
 
-    <div>
-        <div class="layout-header">
-            <div class="header-main">
+  <div>
+    <div class="layout-header">
+      <div class="header-main">
 
-                <div class="header-navbar">
-                    <img class="header-left" src="../../assets/logo.gif" />
-                    <div style="background:red;height:64px;float:left;width:auto">
+        <div class="header-navbar">
+          <img class="header-left" src="../../assets/logo.gif" />
+          <div style="background:red;height:64px;float:left;width:auto">
 
-                    </div>
-                    <div class="header-right">
-                        <!-- <span class="avatar right-span">
+          </div>
+          <div class="header-right">
+            <!-- <span class="avatar right-span">
                             <span>
                                 <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="avatar">
                             </span>
                             <span class="antd-pro-components-global-header-index-name">Serati Ma</span>
                         </span> -->
-                        <span class="right-span">
-                            <el-button type="primary">发表</el-button>
-                        </span>
-                    </div>
-                </div>
-            </div>
-
+            <span class="right-span">
+              <el-button type="primary" @click="publish()">发表</el-button>
+            </span>
+          </div>
         </div>
+      </div>
 
-        <!-- <div class="header-content">
-            <ul>
-                <li>首页</li>
-                <li>日志</li>
-                <li>论坛</li>
-                <li>音乐</li>
-                <li>视频</li>
-                <li><router-link to='/edit-text'>写文章</router-link></li>
-            </ul>
-        </div> -->
-        <div class="layout-main">
-
-            <div class="layout-content">
-                <div class="main-content" style="padding: 8px 32px 32px;">
-                    <div style="margin-top:20px">
-                        <input type="text" class="editor-title" placeholder="请输入标题">
-                        <quill-editor ref="myTextEditor" v-model="content" :options="editorOption"></quill-editor>
-                    </div>
-
-                </div>
-            </div>
-        </div>
     </div>
+    <div class="layout-main">
+
+      <div class="layout-content">
+        <div class="main-content" style="padding: 8px 32px 32px;">
+          <div style="margin-top:20px">
+            <input type="text" class="editor-title" placeholder="请输入标题" v-model="articleTitle">
+            <el-select placeholder="请选择" v-model="articleTagId">
+              <el-option key="1" label="心情日志" value="1"></el-option>
+            </el-select>
+            <quill-editor ref="myTextEditor" v-model="content" :options="editorOption"></quill-editor>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
 
 </template>
 
@@ -63,11 +55,31 @@ export default {
       editorOption: {
         placeholder: "Hello World"
       },
-      content: ""
+      content: "",
+      articleTitle: "",
+      articleTagId: "1"
     };
   },
   components: {
     quillEditor
+  },
+  methods: {
+    publish() {
+      if (this.content.trim() == "") {
+        return;
+      }
+      if (this.articleTitle.trim() == "") {
+        return;
+      }
+      this.$http.http("/index/save", { content: this.content,articleTitle:this.articleTitle}).then(res => {
+        if (res.code == 1) {
+      this.$router.push({ path: "/"});
+          this.$message.success("提交成功！");
+        } else {
+          this.$message.error(res.msg);
+        }
+      });
+    }
   }
 };
 </script>
@@ -170,14 +182,14 @@ export default {
   background: white;
   margin-top: 20px;
 }
-.editor-title{
-    width: 90%;
-    height: 40px;
-    margin: 20px;
-    border: none;
-    font-size: 24px;
-    outline: none;
-
+.editor-title {
+  width: 79%;
+  height: 40px;
+  margin: 20px;
+  border: none;
+  font-size: 24px;
+  outline: none;
+  display: inline-block;
 }
 </style>
 

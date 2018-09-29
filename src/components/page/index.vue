@@ -25,8 +25,7 @@
                         </div>
                         <div class="ant-list-item-content">
                             <div>
-                                <div class="text-content">
-                                    {{article.content}}
+                                <div class="text-content" v-html=article.content>
                                 </div>
                                 <div class="publish">
                                     <span>
@@ -65,7 +64,7 @@
                                     </i>19</span>
                             </li>
                         </ul> -->
-
+                        <hr>
                     </div>
 
                 </div>
@@ -124,6 +123,7 @@ export default {
 .ant-list-item-content .text-content {
   line-height: 22px;
   max-height: 108px;
+  overflow: hidden;
 }
 
 .publish {
