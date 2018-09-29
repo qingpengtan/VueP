@@ -11,11 +11,13 @@ body,
     height: 100%;
     overflow: hidden;
 }
-li{
+
+li {
     list-style: none;
 }
-#app{
-    overflow-y: auto!important;
+
+#app {
+    overflow-y: auto !important;
 }
 
 body {
@@ -178,3 +180,39 @@ a {
 .v-note-wrapper .v-note-panel {
     min-height: 500px;
 }
+
+
+@media only screen and (max-width: 481px) {
+    html {
+        font-size: 68px;
+    }
+}
+
+@media only screen and (max-width: 415px) {
+    html {
+        font-size: 64px;
+    }
+}
+
+@media only screen and (max-width: 376px) {
+    html {
+        font-size: 58px;
+    }
+}
+
+@media only screen and (max-width: 361px) {
+    html {
+        font-size: 56px;
+    }
+}
+
+@media only screen and (max-width: 321px) {
+    html {
+        font-size: 50px;
+    }
+}
+
+@media screen and (max-width:321px){body{font-size:15px} }
+@media screen and (min-width:321px) and (max-width:400px){ body{font-size:16px}}
+
+

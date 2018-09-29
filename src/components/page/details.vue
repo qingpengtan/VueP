@@ -127,23 +127,21 @@ export default {
   },
   data() {
     return {
-        article:""
+      article: ""
     };
   },
   created() {
-    this.$http.http("/index/detail", {articleId:this.$route.query.articleId}).then(res => {
-      this.article = res.data;
-    });
+    this.$http
+      .http("/index/detail", { articleId: this.$route.query.articleId })
+      .then(res => {
+        this.article = res.data;
+      });
   }
 };
 </script>
 
 
 <style scoped>
-#app {
-  overflow: scroll !important;
-}
-
 .layout-main {
   width: 1260px;
   height: 100%;
@@ -235,6 +233,93 @@ export default {
 }
 .leave-comment {
   padding-left: 10px;
+}
+@media only screen and (max-width: 481px) {
+  .layout-main,
+  .main-content,
+  .ant-list-item {
+    width: 100%;
+  }
+  .main-content {
+    width: calc(100% - 0.406897rem);
+    padding: 0.206897rem !important;
+    font-size: 14px;
+  }
+
+  .ant-list-item-meta-content,
+  .ant-list-item-content {
+    margin-bottom: 8px;
+  }
+
+  .ant-list-item-content .text-content {
+    line-height: 22px;
+  }
+
+  .publish {
+    margin-top: 5px;
+  }
+
+  .publish img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: relative;
+    top: 4px;
+    margin-right: 10px;
+  }
+
+  .ant-list-item-action li {
+    float: left;
+    padding-right: 16px;
+    cursor: pointer;
+  }
+  .comment {
+    width: 100%;
+    margin-top: 12px;
+    height: auto;
+  }
+  .comment textarea {
+    width: 90%;
+    margin-left: 20px;
+  }
+  .comment .comment-btn {
+    float: right;
+    margin: 20px;
+    margin-top: 10px;
+  }
+  .leave-word {
+    clear: both;
+    background: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0 #999;
+    padding: 20px;
+  }
+  .leave-word-item .leave-img,
+  .leave-word-item .leave-comment {
+    display: inline-block;
+  }
+  .leave-word-item {
+    padding: 20px 0px;
+    border-bottom: 1px solid #999;
+  }
+  .leave-word-item:first-child {
+    padding-top: 0px;
+  }
+  .leave-img img {
+    width: 30px;
+  }
+  .leave-img span {
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 10px;
+    position: relative;
+    top: -5px;
+    font-weight: bold;
+  }
+  .leave-comment {
+    padding-left: 10px;
+  }
 }
 </style>
 

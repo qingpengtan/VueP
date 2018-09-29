@@ -89,19 +89,17 @@ export default {
       done();
     },
     publish() {
-      if(this.content.trim() == ''){
+      if (this.content.trim() == "") {
         return;
       }
-      this.$http
-        .http("/index/save", { content: this.content })
-        .then(res => {
-          if (res.code == 1) {
-            this.dialogVisible = false;
-            this.$message.success("提交成功！");
-          } else {
-            this.$message.error(res.msg);
-          }
-        });
+      this.$http.http("/index/save", { content: this.content }).then(res => {
+        if (res.code == 1) {
+          this.dialogVisible = false;
+          this.$message.success("提交成功！");
+        } else {
+          this.$message.error(res.msg);
+        }
+      });
     },
     loginOut() {
       localStorage.clear();
@@ -193,6 +191,46 @@ export default {
   height: 24px;
   position: relative;
   top: 7px;
+}
+
+@media only screen and (max-width: 481px) {
+  .header-main {
+    width: 100%;
+  }
+  .header-right {
+    margin-right: 0;
+  }
+  .header-navbar {
+    height: 1rem;
+  }
+  .header-left {
+    height: 1rem;
+    line-height: 1rem;
+  }
+  .header-right .right-span {
+    line-height: 1rem;
+  }
+  .header-content ul {
+    width: 100%;
+  }
+  .header-content li {
+    float: left;
+    min-height: 0.5rem;
+    padding: 0 0.12rem;
+    padding-left: 0.18rem;
+    letter-spacing: 1px;
+    font-size: 14px;
+  }
+  >>> .el-dialog {
+    width: 100% !important;
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+  }
+  >>> .el-dialog__body,>>> .el-dialog__header, >>> .el-dialog__footer{
+    padding: 10px!important;
+  }
+
 }
 </style>
 

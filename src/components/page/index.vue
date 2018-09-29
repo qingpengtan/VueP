@@ -14,7 +14,7 @@
 
                     <div class="ant-list-item" v-for=" article in articleList" :key="article.articleId">
                         <div class="ant-list-item-meta-content">
-                            <router-link  :to="{path:'/detail', query:{articleId:article.articleId}}">
+                            <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
                                 <h4>{{article.articleTitle}}</h4>
                             </router-link>
                             <!-- <div class="ant-list-item-meta-description"><span>
@@ -67,10 +67,10 @@
                         <hr>
                     </div>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 </template>
 
@@ -136,13 +136,60 @@ export default {
   border-radius: 50%;
   position: relative;
   top: 4px;
-  margin-right: 10px;
+  margin-right: 8px;
 }
 
 .ant-list-item-action li {
   float: left;
   padding-right: 16px;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 481px) {
+  .layout-main,
+  .main-content,
+  .ant-list-item {
+    width: 100%;
+  }
+  .main-content {
+    width: calc(100% - 0.506897rem);
+    padding: 0.206897rem !important;
+    font-size: 14px;
+  }
+  .ant-list-item {
+    padding: 0.137931rem 0;
+  }
+
+  .ant-list-item-meta-content,
+  .ant-list-item-content {
+    margin-bottom: 0.172414rem;
+  }
+
+  .ant-list-item-content .text-content {
+    line-height: 22px;
+    max-height: 108px;
+    overflow: hidden;
+    word-wrap: normal;
+    word-break: break-all;
+    text-wrap: normal;
+  }
+
+  .publish {
+    margin-top: 0.172414rem;
+  }
+
+  .publish img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: relative;
+    top: 4px;
+    margin-right: 5px;
+  }
+
+  .ant-list-item-action li {
+    padding-right: 8px;
+  }
 }
 </style>
 

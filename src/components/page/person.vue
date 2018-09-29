@@ -14,7 +14,7 @@
                         <div class="header-avatar-div">
                             <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="avatar">
                         </div>
-                            <div class="header-avatar-div" style="margin-top:30px">
+                            <div class="header-avatar-div mobile-style" style="margin-top:30px">
                                 <div>
                                     <h1>{{form.userName}}</h1>
                                 </div>
@@ -45,13 +45,13 @@
                                     <el-form ref="form" :model="form" style="margin-top:10px" label-width="80px">
 
                                         <el-row :gutter="20">
-                                            <el-col :span="8">
+                                            <el-col :xs="20" :sm="8">
                                                 <el-form-item label="电话">
                                                     <span>{{form.userPhone}}</span>
                                                 </el-form-item>
                                             </el-col>
 
-                                            <el-col :span="8">
+                                            <el-col :xs="20" :sm="8">
                                                 <el-form-item label="角色">
                                                     <span>{{form.roleId == 1 ? '普通' : 'XX'}}</span>
                                                 </el-form-item>
@@ -61,13 +61,13 @@
                                         </el-row>
 
                                         <el-row :gutter="20">
-                                            <el-col :span="8">
+                                            <el-col :xs="20" :sm="8">
                                                 <el-form-item label="用户名">
                                                     <span v-show="!isEdit"> {{form.userName}}</span>
                                                     <el-input v-model="form.userName" v-show="isEdit"></el-input>
                                                 </el-form-item>
                                             </el-col>
-                                            <el-col :span="10">
+                                            <el-col :xs="20" :sm="8">
                                                 <el-form-item label="性别">
                                                     <span v-show="!isEdit">{{form.sex}}</span>
                                                     <el-radio v-model="form.sex" label="男" v-show="isEdit">男</el-radio>
@@ -78,13 +78,13 @@
                                         </el-row>
 
                                         <el-row :gutter="20">
-                                            <el-col :span="8">
+                                            <el-col :xs="20" :sm="8">
                                                 <el-form-item label="出生日期">
                                                     <span v-show="!isEdit">{{form.birthday}}</span>
                                                     <el-date-picker type="date" v-show="isEdit" placeholder="选择日期" value-format="yyyy-MM-dd" v-model="form.birthday" style="width: 100%;"></el-date-picker>
                                                 </el-form-item>
                                             </el-col>
-                                            <el-col :span="10">
+                                            <el-col :xs="20" :sm="8">
                                                 <el-form-item label="省份/城市">
                                                     <span v-show="!isEdit">{{form.provinceN}} {{form.cityN}}</span>
                                                     <el-cascader :options="options" v-model="form.province" v-show="isEdit"></el-cascader>
@@ -94,14 +94,14 @@
                                         </el-row>
 
                                         <el-row :gutter="20">
-                                            <el-col :span="8">
+                                            <el-col :xs="20" :sm="8">
                                                 <el-form-item label="年龄">
                                                     <span v-show="!isEdit">{{form.age}}</span>
                                                     <el-input v-model="form.age" v-show="isEdit"></el-input>
                                                 </el-form-item>
                                             </el-col>
 
-                                            <el-col :span="10">
+                                            <el-col :xs="20" :sm="8">
                                                 <el-form-item label="详细住址">
                                                     <span v-show="!isEdit">{{form.address}}</span>
                                                     <el-input type="textarea" rows="1" v-model="form.address" v-show="isEdit"></el-input>
@@ -282,9 +282,6 @@ export default {
   box-shadow: none !important;
   height: 300px;
 }
-.main-content >>> .person-info {
-}
-
 .main-content >>> .person-info .person-info-edit {
   position: relative;
 }
@@ -292,6 +289,61 @@ export default {
   position: absolute;
   top: 30px;
   right: 40px;
+}
+@media only screen and (max-width: 481px) {
+  .layout-main {
+    width: 100%;
+  }
+  .header-bg .header-avater {
+    left: -20px;
+    top: 120px;
+  }
+  .header-bg .header-avater img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }
+  .header-avater .mobile-style {
+    margin: 14px !important;
+  }
+  .mobile-style h1 {
+    font-size: 24px;
+  }
+  .header-right-contatin {
+    margin-right: 20px;
+    margin-top: 140px;
+  }
+  .header-right-contatin .header-right-div {
+    margin-left: 20px;
+  }
+  .header-right-div h2 {
+    font-size: 20px;
+  }
+  .main-content {
+    padding: 10px !important;
+    margin-top: 20px;
+  }
+
+  .main-content >>> .finish-btn {
+    top: 8px;
+    right: 10px;
+  }
+  .main-content >>> .el-tabs--border-card {
+    height: 505px;
+  }
+  .main-content >>> .el-tabs__content {
+    padding: 0;
+    padding-top: 30px;
+  }
+  .main-content >>> .el-col {
+    height: 40px;
+    width: 95%;
+  }
+
+  .main-content >>> .el-checkbox {
+      width: 100px;
+    margin-left: 0;
+  }
 }
 </style>
 

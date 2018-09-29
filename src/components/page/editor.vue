@@ -30,7 +30,7 @@
         <div class="main-content" style="padding: 8px 32px 32px;">
           <div style="margin-top:20px">
             <input type="text" class="editor-title" placeholder="请输入标题" v-model="articleTitle">
-            <el-select placeholder="请选择" v-model="articleTagId">
+            <el-select placeholder="请选择" v-model="articleTagId" class="select">
               <el-option key="1" label="心情日志" value="1"></el-option>
             </el-select>
             <quill-editor ref="myTextEditor" v-model="content" :options="editorOption"></quill-editor>
@@ -71,14 +71,19 @@ export default {
       if (this.articleTitle.trim() == "") {
         return;
       }
-      this.$http.http("/index/save", { content: this.content,articleTitle:this.articleTitle}).then(res => {
-        if (res.code == 1) {
-      this.$router.push({ path: "/"});
-          this.$message.success("提交成功！");
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
+      this.$http
+        .http("/index/save", {
+          content: this.content,
+          articleTitle: this.articleTitle
+        })
+        .then(res => {
+          if (res.code == 1) {
+            this.$router.push({ path: "/" });
+            this.$message.success("提交成功！");
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
     }
   }
 };
@@ -86,10 +91,6 @@ export default {
 
 
 <style scoped>
-#app {
-  overflow: scroll !important;
-}
-
 .layout-main {
   width: 1260px;
   height: 100%;
@@ -190,6 +191,116 @@ export default {
   font-size: 24px;
   outline: none;
   display: inline-block;
+}
+
+@media only screen and (max-width: 481px) {
+  .layout-main {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+  }
+  .main-content{
+    padding: 10px!important;
+  }
+
+  .main-content >>> .select input{
+    margin: 10px 0;
+  }
+  .layout-header {
+    width: 100%;
+    height: auto;
+    background: #f4f5f5;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  }
+
+  .header-main {
+    width: 100%;
+  }
+  .header-right {
+    margin-right: 0;
+  }
+  .header-navbar {
+    height: 1rem;
+  }
+
+  .header-content {
+    height: auto;
+    min-height: 50px;
+    width: auto;
+    margin-top: 1px;
+    border-bottom: 1px solid #e8e8e8;
+    background: white;
+  }
+
+  .header-content ul {
+    width: 1260px;
+    margin: 0 auto;
+  }
+  .header-content li {
+    float: left;
+    min-height: 50px;
+    line-height: 50px;
+    padding: 0 32px;
+    letter-spacing: 3px;
+  }
+
+  .header-left {
+    cursor: pointer;
+    font-size: 20px;
+    height: 64px;
+    line-height: 64px;
+    transition: all 0.3s, padding 0s;
+    background: burlywood;
+    width: 68px;
+    height: 64px;
+    display: inline-block;
+  }
+
+  .header-right {
+    float: right;
+    height: 100%;
+    margin-right: 20px;
+  }
+
+  .header-right .right-span {
+    padding: 0 15px;
+    cursor: pointer;
+    display: inline-block;
+    height: 100%;
+    transition: all 0.3s;
+    line-height: 64px;
+  }
+
+  .header-right .avatar span {
+    text-align: center;
+    font-size: 14px;
+    height: 100%;
+    display: inline-block;
+  }
+
+  .header-right img {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    top: 7px;
+  }
+
+  .layout-content {
+    height: auto;
+    width: auto;
+    background: white;
+    margin-top: 20px;
+  }
+  .editor-title {
+    width: 100%;
+    height: 40px;
+    margin: 0px;
+    border: none;
+    font-size: 24px;
+    outline: none;
+    display: inline-block;
+  }
 }
 </style>
 

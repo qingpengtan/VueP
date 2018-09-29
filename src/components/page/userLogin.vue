@@ -273,4 +273,18 @@ export default {
   border-radius: 3px;
   cursor: pointer;
 }
+@media only screen and (max-width: 481px) {
+  .login-register-home {
+    width: 100%;
+  }
+  .header-input {
+    padding: 0 40px 36px 40px;
+    width: calc(100% - 80px);
+    background: #536dfd;
+    position: relative;
+  }
+  .send-code {
+    left: 215px;
+  }
+}
 </style>
