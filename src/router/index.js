@@ -29,6 +29,11 @@ export default new Router({
         },
 
         {
+            path:'/person-info',
+            component: resolve => require(['../components/page/person.vue'], resolve),
+        },
+
+        {
             path: '/sys',
             component: resolve => require(['../components/common/Home.vue'], resolve),
             meta: { title: '自述文件' },
@@ -74,6 +79,10 @@ export default new Router({
         {
             path: '/404',
             component: resolve => require(['../components/page/404.vue'], resolve)
+        },
+        {
+            path: '/403',
+            component: resolve => require(['../components/page/403.vue'], resolve)
         },
         {
             path: '*',

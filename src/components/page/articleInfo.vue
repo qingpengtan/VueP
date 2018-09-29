@@ -56,6 +56,8 @@ import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 import { quillEditor } from "vue-quill-editor";
+import bus from "../common/bus";
+import tabUtils from "../../utils/tabUtils.js";
 export default {
   name: "editor",
   data: function() {
@@ -71,6 +73,13 @@ export default {
         articleId: ""
       }
     };
+  },
+  beforeCreate() {
+    // bus.$on("tags", msg => {
+    //   this.$nextTick(() => {
+    //     this.tabsList = msg;
+    //   });
+    // });
   },
   created() {
     let result = this.$route.query;
@@ -93,19 +102,22 @@ export default {
           let params = {
             articleTitle: this.form.articleTitle,
             content: this.form.content,
-            articleTag: this.form.articleTag,
+            articleTagId: this.form.articleTag,
             articleId: this.form.articleId,
             status: this.form.status ? 1000 : 2000
           };
           this.$http.http("/sys/article/save", params).then(res => {
             if (res.code == 1) {
-              // localStorage.setItem("ms_username", that.ruleForm.username);
+              tabUtils.closeCurrentTab(
+                this.$tabsList,
+                window.location.hash,
+                this
+              );
+              this.$message.success("提交成功！");
             } else {
               this.errorMsg = res.msg;
             }
           });
-
-          this.$message.success("提交成功！");
         } else {
           this.$message.success("提交失败！");
         }

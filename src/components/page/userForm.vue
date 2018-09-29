@@ -133,6 +133,7 @@
 import VueCropper from "vue-cropperjs";
 import cityData from "./city2.json";
 import StringUtils from "../../utils/StringUtils.js";
+import tabUtils from "../../utils/tabUtils.js";
 export default {
   name: "baseform",
   data: function() {
@@ -158,7 +159,7 @@ export default {
         status: "",
         userTag: [],
         createTime: "",
-        userUuid:"",
+        userUuid: ""
       },
       errorMsg: "",
       rules: {
@@ -177,8 +178,6 @@ export default {
     VueCropper
   },
   created() {
-   
-
     this.cropImg = this.defaultSrc;
 
     let result = this.$route.query;
@@ -218,11 +217,16 @@ export default {
             address: this.form.address,
             status: this.form.status ? 1000 : 2000,
             userTag: this.form.userTag.join(","),
-            userUuid: this.form.userUuid,
+            userUuid: this.form.userUuid
           };
 
           this.$http.http("/sys/user/save", params).then(res => {
             if (res.code == 1) {
+              tabUtils.closeCurrentTab(
+                this.$tabsList,
+                window.location.hash,
+                this
+              );
               this.$message.success("提交成功！");
             } else {
               this.errorMsg = res.msg;

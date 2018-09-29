@@ -16,6 +16,9 @@ Vue.use(ElementUI, {
 
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';  
 Vue.prototype.$http = https;
+Vue.prototype.$prototype = function(){
+    return Vue.prototype;
+}
 
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
@@ -51,6 +54,7 @@ router.beforeEach((to, from, next) => {
 axios.interceptors.response.use(response => {
     let code = response.data.code;
     let msg = response.data.msg;
+    
     if (code == 500211) {
         new Vue().$message.warning(msg);
         localStorage.clear();
@@ -58,10 +62,11 @@ axios.interceptors.response.use(response => {
             path: "/"
         });
     } else if (code == 500217) {
-        new Vue().$message.warning(msg);
         router.push({
-            path: "/"
+            path: "/403"
         });
+    } else if (code == 500100) {
+        new Vue().$message.warning(msg);
     }
     return response
 }, err => {

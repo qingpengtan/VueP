@@ -81,9 +81,10 @@ export default {
       tableData: [],
       cur_page: 1,
       select_word: "",
-      delVisible: false,
       is_search: false,
-      idx: -1
+      delVisible: false,
+      idx: -1,
+      deleteId: "",
     };
   },
   created() {
@@ -111,13 +112,20 @@ export default {
     },
     handleDelete(index, row) {
       this.idx = index;
+      this.deleteId = row.userUuid;
       this.delVisible = true;
     },
     // 确定删除
     deleteRow() {
-      this.tableData.splice(this.idx, 1);
-      this.$message.success("删除成功");
-      this.delVisible = false;
+      this.$http
+        .http("/sys/user/delete", { id: this.deleteId })
+        .then(res => {
+          if (res.code == 1) {
+            this.tableData.splice(this.idx, 1);
+            this.$message.success("删除成功");
+            this.delVisible = false;
+          }
+        });
     }
   }
 };

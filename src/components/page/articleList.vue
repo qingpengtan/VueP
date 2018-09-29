@@ -59,22 +59,24 @@
 </template>
 
 <script>
+import tabUtils from "../../utils/tabUtils.js";
+import bus from "../common/bus";
+
 export default {
   name: "basetable",
   data() {
     return {
       tableData: [],
       idx: -1,
-      select_word: "",
       delVisible: false,
+      deleteId: "",
+      select_word: "",
       cur_page: 1
     };
   },
   created() {
-    // this.getData();
-    var that = this;
-    this.$http.http("/sys/article/list", {}).then(function(res) {
-      that.tableData = res.data;
+    this.$http.http("/sys/article/list", {}).then(res => {
+      this.tableData = res.data;
     });
   },
   methods: {
@@ -86,15 +88,18 @@ export default {
 
     addUser() {
       this.$router.push({ path: "/sys/article-edit" });
+      // tabUtils.setTags(this.$tabsList,this);
     },
     search() {
       this.is_search = true;
     },
     handleEdit(index, row) {
       this.$router.push({ path: "/sys/article-edit", query: row });
+      // tabUtils.setTags(this.$tabsList,this);
     },
     handleDelete(index, row) {
       this.idx = index;
+      this.deleteId = row.articleId;
       this.delVisible = true;
     },
     handleSelectionChange(val) {
@@ -102,9 +107,15 @@ export default {
     },
     // 确定删除
     deleteRow() {
-      this.tableData.splice(this.idx, 1);
-      this.$message.success("删除成功");
-      this.delVisible = false;
+      this.$http
+        .http("/sys/article/delete", { id: this.deleteId })
+        .then(res => {
+          if (res.code == 1) {
+            this.tableData.splice(this.idx, 1);
+            this.$message.success("删除成功");
+            this.delVisible = false;
+          }
+        });
     }
   }
 };
