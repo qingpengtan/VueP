@@ -90,7 +90,6 @@ export default {
   created() {
     // this.getData();
     this.$http.http("/sys/user/list", {}).then(res => {
-      console.log(res);
       this.tableData = res.data;
     });
   },
