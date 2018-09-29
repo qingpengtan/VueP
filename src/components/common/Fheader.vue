@@ -1,56 +1,65 @@
 <template>
-    <div>
-        <div class="layout-header">
-            <div class="header-main">
+  <div>
+    <div class="layout-header">
+      <div class="header-main">
 
-                <div class="header-navbar">
-                    <router-link to='/'>
-                        <img class="header-left" src="../../assets/logo.gif" />
+        <div class="header-navbar">
+          <router-link to='/'>
+            <img class="header-left" src="../../assets/logo.gif" />
                     </router-link>
 
-                        <div class="header-right">
-                            <el-dropdown trigger="click">
-                                <span class="avatar right-span" v-show="loginStatus">
-                                    <span>
-                                        <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="avatar">
+            <div class="header-right">
+              <el-dropdown trigger="click">
+                <span class="avatar right-span" v-show="loginStatus">
+                  <span>
+                    <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="avatar">
                                     </span>
-                                        <span class="antd-pro-components-global-header-index-name">{{userName}}</span>
-                                    </span>
-                                    <el-dropdown-menu slot="dropdown">
-                                        <el-dropdown-item>
-                                          <router-link to="/person-info">个人中心</router-link>
-                                          </el-dropdown-item>
-                                        <el-dropdown-item @click.native="loginOut()">退出登录</el-dropdown-item>
+                    <span class="antd-pro-components-global-header-index-name">{{userName}}</span>
+                  </span>
+                  <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item>
+                      <router-link to="/person-info">个人中心</router-link>
+                    </el-dropdown-item>
+                    <el-dropdown-item @click.native="loginOut()">退出登录</el-dropdown-item>
 
-                                    </el-dropdown-menu>
-                            </el-dropdown>
+                  </el-dropdown-menu>
+              </el-dropdown>
 
-                            <span class="right-span" v-show="!loginStatus">
-                                <router-link to='/user-login'>
-                                    <el-button type="primary" plain>登录</el-button>
-                                </router-link>
-                            </span>
-                        </div>
-                </div>
+              <span class="right-span" v-show="!loginStatus">
+                <router-link to='/user-login'>
+                  <el-button type="primary" plain>登录</el-button>
+                </router-link>
+              </span>
             </div>
-
         </div>
+      </div>
 
-        <div class="header-content">
-            <ul>
-                <li>
-                    <router-link to='/'>首页</router-link>
-                </li>
-                <li>日志</li>
-                <li>论坛</li>
-                <li>音乐</li>
-                <li>视频</li>
-                <li>
-                    <router-link to='/edit-text'>写文章</router-link>
-                </li>
-            </ul>
-        </div>
     </div>
+
+    <div class="header-content">
+      <ul>
+        <li>
+          <router-link to='/'>首页</router-link>
+        </li>
+        <li>日志</li>
+        <li>论坛</li>
+        <li>音乐</li>
+        <li>视频</li>
+        <li @click="dialogVisible = true">写说说</li>
+        <li>
+          <router-link to='/edit-text'>写文章</router-link>
+        </li>
+      </ul>
+    </div>
+
+    <el-dialog title="记录说说" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+      <el-input type="textarea" v-model="content" :rows="5" placeholder="记录美好生活">
+      </el-input>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="publish()">发表</el-button>
+      </span>
+    </el-dialog>
+  </div>
 </template>
 
 <script>
@@ -61,7 +70,10 @@ export default {
   data() {
     return {
       loginStatus: false,
-      userName: ""
+      userName: "",
+      textarea: "",
+      dialogVisible: false,
+      content: ""
     };
   },
   created() {
@@ -73,6 +85,21 @@ export default {
     }
   },
   methods: {
+    handleClose(done) {
+      done();
+    },
+    publish() {
+      this.$http
+        .http("/index/save", { content: this.content })
+        .then(res => {
+          if (res.code == 1) {
+            this.dialogVisible = false;
+            this.$message.success("提交成功！");
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+    },
     loginOut() {
       localStorage.clear();
       this.$router.push("/user-login");
@@ -108,6 +135,10 @@ export default {
   background: white;
 }
 
+>>> .el-dialog__body {
+  padding: 10px 20px !important;
+}
+
 .header-content ul {
   width: 1260px;
   margin: 0 auto;
@@ -118,6 +149,7 @@ export default {
   line-height: 50px;
   padding: 0 32px;
   letter-spacing: 2px;
+  cursor: pointer;
 }
 
 .header-left {

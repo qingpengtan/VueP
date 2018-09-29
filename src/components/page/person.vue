@@ -16,9 +16,9 @@
                         </div>
                             <div class="header-avatar-div" style="margin-top:30px">
                                 <div>
-                                    <h1>星空</h1>
+                                    <h1>{{form.userName}}</h1>
                                 </div>
-                                <div style="margin-top:5px">暂无居住地</div>
+                                <div style="margin-top:5px">{{form.provinceN}} {{form.cityN}}</div>
                             </div>
                         </div>
                         <div class="header-right-contatin">
@@ -47,12 +47,13 @@
                                         <el-row :gutter="20">
                                             <el-col :span="8">
                                                 <el-form-item label="电话">
+                                                    <span>{{form.userPhone}}</span>
                                                 </el-form-item>
                                             </el-col>
 
                                             <el-col :span="8">
                                                 <el-form-item label="角色">
-
+                                                    <span>{{form.roleId == 1 ? '普通' : 'XX'}}</span>
                                                 </el-form-item>
 
                                             </el-col>
@@ -62,29 +63,31 @@
                                         <el-row :gutter="20">
                                             <el-col :span="8">
                                                 <el-form-item label="用户名">
-                                                    <el-input v-model="form.userName"></el-input>
+                                                    <span v-show="!isEdit"> {{form.userName}}</span>
+                                                    <el-input v-model="form.userName" v-show="isEdit"></el-input>
                                                 </el-form-item>
                                             </el-col>
                                             <el-col :span="10">
                                                 <el-form-item label="性别">
-                                                    <el-radio v-model="form.sex" label="男">男</el-radio>
-                                                    <el-radio v-model="form.sex" label="女">女</el-radio>
+                                                    <span v-show="!isEdit">{{form.sex}}</span>
+                                                    <el-radio v-model="form.sex" label="男" v-show="isEdit">男</el-radio>
+                                                    <el-radio v-model="form.sex" label="女" v-show="isEdit">女</el-radio>
                                                 </el-form-item>
                                             </el-col>
 
                                         </el-row>
 
                                         <el-row :gutter="20">
-
                                             <el-col :span="8">
                                                 <el-form-item label="出生日期">
-                                                    <el-date-picker type="date" placeholder="选择日期" value-format="yyyy-MM-dd" v-model="form.birthday" style="width: 100%;"></el-date-picker>
+                                                    <span v-show="!isEdit">{{form.birthday}}</span>
+                                                    <el-date-picker type="date" v-show="isEdit" placeholder="选择日期" value-format="yyyy-MM-dd" v-model="form.birthday" style="width: 100%;"></el-date-picker>
                                                 </el-form-item>
                                             </el-col>
                                             <el-col :span="10">
-
                                                 <el-form-item label="省份/城市">
-                                                    <el-cascader :options="options" v-model="form.province"></el-cascader>
+                                                    <span v-show="!isEdit">{{form.provinceN}} {{form.cityN}}</span>
+                                                    <el-cascader :options="options" v-model="form.province" v-show="isEdit"></el-cascader>
                                                 </el-form-item>
                                             </el-col>
 
@@ -93,21 +96,23 @@
                                         <el-row :gutter="20">
                                             <el-col :span="8">
                                                 <el-form-item label="年龄">
-                                                    <el-input v-model="form.age">13030860591</el-input>
+                                                    <span v-show="!isEdit">{{form.age}}</span>
+                                                    <el-input v-model="form.age" v-show="isEdit"></el-input>
                                                 </el-form-item>
                                             </el-col>
 
                                             <el-col :span="10">
-
                                                 <el-form-item label="详细住址">
-                                                    <el-input type="textarea" rows="1" v-model="form.address"></el-input>
+                                                    <span v-show="!isEdit">{{form.address}}</span>
+                                                    <el-input type="textarea" rows="1" v-model="form.address" v-show="isEdit"></el-input>
                                                 </el-form-item>
                                             </el-col>
 
                                         </el-row>
 
                                         <el-form-item label="兴趣标签">
-                                            <el-checkbox-group v-model="form.userTag">
+                                            <span v-show="!isEdit">{{form.userTags}}</span>
+                                            <el-checkbox-group v-model="form.userTag" v-show="isEdit">
                                                 <el-checkbox label="java">Java开发</el-checkbox>
                                                 <el-checkbox label="web">前端开发</el-checkbox>
                                                 <el-checkbox label="go">Go开发</el-checkbox>
@@ -116,8 +121,14 @@
                                         </el-form-item>
 
                                         <div class="finish-btn">
-                                            <el-button type="primary" @click="onSubmit('form')">完成</el-button>
-                                            <el-button>取消</el-button>
+                                            <div v-show="isEdit">
+                                                <el-button type="primary" @click="updateInfo('form')">完成</el-button>
+                                                <el-button @click="isEdit = !isEdit">取消</el-button>
+                                            </div>
+                                            <div v-show="!isEdit">
+                                                <el-button type="primary" plain @click="isEdit = !isEdit">编辑</el-button>
+                                            </div>
+
                                         </div>
                                     </el-form>
                                 </div>
@@ -145,6 +156,7 @@ export default {
   data() {
     return {
       options: cityData,
+      isEdit: false,
       form: {
         // ---------------
         userName: "",
@@ -154,14 +166,66 @@ export default {
         sex: "",
         age: "",
         roleId: "3",
-        province: ["津30000", "津30100"],
+        province: [],
+        provinceN: "",
+        cityN: "",
         address: "",
-        status: "",
         userTag: [],
         createTime: "",
         userUuid: ""
       }
     };
+  },
+  created() {
+    this.getUser();
+  },
+  methods: {
+    updateInfo() {
+      this.isEdit = !this.isEdit;
+
+      let params = {
+        userName: this.form.userName,
+        birthday: this.form.birthday,
+        sex: this.form.sex,
+        age: this.form.age,
+        province: this.form.province[0],
+        city: this.form.province[1],
+        address: this.form.address,
+        userTag: this.form.userTag.join(","),
+        userUuid: this.form.userUuid
+      };
+
+      this.$http.http("/user/save", params).then(res => {
+        if (res.code == 1) {
+          this.getUser();
+          this.$message.success("提交成功！");
+        } else {
+          this.$message.success(res.msg);
+        }
+      });
+    },
+
+    getUser() {
+      this.$http.http("/user/personInfo", {}).then(res => {
+        if (res.code == 1) {
+          console.log(res);
+          this.form.userName = res.data.userName;
+          this.form.userUuid = res.data.userUuid;
+          this.form.userPhone = res.data.userPhone;
+          this.form.birthday = res.data.birthday;
+          this.form.sex = res.data.sex;
+          this.form.age = res.data.age;
+          this.form.roleId = res.data.roleId + "";
+          this.form.province = [res.data.provinceV, res.data.cityV, ""];
+          this.form.provinceN = res.data.province;
+          this.form.cityN = res.data.city;
+          this.form.address = res.data.address;
+          this.form.userTags = res.data.userTag;
+          this.form.userTag = res.data.userTag.split(",");
+          this.form.userUuid = res.data.userUuid;
+        }
+      });
+    }
   }
 };
 </script>
@@ -226,7 +290,7 @@ export default {
 }
 .main-content >>> .finish-btn {
   position: absolute;
-  top:30px;
+  top: 30px;
   right: 40px;
 }
 </style>
