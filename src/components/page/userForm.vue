@@ -196,10 +196,10 @@ export default {
           this.form.province = [result.provinceV, result.cityV, ""];
           this.form.address = result.address;
           this.form.status = result.status == 1000 ? true : false;
-          (this.form.userTag = StringUtils.isEmpty(tempTag)
-            ? ""
-            : tempTag.split(",")),
-            (this.form.createTime = result.createTime);
+          this.form.userTag = StringUtils.isEmpty(tempTag)
+            ? []
+            : StringUtils.str2Int(tempTag.split(","));
+          this.form.createTime = result.createTime;
           this.form.userUuid = result.userUuid;
         }
       }

@@ -76,7 +76,8 @@ export default {
       this.$http
         .http("/index/save", {
           content: this.content,
-          articleTitle: this.articleTitle
+          articleTitle: this.articleTitle,
+          articleTagId: this.articleTagId
         })
         .then(res => {
           if (res.code == 1) {

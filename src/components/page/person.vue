@@ -113,7 +113,7 @@
                                         <el-form-item label="兴趣标签">
                                             <span v-show="!isEdit">{{form.userTags}}</span>
                                             <el-checkbox-group v-model="form.userTag" v-show="isEdit">
-                                                <el-checkbox  v-for=" tag in articleTag"  :key=tag.articleTagId  :label=tag.articleTagId >{{tag.articleTag}}</el-checkbox>
+                                                <el-checkbox v-for=" tag in articleTag" :key=tag.articleTagId :label=tag.articleTagId>{{tag.articleTag}}</el-checkbox>
                                             </el-checkbox-group>
                                         </el-form-item>
 
@@ -154,7 +154,7 @@ export default {
   data() {
     return {
       options: cityData,
-      articleTag:"",
+      articleTag: "",
       isEdit: false,
       form: {
         // ---------------
@@ -187,6 +187,7 @@ export default {
     updateInfo() {
       this.isEdit = !this.isEdit;
       let tempTag = this.form.userTag;
+      console.log(tempTag)
 
       let params = {
         userName: this.form.userName,
@@ -226,10 +227,10 @@ export default {
           this.form.cityN = res.data.city;
           this.form.address = res.data.address;
           this.form.userTags = res.data.userTag;
-          (this.form.userTag = StringUtils.isEmpty(tempTag)
-            ? ""
-            : tempTag.split(",")),
-            (this.form.userUuid = res.data.userUuid);
+          this.form.userTag = StringUtils.isEmpty(tempTag)
+            ? []
+            : StringUtils.str2Int(tempTag.split(","));
+          this.form.userUuid = res.data.userUuid;
         }
       });
     }

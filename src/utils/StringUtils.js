@@ -13,6 +13,14 @@ export default {
                 return false;
         } else
             return false;
+    },
+
+    str2Int(arr) {
+        let tempArr = [];
+        for (let i of arr) {
+            tempArr.push(parseInt(i))
+        }
+        return tempArr;
     }
 
 }
