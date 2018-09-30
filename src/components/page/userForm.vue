@@ -95,10 +95,7 @@
 
                 <el-form-item label="用户标签">
                     <el-checkbox-group v-model="form.userTag">
-                        <el-checkbox label="java">Java开发</el-checkbox>
-                        <el-checkbox label="web">前端开发</el-checkbox>
-                        <el-checkbox label="go">Go开发</el-checkbox>
-                        <el-checkbox label="bigdata">大数据</el-checkbox>
+                        <el-checkbox v-for=" tag in articleTag" :key=tag.articleTagId :label=tag.articleTagId>{{tag.articleTag}}</el-checkbox>
                     </el-checkbox-group>
                 </el-form-item>
 
@@ -145,6 +142,7 @@ export default {
       dialogVisible: false,
       options: cityData,
       isEdit: false,
+      articleTag: "",
       form: {
         // ---------------
         userName: "",
@@ -178,29 +176,35 @@ export default {
     VueCropper
   },
   created() {
+    this.$http.http("/index/classify", { exculde: "yes" }).then(res => {
+      if (res.code == 1) {
+        this.articleTag = res.data;
+        let result = this.$route.query;
+
+        if (StringUtils.isEmpty(result)) {
+          this.isEdit = false;
+        } else {
+          let tempTag = result.userTag;
+          this.isEdit = true;
+          this.form.userName = result.userName;
+          this.form.userUuid = result.userUuid;
+          this.form.userPhone = result.userPhone;
+          this.form.birthday = result.birthday;
+          this.form.sex = result.sex;
+          this.form.age = result.age;
+          this.form.roleId = result.roleId + "";
+          this.form.province = [result.provinceV, result.cityV, ""];
+          this.form.address = result.address;
+          this.form.status = result.status == 1000 ? true : false;
+          (this.form.userTag = StringUtils.isEmpty(tempTag)
+            ? ""
+            : tempTag.split(",")),
+            (this.form.createTime = result.createTime);
+          this.form.userUuid = result.userUuid;
+        }
+      }
+    });
     this.cropImg = this.defaultSrc;
-
-    let result = this.$route.query;
-
-    if (StringUtils.isEmpty(result)) {
-      this.isEdit = false;
-    } else {
-      let tempTag = result.userTag;
-      this.isEdit = true;
-      this.form.userName = result.userName;
-      this.form.userUuid = result.userUuid;
-      this.form.userPhone = result.userPhone;
-      this.form.birthday = result.birthday;
-      this.form.sex = result.sex;
-      this.form.age = result.age;
-      this.form.roleId = result.roleId + "";
-      this.form.province = [result.provinceV, result.cityV, ""];
-      this.form.address = result.address;
-      this.form.status = result.status == 1000 ? true : false;
-      this.form.userTag = StringUtils.isEmpty(tempTag)? "" : tempTag.split(","),
-      this.form.createTime = result.createTime;
-      this.form.userUuid = result.userUuid;
-    }
   },
   methods: {
     onSubmit(formName) {
@@ -218,7 +222,7 @@ export default {
             city: this.form.province[1],
             address: this.form.address,
             status: this.form.status ? 1000 : 2000,
-            userTag: StringUtils.isEmpty(tempTag)? "" : tempTag.join(","),
+            userTag: StringUtils.isEmpty(tempTag) ? "" : tempTag.join(","),
             userUuid: this.form.userUuid
           };
 

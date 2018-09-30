@@ -39,12 +39,20 @@
     <div class="header-content">
       <ul>
         <li>
-          <router-link to='/'>首页</router-link>
+          <router-link to='/' exact>首页</router-link>
         </li>
         <li>日志</li>
-        <li>论坛</li>
-        <li>音乐</li>
-        <li>视频</li>
+        <el-dropdown trigger="click">
+          <li>论坛</li>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item v-for=" tag in articleTag" :key="tag.articleTagId">
+              <router-link to="/person-info">{{tag.articleTag}}</router-link>
+            </el-dropdown-item>
+
+          </el-dropdown-menu>
+        </el-dropdown>
+        <!-- <li>音乐</li> -->
+        <!-- <li>视频</li> -->
         <li @click="dialogVisible = true">写说说</li>
         <li>
           <router-link to='/edit-text'>写文章</router-link>
@@ -73,7 +81,8 @@ export default {
       userName: "",
       textarea: "",
       dialogVisible: false,
-      content: ""
+      content: "",
+      articleTag: ""
     };
   },
   created() {
@@ -83,6 +92,12 @@ export default {
     if (this.loginStatus) {
       this.userName = localStorage.getItem("x_userPhone");
     }
+
+    this.$http.http("/index/classify", { exculde: "yes" }).then(res => {
+      if (res.code == 1) {
+        this.articleTag = res.data;
+      }
+    });
   },
   methods: {
     handleClose(done) {
@@ -227,10 +242,11 @@ export default {
     bottom: 0;
     margin: 0;
   }
-  >>> .el-dialog__body,>>> .el-dialog__header, >>> .el-dialog__footer{
-    padding: 10px!important;
+  >>> .el-dialog__body,
+  >>> .el-dialog__header,
+  >>> .el-dialog__footer {
+    padding: 10px !important;
   }
-
 }
 </style>
 

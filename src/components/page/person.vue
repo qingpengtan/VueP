@@ -113,10 +113,7 @@
                                         <el-form-item label="兴趣标签">
                                             <span v-show="!isEdit">{{form.userTags}}</span>
                                             <el-checkbox-group v-model="form.userTag" v-show="isEdit">
-                                                <el-checkbox label="java">Java开发</el-checkbox>
-                                                <el-checkbox label="web">前端开发</el-checkbox>
-                                                <el-checkbox label="go">Go开发</el-checkbox>
-                                                <el-checkbox label="bigdata">大数据</el-checkbox>
+                                                <el-checkbox  v-for=" tag in articleTag"  :key=tag.articleTagId  :label=tag.articleTagId >{{tag.articleTag}}</el-checkbox>
                                             </el-checkbox-group>
                                         </el-form-item>
 
@@ -157,6 +154,7 @@ export default {
   data() {
     return {
       options: cityData,
+      articleTag:"",
       isEdit: false,
       form: {
         // ---------------
@@ -178,7 +176,12 @@ export default {
     };
   },
   created() {
-    this.getUser();
+    this.$http.http("/index/classify", { exculde: "yes" }).then(res => {
+      if (res.code == 1) {
+        this.articleTag = res.data;
+        this.getUser();
+      }
+    });
   },
   methods: {
     updateInfo() {
@@ -193,7 +196,7 @@ export default {
         province: this.form.province[0],
         city: this.form.province[1],
         address: this.form.address,
-        userTag: StringUtils.isEmpty(tempTag)? "" : tempTag.join(","),
+        userTag: StringUtils.isEmpty(tempTag) ? "" : tempTag.join(","),
         userUuid: this.form.userUuid
       };
 
@@ -223,8 +226,10 @@ export default {
           this.form.cityN = res.data.city;
           this.form.address = res.data.address;
           this.form.userTags = res.data.userTag;
-          this.form.userTag = StringUtils.isEmpty(tempTag)? "" : tempTag.split(","),
-          this.form.userUuid = res.data.userUuid;
+          (this.form.userTag = StringUtils.isEmpty(tempTag)
+            ? ""
+            : tempTag.split(",")),
+            (this.form.userUuid = res.data.userUuid);
         }
       });
     }
@@ -297,7 +302,7 @@ export default {
     width: 100%;
   }
   .header-bg {
-    height:3.448276rem;
+    height: 3.448276rem;
   }
   .header-bg .header-avater {
     left: -0.344828rem;
@@ -309,17 +314,17 @@ export default {
     border-radius: 50%;
   }
   .header-avater .mobile-style {
-    margin: .241379rem !important;
+    margin: 0.241379rem !important;
   }
   .mobile-style h1 {
     font-size: 24px;
   }
   .header-right-contatin {
-    margin-right: .344828rem;
+    margin-right: 0.344828rem;
     margin-top: 2.413793rem;
   }
   .header-right-contatin .header-right-div {
-    margin-left: .344828rem;
+    margin-left: 0.344828rem;
   }
   .header-right-div h2 {
     font-size: 20px;
@@ -334,7 +339,7 @@ export default {
     right: 10px;
   }
   .main-content >>> .el-tabs--border-card {
-    height: 505px;
+    height: 610px;
     border: none;
   }
   .main-content >>> .el-tabs__content {

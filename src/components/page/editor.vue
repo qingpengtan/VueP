@@ -24,7 +24,7 @@
           <div style="margin-top:20px">
             <input type="text" class="editor-title" placeholder="请输入标题" v-model="articleTitle">
             <el-select placeholder="请选择" v-model="articleTagId" class="select">
-              <el-option key="1" label="心情日志" value="1"></el-option>
+              <el-option  v-for=" tag in articleTag"  :key=tag.articleTagId :label=tag.articleTag :value=tag.articleTagId></el-option>
             </el-select>
             <quill-editor ref="myTextEditor" v-model="content" :options="editorOption"></quill-editor>
           </div>
@@ -50,11 +50,20 @@ export default {
       },
       content: "",
       articleTitle: "",
-      articleTagId: "1"
+      articleTagId: 1,
+      articleTag: ""
+
     };
   },
   components: {
     quillEditor
+  },
+  created(){
+    this.$http.http("/index/classify", {}).then(res => {
+      if (res.code == 1) {
+        this.articleTag = res.data;
+      }
+    });
   },
   methods: {
     publish() {
@@ -257,12 +266,12 @@ export default {
   }
 
   .header-right .right-span {
-    padding: 0 15px;
+    padding: 0 0;
     cursor: pointer;
     display: inline-block;
     height: 100%;
     transition: all 0.3s;
-    line-height: 64px;
+    line-height: 50px;
   }
 
   .header-right .avatar span {
