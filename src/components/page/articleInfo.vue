@@ -20,17 +20,10 @@
           <el-col :span="8">
             <el-form-item label="类型">
               <el-select placeholder="请选择" v-model="form.articleTag">
-                <el-option key="1" label="心情日志" value="1"></el-option>
+                <el-option v-for=" tag in articleTag" :key=tag.articleTagId :label=tag.articleTag :value=tag.articleTagId></el-option>
               </el-select>
             </el-form-item>
           </el-col>
-
-          <!-- // <el-col :span="8">
-                    //     <el-form-item label="创建时间">
-                    //         <el-date-picker type="date" v-model="form.time" placeholder="选择时间" style="width: 100%;"></el-date-picker>
-                    //     </el-form-item>
-                    // </el-col> -->
-
           <el-col :span="8">
 
             <el-form-item label="状态">
@@ -57,6 +50,7 @@ import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 import { quillEditor } from "vue-quill-editor";
 import bus from "../common/bus";
+import StringUtils from "../../utils/StringUtils.js";
 import tabUtils from "../../utils/tabUtils.js";
 export default {
   name: "editor",
@@ -65,12 +59,13 @@ export default {
       editorOption: {
         placeholder: "Hello World"
       },
+      articleTag: "",
       form: {
         articleTitle: "",
         articleTag: "",
         status: "",
         content: "",
-        articleId: ""
+        articleId: 1
       }
     };
   },
@@ -82,12 +77,17 @@ export default {
     // });
   },
   created() {
-    let result = this.$route.query;
-    this.form.articleTitle = result.articleTitle;
-    this.form.content = result.content;
-    this.form.articleTag = result.articleTag;
-    this.form.status = result.status == 1000 ? true : false;
-    this.form.articleId = result.articleId;
+    this.$http.http("/index/classify").then(res => {
+      if (res.code == 1) {
+        this.articleTag = res.data;
+        let result = this.$route.query;
+        this.form.articleTitle = result.articleTitle;
+        this.form.content = result.content;
+        this.form.articleTag = StringUtils.isEmpty(result.articleTag) ? 1 :  result.articleTag;
+        this.form.status = result.status == 1000 ? true : false;
+        this.form.articleId = result.articleId;
+      }
+    });
   },
   components: {
     quillEditor

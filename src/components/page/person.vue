@@ -187,7 +187,6 @@ export default {
     updateInfo() {
       this.isEdit = !this.isEdit;
       let tempTag = this.form.userTag;
-      console.log(tempTag)
 
       let params = {
         userName: this.form.userName,
