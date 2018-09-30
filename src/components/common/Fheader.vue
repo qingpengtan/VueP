@@ -41,12 +41,16 @@
         <li>
           <router-link to='/' exact>首页</router-link>
         </li>
-        <li>日志</li>
+        <li>
+          <router-link to='/daily' xact>日志</router-link>
+        </li>
         <el-dropdown trigger="click">
           <li>论坛</li>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item v-for=" tag in articleTag" :key="tag.articleTagId">
-              <router-link to="/person-info">{{tag.articleTag}}</router-link>
+              <router-link :to="{path:'/tribune', query:{articleTagId:tag.articleTagId}}">
+                {{tag.articleTag}}
+              </router-link>
             </el-dropdown-item>
 
           </el-dropdown-menu>

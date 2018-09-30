@@ -33,6 +33,14 @@ export default new Router({
             path:'/person-info',
             component: resolve => require(['../components/page/person.vue'], resolve),
         },
+        {
+            path:'/tribune',
+            component: resolve => require(['../components/page/tribune.vue'], resolve),
+        },
+        {
+            path:'/daily',
+            component: resolve => require(['../components/page/daily.vue'], resolve),
+        },
 
         {
             path: '/sys',
