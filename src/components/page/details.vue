@@ -288,11 +288,8 @@ export default {
     margin-top: 10px;
   }
   .leave-word {
-    clear: both;
-    background: #f9f9f9;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px 0 #999;
-    padding: 20px;
+    box-shadow: none;
+    padding: 0px;
   }
   .leave-word-item .leave-img,
   .leave-word-item .leave-comment {

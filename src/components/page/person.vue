@@ -294,33 +294,36 @@ export default {
   .layout-main {
     width: 100%;
   }
+  .header-bg {
+    height:3.448276rem;
+  }
   .header-bg .header-avater {
-    left: -20px;
-    top: 120px;
+    left: -0.344828rem;
+    top: 2.068966rem;
   }
   .header-bg .header-avater img {
-    width: 100px;
-    height: 100px;
+    width: 1.724138rem;
+    height: 1.724138rem;
     border-radius: 50%;
   }
   .header-avater .mobile-style {
-    margin: 14px !important;
+    margin: .241379rem !important;
   }
   .mobile-style h1 {
     font-size: 24px;
   }
   .header-right-contatin {
-    margin-right: 20px;
-    margin-top: 140px;
+    margin-right: .344828rem;
+    margin-top: 2.413793rem;
   }
   .header-right-contatin .header-right-div {
-    margin-left: 20px;
+    margin-left: .344828rem;
   }
   .header-right-div h2 {
     font-size: 20px;
   }
   .main-content {
-    padding: 10px !important;
+    padding: 0px !important;
     margin-top: 20px;
   }
 
@@ -330,6 +333,7 @@ export default {
   }
   .main-content >>> .el-tabs--border-card {
     height: 505px;
+    border: none;
   }
   .main-content >>> .el-tabs__content {
     padding: 0;
@@ -341,7 +345,7 @@ export default {
   }
 
   .main-content >>> .el-checkbox {
-      width: 100px;
+    width: 100px;
     margin-left: 0;
   }
 }

@@ -35,7 +35,7 @@
         <div class="header-input" v-show="!isLogin">
 
           <el-form :model="registerForm" :rules="registerRule" ref="registerForm">
-            <el-form-item prop="userPhone" :error="errorMsg">
+            <el-form-item prop="userPhone" :error="errorRegister">
               <el-input type="text" v-model="registerForm.userPhone" placeholder="请输入手机号"></el-input>
             </el-form-item>
 
@@ -44,34 +44,34 @@
             </el-form-item>
 
             <el-form-item>
-              <el-input type="text" placeholder="请输入短信验证码"></el-input>
+              <el-input type="text" v-model="registerForm.imageCode" placeholder="请输入验证码"></el-input>
             </el-form-item>
           </el-form>
 
-          <div class="send-code">
-            发送验证码
+          <div class="send-code" @click="changeCode()">
+            <img :src=imageCode alt="">
           </div>
 
-          <button class="register" @click="register('registerForm')">注册</button>
+            <button class="register" @click="register('registerForm')">注册</button>
 
-          <div class="register-footer">
-            查看用户协议
+            <div class="register-footer">
+              查看用户协议
+            </div>
+
           </div>
 
-        </div>
+          <div class="login-tip">
+            <span v-show="!isLogin">
+              已有账号？<span @click="isLogin=!isLogin" class="point">登录</span>
+            </span>
+            <span v-show="isLogin">
+              没有账号？<span @click="isLogin=!isLogin" class="point">注册</span>
+            </span>
+          </div>
 
-        <div class="login-tip">
-          <span v-show="!isLogin">
-            已有账号？<span @click="isLogin=!isLogin" class="point">登录</span>
-          </span>
-          <span v-show="isLogin">
-            没有账号？<span @click="isLogin=!isLogin" class="point">注册</span>
-          </span>
         </div>
 
       </div>
-
-    </div>
 
 </template>
 <script>
@@ -80,13 +80,15 @@ export default {
   data() {
     return {
       isLogin: true,
+      imageCode: "/user/verifiCode",
       ruleForm: {
         username: "",
         password: ""
       },
       registerForm: {
         userPhone: "",
-        password: ""
+        password: "",
+        imageCode:""
       },
       errorMsg: "",
       errorRegister: "",
@@ -137,7 +139,8 @@ export default {
           this.$http
             .http("/user/regist", {
               userPhone: this.registerForm.userPhone,
-              password: this.registerForm.password
+              password: this.registerForm.password,
+              imageCode:this.registerForm.imageCode,
             })
             .then(res => {
               if (res.code == 1) {
@@ -145,7 +148,7 @@ export default {
                 // this.registerForm.resetFields();
                 this.$message.success("注册成功！");
               } else {
-                this.errorMsg = res.msg;
+                this.errorRegister = res.msg;
               }
             });
         } else {
@@ -153,6 +156,10 @@ export default {
           return false;
         }
       });
+    },
+
+    changeCode() {
+      this.imageCode = "/user/verifiCode?a=" + new Date().getTime();
     }
   }
 };
@@ -273,9 +280,14 @@ export default {
   border-radius: 3px;
   cursor: pointer;
 }
+.send-code img {
+  width: 120px;
+  height: 36px;
+}
 @media only screen and (max-width: 481px) {
   .login-register-home {
     width: 100%;
+    margin-top: 1.37931rem;
   }
   .header-input {
     padding: 0 40px 36px 40px;
@@ -284,7 +296,15 @@ export default {
     position: relative;
   }
   .send-code {
-    left: 215px;
+    height: 0.62069rem;
+    width: 2.068966rem;
+    left: 3.706897rem;
+    line-height: 0.62069rem;
+  }
+
+  .send-code img {
+    height: 0.62069rem;
+    width: 2.068966rem;
   }
 }
 </style>
