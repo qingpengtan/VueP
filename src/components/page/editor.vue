@@ -5,21 +5,14 @@
       <div class="header-main">
 
         <div class="header-navbar">
-          <img class="header-left" src="../../assets/logo.gif" />
-          <div style="background:red;height:64px;float:left;width:auto">
-
-          </div>
-          <div class="header-right">
-            <!-- <span class="avatar right-span">
-                            <span>
-                                <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="avatar">
-                            </span>
-                            <span class="antd-pro-components-global-header-index-name">Serati Ma</span>
-                        </span> -->
-            <span class="right-span">
-              <el-button type="primary" @click="publish()">发表</el-button>
-            </span>
-          </div>
+          <router-link to='/'>
+            <img class="header-left" src="../../assets/logo.gif" />
+                    </router-link>
+            <div class="header-right">
+              <span class="right-span">
+                <el-button type="primary" @click="publish()">发表</el-button>
+              </span>
+            </div>
         </div>
       </div>
 
@@ -199,11 +192,11 @@ export default {
     height: 100%;
     margin: 0 auto;
   }
-  .main-content{
-    padding: 10px!important;
+  .main-content {
+    padding: 10px !important;
   }
 
-  .main-content >>> .select input{
+  .main-content >>> .select input {
     margin: 10px 0;
   }
   .layout-header {

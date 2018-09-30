@@ -185,6 +185,7 @@ export default {
     if (StringUtils.isEmpty(result)) {
       this.isEdit = false;
     } else {
+      let tempTag = result.userTag;
       this.isEdit = true;
       this.form.userName = result.userName;
       this.form.userUuid = result.userUuid;
@@ -196,7 +197,7 @@ export default {
       this.form.province = [result.provinceV, result.cityV, ""];
       this.form.address = result.address;
       this.form.status = result.status == 1000 ? true : false;
-      this.form.userTag = result.userTag.split(",");
+      this.form.userTag = StringUtils.isEmpty(tempTag)? "" : tempTag.split(","),
       this.form.createTime = result.createTime;
       this.form.userUuid = result.userUuid;
     }
@@ -205,6 +206,7 @@ export default {
     onSubmit(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
+          let tempTag = this.form.userTag;
           let params = {
             userName: this.form.userName,
             userPhone: this.form.userPhone,
@@ -216,7 +218,7 @@ export default {
             city: this.form.province[1],
             address: this.form.address,
             status: this.form.status ? 1000 : 2000,
-            userTag: this.form.userTag.join(","),
+            userTag: StringUtils.isEmpty(tempTag)? "" : tempTag.join(","),
             userUuid: this.form.userUuid
           };
 

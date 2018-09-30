@@ -147,6 +147,7 @@
 <script>
 import Header from "../common/Fheader.vue";
 import cityData from "./city2.json";
+import StringUtils from "../../utils/StringUtils.js";
 
 export default {
   name: "index",
@@ -182,6 +183,7 @@ export default {
   methods: {
     updateInfo() {
       this.isEdit = !this.isEdit;
+      let tempTag = this.form.userTag;
 
       let params = {
         userName: this.form.userName,
@@ -191,7 +193,7 @@ export default {
         province: this.form.province[0],
         city: this.form.province[1],
         address: this.form.address,
-        userTag: this.form.userTag.join(","),
+        userTag: StringUtils.isEmpty(tempTag)? "" : tempTag.join(","),
         userUuid: this.form.userUuid
       };
 
@@ -208,7 +210,7 @@ export default {
     getUser() {
       this.$http.http("/user/personInfo", {}).then(res => {
         if (res.code == 1) {
-          console.log(res);
+          let tempTag = res.data.userTag;
           this.form.userName = res.data.userName;
           this.form.userUuid = res.data.userUuid;
           this.form.userPhone = res.data.userPhone;
@@ -221,7 +223,7 @@ export default {
           this.form.cityN = res.data.city;
           this.form.address = res.data.address;
           this.form.userTags = res.data.userTag;
-          this.form.userTag = res.data.userTag.split(",");
+          this.form.userTag = StringUtils.isEmpty(tempTag)? "" : tempTag.split(","),
           this.form.userUuid = res.data.userUuid;
         }
       });
