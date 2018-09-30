@@ -25,7 +25,7 @@
             <p>{{scope.row.userPhone}}/{{ scope.row.userName | emptyValue }}</p>
           </template>
         </el-table-column>
-        <el-table-column prop="articleTag" label="文章类型">
+        <el-table-column prop="articleTagName" label="文章类型">
         </el-table-column>
         <el-table-column label="状态">
           <template scope="scope">

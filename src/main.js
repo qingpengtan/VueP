@@ -16,7 +16,7 @@ Vue.use(ElementUI, {
 
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';  
 Vue.prototype.$http = https;
-Vue.prototype.$prototype = function(){
+Vue.prototype.$prototype = function () {
     return Vue.prototype;
 }
 
@@ -54,7 +54,7 @@ router.beforeEach((to, from, next) => {
 axios.interceptors.response.use(response => {
     let code = response.data.code;
     let msg = response.data.msg;
-    
+
     if (code == 500211) {
         new Vue().$message.warning(msg);
         localStorage.clear();
@@ -68,7 +68,7 @@ axios.interceptors.response.use(response => {
     } else if (code == 500100) {
         new Vue().$message({
             showClose: true,
-            duration:10000,
+            duration: 10000,
             message: msg,
             type: 'warning'
         });
@@ -80,22 +80,24 @@ axios.interceptors.response.use(response => {
 
 
 Vue.filter("emptyValue", function (value) {
-    if(StringUtils.isEmpty(value)){
+    if (StringUtils.isEmpty(value)) {
         return "";
-    }else{
+    } else {
         return value;
     }
 });
 
+
+
 Vue.filter("statusFilter", function (value) {
 
-    if(value == 1000){
+    if (value == 1000) {
         return "正常";
-    }else if(value ==2000){
+    } else if (value == 2000) {
         return "禁用";
-    }else if(StringUtils.isEmpty(value)){
+    } else if (StringUtils.isEmpty(value)) {
         return "";
-    }else{
+    } else {
         return value;
     }
 

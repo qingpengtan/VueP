@@ -17,9 +17,12 @@
                 <div class="publish">
                   <span>
                     <img src="https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png">
-                                    </span>
-                    <a href="https://ant.design">{{article.userName}}</a> 发布
-                    <b>{{article.createTime}}</b>
+                   </span>
+                    <a href="https://ant.design">{{article.userName}}</a>于{{article.createTime}}发表了
+                    <b>{{article.articleTagName}}</b> 文章 &nbsp;&nbsp;
+                    <router-link :to="{path:'/edit-text', query:{articleId:article.articleId}}" v-show="isEdit">
+                      <i class="el-icon-edit" style="color:#43bcff">更新文章？</i>
+                    </router-link>
                 </div>
               </div>
             </div>
@@ -127,7 +130,8 @@ export default {
     return {
       article: "",
       dialogVisible: false,
-      comment:"",
+      comment: "",
+      isEdit: false
     };
   },
   created() {
@@ -135,6 +139,11 @@ export default {
       .http("/index/detail", { articleId: this.$route.query.articleId })
       .then(res => {
         this.article = res.data;
+        this.$http
+          .http("/index/isEdit", {userPhone: res.data.userPhone })
+          .then(resu => {
+            this.isEdit = resu.data;
+          });
       });
   },
   methods: {

@@ -15,13 +15,9 @@
                     <div class="ant-list-item" v-for=" article in articleList" :key="article.articleId">
                         <div class="ant-list-item-meta-content">
                             <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
+                                <span class="article-tag">{{article.articleTagName}}</span>
                                 <h4>{{article.articleTitle}}</h4>
                             </router-link>
-                            <!-- <div class="ant-list-item-meta-description"><span>
-                                        <div data-show="true" class="ant-tag">Ant Design</div>
-                                        <div data-show="true" class="ant-tag">设计语言</div>
-                                        <div data-show="true" class="ant-tag">蚂蚁金服</div>
-                                    </span></div> -->
                         </div>
                         <div class="ant-list-item-content">
                             <div>
@@ -31,8 +27,8 @@
                                     <span>
                                         <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png">
                                     </span>
-                                        <a href="https://ant.design">{{article.userName}}</a> 发布
-                                        <b>{{article.createTime}}</b>
+                                        <a href="https://ant.design">{{article.userName}}</a> 发布于
+                                        {{article.createTime}}
                                 </div>
                             </div>
                         </div>
@@ -144,7 +140,23 @@ export default {
   padding-right: 16px;
   cursor: pointer;
 }
+.article-tag + h4 {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
+}
+.article-tag {
+  padding: 0 3px;
+  margin-right: 5px;
+  border-radius: 3px;
+  box-shadow: 0 0 2px 0 #43bcff;
+  border: 1px solid #43bcff;
+  color: #43bcff;
+  position: relative;
+  top: -2px;
+}
 @media only screen and (max-width: 481px) {
   .layout-main,
   .main-content,
@@ -189,6 +201,9 @@ export default {
 
   .ant-list-item-action li {
     padding-right: 8px;
+  }
+  .article-tag + h4 {
+      max-width: 4.617931rem;
   }
 }
 </style>

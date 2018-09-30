@@ -83,7 +83,7 @@ export default {
         let result = this.$route.query;
         this.form.articleTitle = result.articleTitle;
         this.form.content = result.content;
-        this.form.articleTag = StringUtils.isEmpty(result.articleTag) ? 1 :  result.articleTag;
+        this.form.articleTag = StringUtils.isEmpty(result.articleTag) ? 1 : parseInt(result.articleTag);
         this.form.status = result.status == 1000 ? true : false;
         this.form.articleId = result.articleId;
       }

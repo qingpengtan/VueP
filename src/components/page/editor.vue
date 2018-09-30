@@ -23,6 +23,7 @@
         <div class="main-content" style="padding: 8px 32px 32px;">
           <div style="margin-top:20px">
             <input type="text" class="editor-title" placeholder="请输入标题" v-model="articleTitle">
+            <input type="text" v-show="none" v-model="articleId">
             <el-select placeholder="请选择" v-model="articleTagId" class="select">
               <el-option  v-for=" tag in articleTag"  :key=tag.articleTagId :label=tag.articleTag :value=tag.articleTagId></el-option>
             </el-select>
@@ -41,6 +42,7 @@ import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 import { quillEditor } from "vue-quill-editor";
+import StringUtils from "../../utils/StringUtils.js";
 export default {
   name: "editor",
   data: function() {
@@ -51,7 +53,8 @@ export default {
       content: "",
       articleTitle: "",
       articleTagId: 1,
-      articleTag: ""
+      articleTag: "",
+      articleId:"",
 
     };
   },
@@ -62,10 +65,24 @@ export default {
     this.$http.http("/index/classify", {}).then(res => {
       if (res.code == 1) {
         this.articleTag = res.data;
+        if(!StringUtils.isEmpty(this.$route.query)){
+          this.getArticle();
+        }
       }
     });
   },
   methods: {
+
+    getArticle(){
+    this.$http
+      .http("/index/detail", { articleId: this.$route.query.articleId })
+      .then(res => {
+        this.content = res.data.content;
+        this.articleTagId = res.data.articleTag;
+        this.articleTitle = res.data.articleTitle;
+        this.articleId = res.data.articleId;
+      });
+  },
     publish() {
       if (this.content.trim() == "") {
         return;
@@ -77,7 +94,8 @@ export default {
         .http("/index/save", {
           content: this.content,
           articleTitle: this.articleTitle,
-          articleTagId: this.articleTagId
+          articleTagId: this.articleTagId,
+          articleId:this.articleId
         })
         .then(res => {
           if (res.code == 1) {

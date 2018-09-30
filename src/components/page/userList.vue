@@ -39,7 +39,7 @@
         </el-table-column>
         <el-table-column prop="address" label="详细住址">
         </el-table-column>
-        <el-table-column prop="userTag" label="用户标签">
+        <el-table-column prop="userTagName" label="用户标签">
         </el-table-column>
         <el-table-column label="状态">
           <template scope="scope">
