@@ -88,7 +88,7 @@ export default {
       registerForm: {
         userPhone: "",
         password: "",
-        imageCode:""
+        imageCode: ""
       },
       errorMsg: "",
       errorRegister: "",
@@ -136,11 +136,19 @@ export default {
     register(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
+          let reg = new RegExp(/^(?!([a-zA-Z]+|\d+)$)[a-zA-Z\d]{8,16}$/);
+          let reg2 = /^1[345678][0-9]{9}$/;
+          if (!reg2.test(this.registerForm.userPhone)) {
+            return (this.errorRegister = "请输入正确的手机号码");
+          }
+          if (!reg.test(this.registerForm.password)) {
+            return (this.errorRegister = "密码由8-16位数字和字母组成");
+          }
           this.$http
             .http("/user/regist", {
               userPhone: this.registerForm.userPhone,
               password: this.registerForm.password,
-              imageCode:this.registerForm.imageCode,
+              imageCode: this.registerForm.imageCode
             })
             .then(res => {
               if (res.code == 1) {

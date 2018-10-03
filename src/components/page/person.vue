@@ -252,7 +252,7 @@ export default {
       }
     },
     getArticle() {
-      this.$http.http("/index/list", {}).then(res => {
+      this.$http.http("/index/list", {userPhone:localStorage.getItem("x_userPhone")}).then(res => {
         this.articleList = res.data;
       });
     }
@@ -348,7 +348,7 @@ export default {
   }
   .header-bg .header-avater {
     left: -0.344828rem;
-    top: 2.068966rem;
+    top: 1.965517rem;
   }
   .header-bg .header-avater img {
     width: 1.724138rem;
@@ -357,6 +357,7 @@ export default {
   }
   .header-avater .mobile-style {
     margin: 0.241379rem !important;
+    margin-top: .344828rem !important;
   }
   .mobile-style h1 {
     font-size: 24px;

@@ -203,7 +203,7 @@ export default {
     padding-right: 8px;
   }
   .article-tag + h4 {
-      max-width: 4.617931rem;
+      max-width: 4.207931rem;
   }
 }
 </style>

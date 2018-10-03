@@ -160,7 +160,6 @@ export default {
 .header-left {
   cursor: pointer;
   font-size: 20px;
-  height: 64px;
   line-height: 64px;
   transition: all 0.3s, padding 0s;
   background: burlywood;
@@ -238,11 +237,12 @@ export default {
   .header-main {
     width: 100%;
   }
+  
   .header-right {
     margin-right: 0;
   }
   .header-navbar {
-    height: 1rem;
+    height: 0.85rem;
   }
 
   .header-content {
@@ -269,12 +269,11 @@ export default {
   .header-left {
     cursor: pointer;
     font-size: 20px;
-    height: 64px;
-    line-height: 64px;
+    height: 0.85rem;
+    line-height: 0.85rem;
     transition: all 0.3s, padding 0s;
     background: burlywood;
-    width: 68px;
-    height: 64px;
+    width: 0.85rem;
     display: inline-block;
   }
 

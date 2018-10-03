@@ -42,7 +42,7 @@
           <router-link to='/' exact>首页</router-link>
         </li>
         <li>
-          <router-link to='/daily' xact>日志</router-link>
+          <router-link to='/daily' >日志</router-link>
         </li>
         <el-dropdown trigger="click">
           <li>论坛</li>
@@ -220,14 +220,14 @@ export default {
     margin-right: 0;
   }
   .header-navbar {
-    height: 1rem;
+    height: 0.85rem;
   }
   .header-left {
-    height: 1rem;
-    line-height: 1rem;
+    height: 0.85rem;
+    line-height: 0.85rem;
   }
   .header-right .right-span {
-    line-height: 1rem;
+    line-height: 0.85rem;
   }
   .header-content ul {
     width: 100%;

@@ -3,6 +3,8 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
+// const serverUrl = "http://119.29.230.48:8080/spring-boot-1.0"
+const serverUrl = "http://localhost:8080" 
 
 module.exports = {
   dev: {
@@ -11,22 +13,28 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      // '/sys':{
-      //     target:'http://localhost:8080',
-      //     changeOrigin:true,
-      //     pathRewrite:{
-      //         '^sys/*':'^sys/*'
-      //     }
-      // }
-      '/':{
-        target:'http://localhost:8080',
-        changeOrigin:true,
-        pathRewrite:{
-            '/':'/'
-        }
-    }
-      
+      '/sys':{
+        target:serverUrl,
+          changeOrigin:true,
+          pathRewrite:{
+              '^sys/*':'^sys/*'
+          }
+      },
+    '/user':{
+      target:serverUrl,
+      changeOrigin:true,
+      pathRewrite:{
+        '^user/*':'^user/*'
+      }
     },
+    '/index':{
+      target:serverUrl,
+      changeOrigin:true,
+      pathRewrite:{
+        '^index/*':'^index/*'
+      }
+    } 
+  },
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
     port: 8081, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
