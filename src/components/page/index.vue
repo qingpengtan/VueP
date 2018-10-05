@@ -1,38 +1,38 @@
 <template>
 
-    <div>
+  <div>
 
-        <Header></Header>
+    <Header></Header>
 
-        <div class="layout-main">
-            <!-- <div class="header-content">
+    <div class="layout-main">
+      <!-- <div class="header-content">
 
         </div> -->
 
-            <div class="layout-content">
-                <div class="main-content" style="padding: 8px 32px 32px;">
+      <div class="layout-content">
+        <div class="main-content" style="padding: 8px 32px 32px;">
 
-                    <div class="ant-list-item" v-for=" article in articleList" :key="article.articleId">
-                        <div class="ant-list-item-meta-content">
-                            <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
-                                <span class="article-tag">{{article.articleTagName}}</span>
-                                <h4>{{article.articleTitle}}</h4>
-                            </router-link>
-                        </div>
-                        <div class="ant-list-item-content">
-                            <div>
-                                <div class="text-content" v-html=article.content>
-                                </div>
-                                <div class="publish">
-                                    <span>
-                                        <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png">
+          <div class="ant-list-item" v-for=" article in articleList" :key="article.articleId">
+            <div class="ant-list-item-meta-content">
+              <span class="article-tag">{{article.articleTagName}}</span>
+              <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
+                <h4>{{article.articleTitle}}</h4>
+              </router-link>
+            </div>
+            <div class="ant-list-item-content">
+              <div>
+                <div class="text-content" v-html=article.content>
+                </div>
+                <div class="publish">
+                  <span>
+                    <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png">
                                     </span>
-                                        <a href="https://ant.design">{{article.userName}}</a> 发布于
-                                        {{article.createTime}}
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <ul class="ant-list-item-action">
+                    <a href="https://ant.design">{{article.userName}}</a> 发布于
+                    {{article.createTime}}
+                </div>
+              </div>
+            </div>
+            <!-- <ul class="ant-list-item-action">
                             <li>
                                 <span>
                                     <i class="anticon anticon-star-o" style="margin-right: 8px;">
@@ -60,13 +60,13 @@
                                     </i>19</span>
                             </li>
                         </ul> -->
-                        <hr>
+            <hr>
                     </div>
 
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
+    </div>
 
 </template>
 
@@ -140,22 +140,21 @@ export default {
   padding-right: 16px;
   cursor: pointer;
 }
-.article-tag + h4 {
+.article-tag + a h4 {
   display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-
 }
 .article-tag {
   padding: 0 3px;
-  margin-right: 5px;
   border-radius: 3px;
-  box-shadow: 0 0 2px 0 #43bcff;
+  box-shadow: 0 0 1px 0 #43bcff;
   border: 1px solid #43bcff;
   color: #43bcff;
+  font-size: 11px;
   position: relative;
-  top: -2px;
+  top: -4px;
 }
 @media only screen and (max-width: 481px) {
   .layout-main,
@@ -202,8 +201,8 @@ export default {
   .ant-list-item-action li {
     padding-right: 8px;
   }
-  .article-tag + h4 {
-      max-width: 4.207931rem;
+  .article-tag + a h4 {
+    max-width: 4.417931rem;
   }
 }
 </style>

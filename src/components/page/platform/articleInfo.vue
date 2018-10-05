@@ -49,9 +49,8 @@ import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 import { quillEditor } from "vue-quill-editor";
-import bus from "../common/bus";
-import StringUtils from "../../utils/StringUtils.js";
-import tabUtils from "../../utils/tabUtils.js";
+import StringUtils from "../../../utils/StringUtils.js";
+import tabUtils from "../../../utils/tabUtils.js";
 export default {
   name: "editor",
   data: function() {

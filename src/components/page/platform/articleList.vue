@@ -59,8 +59,8 @@
 </template>
 
 <script>
-import tabUtils from "../../utils/tabUtils.js";
-import bus from "../common/bus";
+import tabUtils from "../../../utils/tabUtils.js";
+import bus from "../../common/bus";
 
 export default {
   name: "basetable",

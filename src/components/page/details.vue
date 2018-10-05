@@ -9,7 +9,7 @@
 
           <div class="ant-list-item">
             <div class="ant-list-item-meta-content">
-              <h4>{{article.articleTitle}}</h4>
+              <h3>{{article.articleTitle}}</h3>
             </div>
             <div class="ant-list-item-content">
               <div>
@@ -184,6 +184,10 @@ export default {
 .ant-list-item {
   padding: 20px 0;
   width: 720px;
+}
+
+.ant-list-item-meta-content {
+  /* color: #43bcff; */
 }
 
 .ant-list-item-meta-content,

@@ -329,10 +329,12 @@ export default {
 }
 .text-item {
   padding: 5px;
+  font-size: 14px;
+  line-height: 1.5;
 }
 .text-item span {
-  padding: 0 3px;
-  margin-right: 10px;
+  padding: 0 2px;
+  margin-right: 5px;
   border-radius: 3px;
   box-shadow: 0 0 2px 0 #43bcff;
   border: 1px solid #43bcff;

@@ -128,9 +128,9 @@
 
 <script>
 import VueCropper from "vue-cropperjs";
-import cityData from "./city2.json";
-import StringUtils from "../../utils/StringUtils.js";
-import tabUtils from "../../utils/tabUtils.js";
+import cityData from "../city2.json";
+import StringUtils from "../../../utils/StringUtils.js";
+import tabUtils from "../../../utils/tabUtils.js";
 export default {
   name: "baseform",
   data: function() {

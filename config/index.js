@@ -3,8 +3,8 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-// const serverUrl = "http://119.29.230.48:8080/spring-boot-1.0"
-const serverUrl = "http://localhost:8080" 
+const serverUrl = "http://119.29.230.48"
+// const serverUrl = "http://localhost:8080" 
 
 module.exports = {
   dev: {
