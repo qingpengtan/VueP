@@ -154,7 +154,7 @@ export default {
   color: #43bcff;
   font-size: 11px;
   position: relative;
-  top: -4px;
+  top: -5px;
 }
 @media only screen and (max-width: 481px) {
   .layout-main,

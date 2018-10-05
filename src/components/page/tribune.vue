@@ -20,15 +20,17 @@
               </router-link>
             </div>
             <div class="ant-list-item-content">
-              <div>
-                <div class="text-content" v-html=article.content>
+              <div class="ql-snow">
+                <div class="ql-editor">
+                  <div class="text-content" v-html=article.content>
+                  </div>
                 </div>
                 <div class="publish">
                   <span>
                     <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png">
-                                    </span>
-                    <a href="https://ant.design">{{article.userName}}</a> 发布于
-                    {{article.createTime}}
+                  </span>
+                  <a href="https://ant.design">{{article.userName}}</a> 发布于
+                  {{article.createTime}}
                 </div>
               </div>
             </div>
@@ -61,12 +63,12 @@
                             </li>
                         </ul> -->
             <hr>
-                    </div>
-
           </div>
+
         </div>
       </div>
     </div>
+  </div>
 
 </template>
 
@@ -83,9 +85,11 @@ export default {
     };
   },
   created() {
-    this.$http.http("/index/list", {articleTagId:this.$route.query.articleTagId}).then(res => {
-      this.articleList = res.data;
-    });
+    this.$http
+      .http("/index/list", { articleTagId: this.$route.query.articleTagId })
+      .then(res => {
+        this.articleList = res.data;
+      });
   },
   methods: {}
 };
@@ -154,7 +158,7 @@ export default {
   color: #43bcff;
   font-size: 11px;
   position: relative;
-  top: -4px;
+  top: -5px;
 }
 @media only screen and (max-width: 481px) {
   .layout-main,

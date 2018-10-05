@@ -8,6 +8,9 @@ export default new Router({
     routes: [{
             path: '/',
             component: resolve => require(['../components/page/index.vue'], resolve),
+            meta: {
+                title: 'Tang'
+              }
         },
         {
             path: '/user-login',
@@ -119,11 +122,17 @@ export default new Router({
         },
         {
             path: '/404',
-            component: resolve => require(['../components/page/404.vue'], resolve)
+            component: resolve => require(['../components/page/404.vue'], resolve),
+            meta: {
+                title: '404'
+              }
         },
         {
             path: '/403',
-            component: resolve => require(['../components/page/403.vue'], resolve)
+            component: resolve => require(['../components/page/403.vue'], resolve),
+            meta: {
+                title: '403'
+              }
         },
         {
             path: '*',
