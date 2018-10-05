@@ -12,33 +12,54 @@ export default new Router({
         {
             path: '/user-login',
             component: resolve => require(['../components/page/userLogin.vue'], resolve),
+            meta: {
+                title: '登录'
+              }
         },
 
         {
             path: '/detail',
             component: resolve => require(['../components/page/details.vue'], resolve),
+            meta: {
+                title: '文章详情'
+              }
         },
 
         {
             path: '/edit-text',
             component: resolve => require(['../components/page/editor.vue'], resolve),
+            meta: {
+                title: '编辑文章'
+              }
         },
 
         {
             path: '/person-info',
             component: resolve => require(['../components/page/person.vue'], resolve),
+            meta: {
+                title: '个人中心'
+              }
         },
         {
             path: '/tribune',
             component: resolve => require(['../components/page/tribune.vue'], resolve),
+            meta: {
+                title: '论坛'
+              }
         },
         {
             path: '/daily',
             component: resolve => require(['../components/page/daily.vue'], resolve),
+            meta: {
+                title: '心情日志'
+              }
         },
         {
             path: '/sys/login',
-            component: resolve => require(['../components/page/platform/Login.vue'], resolve)
+            component: resolve => require(['../components/page/platform/Login.vue'], resolve),
+            meta: {
+                title: '后台管理登录'
+              }
         },
         // 平台
         {
@@ -49,7 +70,7 @@ export default new Router({
             path: '/sys',
             component: resolve => require(['../components/common/Home.vue'], resolve),
             meta: {
-                title: '自述文件'
+                title: '后台管理系统'
             },
             children: [{
                     path: '/sys/dashboard',

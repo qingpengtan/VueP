@@ -24,6 +24,9 @@ Vue.prototype.$prototype = function () {
 router.beforeEach((to, from, next) => {
     const token = localStorage.getItem('x_token');
     const role = localStorage.getItem('x_role');
+    if (to.meta.title) {
+        document.title = to.meta.title;
+      }
     // 当用户未登录
     if (StringUtils.isEmpty(token) && (to.path.indexOf('sys') == -1) && to.path != '/user-login') {
         next('/user-login');

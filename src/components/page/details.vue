@@ -18,7 +18,7 @@
                   <span>
                     <img src="https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png">
                    </span>
-                    <a href="https://ant.design">{{article.userName}}</a>于{{article.createTime}}发表了
+                    <a href="#">{{isEdit? "我" : article.userName}}</a>于{{article.createTime}}发表了
                     <b>{{article.articleTagName}}</b> 文章 &nbsp;&nbsp;
                     <router-link :to="{path:'/edit-text', query:{articleId:article.articleId}}" v-show="isEdit">
                       <i class="el-icon-edit" style="color:#43bcff">更新文章？</i>
@@ -201,6 +201,7 @@ export default {
 
 .publish {
   margin-top: 16px;
+  line-height: 1.5;
 }
 
 .publish img {
