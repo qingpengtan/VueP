@@ -7,12 +7,12 @@
         <div class="header-navbar">
           <router-link to='/'>
             <img class="header-left" src="../../assets/logo.gif" />
-                    </router-link>
-            <div class="header-right">
-              <span class="right-span">
-                <el-button type="primary" @click="publish()">发表</el-button>
-              </span>
-            </div>
+          </router-link>
+          <div class="header-right">
+            <span class="right-span">
+              <el-button type="primary" @click="publish()">发表</el-button>
+            </span>
+          </div>
         </div>
       </div>
 
@@ -23,9 +23,9 @@
         <div class="main-content" style="padding: 8px 32px 32px;">
           <div style="margin-top:20px">
             <input type="text" class="editor-title" placeholder="请输入标题" v-model="articleTitle">
-            <input type="text" v-show="none" v-model="articleId">
+            <input type="text" v-show="false" v-model="articleId">
             <el-select placeholder="请选择" v-model="articleTagId" class="select">
-              <el-option  v-for=" tag in articleTag"  :key=tag.articleTagId :label=tag.articleTag :value=tag.articleTagId></el-option>
+              <el-option v-for=" tag in articleTag" :key=tag.articleTagId :label=tag.articleTag :value=tag.articleTagId></el-option>
             </el-select>
             <quill-editor ref="myTextEditor" v-model="content" :options="editorOption"></quill-editor>
           </div>
@@ -54,35 +54,33 @@ export default {
       articleTitle: "",
       articleTagId: 1,
       articleTag: "",
-      articleId:"",
-
+      articleId: ""
     };
   },
   components: {
     quillEditor
   },
-  created(){
+  created() {
     this.$http.http("/index/classify", {}).then(res => {
       if (res.code == 1) {
         this.articleTag = res.data;
-        if(!StringUtils.isEmpty(this.$route.query)){
+        if (!StringUtils.isEmpty(this.$route.query)) {
           this.getArticle();
         }
       }
     });
   },
   methods: {
-
-    getArticle(){
-    this.$http
-      .http("/index/detail", { articleId: this.$route.query.articleId })
-      .then(res => {
-        this.content = res.data.content;
-        this.articleTagId = res.data.articleTag;
-        this.articleTitle = res.data.articleTitle;
-        this.articleId = res.data.articleId;
-      });
-  },
+    getArticle() {
+      this.$http
+        .http("/index/detail", { articleId: this.$route.query.articleId })
+        .then(res => {
+          this.content = res.data.content;
+          this.articleTagId = res.data.articleTag;
+          this.articleTitle = res.data.articleTitle;
+          this.articleId = res.data.articleId;
+        });
+    },
     publish() {
       if (this.content.trim() == "") {
         return;
@@ -95,7 +93,7 @@ export default {
           content: this.content,
           articleTitle: this.articleTitle,
           articleTagId: this.articleTagId,
-          articleId:this.articleId
+          articleId: this.articleId
         })
         .then(res => {
           if (res.code == 1) {
@@ -237,7 +235,7 @@ export default {
   .header-main {
     width: 100%;
   }
-  
+
   .header-right {
     margin-right: 0;
   }

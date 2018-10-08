@@ -72,10 +72,12 @@
 
 <script>
 import Header from "../common/Fheader.vue";
+import Scroll from './foreground/scroll';
 export default {
   name: "index",
   components: {
-    Header
+    Header,
+    'v-scroll': Scroll
   },
   data() {
     return {

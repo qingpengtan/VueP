@@ -13,6 +13,13 @@ export default new Router({
               }
         },
         {
+            path: '/test',
+            component: resolve => require(['../components/page/test.vue'], resolve),
+            meta: {
+                title: '登录'
+              }
+        },
+        {
             path: '/user-login',
             component: resolve => require(['../components/page/userLogin.vue'], resolve),
             meta: {
@@ -23,9 +30,6 @@ export default new Router({
         {
             path: '/detail',
             component: resolve => require(['../components/page/details.vue'], resolve),
-            meta: {
-                title: '文章详情'
-              }
         },
 
         {

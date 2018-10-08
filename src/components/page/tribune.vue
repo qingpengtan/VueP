@@ -20,11 +20,7 @@
               </router-link>
             </div>
             <div class="ant-list-item-content">
-              <div class="ql-snow">
-                <div class="ql-editor">
-                  <div class="text-content" v-html=article.content>
-                  </div>
-                </div>
+              <div class="text-content" v-html=article.content>
                 <div class="publish">
                   <span>
                     <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png">

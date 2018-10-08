@@ -143,10 +143,12 @@ export default {
     };
   },
   created() {
+    window.scrollTo(0,0)
     this.$http
       .http("/index/detail", { articleId: this.$route.query.articleId })
       .then(res => {
         this.article = res.data;
+        document.title = this.article.articleTitle;
         this.$http
           .http("/index/isEdit", { userPhone: res.data.userPhone })
           .then(resu => {
