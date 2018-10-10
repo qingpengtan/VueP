@@ -199,7 +199,7 @@ export default {
 
       //如果滑动距离太短
       if (Math.abs(dx) < 2 && Math.abs(dy) < 2) {
-        console.log("滑动距离太短");
+        // console.log("滑动距离太短");
         return;
       }
 

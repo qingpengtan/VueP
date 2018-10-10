@@ -132,14 +132,11 @@
             </el-tab-pane>
             <el-tab-pane label="我的文章" name="article">
               <el-card class="box-card">
-                <div id="scroll">
-                  <div v-for="article in articleList" :key=article.articleId class="text-item">
-                    <span>{{article.articleTagName}}</span>
-                    <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
-                      {{article.articleTitle }}
-                    </router-link>
-                  </div>
-                  <footer>上滑加载更多内容</footer>
+                <div v-for="article in articleList" :key=article.articleId class="text-item">
+                  <span>{{article.articleTagName}}</span>
+                  <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
+                    {{article.articleTitle }}
+                  </router-link>
                 </div>
 
                 <div id="bar"></div>
@@ -201,9 +198,9 @@ export default {
     });
 
     this.getArticle();
-    document.addEventListener("touchstart", function(e) {
-      e.preventDefault();
-    });
+    // document.addEventListener("touchstart", function(e) {
+    //   e.preventDefault();
+    // });
   },
   methods: {
     updateInfo() {
@@ -264,7 +261,7 @@ export default {
     getArticle() {
       this.$http
         .http("/index/list", {
-          userPhone: localStorage.getItem("x_userPhone"),
+          personInfo: "phone",
           page: 1
         })
         .then(res => {
