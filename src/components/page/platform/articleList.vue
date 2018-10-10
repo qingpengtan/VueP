@@ -42,7 +42,7 @@
         </el-table-column>
       </el-table>
       <div class="pagination">
-        <el-pagination @current-change="handleCurrentChange" layout="prev, pager, next" :total="1000">
+        <el-pagination background @current-change="handleCurrentChange" :current-page="current" :page-size="10" layout="total, prev, pager, next, jumper" :total="totalSize">
         </el-pagination>
       </div>
     </div>
@@ -71,19 +71,25 @@ export default {
       delVisible: false,
       deleteId: "",
       select_word: "",
-      cur_page: 1
+      totalSize: 1,
+      current: 1
     };
   },
   created() {
     this.$http.http("/sys/article/list", {}).then(res => {
-      this.tableData = res.data;
+      this.current = res.data.current;
+      this.totalSize = res.data.totalSize;
+      this.tableData = res.data.articleList;
     });
   },
   methods: {
     // 分页导航
     handleCurrentChange(val) {
-      this.cur_page = val;
-      this.getData();
+      this.$http.http("/sys/article/list", {page:val}).then(res => {
+        this.current = res.data.current;
+        this.totalSize = res.data.totalSize;
+        this.tableData = res.data.articleList;
+      });
     },
 
     addUser() {

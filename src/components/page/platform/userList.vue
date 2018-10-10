@@ -56,7 +56,8 @@
         </el-table-column>
       </el-table>
       <div class="pagination">
-        <el-pagination @current-change="handleCurrentChange" layout="prev, pager, next" :total="1000">
+
+        <el-pagination background @current-change="handleCurrentChange" :current-page="current" :page-size="10" layout="total, prev, pager, next, jumper" :total="totalSize">
         </el-pagination>
       </div>
     </div>
@@ -79,25 +80,30 @@ export default {
     return {
       url: "./static/vuetable.json",
       tableData: [],
-      cur_page: 1,
+      totalSize: 1,
+      current: 1,
       select_word: "",
       is_search: false,
       delVisible: false,
       idx: -1,
-      deleteId: "",
+      deleteId: ""
     };
   },
   created() {
-    // this.getData();
     this.$http.http("/sys/user/list", {}).then(res => {
-      this.tableData = res.data;
+      this.current = res.data.current;
+      this.totalSize = res.data.totalSize;
+      this.tableData = res.data.userList;
     });
   },
   methods: {
     // 分页导航
     handleCurrentChange(val) {
-      this.cur_page = val;
-      this.getData();
+      this.$http.http("/sys/user/list", {page:val}).then(res => {
+        this.current = res.data.current;
+        this.totalSize = res.data.totalSize;
+        this.tableData = res.data.userList;
+      });
     },
 
     addUser() {
@@ -116,15 +122,13 @@ export default {
     },
     // 确定删除
     deleteRow() {
-      this.$http
-        .http("/sys/user/delete", { id: this.deleteId })
-        .then(res => {
-          if (res.code == 1) {
-            this.tableData.splice(this.idx, 1);
-            this.$message.success("删除成功");
-            this.delVisible = false;
-          }
-        });
+      this.$http.http("/sys/user/delete", { id: this.deleteId }).then(res => {
+        if (res.code == 1) {
+          this.tableData.splice(this.idx, 1);
+          this.$message.success("删除成功");
+          this.delVisible = false;
+        }
+      });
     }
   }
 };
