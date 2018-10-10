@@ -12,25 +12,29 @@
       <div class="layout-content">
         <div class="main-content" style="padding: 8px 32px 32px;">
 
-          <div class="ant-list-item" v-for=" article in articleList" :key="article.articleId">
-            <div class="ant-list-item-meta-content">
-              <span class="article-tag">{{article.articleTagName}}</span>
-              <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
-                <h4>{{article.articleTitle}}</h4>
-              </router-link>
-            </div>
-            <div class="ant-list-item-content">
-              <div class="text-content" v-html=article.content>
-                <div class="publish">
-                  <span>
-                    <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png">
-                  </span>
-                  <a href="https://ant.design">{{article.userName}}</a> 发布于
-                  {{article.createTime}}
+          <v-scroll :on-refresh="onRefresh" :on-infinite="onInfinite" :dataList="scrollData">
+
+            <div class="ant-list-item" v-for=" article in articleList" :key="article.articleId">
+              <div class="ant-list-item-meta-content">
+                <span class="article-tag">{{article.articleTagName}}</span>
+                <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
+                  <h4>{{article.articleTitle}}</h4>
+                </router-link>
+              </div>
+              <div class="ant-list-item-content">
+                <div>
+                  <div class="text-content" v-html=article.content>
+                  </div>
+                  <div class="publish">
+                    <span>
+                      <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png">
+                    </span>
+                    <a href="https://ant.design">{{article.userName}}</a> 发布于
+                    {{article.createTime}}
+                  </div>
                 </div>
               </div>
-            </div>
-            <!-- <ul class="ant-list-item-action">
+              <!-- <ul class="ant-list-item-action">
                             <li>
                                 <span>
                                     <i class="anticon anticon-star-o" style="margin-right: 8px;">
@@ -58,8 +62,13 @@
                                     </i>19</span>
                             </li>
                         </ul> -->
-            <hr>
-          </div>
+              <hr>
+            </div>
+            <div class="pc-more" @click="moreData" v-show="disMore">
+              查看更多
+            </div>
+
+          </v-scroll>
 
         </div>
       </div>
@@ -70,24 +79,67 @@
 
 <script>
 import Header from "../common/Fheader.vue";
+import Scroll from "./foreground/scroll";
 export default {
-  name: "index",
+  name: "daily",
   components: {
-    Header
+    Header,
+    "v-scroll": Scroll
   },
   data() {
     return {
-      articleList: []
+      disMore: false,
+      totalPage: 1,
+      current: 1,
+      articleList: [],
+      scrollData: {
+        noFlag: false //暂无更多数据显示
+      }
     };
   },
-  created() {
-    this.$http
-      .http("/index/list", { articleTagId: this.$route.query.articleTagId })
-      .then(res => {
-        this.articleList = res.data;
-      });
+  mounted: function() {
+      this.reqData(1);
   },
-  methods: {}
+  methods: {
+    onRefresh(done) {
+      this.reqData(1);
+      done(); // call done
+    },
+    onInfinite(done) {
+      this.current++;
+      let more = this.$el.querySelector(".load-more");
+
+      if (this.current > this.totalPage) {
+        this.scrollData.noFlag = true;
+        more.style.display = "none"; //隐藏加载条
+        return;
+      }
+      this.reqData(this.current);
+
+      done();
+    },
+    moreData() {
+      this.current++;
+      if (this.current > this.totalPage) {
+        this.$el.querySelector(".pc-more").innerHTML = "没有更多数据了";
+        return;
+      }
+      this.reqData(this.current)
+    },
+    reqData(page) {
+      this.$http.http("/index/list", { articleTagId: this.$route.query.articleTagId,page:page }).then(
+        res => {
+          this.disMore = true;
+          this.totalPage = res.data.totalPage;
+          this.current = res.data.current;
+          this.articleList = this.articleList.concat(res.data.articleList);
+        },
+        response => {
+          console.log("error");
+        }
+      );
+    }
+  }
 };
 </script>
 
@@ -104,6 +156,9 @@ export default {
   width: auto;
   background: white;
   margin-top: 20px;
+}
+.main-content {
+  position: relative;
 }
 
 .ant-list-item {
@@ -156,6 +211,16 @@ export default {
   position: relative;
   top: -5px;
 }
+.pc-more {
+  width: 720px;
+  background: #ddd;
+  border-radius: 4px;
+  color: #666;
+  text-align: center;
+  font-size: 15px;
+  cursor: pointer;
+  display: block;
+}
 @media only screen and (max-width: 481px) {
   .layout-main,
   .main-content,
@@ -203,6 +268,9 @@ export default {
   }
   .article-tag + a h4 {
     max-width: 4.617931rem;
+  }
+  .pc-more {
+    display: none;
   }
 }
 </style>

@@ -252,8 +252,8 @@ export default {
       }
     },
     getArticle() {
-      this.$http.http("/index/list", {userPhone:localStorage.getItem("x_userPhone")}).then(res => {
-        this.articleList = res.data;
+      this.$http.http("/index/list", {userPhone:localStorage.getItem("x_userPhone"),page:1}).then(res => {
+          this.articleList = this.articleList.concat(res.data.articleList);
       });
     }
   }
