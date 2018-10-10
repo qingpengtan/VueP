@@ -102,7 +102,16 @@ export default {
   },
   methods: {
     onRefresh(done) {
-      this.reqData(1);
+      this.$http.http("/index/list", { articleTagId: this.$route.query.articleTagId }).then(
+        res => {
+          this.totalPage = res.data.totalPage;
+          this.current = res.data.current;
+          this.articleList = res.data.articleList;
+        },
+        response => {
+          console.log("error");
+        }
+      );
       done(); // call done
     },
     onInfinite(done) {
