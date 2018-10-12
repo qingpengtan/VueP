@@ -97,21 +97,39 @@ export default {
       }
     };
   },
-  mounted: function() {
-      this.reqData(1);
+  created() {
+    this.reqData(1);
+  },
+  watch: {
+    $route(to, from) {
+      this.$http
+        .http("/index/list", { articleTagId: this.$route.query.articleTagId })
+        .then(
+          res => {
+            this.totalPage = res.data.totalPage;
+            this.current = res.data.current;
+            this.articleList = res.data.articleList;
+          },
+          response => {
+            console.log("error");
+          }
+        );
+    }
   },
   methods: {
     onRefresh(done) {
-      this.$http.http("/index/list", { articleTagId: this.$route.query.articleTagId }).then(
-        res => {
-          this.totalPage = res.data.totalPage;
-          this.current = res.data.current;
-          this.articleList = res.data.articleList;
-        },
-        response => {
-          console.log("error");
-        }
-      );
+      this.$http
+        .http("/index/list", { articleTagId: this.$route.query.articleTagId })
+        .then(
+          res => {
+            this.totalPage = res.data.totalPage;
+            this.current = res.data.current;
+            this.articleList = res.data.articleList;
+          },
+          response => {
+            console.log("error");
+          }
+        );
       done(); // call done
     },
     onInfinite(done) {
@@ -133,20 +151,28 @@ export default {
         this.$el.querySelector(".pc-more").innerHTML = "没有更多数据了";
         return;
       }
-      this.reqData(this.current)
+      this.reqData(this.current);
     },
     reqData(page) {
-      this.$http.http("/index/list", { articleTagId: this.$route.query.articleTagId,page:page }).then(
-        res => {
-          this.disMore = true;
-          this.totalPage = res.data.totalPage;
-          this.current = res.data.current;
-          this.articleList = this.articleList.concat(res.data.articleList);
-        },
-        response => {
-          console.log("error");
-        }
-      );
+      this.$http
+        .http("/index/list", {
+          articleTagId: this.$route.query.articleTagId,
+          page: page
+        })
+        .then(
+          res => {
+            this.disMore = true;
+            this.totalPage = res.data.totalPage;
+            this.current = res.data.current;
+            this.articleList = this.articleList.concat(res.data.articleList);
+            if (res.data.articleList.length < 10) {
+              this.$el.querySelector(".pc-more").innerHTML = "没有更多数据了";
+            }
+          },
+          response => {
+            console.log("error");
+          }
+        );
     }
   }
 };
@@ -222,9 +248,11 @@ export default {
 }
 .pc-more {
   width: 720px;
-  background: #ddd;
+  height: 35px;
+  line-height: 35px;
+  background: #f2f2f2;
   border-radius: 4px;
-  color: #666;
+  color: #999999;
   text-align: center;
   font-size: 15px;
   cursor: pointer;
@@ -279,7 +307,7 @@ export default {
     max-width: 4.617931rem;
   }
   .pc-more {
-    display: none;
+    display: none!important;
   }
 }
 </style>

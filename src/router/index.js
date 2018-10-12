@@ -9,7 +9,8 @@ export default new Router({
             path: '/',
             component: resolve => require(['../components/page/index.vue'], resolve),
             meta: {
-                title: 'Tang'
+                title: 'Tang', 
+                keepAlive: true,
               }
         },
         {
@@ -51,14 +52,16 @@ export default new Router({
             path: '/tribune',
             component: resolve => require(['../components/page/tribune.vue'], resolve),
             meta: {
-                title: '论坛'
+                title: '论坛',
+                keepAlive: true
               }
         },
         {
             path: '/daily',
             component: resolve => require(['../components/page/daily.vue'], resolve),
             meta: {
-                title: '心情日志'
+                title: '心情日志',
+                keepAlive: true
               }
         },
         {

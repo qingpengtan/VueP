@@ -102,7 +102,7 @@ export default {
       }
     };
   },
-  mounted: function() {
+  mounted() {
       this.reqData(1);
   },
   methods: {
@@ -147,6 +147,9 @@ export default {
           this.totalPage = res.data.totalPage;
           this.current = res.data.current;
           this.articleList = this.articleList.concat(res.data.articleList);
+          if(res.data.articleList.length < 10){
+            this.$el.querySelector(".pc-more").innerHTML = "没有更多数据了";
+          }
         },
         response => {
           console.log("error");
@@ -227,9 +230,11 @@ export default {
 }
 .pc-more {
   width: 720px;
-  background: #ddd;
+  height: 35px;
+  line-height: 35px;
+  background: #f2f2f2;
   border-radius: 4px;
-  color: #666;
+  color: #999999;
   text-align: center;
   font-size: 15px;
   cursor: pointer;
@@ -284,7 +289,7 @@ export default {
     max-width: 4.617931rem;
   }
   .pc-more {
-    display: none;
+    display: none!important;
   }
 }
 </style>

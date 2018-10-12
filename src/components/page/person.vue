@@ -131,15 +131,18 @@
               </div>
             </el-tab-pane>
             <el-tab-pane label="我的文章" name="article">
-              <el-card class="box-card">
+              <el-card class="box-card" @touchmove.native="tuchMove()">
+
                 <div v-for="article in articleList" :key=article.articleId class="text-item">
                   <span>{{article.articleTagName}}</span>
                   <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
                     {{article.articleTitle }}
                   </router-link>
                 </div>
+                <div class="pc-more" @click="moreData" v-show="disMore">
+                  查看更多
+                </div>
 
-                <div id="bar"></div>
               </el-card>
             </el-tab-pane>
             <el-tab-pane label="XXXXXX" name="a">XXXXXX</el-tab-pane>
@@ -164,6 +167,7 @@ export default {
   },
   data() {
     return {
+      disMore: false,
       options: cityData,
       articleTag: "",
       isEdit: false,
@@ -203,6 +207,20 @@ export default {
     // });
   },
   methods: {
+    tuchMove() {
+      var clientH = this.$el.getElementsByClassName("el-tabs--border-card")[0]
+        .clientHeight;
+      var scrollTops = this.$el.getElementsByClassName("el-tabs__content")[0]
+        .scrollTop;
+      var totalHeight = this.$el.getElementsByClassName("el-tab-pane")[1]
+        .clientHeight;
+      if (clientH + Math.ceil(scrollTops) >= totalHeight) {
+        console.log("到顶部了");
+        return;
+      }
+    },
+
+    moreData() {},
     updateInfo() {
       this.isEdit = !this.isEdit;
       let tempTag = this.form.userTag;
@@ -266,6 +284,10 @@ export default {
         })
         .then(res => {
           this.articleList = this.articleList.concat(res.data.articleList);
+          this.disMore = true;
+          if (res.data.articleList.length < 10) {
+            this.$el.querySelector(".pc-more").innerHTML = "没有更多数据了";
+          }
         });
     }
   }
@@ -324,6 +346,13 @@ export default {
   box-shadow: none !important;
   height: 300px;
 }
+.main-content >>> .el-tabs__content {
+  height: 100%;
+  overflow: auto;
+}
+.main-content >>> .el-tab-pane {
+  margin-bottom: 30px;
+}
 .main-content >>> .person-info .person-info-edit {
   position: relative;
 }
@@ -352,6 +381,21 @@ export default {
   border: 1px solid #43bcff;
   color: #43bcff;
   font-size: 13px;
+}
+.pc-more {
+  width: 100%;
+  height: 35px;
+  line-height: 35px;
+  background: #f2f2f2;
+  border-radius: 4px;
+  color: #999999;
+  text-align: center;
+  font-size: 15px;
+  cursor: pointer;
+  display: block;
+}
+.main-content >>> .el-tabs__content::-webkit-scrollbar {
+    display: none;
 }
 @media only screen and (max-width: 481px) {
   .layout-main {
@@ -396,7 +440,7 @@ export default {
     right: 10px;
   }
   .main-content >>> .el-tabs--border-card {
-    height: 610px;
+    height: calc(100vh - 100px - 4.298276rem);
     border: none;
   }
   .main-content >>> .el-tabs__content {
@@ -411,6 +455,9 @@ export default {
   .main-content >>> .el-checkbox {
     width: 100px;
     margin-left: 0;
+  }
+  .pc-more{
+    display: none!important;
   }
 }
 </style>

@@ -42,6 +42,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  line-height: 16px
 }
 .yo-scroll .inner .load-more {
   height: 32px;
