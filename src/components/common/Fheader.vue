@@ -6,31 +6,37 @@
         <div class="header-navbar">
           <router-link to='/'>
             <img class="header-left" src="../../assets/logo.gif" />
-                    </router-link>
+          </router-link>
+          <div class="header-center">
+            <el-input placeholder="搜索文章">
+              <i class="el-icon-search el-input__icon" slot="suffix">
+              </i>
+            </el-input>
+          </div>
 
-            <div class="header-right">
-              <el-dropdown trigger="click">
-                <span class="avatar right-span" v-show="loginStatus">
-                  <span>
-                    <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="avatar">
-                                    </span>
-                    <span class="antd-pro-components-global-header-index-name">{{userName}}</span>
-                  </span>
-                  <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>
-                      <router-link to="/person-info">个人中心</router-link>
-                    </el-dropdown-item>
-                    <el-dropdown-item @click.native="loginOut()">退出登录</el-dropdown-item>
-
-                  </el-dropdown-menu>
-              </el-dropdown>
-
-              <span class="right-span" v-show="!loginStatus">
-                <router-link to='/user-login'>
-                  <el-button type="primary" plain>登录</el-button>
-                </router-link>
+          <div class="header-right">
+            <el-dropdown trigger="click">
+              <span class="avatar right-span" v-show="loginStatus">
+                <span>
+                  <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="avatar">
+                </span>
+                <span class="header-username">{{userName}}</span>
               </span>
-            </div>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>
+                  <router-link to="/person-info">个人中心</router-link>
+                </el-dropdown-item>
+                <el-dropdown-item @click.native="loginOut()">退出登录</el-dropdown-item>
+
+              </el-dropdown-menu>
+            </el-dropdown>
+
+            <span class="right-span" v-show="!loginStatus">
+              <router-link to='/user-login'>
+                <el-button type="primary" plain>登录</el-button>
+              </router-link>
+            </span>
+          </div>
         </div>
       </div>
 
@@ -42,7 +48,7 @@
           <router-link to='/' exact>首页</router-link>
         </li>
         <li>
-          <router-link to='/daily' >日志</router-link>
+          <router-link to='/daily'>日志</router-link>
         </li>
         <el-dropdown trigger="click">
           <li>论坛</li>
@@ -62,6 +68,9 @@
           <router-link to='/edit-text'>写文章</router-link>
         </li>
       </ul>
+      <div v-show="ifSearch" style="padding:0px 0px 10px 20px;color:#43bcff;font-weight:bold;font-size:20px;">
+        <i class="el-icon-tickets"></i> 搜索结果
+      </div>
     </div>
 
     <el-dialog title="说说记录" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
@@ -86,7 +95,8 @@ export default {
       textarea: "",
       dialogVisible: false,
       content: "",
-      articleTag: ""
+      articleTag: "",
+      ifSearch:false
     };
   },
   created() {
@@ -144,6 +154,8 @@ export default {
 .header-navbar {
   height: 64px;
   width: 100%;
+  display: flex;
+  display: -webkit-box;
 }
 
 .header-content {
@@ -182,9 +194,19 @@ export default {
   height: 64px;
   display: inline-block;
 }
+.header-center {
+  flex: 1;
+}
+.header-center >>> input {
+  width: 270px;
+  float: right;
+  margin-top: 15px;
+}
+.header-center >>> .el-input--small .el-input__icon {
+  line-height: 60px;
+}
 
 .header-right {
-  float: right;
   height: 100%;
   margin-right: 20px;
 }
@@ -211,6 +233,9 @@ export default {
   position: relative;
   top: 7px;
 }
+.header-username {
+  display: inline-block !important;
+}
 
 @media only screen and (max-width: 481px) {
   .header-main {
@@ -225,6 +250,17 @@ export default {
   .header-left {
     height: 0.85rem;
     line-height: 0.85rem;
+  }
+
+  .header-center >>> input {
+    width: 90%;
+    margin-right: 5%;
+    margin-top: 0.155172rem;
+  }
+  .header-center >>> .el-input--small .el-input__icon {
+    line-height: 0.896552rem;
+    position: relative;
+    right: 0.206897rem;
   }
   .header-right .right-span {
     line-height: 0.85rem;
@@ -250,6 +286,14 @@ export default {
   >>> .el-dialog__header,
   >>> .el-dialog__footer {
     padding: 10px !important;
+  }
+  .header-right img {
+    width: 0.568966rem;
+    height: 0.568966rem;
+    top: 0.137931rem;
+  }
+  .header-username {
+    display: none !important;
   }
 }
 </style>

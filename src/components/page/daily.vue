@@ -214,11 +214,11 @@ export default {
   white-space: nowrap;
 }
 .article-tag {
-  padding: 0 3px;
+  padding: 1px 4px;
   border-radius: 3px;
   box-shadow: 0 0 1px 0 #43bcff;
-  border: 1px solid #43bcff;
-  color: #43bcff;
+  background: #43bcff;
+  color: white;
   font-size: 11px;
   position: relative;
   top: -5px;

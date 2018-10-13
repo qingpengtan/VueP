@@ -374,12 +374,12 @@ export default {
   line-height: 1.5;
 }
 .text-item span {
-  padding: 0 2px;
+  padding: 1px 3px;
   margin-right: 5px;
   border-radius: 3px;
   box-shadow: 0 0 2px 0 #43bcff;
-  border: 1px solid #43bcff;
-  color: #43bcff;
+  background: #43bcff;
+  color: white;
   font-size: 13px;
 }
 .pc-more {
