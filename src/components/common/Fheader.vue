@@ -155,7 +155,7 @@ export default {
   height: 64px;
   width: 100%;
   display: flex;
-  display: -webkit-box;
+  display: -webkit-flex;
 }
 
 .header-content {

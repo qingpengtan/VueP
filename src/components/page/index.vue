@@ -230,7 +230,7 @@ export default {
   color: white;
   font-size: 11px;
   position: relative;
-  top: -5px;
+  top: -6px;
 }
 .pc-more {
   width: 720px;

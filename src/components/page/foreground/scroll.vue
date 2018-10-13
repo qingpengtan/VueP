@@ -42,7 +42,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  line-height: 16px
+  line-height: 16px;
 }
 .yo-scroll .inner .load-more {
   height: 32px;
@@ -153,7 +153,12 @@ export default {
         return;
       }
       let diff = e.targetTouches[0].pageY - this.startY - this.startScroll;
-      if (diff > 0) e.preventDefault();
+      if (diff > 0) {
+        let htmlTop = document.getElementsByTagName("html")[0].scrollTop;
+        if (htmlTop < 160) {
+          e.preventDefault();
+        }
+      }
       this.top = Math.pow(diff, 0.8) + (this.state === 2 ? this.offset : 0);
       if (this.state === 2) {
         // in refreshing
@@ -184,8 +189,13 @@ export default {
         return;
       }
       if (this.top >= this.offset) {
-        // do refresh
+        console.log(this.$el.scrollTop);
+        let htmlTop = document.getElementsByTagName("html")[0].scrollTop;
+        if (htmlTop > 160) {
+          return;
+        }
         this.refresh();
+        // do refresh
       } else {
         // cancel refresh
         this.state = 0;

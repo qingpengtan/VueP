@@ -145,7 +145,7 @@
 
               </el-card>
             </el-tab-pane>
-            <el-tab-pane label="XXXXXX" name="a">XXXXXX</el-tab-pane>
+            <el-tab-pane label="" name="a"></el-tab-pane>
           </el-tabs>
 
         </div>
@@ -167,6 +167,8 @@ export default {
   },
   data() {
     return {
+      totalPage: 1,
+      current: 1,
       disMore: false,
       options: cityData,
       articleTag: "",
@@ -201,7 +203,7 @@ export default {
       }
     });
 
-    this.getArticle();
+    this.getArticle(this.current);
     // document.addEventListener("touchstart", function(e) {
     //   e.preventDefault();
     // });
@@ -215,12 +217,19 @@ export default {
       var totalHeight = this.$el.getElementsByClassName("el-tab-pane")[1]
         .clientHeight;
       if (clientH + Math.ceil(scrollTops) >= totalHeight) {
-        console.log("到顶部了");
+        this.moreData();
         return;
       }
     },
 
-    moreData() {},
+    moreData() {
+      this.current++;
+      if (this.current > this.totalPage) {
+        this.$el.querySelector(".pc-more").innerHTML = "没有更多数据了";
+        return;
+      }
+      this.getArticle(this.current);
+    },
     updateInfo() {
       this.isEdit = !this.isEdit;
       let tempTag = this.form.userTag;
@@ -276,13 +285,15 @@ export default {
         // this.getArticle();
       }
     },
-    getArticle() {
+    getArticle(page) {
       this.$http
         .http("/index/list", {
           personInfo: "phone",
-          page: 1
+          page: page
         })
         .then(res => {
+          this.totalPage = res.data.totalPage;
+          this.current = res.data.current;
           this.articleList = this.articleList.concat(res.data.articleList);
           this.disMore = true;
           if (res.data.articleList.length < 10) {
@@ -395,7 +406,7 @@ export default {
   display: block;
 }
 .main-content >>> .el-tabs__content::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 @media only screen and (max-width: 481px) {
   .layout-main {
@@ -456,8 +467,11 @@ export default {
     width: 100px;
     margin-left: 0;
   }
-  .pc-more{
-    display: none!important;
+  .text-item {
+    border-bottom: 1px solid #ddd;
+  }
+  .pc-more {
+    display: none !important;
   }
 }
 </style>

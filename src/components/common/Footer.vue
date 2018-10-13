@@ -17,17 +17,18 @@ export default {
 .footer-warp {
   width: 100%;
   background: white;
+  margin-top: 20px;
+  border-top: 1px solid #ddd;
 }
 .footer-warp .footer-content {
   width: 1260px;
   height: 90px;
-  border-top: 1px solid #ddd;
   margin: 0 auto;
 }
 
 @media only screen and (max-width: 481px) {
   .footer-warp{
-    display: none;
+    /* display: none; */
   }
   .footer-warp .footer-content {
     width: 100%;
