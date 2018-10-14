@@ -45,7 +45,8 @@ export default new Router({
             path: '/person-info',
             component: resolve => require(['../components/page/person.vue'], resolve),
             meta: {
-                title: '个人中心'
+                title: '个人中心',
+                keepAlive: true,
               }
         },
         {

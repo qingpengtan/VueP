@@ -28,7 +28,7 @@ export default {
 
 @media only screen and (max-width: 481px) {
   .footer-warp{
-    /* display: none; */
+    display: none;
   }
   .footer-warp .footer-content {
     width: 100%;
