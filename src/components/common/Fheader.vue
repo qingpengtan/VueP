@@ -8,7 +8,7 @@
             <img class="header-left" src="../../assets/logo.gif" />
           </router-link>
           <div class="header-center">
-            <el-input placeholder="搜索文章">
+            <el-input placeholder="搜索文章" @keyup.enter.native="searchArticle()">
               <i class="el-icon-search el-input__icon" slot="suffix">
               </i>
             </el-input>
@@ -43,7 +43,7 @@
     </div>
 
     <div class="header-content">
-      <ul>
+      <ul v-show="!ifSearch">
         <li>
           <router-link to='/' exact>首页</router-link>
         </li>
@@ -51,10 +51,10 @@
           <router-link to='/daily'>日志</router-link>
         </li>
         <el-dropdown trigger="click">
-          <li>论坛</li>
+          <li> <i class="el-icon-menu"></i>论坛</li>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item v-for=" tag in articleTag" :key="tag.articleTagId">
-              <router-link :to="{path:'/tribune', query:{articleTagId:tag.articleTagId}}">
+              <router-link @click.native="pushTribune()" :to="{path:'/tribune', query:{articleTagId:tag.articleTagId}}">
                 {{tag.articleTag}}
               </router-link>
             </el-dropdown-item>
@@ -68,8 +68,34 @@
           <router-link to='/edit-text'>写文章</router-link>
         </li>
       </ul>
-      <div v-show="ifSearch" style="padding:0px 0px 10px 20px;color:#43bcff;font-weight:bold;font-size:20px;">
-        <i class="el-icon-tickets"></i> 搜索结果
+      <div v-show="ifSearch">
+
+        <ol style="display:inline-block">
+          <li>
+            <router-link to='/' exact>首页</router-link>
+          </li>
+          <el-dropdown trigger="click">
+            <li> <i class="el-icon-menu"></i>论坛</li>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item v-for=" tag in articleTag" :key="tag.articleTagId">
+                <router-link @click.native="pushTribune()" :to="{path:'/tribune', query:{articleTagId:tag.articleTagId}}">
+                  {{tag.articleTag}}
+                </router-link>
+              </el-dropdown-item>
+
+            </el-dropdown-menu>
+          </el-dropdown>
+          <!-- <li>音乐</li> -->
+          <!-- <li>视频</li> -->
+          <li @click="dialogVisible = true"><i class="el-icon-edit"></i>写说说</li>
+          <li>
+            <i class="el-icon-edit"></i>
+            <router-link to='/edit-text'>写文章</router-link>
+          </li>
+          <span style="color:#43bcff;font-weight:bold;font-size:20px;position:relative;left:20px;top:-16px;">
+            <i class="el-icon-tickets"></i> {{dispayText}}
+          </span>
+        </ol>
       </div>
     </div>
 
@@ -96,7 +122,9 @@ export default {
       dialogVisible: false,
       content: "",
       articleTag: "",
-      ifSearch:false
+      ifSearch: false,
+      searchContent: "",
+      dispayText: "XXXX"
     };
   },
   created() {
@@ -114,6 +142,14 @@ export default {
     });
   },
   methods: {
+    searchArticle() {
+      // this.ifSearch = true;
+      // this.dispayText = "搜索结果";
+    },
+    pushTribune() {
+      // this.ifSearch = true;
+      // this.dispayText ="论坛";
+    },
     handleClose(done) {
       done();
     },

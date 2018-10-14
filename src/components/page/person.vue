@@ -139,6 +139,14 @@
                     {{article.articleTitle }}
                   </router-link>
                 </div>
+                <div class="mobile-more">
+                  <span id="loading">
+                    正在加载中 <i class="el-icon-loading"></i>
+                  </span>
+                  <span id="nodata" style="display:none">
+                    没有更多数据啦
+                  </span>
+                </div>
                 <div class="pc-more" @click="moreData" v-show="disMore">
                   查看更多
                 </div>
@@ -298,6 +306,8 @@ export default {
           this.disMore = true;
           if (res.data.articleList.length < 10) {
             this.$el.querySelector(".pc-more").innerHTML = "没有更多数据了";
+            this.$el.querySelector("#loading").style.display = "none";
+            this.$el.querySelector("#nodata").style.display = "inline";
           }
         });
     }
@@ -405,6 +415,9 @@ export default {
   cursor: pointer;
   display: block;
 }
+.mobile-more {
+  display: none;
+}
 .main-content >>> .el-tabs__content::-webkit-scrollbar {
   display: none;
 }
@@ -472,6 +485,11 @@ export default {
   }
   .pc-more {
     display: none !important;
+  }
+  .mobile-more {
+    display: block;
+    text-align: center;
+    font-size: 14px;
   }
 }
 </style>

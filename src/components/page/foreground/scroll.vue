@@ -157,6 +157,8 @@ export default {
         let htmlTop = document.getElementsByTagName("html")[0].scrollTop;
         if (htmlTop < 160) {
           e.preventDefault();
+        }else{
+          return;
         }
       }
       this.top = Math.pow(diff, 0.8) + (this.state === 2 ? this.offset : 0);

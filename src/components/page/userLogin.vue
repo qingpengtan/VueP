@@ -16,7 +16,7 @@
             </el-form-item>
 
             <el-form-item prop="password">
-              <el-input type="password" v-model="ruleForm.password" placeholder="请输入密码"></el-input>
+              <el-input type="password" v-model="ruleForm.password" placeholder="请输入密码"  @keyup.enter.native="login('ruleForm')"></el-input>
             </el-form-item>
           </el-form>
           <div class="forget-pswd">
