@@ -2,6 +2,7 @@
 
   <div>
 
+    <Header class="ifHead"></Header>
 
     <div class="layout-main">
 
@@ -118,11 +119,11 @@
 
                   <div class="finish-btn">
                     <div v-show="isEdit">
-                      <el-button type="primary" @click="updateInfo('form')">完成</el-button>
-                      <el-button @click="isEdit = !isEdit">取消</el-button>
+                      <i class="el-icon-close" @click="isEdit = !isEdit"></i> &nbsp;
+                      <i class="el-icon-check" @click="updateInfo('form')"></i>
                     </div>
                     <div v-show="!isEdit">
-                      <el-button type="primary" plain @click="isEdit = !isEdit">编辑</el-button>
+                      <i class="el-icon-edit-outline" @click="isEdit = !isEdit"></i>
                     </div>
 
                   </div>
@@ -378,8 +379,9 @@ export default {
 }
 .main-content >>> .finish-btn {
   position: absolute;
-  top: 30px;
+  top: 20px;
   right: 40px;
+  font-size: 20px;
 }
 .main-content >>> .el-card {
   box-shadow: none;
@@ -462,7 +464,7 @@ export default {
   }
 
   .main-content >>> .finish-btn {
-    top: 8px;
+    top: 0px;
     right: 10px;
   }
   .main-content >>> .el-tabs--border-card {
@@ -471,7 +473,6 @@ export default {
   }
   .main-content >>> .el-tabs__content {
     padding: 0;
-    padding-top: 30px;
   }
   .main-content >>> .el-col {
     height: 40px;
@@ -492,6 +493,9 @@ export default {
     display: block;
     text-align: center;
     font-size: 14px;
+  }
+  .ifHead {
+    display: none;
   }
 }
 </style>

@@ -163,7 +163,7 @@ export default {
       articleTag: "",
       ifSearch: false,
       searchContent: "",
-      dispayText: "XXXX"
+      dispayText: "XXXX",
     };
   },
   created() {
