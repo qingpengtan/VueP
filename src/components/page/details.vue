@@ -293,6 +293,9 @@ export default {
     padding: 0.206897rem !important;
     font-size: 14px;
   }
+  .layout-content{
+    margin-top: 0;
+  }
 
   .ant-list-item-meta-content,
   .ant-list-item-content {

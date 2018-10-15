@@ -2,7 +2,6 @@
 
   <div>
 
-    <Header></Header>
 
     <div class="layout-main">
 
@@ -425,6 +424,9 @@ export default {
   .layout-main {
     width: 100%;
   }
+  .layout-content {
+    margin-top: 0;
+  }
   .header-bg {
     height: 3.448276rem;
   }
@@ -464,7 +466,7 @@ export default {
     right: 10px;
   }
   .main-content >>> .el-tabs--border-card {
-    height: calc(100vh - 100px - 4.298276rem);
+    height: calc(100vh - 20px - 3.448276rem);
     border: none;
   }
   .main-content >>> .el-tabs__content {

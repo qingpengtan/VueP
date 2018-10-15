@@ -9,23 +9,23 @@ export default new Router({
             path: '/',
             component: resolve => require(['../components/page/index.vue'], resolve),
             meta: {
-                title: 'Tang', 
+                title: 'Tang',
                 keepAlive: true,
-              }
+            }
         },
         {
             path: '/test',
             component: resolve => require(['../components/page/test.vue'], resolve),
             meta: {
                 title: '登录'
-              }
+            }
         },
         {
             path: '/user-login',
             component: resolve => require(['../components/page/userLogin.vue'], resolve),
             meta: {
                 title: '登录'
-              }
+            }
         },
 
         {
@@ -38,7 +38,7 @@ export default new Router({
             component: resolve => require(['../components/page/editor.vue'], resolve),
             meta: {
                 title: '编辑文章'
-              }
+            }
         },
 
         {
@@ -47,7 +47,7 @@ export default new Router({
             meta: {
                 title: '个人中心',
                 keepAlive: true,
-              }
+            }
         },
         {
             path: '/tribune',
@@ -55,7 +55,7 @@ export default new Router({
             meta: {
                 title: '论坛',
                 keepAlive: true
-              }
+            }
         },
         {
             path: '/daily',
@@ -63,14 +63,22 @@ export default new Router({
             meta: {
                 title: '心情日志',
                 keepAlive: true
-              }
+            }
+        },
+        {
+            path: '/search',
+            component: resolve => require(['../components/page/search.vue'], resolve),
+            meta: {
+                title: '搜索结果',
+                // keepAlive: true
+            }
         },
         {
             path: '/sys/login',
             component: resolve => require(['../components/page/platform/Login.vue'], resolve),
             meta: {
                 title: '后台管理登录'
-              }
+            }
         },
         // 平台
         {
@@ -133,14 +141,14 @@ export default new Router({
             component: resolve => require(['../components/page/404.vue'], resolve),
             meta: {
                 title: '404'
-              }
+            }
         },
         {
             path: '/403',
             component: resolve => require(['../components/page/403.vue'], resolve),
             meta: {
                 title: '403'
-              }
+            }
         },
         {
             path: '*',

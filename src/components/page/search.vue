@@ -2,7 +2,7 @@
 
     <div>
 
-        <Header></Header>
+        <Header v-bind:searchWd="articleTitle"></Header>
 
         <div class="layout-main">
             <!-- <div class="header-content">
@@ -77,27 +77,12 @@ export default {
       pullup: true,
       totalPage: 1,
       current: 1,
-      articleList: []
+      articleList: [],
+      articleTitle:"",
     };
   },
   mounted() {
     this.reqData(1);
-  },
-  watch: {
-    $route(to, from) {
-      this.$http
-        .http("/index/list", { articleTagId: this.$route.query.articleTagId })
-        .then(
-          res => {
-            this.totalPage = res.data.totalPage;
-            this.current = res.data.current;
-            this.articleList = res.data.articleList;
-          },
-          response => {
-            console.log("error");
-          }
-        );
-    }
   },
   methods: {
     moreData() {
@@ -109,7 +94,8 @@ export default {
       this.reqData(this.current);
     },
     reqData(page) {
-      this.$http.http("/index/list", { page: page, articleTagId: this.$route.query.articleTagId  }).then(
+      this.articleTitle = this.$route.query.search;
+      this.$http.http("/index/list", { page: page, articleTitle:  this.articleTitle}).then(
         res => {
           this.disMore = true;
           this.totalPage = res.data.totalPage;

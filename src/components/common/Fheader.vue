@@ -4,11 +4,48 @@
       <div class="header-main">
 
         <div class="header-navbar">
-          <router-link to='/'>
+          <router-link to='/' class="header-logo">
             <img class="header-left" src="../../assets/logo.gif" />
           </router-link>
+          <div class="nav-arrow" @click="isCollapse = false">
+            <img class="header-left" src="../../assets/nav-menu.png" />
+          </div>
+          <div class="header-nav-menu" v-show="!isCollapse">
+            <el-menu class="el-menu-vertical-demo" background-color="rgb(236, 236, 236)">
+              <router-link to='/' exact>
+                <el-menu-item index="1">首页 </el-menu-item>
+              </router-link>
+              <router-link to='/daily'>
+                <el-menu-item index="2">日志 </el-menu-item>
+              </router-link>
+              <span @click="dialogVisible = true">
+                <el-menu-item index="3">写说说</el-menu-item>
+              </span>
+              <router-link to='/edit-text'>
+                <el-menu-item index="4"> 写文章</el-menu-item>
+              </router-link>
+              <el-submenu index="5">
+                <template slot="title">
+                  <span>论坛</span>
+                </template>
+                <el-menu-item-group>
+                  <el-menu-item :index="tag.articleTagId+''" v-for=" tag in articleTag" :key="tag.articleTagId">
+                    <router-link @click.native="pushTribune()" :to="{path:'/tribune', query:{articleTagId:tag.articleTagId}}">
+                      {{tag.articleTag}}
+                    </router-link>
+                  </el-menu-item>
+                </el-menu-item-group>
+
+              </el-submenu>
+            </el-menu>
+
+            <div style="position:absolute;right:-34px;top:0" @click="isCollapse = true">
+              <i class="el-icon-d-arrow-left" style="font-size:24px;color:#43bcff;background:rgb(236, 236, 236);padding:5px"></i>
+            </div>
+          </div>
+
           <div class="header-center">
-            <el-input placeholder="搜索文章" @keyup.enter.native="searchArticle()">
+            <el-input placeholder="搜索文章" v-model="searchWd" @keyup.enter.native="searchArticle()">
               <i class="el-icon-search el-input__icon" slot="suffix">
               </i>
             </el-input>
@@ -114,8 +151,10 @@ import StringUtils from "../../utils/StringUtils.js";
 
 export default {
   name: "fhead",
+   props:["searchWd"],
   data() {
     return {
+      isCollapse: true,
       loginStatus: false,
       userName: "",
       textarea: "",
@@ -143,8 +182,7 @@ export default {
   },
   methods: {
     searchArticle() {
-      // this.ifSearch = true;
-      // this.dispayText = "搜索结果";
+      this.$router.push({ path: "/search", query: {search:this.searchWd} });
     },
     pushTribune() {
       // this.ifSearch = true;
@@ -272,6 +310,10 @@ export default {
 .header-username {
   display: inline-block !important;
 }
+.header-nav-menu,
+.nav-arrow {
+  display: none;
+}
 
 @media only screen and (max-width: 481px) {
   .header-main {
@@ -284,8 +326,12 @@ export default {
     height: 0.85rem;
   }
   .header-left {
-    height: 0.85rem;
-    line-height: 0.85rem;
+    width: 0.45rem;
+    height: 0.45rem;
+    position: relative;
+    left: 0.172414rem;
+    margin-right: 0.172414rem;
+    top: 0.172414rem;
   }
 
   .header-center >>> input {
@@ -300,6 +346,9 @@ export default {
   }
   .header-right .right-span {
     line-height: 0.85rem;
+  }
+  .header-content {
+    display: none;
   }
   .header-content ul {
     width: 100%;
@@ -330,6 +379,21 @@ export default {
   }
   .header-username {
     display: none !important;
+  }
+  .nav-arrow {
+    display: inline;
+  }
+  .header-nav-menu {
+    display: block;
+    position: absolute;
+    top: 0;
+    padding-top: 0.172414rem;
+    background: rgb(236, 236, 236);
+    z-index: 10000;
+    height: 100vh;
+  }
+  .header-logo {
+    display: none;
   }
 }
 </style>
