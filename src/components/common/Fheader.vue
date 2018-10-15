@@ -45,7 +45,7 @@
           </div>
 
           <div class="header-center">
-            <el-input placeholder="搜索文章" v-model="searchWd" @keyup.enter.native="searchArticle()">
+            <el-input placeholder="搜索文章" v-model="searchContent" @keyup.enter.native="searchArticle()">
               <i class="el-icon-search el-input__icon" slot="suffix">
               </i>
             </el-input>
@@ -151,7 +151,7 @@ import StringUtils from "../../utils/StringUtils.js";
 
 export default {
   name: "fhead",
-   props:["searchWd"],
+  props:["searchWd"],
   data() {
     return {
       isCollapse: true,
@@ -179,10 +179,11 @@ export default {
         this.articleTag = res.data;
       }
     });
+    this.searchContent = this.searchWd;
   },
   methods: {
     searchArticle() {
-      this.$router.push({ path: "/search", query: {search:this.searchWd} });
+      this.$router.push({ path: "/search", query: {search:this.searchContent} });
     },
     pushTribune() {
       // this.ifSearch = true;
