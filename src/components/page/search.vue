@@ -26,11 +26,12 @@
                 </div>
                 <div class="ant-list-item-content">
                   <div>
-                    <div class="text-content" v-html=article.content>
+                    <div class="text-content">
+                      {{article.articleBrief}}
                     </div>
                     <div class="publish">
                       <span>
-                        <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png">
+                        <img :src="article.userPic">
                       </span>
                       <a href="https://ant.design">{{article.userName}}</a> 发布于
                       {{article.createTime}}
@@ -148,11 +149,13 @@ export default {
 }
 
 .ant-list-item {
-  padding: 20px 0;
+  padding-top: 20px;
   width: 720px;
 }
 
-.ant-list-item-meta-content,
+.ant-list-item-meta-content {
+  margin-bottom: 2px;
+}
 .ant-list-item-content {
   margin-bottom: 16px;
 }
@@ -220,7 +223,7 @@ export default {
   }
   .layout-content {
     margin-top: 0;
-    padding-top: 10px;
+    padding-top: 0px;
   }
   .main-content {
     width: 100%;
@@ -230,13 +233,15 @@ export default {
   .ant-list-item {
     box-sizing: border-box;
     padding: 0.137931rem 0.172414rem;
-    border-bottom: 3px solid #dddddd;
+    border-bottom: 5px solid #dddddd;
   }
   hr {
     display: none;
   }
 
-  .ant-list-item-meta-content,
+  .ant-list-item-meta-content {
+    margin: 5px 0;
+  }
   .ant-list-item-content {
     margin-bottom: 0.172414rem;
   }
@@ -267,7 +272,7 @@ export default {
     padding-right: 8px;
   }
   .article-tag + a h4 {
-    max-width: 4.617931rem;
+    max-width: 4.807931rem;
   }
   .pc-more {
     display: none !important;
@@ -278,7 +283,7 @@ export default {
     font-size: 14px;
   }
   .v-scroll {
-    height: calc(100vh - 1.45rem);
+    height: calc(100vh - 1.174139rem);
     overflow: hidden;
   }
 }

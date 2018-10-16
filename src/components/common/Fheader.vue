@@ -29,13 +29,14 @@
                   <span>论坛</span>
                 </template>
                 <el-menu-item-group>
-                  <el-menu-item :index="tag.articleTagId+''" v-for=" tag in articleTag" :key="tag.articleTagId">
+                  <div v-for=" tag in articleTag" :key="tag.articleTagId">
                     <router-link @click.native="pushTribune()" :to="{path:'/tribune', query:{articleTagId:tag.articleTagId}}">
-                      {{tag.articleTag}}
+                      <el-menu-item :index="tag.articleTagId+''" @click="isCollapse = true">
+                        {{tag.articleTag}}
+                      </el-menu-item>
                     </router-link>
-                  </el-menu-item>
+                  </div>
                 </el-menu-item-group>
-
               </el-submenu>
             </el-menu>
 
@@ -55,7 +56,7 @@
             <el-dropdown trigger="click">
               <span class="avatar right-span" v-show="loginStatus">
                 <span>
-                  <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="avatar">
+                  <img :src="userPic" alt="avatar">
                 </span>
                 <span class="header-username">{{userName}}</span>
               </span>
@@ -157,6 +158,7 @@ export default {
       isCollapse: true,
       loginStatus: false,
       userName: "",
+      userPic:"",
       textarea: "",
       dialogVisible: false,
       content: "",
@@ -166,9 +168,9 @@ export default {
       dispayText: "XXXX"
     };
   },
-  watch:{
-    searchWd(){
-      this.searchContent = this.searchWd
+  watch: {
+    searchWd() {
+      this.searchContent = this.searchWd;
     }
   },
   created() {
@@ -177,6 +179,7 @@ export default {
       : true;
     if (this.loginStatus) {
       this.userName = localStorage.getItem("x_userPhone");
+      this.userPic = localStorage.getItem("x_userPic");
     }
 
     this.$http.http("/index/classify", { exculde: "yes" }).then(res => {
@@ -203,7 +206,7 @@ export default {
       if (this.content.trim() == "") {
         return;
       }
-      this.$http.http("/index/save", { content: this.content }).then(res => {
+      this.$http.http("/index/save", { content: this.content,articleBrief:this.content }).then(res => {
         if (res.code == 1) {
           this.dialogVisible = false;
           this.$message.success("提交成功！");

@@ -1,62 +1,63 @@
 <template>
 
-    <div>
+  <div>
 
-        <Header></Header>
+    <Header></Header>
 
-        <div class="layout-main">
-            <!-- <div class="header-content">
+    <div class="layout-main">
+      <!-- <div class="header-content">
 
         </div> -->
 
-            <div class="layout-content">
-                <div class="main-content" style="padding: 8px 32px 32px;">
+      <div class="layout-content">
+        <div class="main-content" style="padding: 8px 32px 32px;">
 
-                    <v-scroll :data="articleList" :pullup="pullup" @scrollToEnd="moreData()" class="v-scroll">
-                        <ul>
-                            <li class="ant-list-item" v-for=" article in articleList" :key="article.articleId">
-                                <div class="ant-list-item-meta-content">
-                                    <span class="article-tag">{{article.articleTagName}}</span>
-                                    <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
-                                        <h4>{{article.articleTitle}}</h4>
-                                    </router-link>
-                                </div>
-                                <div class="ant-list-item-content">
-                                    <div>
-                                        <div class="text-content" v-html=article.content>
-                                        </div>
-                                        <div class="publish">
-                                            <span>
-                                                <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png">
-                                            </span>
-                                            <a href="https://ant.design">{{article.userName}}</a> 发布于
-                                            {{article.createTime}}
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                            </li>
-                            <div class="mobile-more">
-                                <span id="loading">
-                                    正在加载中 <i class="el-icon-loading"></i>
-                                </span>
-                                <span id="nodata" style="display:none">
-                                    没有更多数据啦
-                                </span>
-                            </div>
-                        </ul>
-                        <div class="pc-more" @click="moreData" v-show="disMore">
-                            查看更多
-                        </div>
-
-                    </v-scroll>
-
+          <v-scroll :data="articleList" :pullup="pullup" @scrollToEnd="moreData()" class="v-scroll">
+            <ul>
+              <li class="ant-list-item" v-for=" article in articleList" :key="article.articleId">
+                <div class="ant-list-item-meta-content">
+                  <span class="article-tag">{{article.articleTagName}}</span>
+                  <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
+                    <h4>{{article.articleTitle}}</h4>
+                  </router-link>
                 </div>
+                <div class="ant-list-item-content">
+                  <div>
+                    <div class="text-content">
+                      {{article.articleBrief}}
+                    </div>
+                    <div class="publish">
+                      <span>
+                        <img :src="article.userPic">
+                      </span>
+                      <a href="https://ant.design">{{article.userName}}</a> 发布于
+                      {{article.createTime}}
+                    </div>
+                  </div>
+                </div>
+                <hr>
+              </li>
+              <div class="mobile-more">
+                <span id="loading">
+                  正在加载中 <i class="el-icon-loading"></i>
+                </span>
+                <span id="nodata" style="display:none">
+                  没有更多数据啦
+                </span>
+              </div>
+            </ul>
+            <div class="pc-more" @click="moreData" v-show="disMore">
+              查看更多
             </div>
-        </div>
 
-        <Footer></Footer>
+          </v-scroll>
+
+        </div>
+      </div>
     </div>
+
+    <Footer></Footer>
+  </div>
 
 </template>
 
@@ -109,22 +110,27 @@ export default {
       this.reqData(this.current);
     },
     reqData(page) {
-      this.$http.http("/index/list", { page: page, articleTagId: this.$route.query.articleTagId  }).then(
-        res => {
-          this.disMore = true;
-          this.totalPage = res.data.totalPage;
-          this.current = res.data.current;
-          this.articleList = this.articleList.concat(res.data.articleList);
-          if (res.data.articleList.length < 10) {
-            this.$el.querySelector(".pc-more").innerHTML = "没有更多数据了";
-            this.$el.querySelector("#loading").style.display = "none";
-            this.$el.querySelector("#nodata").style.display = "inline";
+      this.$http
+        .http("/index/list", {
+          page: page,
+          articleTagId: this.$route.query.articleTagId
+        })
+        .then(
+          res => {
+            this.disMore = true;
+            this.totalPage = res.data.totalPage;
+            this.current = res.data.current;
+            this.articleList = this.articleList.concat(res.data.articleList);
+            if (res.data.articleList.length < 10) {
+              this.$el.querySelector(".pc-more").innerHTML = "没有更多数据了";
+              this.$el.querySelector("#loading").style.display = "none";
+              this.$el.querySelector("#nodata").style.display = "inline";
+            }
+          },
+          response => {
+            console.log("error");
           }
-        },
-        response => {
-          console.log("error");
-        }
-      );
+        );
     }
   }
 };
@@ -149,11 +155,13 @@ export default {
 }
 
 .ant-list-item {
-  padding: 20px 0;
+  padding-top: 20px;
   width: 720px;
 }
 
-.ant-list-item-meta-content,
+.ant-list-item-meta-content {
+  margin-bottom: 2px;
+}
 .ant-list-item-content {
   margin-bottom: 16px;
 }
@@ -219,9 +227,9 @@ export default {
   .ant-list-item {
     width: 100%;
   }
-  .layout-content{
+  .layout-content {
     margin-top: 0;
-    padding-top: 10px;
+    padding-top: 0px;
   }
   .main-content {
     width: 100%;
@@ -230,14 +238,16 @@ export default {
   }
   .ant-list-item {
     box-sizing: border-box;
-    padding: 0.137931rem .172414rem;
-    border-bottom: 3px solid #dddddd;
+    padding: 0.137931rem 0.172414rem;
+    border-bottom: 5px solid #dddddd;
   }
-  hr{
+  hr {
     display: none;
   }
 
-  .ant-list-item-meta-content,
+  .ant-list-item-meta-content {
+    margin: 5px 0;
+  }
   .ant-list-item-content {
     margin-bottom: 0.172414rem;
   }
@@ -268,7 +278,7 @@ export default {
     padding-right: 8px;
   }
   .article-tag + a h4 {
-    max-width: 4.617931rem;
+    max-width: 4.807931rem;
   }
   .pc-more {
     display: none !important;
@@ -279,7 +289,7 @@ export default {
     font-size: 14px;
   }
   .v-scroll {
-    height: calc(100vh - 1.05rem);
+    height: calc(100vh - 0.8432rem);
     overflow: hidden;
   }
 }

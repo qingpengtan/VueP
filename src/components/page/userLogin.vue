@@ -121,6 +121,7 @@ export default {
                 localStorage.setItem("x_userName", res.data.userName);
                 localStorage.setItem("x_userPhone", res.data.userPhone);
                 localStorage.setItem("x_role", res.data.role);
+                localStorage.setItem("x_userPic",res.data.userPic);
                 this.$router.push("/");
               } else {
                 this.errorMsg = res.msg;

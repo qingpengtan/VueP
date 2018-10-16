@@ -182,6 +182,12 @@ a {
     min-height: 500px;
 }
 
+.el-dropdown-menu .el-dropdown-menu__item a {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
 
 @media only screen and (max-width: 481px) {
     /* html,body{

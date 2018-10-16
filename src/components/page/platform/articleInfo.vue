@@ -33,7 +33,7 @@
         </el-row>
 
         <el-form-item label="内容">
-          <quill-editor ref="myTextEditor" v-model="form.content" :options="editorOption"></quill-editor>
+          <quill-editor ref="myTextEditor" v-model="form.content" :options="editorOption" @change="onEditorChange($event)"></quill-editor>
         </el-form-item>
         <el-form-item>
           <el-button class="editor-btn" type="primary" @click="onSubmit('form')">提交</el-button>
@@ -48,6 +48,7 @@
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
+import { quillRedefine } from "vue-quill-editor-upload";
 import { quillEditor } from "vue-quill-editor";
 import StringUtils from "../../../utils/StringUtils.js";
 import tabUtils from "../../../utils/tabUtils.js";
@@ -63,6 +64,7 @@ export default {
         articleTitle: "",
         articleTag: "",
         status: "",
+        articleBrief: "",
         content: "",
         articleId: 1
       }
@@ -76,24 +78,29 @@ export default {
     // });
   },
   created() {
+    this.setEdirorParam();
     this.$http.http("/index/classify").then(res => {
       if (res.code == 1) {
         this.articleTag = res.data;
         let result = this.$route.query;
         this.form.articleTitle = result.articleTitle;
         this.form.content = result.content;
-        this.form.articleTag = StringUtils.isEmpty(result.articleTag) ? 1 : parseInt(result.articleTag);
+        this.form.articleTag = StringUtils.isEmpty(result.articleTag)
+          ? 1
+          : parseInt(result.articleTag);
         this.form.status = result.status == 1000 ? true : false;
         this.form.articleId = result.articleId;
+        this.form.articleBrief = result.articleBrief;
       }
     });
   },
   components: {
-    quillEditor
+    quillEditor,
+    quillRedefine
   },
   methods: {
-    onEditorChange({ editor, html, text }) {
-      this.content = html;
+    onEditorChange(quill) {
+      this.articleBrief = quill.quill.container.textContent;
     },
     onSubmit(formName) {
       this.$refs[formName].validate(valid => {
@@ -103,6 +110,7 @@ export default {
             content: this.form.content,
             articleTagId: this.form.articleTag,
             articleId: this.form.articleId,
+            articleBrief: this.form.articleBrief,
             status: this.form.status ? 1000 : 2000
           };
           this.$http.http("/sys/article/save", params).then(res => {
@@ -119,6 +127,34 @@ export default {
           });
         } else {
           this.$message.success("提交失败！");
+        }
+      });
+    },
+    setEdirorParam() {
+      this.editorOption = quillRedefine({
+        placeholder: "内容",
+        // 图片上传的设置
+        uploadConfig: {
+          action: "/upload/image", // 必填参数 图片上传地址
+          // 必选参数  res是一个函数，函数接收的response为上传成功时服务器返回的数据
+          // 你必须把返回的数据中所包含的图片地址 return 回去
+          res: respnse => {
+            if (respnse.code == 1) {
+              return respnse.data;
+            } else {
+              this.$message.error("图片上传失败啦，图片大小仅支持1M以内");
+            }
+          },
+          methods: "POST", // 可选参数 图片上传方式  默认为post
+          // token: sessionStorage.token,  // 可选参数 如果需要token验证，假设你的token有存放在sessionStorage
+          name: "img", // 可选参数 文件的参数名 默认为img
+          // size: 1024,  // 可选参数   图片限制大小，单位为Kb, 1M = 1024Kb
+          accept: "image/png, image/gif, image/jpeg, image/bmp, image/x-icon", // 可选参数 可上传的图片格式
+          // start: function (){}
+          start: () => {}, // 可选参数 接收一个函数 开始上传数据时会触发
+          end: () => {}, // 可选参数 接收一个函数 上传数据完成（成功或者失败）时会触发
+          success: () => {}, // 可选参数 接收一个函数 上传数据成功时会触发
+          error: () => {} // 可选参数 接收一个函数 上传数据中断时会触发
         }
       });
     }

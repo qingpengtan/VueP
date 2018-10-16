@@ -237,7 +237,6 @@ export default {
         this.getUser();
       }
     });
-    this.cropImg = this.defaultSrc;
     this.getArticle(this.current);
     // document.addEventListener("touchstart", function(e) {
     //   e.preventDefault();
@@ -308,6 +307,7 @@ export default {
           this.form.address = res.data.address;
           this.form.userTags = res.data.userTag;
           this.form.userTagName = res.data.userTagName;
+          this.cropImg = res.data.userPic;
           this.form.userTag = StringUtils.isEmpty(tempTag)
             ? []
             : StringUtils.str2Int(tempTag.split(","));
@@ -368,7 +368,6 @@ export default {
       var fd = new FormData();
       fd.append("img", blob);
       fd.append("imgeFileName", this.imgFileName);
-      console.log(blob);
       if (blob.size > 1041311) {
         this.$message.error("头像上传失败啦，图片大小仅支持120kb以内");
       }
@@ -378,7 +377,7 @@ export default {
         imageName: this.imgFileName
       };
       this.$axios
-        .post("/upload/image", fd, {
+        .post("/upload/uploadAvater", fd, {
           headers: {
             "Content-Type": "multipart/form-data"
           }
@@ -387,6 +386,7 @@ export default {
           if (res.data.code == 1) {
             this.dialogVisible = false;
             this.cropImg = res.data.data;
+            localStorage.setItem("x_userPic", res.data.data);
           } else {
             this.$message.error("图片上传失败啦");
           }
@@ -609,7 +609,7 @@ export default {
     height: 100vh;
     margin-top: 0 !important;
   }
-  .home-btn{
+  .home-btn {
     display: block;
   }
 }

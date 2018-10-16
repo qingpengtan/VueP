@@ -27,7 +27,7 @@
             <el-select placeholder="请选择" v-model="articleTagId" class="select">
               <el-option v-for=" tag in articleTag" :key=tag.articleTagId :label=tag.articleTag :value=tag.articleTagId></el-option>
             </el-select>
-            <quill-editor ref="myTextEditor" v-model="content" :options="editorOption" @blur="onEditorBlur($event)"></quill-editor>
+            <quill-editor ref="myTextEditor" v-model="content" :options="editorOption" @change="onEditorChange($event)"></quill-editor>
           </div>
 
         </div>
@@ -55,7 +55,8 @@ export default {
       articleTitle: "",
       articleTagId: 1,
       articleTag: "",
-      articleId: ""
+      articleId: "",
+      articleBrief:""
     };
   },
   components: {
@@ -74,8 +75,8 @@ export default {
     });
   },
   methods: {
-    onEditorBlur(quill) {
-      console.log("editor blur!", quill.container.innerText);
+    onEditorChange(quill) {
+      this.articleBrief = quill.quill.container.textContent;
     },
 
     setEdirorParam() {
@@ -114,6 +115,7 @@ export default {
           this.articleTagId = res.data.articleTag;
           this.articleTitle = res.data.articleTitle;
           this.articleId = res.data.articleId;
+          this.articleBrief = res.data.articleBrief;
         });
     },
     publish() {
@@ -128,7 +130,8 @@ export default {
           content: this.content,
           articleTitle: this.articleTitle,
           articleTagId: this.articleTagId,
-          articleId: this.articleId
+          articleId: this.articleId,
+          articleBrief: this.articleBrief
         })
         .then(res => {
           if (res.code == 1) {
