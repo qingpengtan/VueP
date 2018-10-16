@@ -10,8 +10,8 @@
           <div class="nav-arrow" @click="isCollapse = false">
             <img class="header-left" src="../../assets/nav-menu.png" />
           </div>
-          <div class="header-nav-menu" v-show="!isCollapse" >
-            <el-menu class="el-menu-vertical-demo" background-color="rgb(236, 236, 236)">
+          <div class="header-nav-menu" v-show="!isCollapse">
+            <el-menu class="el-menu-vertical-demo" background-color="rgb(236, 236, 236)" style="padding-top:10px">
               <router-link to='/' exact>
                 <el-menu-item index="1" @click="isCollapse = true">首页 </el-menu-item>
               </router-link>
@@ -151,7 +151,7 @@ import StringUtils from "../../utils/StringUtils.js";
 
 export default {
   name: "fhead",
-  props:["searchWd"],
+  props: ["searchWd"],
   data() {
     return {
       isCollapse: true,
@@ -162,9 +162,14 @@ export default {
       content: "",
       articleTag: "",
       ifSearch: false,
-      searchContent: "",
-      dispayText: "XXXX",
+      searchContent: this.searchWd,
+      dispayText: "XXXX"
     };
+  },
+  watch:{
+    searchWd(){
+      this.searchContent = this.searchWd
+    }
   },
   created() {
     this.loginStatus = StringUtils.isEmpty(localStorage.getItem("x_token"))
@@ -179,14 +184,13 @@ export default {
         this.articleTag = res.data;
       }
     });
-    this.searchContent = this.searchWd;
   },
   methods: {
-    test(){
-      console.log('aaa');
-    },
     searchArticle() {
-      this.$router.push({ path: "/search", query: {search:this.searchContent} });
+      this.$router.push({
+        path: "/search",
+        query: { search: this.searchContent }
+      });
     },
     pushTribune() {
       // this.ifSearch = true;
@@ -391,7 +395,6 @@ export default {
     display: block;
     position: absolute;
     top: 0;
-    padding-top: 0.172414rem;
     background: rgb(236, 236, 236);
     z-index: 10000;
     height: 100vh;

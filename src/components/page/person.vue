@@ -10,6 +10,12 @@
 
         <div class="header-bg">
 
+          <div style="position:absolute;top:17px;left:18px" class="home-btn">
+            <router-link to='/'>
+              <img src="../../assets/HOME.png" alt="">
+            </router-link>
+          </div>
+
           <div style="position:absolute;top:20px;right:25px;color:white;font-size:20px">
             <i class="el-icon-edit-outline"></i>
             <input style="position:absolute;width:20px;height:20px;right:0;top:0;opacity:0" class="" type="file" name="image" accept="image/*" @change="setImageBg" />
@@ -346,9 +352,7 @@ export default {
       };
       reader.readAsDataURL(file);
     },
-    setImageBg(e){
-
-    },
+    setImageBg(e) {},
     uploadImage() {
       let data;
       this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
@@ -519,6 +523,9 @@ export default {
   border: 1px solid #eee;
   border-radius: 5px;
 }
+.home-btn {
+  display: none;
+}
 @media only screen and (max-width: 481px) {
   .layout-main {
     width: 100%;
@@ -601,6 +608,9 @@ export default {
     width: 100% !important;
     height: 100vh;
     margin-top: 0 !important;
+  }
+  .home-btn{
+    display: block;
   }
 }
 </style>

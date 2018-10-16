@@ -278,7 +278,7 @@ export default {
     font-size: 14px;
   }
   .v-scroll {
-    height: calc(100vh - 1.05rem);
+    height: calc(100vh - 1.45rem);
     overflow: hidden;
   }
 }
