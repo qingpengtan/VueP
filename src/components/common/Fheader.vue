@@ -10,16 +10,16 @@
           <div class="nav-arrow" @click="isCollapse = false">
             <img class="header-left" src="../../assets/nav-menu.png" />
           </div>
-          <div class="header-nav-menu" v-show="!isCollapse">
+          <div class="header-nav-menu" v-show="!isCollapse" >
             <el-menu class="el-menu-vertical-demo" background-color="rgb(236, 236, 236)">
               <router-link to='/' exact>
-                <el-menu-item index="1">首页 </el-menu-item>
+                <el-menu-item index="1" @click="isCollapse = true">首页 </el-menu-item>
               </router-link>
               <router-link to='/daily'>
-                <el-menu-item index="2">日志 </el-menu-item>
+                <el-menu-item index="2" @click="isCollapse = true">日志 </el-menu-item>
               </router-link>
               <span @click="dialogVisible = true">
-                <el-menu-item index="3">写说说</el-menu-item>
+                <el-menu-item index="3" @click="isCollapse = true">写说说</el-menu-item>
               </span>
               <router-link to='/edit-text'>
                 <el-menu-item index="4"> 写文章</el-menu-item>
@@ -182,6 +182,9 @@ export default {
     this.searchContent = this.searchWd;
   },
   methods: {
+    test(){
+      console.log('aaa');
+    },
     searchArticle() {
       this.$router.push({ path: "/search", query: {search:this.searchContent} });
     },
@@ -392,6 +395,10 @@ export default {
     background: rgb(236, 236, 236);
     z-index: 10000;
     height: 100vh;
+  }
+  .el-menu-vertical-demo {
+    height: 100vh;
+    overflow: scroll;
   }
   .header-logo {
     display: none;

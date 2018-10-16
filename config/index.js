@@ -3,8 +3,8 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-const serverUrl = "http://119.29.230.48"
-// const serverUrl = "http://localhost:8080" 
+// const serverUrl = "http://119.29.230.48"
+const serverUrl = "http://localhost:8080" 
 
 module.exports = {
   dev: {
@@ -33,7 +33,14 @@ module.exports = {
       pathRewrite:{
         '^index/*':'^index/*'
       }
-    } 
+    },
+    '/upload':{
+      target:serverUrl,
+      changeOrigin:true,
+      pathRewrite:{
+        '^upload/*':'^upload/*'
+      }
+    }
   },
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

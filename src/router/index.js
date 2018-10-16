@@ -37,7 +37,7 @@ export default new Router({
             path: '/edit-text',
             component: resolve => require(['../components/page/editor.vue'], resolve),
             meta: {
-                title: '编辑文章'
+                title: '写文章'
             }
         },
 

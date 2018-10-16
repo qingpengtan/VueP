@@ -136,7 +136,6 @@ export default {
   data: function() {
     return {
       defaultSrc: "./static/img/img.jpg",
-      fileList: [],
       imgSrc: "",
       cropImg: "",
       dialogVisible: false,

@@ -142,7 +142,6 @@ export default {
   height: auto;
   width: auto;
   background: white;
-  margin-top: 20px;
 }
 .main-content {
   position: relative;
@@ -279,7 +278,7 @@ export default {
     font-size: 14px;
   }
   .v-scroll {
-    height: calc(100vh - 0.85rem);
+    height: calc(100vh - 1.05rem);
     overflow: hidden;
   }
 }

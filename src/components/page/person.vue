@@ -10,10 +10,24 @@
 
         <div class="header-bg">
 
+          <div style="position:absolute;top:20px;right:25px;color:white;font-size:20px">
+            <i class="el-icon-edit-outline"></i>
+            <input style="position:absolute;width:20px;height:20px;right:0;top:0;opacity:0" class="" type="file" name="image" accept="image/*" @change="setImageBg" />
+          </div>
+
           <div class="header-avater">
             <div class="header-avatar-div">
-              <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="avatar">
+              <img :src="cropImg" class="pre-img">
+              <input class="crop-input" type="file" name="image" accept="image/*" @change="setImage" />
             </div>
+            <el-dialog title="裁剪图片" :visible.sync="dialogVisible" width="50%">
+              <!-- <vue-cropper ref='cropper' :src="imgSrc" :ready="cropImage" :zoom="cropImage" :cropmove="cropImage" style="width:100%;height:300px;"></vue-cropper> -->
+              <vue-cropper ref='cropper' :src="imgSrc" style="width:100%;height:300px;"></vue-cropper>
+              <span slot="footer" class="dialog-footer">
+                <el-button @click="cancelCrop">取 消</el-button>
+                <el-button type="primary" @click="uploadImage()">确 定</el-button>
+              </span>
+            </el-dialog>
             <div class="header-avatar-div mobile-style" style="margin-top:30px">
               <div>
                 <h1>{{form.userName}}</h1>
@@ -165,16 +179,22 @@
 
 <script>
 import Header from "../common/Fheader.vue";
+import VueCropper from "vue-cropperjs";
 import cityData from "./city2.json";
 import StringUtils from "../../utils/StringUtils.js";
 
 export default {
   name: "index",
   components: {
-    Header
+    Header,
+    VueCropper
   },
   data() {
     return {
+      defaultSrc: "./static/img/img.jpg",
+      imgSrc: "",
+      cropImg: "",
+      dialogVisible: false,
       totalPage: 1,
       current: 1,
       disMore: false,
@@ -183,6 +203,7 @@ export default {
       isEdit: false,
       articleList: [],
       activeName: "info",
+      imgFileName: "",
       form: {
         // ---------------
         userName: "",
@@ -210,7 +231,7 @@ export default {
         this.getUser();
       }
     });
-
+    this.cropImg = this.defaultSrc;
     this.getArticle(this.current);
     // document.addEventListener("touchstart", function(e) {
     //   e.preventDefault();
@@ -310,6 +331,66 @@ export default {
             this.$el.querySelector("#nodata").style.display = "inline";
           }
         });
+    },
+    setImage(e) {
+      const file = e.target.files[0];
+      if (!file.type.includes("image/")) {
+        return;
+      }
+      this.imgFileName = file.name;
+      const reader = new FileReader();
+      reader.onload = event => {
+        this.dialogVisible = true;
+        this.imgSrc = event.target.result;
+        this.$refs.cropper && this.$refs.cropper.replace(event.target.result);
+      };
+      reader.readAsDataURL(file);
+    },
+    setImageBg(e){
+
+    },
+    uploadImage() {
+      let data;
+      this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
+
+      data = this.cropImg.split(",")[1];
+      data = window.atob(data);
+      var ia = new Uint8Array(data.length);
+      for (var i = 0; i < data.length; i++) {
+        ia[i] = data.charCodeAt(i);
+      }
+
+      var blob = new Blob([ia], { type: "image/png", name: this.imgFileName });
+      var fd = new FormData();
+      fd.append("img", blob);
+      fd.append("imgeFileName", this.imgFileName);
+      console.log(blob);
+      if (blob.size > 1041311) {
+        this.$message.error("头像上传失败啦，图片大小仅支持120kb以内");
+      }
+
+      let obj = {
+        baseImg: this.cropImg,
+        imageName: this.imgFileName
+      };
+      this.$axios
+        .post("/upload/image", fd, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        })
+        .then(res => {
+          if (res.data.code == 1) {
+            this.dialogVisible = false;
+            this.cropImg = res.data.data;
+          } else {
+            this.$message.error("图片上传失败啦");
+          }
+        });
+    },
+    cancelCrop() {
+      this.dialogVisible = false;
+      this.cropImg = this.defaultSrc;
     }
   }
 };
@@ -422,6 +503,22 @@ export default {
 .main-content >>> .el-tabs__content::-webkit-scrollbar {
   display: none;
 }
+.crop-input {
+  position: absolute;
+  width: 135px;
+  height: 100px;
+  left: 35;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.pre-img {
+  width: 100px;
+  height: 100px;
+  background: #f8f8f8;
+  border: 1px solid #eee;
+  border-radius: 5px;
+}
 @media only screen and (max-width: 481px) {
   .layout-main {
     width: 100%;
@@ -467,6 +564,9 @@ export default {
     top: 0px;
     right: 10px;
   }
+  .main-content >>> .el-tab-pane {
+    margin-bottom: 0px;
+  }
   .main-content >>> .el-tabs--border-card {
     height: calc(100vh - 20px - 3.448276rem);
     border: none;
@@ -496,6 +596,11 @@ export default {
   }
   .ifHead {
     display: none;
+  }
+  .header-avater >>> .el-dialog {
+    width: 100% !important;
+    height: 100vh;
+    margin-top: 0 !important;
   }
 }
 </style>

@@ -15,6 +15,7 @@ Vue.use(ElementUI, {
 
 
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';  
+Vue.prototype.$axios = axios;
 Vue.prototype.$http = https;
 Vue.prototype.$prototype = function () {
     return Vue.prototype;

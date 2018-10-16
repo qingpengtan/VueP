@@ -21,13 +21,13 @@
 
       <div class="layout-content">
         <div class="main-content" style="padding: 8px 32px 32px;">
-          <div style="margin-top:20px">
+          <div>
             <input type="text" class="editor-title" placeholder="标题" v-model="articleTitle">
             <input type="text" v-show="false" v-model="articleId">
             <el-select placeholder="请选择" v-model="articleTagId" class="select">
               <el-option v-for=" tag in articleTag" :key=tag.articleTagId :label=tag.articleTag :value=tag.articleTagId></el-option>
             </el-select>
-            <quill-editor ref="myTextEditor" v-model="content" :options="editorOption"></quill-editor>
+            <quill-editor ref="myTextEditor" v-model="content" :options="editorOption" @blur="onEditorBlur($event)"></quill-editor>
           </div>
 
         </div>
@@ -41,7 +41,7 @@
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
- import {quillRedefine} from 'vue-quill-editor-upload';
+import { quillRedefine } from "vue-quill-editor-upload";
 import { quillEditor } from "vue-quill-editor";
 import StringUtils from "../../utils/StringUtils.js";
 export default {
@@ -59,11 +59,11 @@ export default {
     };
   },
   components: {
-    quillEditor,quillRedefine
+    quillEditor,
+    quillRedefine
   },
   created() {
-
-  this.setEdirorParam();
+    this.setEdirorParam();
     this.$http.http("/index/classify", {}).then(res => {
       if (res.code == 1) {
         this.articleTag = res.data;
@@ -74,41 +74,37 @@ export default {
     });
   },
   methods: {
+    onEditorBlur(quill) {
+      console.log("editor blur!", quill.container.innerText);
+    },
 
-    setEdirorParam(){
-       this.editorOption = quillRedefine(
-        {
-          placeholder:"内容",
-          // 图片上传的设置
-          uploadConfig: {
-            action: '/sys/user/test',  // 必填参数 图片上传地址
-            // 必选参数  res是一个函数，函数接收的response为上传成功时服务器返回的数据
-            // 你必须把返回的数据中所包含的图片地址 return 回去
-            res: (respnse) => {
-              if(respnse.code == 1){
-                return respnse.data
-              }else{
-                  this.$message.error("图片上传失败啦，图片大小仅支持1M以内");
-              }
-            },
-            methods: 'POST',  // 可选参数 图片上传方式  默认为post
-            // token: sessionStorage.token,  // 可选参数 如果需要token验证，假设你的token有存放在sessionStorage
-            name: 'img',  // 可选参数 文件的参数名 默认为img
-            // size: 1024,  // 可选参数   图片限制大小，单位为Kb, 1M = 1024Kb
-            accept: 'image/png, image/gif, image/jpeg, image/bmp, image/x-icon',  // 可选参数 可上传的图片格式
-            // start: function (){}
-            start: () => {
-            },  // 可选参数 接收一个函数 开始上传数据时会触发
-            end: () => {
-
-            },  // 可选参数 接收一个函数 上传数据完成（成功或者失败）时会触发
-            success: () => {
-            },  // 可选参数 接收一个函数 上传数据成功时会触发
-            error: () => {
-            }  // 可选参数 接收一个函数 上传数据中断时会触发
+    setEdirorParam() {
+      this.editorOption = quillRedefine({
+        placeholder: "内容",
+        // 图片上传的设置
+        uploadConfig: {
+          action: "/upload/image", // 必填参数 图片上传地址
+          // 必选参数  res是一个函数，函数接收的response为上传成功时服务器返回的数据
+          // 你必须把返回的数据中所包含的图片地址 return 回去
+          res: respnse => {
+            if (respnse.code == 1) {
+              return respnse.data;
+            } else {
+              this.$message.error("图片上传失败啦，图片大小仅支持1M以内");
+            }
           },
+          methods: "POST", // 可选参数 图片上传方式  默认为post
+          // token: sessionStorage.token,  // 可选参数 如果需要token验证，假设你的token有存放在sessionStorage
+          name: "img", // 可选参数 文件的参数名 默认为img
+          // size: 1024,  // 可选参数   图片限制大小，单位为Kb, 1M = 1024Kb
+          accept: "image/png, image/gif, image/jpeg, image/bmp, image/x-icon", // 可选参数 可上传的图片格式
+          // start: function (){}
+          start: () => {}, // 可选参数 接收一个函数 开始上传数据时会触发
+          end: () => {}, // 可选参数 接收一个函数 上传数据完成（成功或者失败）时会触发
+          success: () => {}, // 可选参数 接收一个函数 上传数据成功时会触发
+          error: () => {} // 可选参数 接收一个函数 上传数据中断时会触发
         }
-      )
+      });
     },
     getArticle() {
       this.$http
@@ -347,7 +343,7 @@ export default {
     height: auto;
     width: auto;
     background: white;
-    margin-top: 20px;
+    margin-top: 0px;
   }
   .editor-title {
     width: 100%;
