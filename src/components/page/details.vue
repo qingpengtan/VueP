@@ -21,7 +21,7 @@
                 </div>
                 <div class="publish">
                   <span>
-                    <img src="https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png">
+                    <img :src ="article.userPic">
                   </span>
                   <a href="#">{{isEdit? "我" : article.userName}}</a>于{{article.createTime}}发表了
                   <b>{{article.articleTagName}}</b> 文章 &nbsp;&nbsp;

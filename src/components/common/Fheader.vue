@@ -11,7 +11,7 @@
             <img class="header-left" src="../../assets/nav-menu.png" />
           </div>
           <div class="header-nav-menu" v-show="!isCollapse">
-            <el-menu class="el-menu-vertical-demo" background-color="rgb(236, 236, 236)" style="padding-top:10px">
+            <el-menu class="el-menu-vertical-demo" background-color="rgb(236, 236, 236)">
               <router-link to='/' exact>
                 <el-menu-item index="1" @click="isCollapse = true">首页 </el-menu-item>
               </router-link>
@@ -315,6 +315,7 @@ export default {
 .header-right img {
   width: 24px;
   height: 24px;
+  border-radius: 50%;
   position: relative;
   top: 7px;
 }

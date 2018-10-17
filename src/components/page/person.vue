@@ -379,7 +379,8 @@ export default {
       this.$axios
         .post("/upload/uploadAvater", fd, {
           headers: {
-            "Content-Type": "multipart/form-data"
+            "Content-Type": "multipart/form-data",
+             'token': localStorage.getItem('x_token')
           }
         })
         .then(res => {
@@ -529,6 +530,7 @@ export default {
 @media only screen and (max-width: 481px) {
   .layout-main {
     width: 100%;
+    overflow: hidden;
   }
   .layout-content {
     margin-top: 0;

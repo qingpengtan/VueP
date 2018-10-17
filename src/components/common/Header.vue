@@ -23,7 +23,7 @@
                     <span class="btn-bell-badge" v-if="message"></span>
                 </div>
                 <!-- 用户头像 -->
-                <div class="user-avator"><img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"></div>
+                <div class="user-avator"><img :src="userPic"></div>
                 <!-- 用户名下拉菜单 -->
                 <el-dropdown class="user-name" trigger="click" @command="handleCommand">
                     <span class="el-dropdown-link">
@@ -45,7 +45,8 @@
                 collapse: false,
                 fullscreen: false,
                 name: 'linxin',
-                message: 2
+                message: 2,
+                userPic:""
             }
         },
         computed:{
@@ -99,6 +100,7 @@
             if(document.body.clientWidth < 1500){
                 this.collapseChage();
             }
+            this.userPic = localStorage.getItem("x_userPic");
         }
     }
 </script>
