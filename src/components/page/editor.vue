@@ -131,7 +131,7 @@ export default {
           articleTitle: this.articleTitle,
           articleTagId: this.articleTagId,
           articleId: this.articleId,
-          articleBrief: this.articleBrief
+          articleBrief: this.articleBrief.substring(0,200)
         })
         .then(res => {
           if (res.code == 1) {
@@ -157,7 +157,7 @@ export default {
 .layout-header {
   width: 100%;
   height: auto;
-  background: #f4f5f5;
+  background: white;
   overflow: hidden;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 }
@@ -198,7 +198,6 @@ export default {
   font-size: 20px;
   line-height: 64px;
   transition: all 0.3s, padding 0s;
-  background: burlywood;
   width: 68px;
   height: 64px;
   display: inline-block;
@@ -265,7 +264,7 @@ export default {
   .layout-header {
     width: 100%;
     height: auto;
-    background: #f4f5f5;
+    background: white;
     overflow: hidden;
     box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   }
@@ -308,7 +307,6 @@ export default {
     height: 0.85rem;
     line-height: 0.85rem;
     transition: all 0.3s, padding 0s;
-    background: burlywood;
     width: 0.85rem;
     display: inline-block;
   }
@@ -357,6 +355,9 @@ export default {
     outline: none;
     display: inline-block;
   }
+  .main-content >>> .el-select{
+     width:100%;
+   }
 }
 </style>
 

@@ -151,6 +151,13 @@ export default new Router({
             }
         },
         {
+            path: '/500',
+            component: resolve => require(['../components/page/500.vue'], resolve),
+            meta: {
+                title: '500'
+            }
+        },
+        {
             path: '*',
             redirect: '/404'
         }

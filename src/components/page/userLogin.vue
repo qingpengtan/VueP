@@ -208,7 +208,6 @@ export default {
   padding: 0 40px 36px 40px;
   height: 265px;
   width: 352px;
-  background: #536dfd;
   position: relative;
 }
 .header-input >>> input {
@@ -218,10 +217,9 @@ export default {
   height: 36px !important;
   border: none;
   outline: none;
-  color: white;
-  background: #536dfd;
+  color: #999999;
   font-size: 16px;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #ddd;
 }
 .header-input input::-webkit-input-placeholder {
   color: #dcdcdc;
@@ -250,8 +248,8 @@ export default {
   height: 36px;
   margin-top: 15px;
   border: none;
-  background: white;
-  color: #666666;
+  background: #2ab1ea;
+  color: white;
   cursor: pointer;
   border-radius: 3px;
   font-size: 16px;
@@ -260,8 +258,10 @@ export default {
   margin-top: 30px;
   width: 100%;
   text-align: center;
+    color: #999999;
 }
 .register-footer {
+  color: #999999;
   margin-top: 10px;
 }
 .login-tip {
@@ -274,7 +274,7 @@ export default {
 }
 .login-tip .point {
   cursor: pointer;
-  color: #536dfd;
+  color:#2ab1ea;
 }
 .send-code {
   position: absolute;
@@ -301,7 +301,6 @@ export default {
   .header-input {
     padding: 0 40px 36px 40px;
     width: calc(100% - 80px);
-    background: #536dfd;
     position: relative;
   }
   .send-code {

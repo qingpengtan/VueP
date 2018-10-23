@@ -10,17 +10,18 @@
 
         <div class="header-bg">
 
-          <div style="position:absolute;top:17px;left:18px" class="home-btn">
+          <div style="position:absolute;top:14px;left:18px" class="home-btn">
             <router-link to='/'>
               <img src="../../assets/HOME.png" alt="">
             </router-link>
           </div>
 
-          <div style="position:absolute;top:20px;right:25px;color:white;font-size:20px">
+          <!--
+          <div style="position:absolute;top:15px;right:25px;color:white;font-size:20px">
             <i class="el-icon-edit-outline"></i>
             <input style="position:absolute;width:20px;height:20px;right:0;top:0;opacity:0" class="" type="file" name="image" accept="image/*" @change="setImageBg" />
           </div>
-
+-->
           <div class="header-avater">
             <div class="header-avatar-div">
               <img :src="cropImg" class="pre-img">
@@ -38,7 +39,8 @@
               <div>
                 <h1>{{form.userName}}</h1>
               </div>
-              <div style="margin-top:5px">{{form.provinceN}} {{form.cityN}}</div>
+              <div style="margin-top:5px" v-if="form.provinceN">{{form.provinceN}} {{form.cityN}}</div>
+              <div style="margin-top:5px" v-else>暂无居住地</div>
             </div>
           </div>
           <div class="header-right-contatin">
@@ -145,7 +147,10 @@
                     <div v-show="!isEdit">
                       <i class="el-icon-edit-outline" @click="isEdit = !isEdit"></i>
                     </div>
+                  </div>
 
+                  <div class="login-out">
+                    <el-button type="danger" @click="loginOut">退出登录</el-button>
                   </div>
                 </el-form>
               </div>
@@ -155,7 +160,7 @@
 
                 <div v-for="article in articleList" :key=article.articleId class="text-item">
                   <span>{{article.articleTagName}}</span>
-                  <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
+                  <router-link :to="{path:'/detail', query:{articleId:article.articleId}}" style="color:#6cb5ff">
                     {{article.articleTitle }}
                   </router-link>
                 </div>
@@ -226,7 +231,8 @@ export default {
         userTag: [],
         createTime: "",
         userUuid: "",
-        userTagName: ""
+        userTagName: "",
+        userPic: ""
       }
     };
   },
@@ -242,6 +248,14 @@ export default {
     //   e.preventDefault();
     // });
   },
+  //   beforeRouteEnter(to, from, next) {
+  //   if ((from.path.indexOf("edit-text") != -1) || (from.path.indexOf("user-login") != -1)) {
+  //     to.meta.keepAlive = false;
+  //   } else {
+  //     to.meta.keepAlive = true;
+  //   }
+  //   next();
+  // },
   methods: {
     tuchMove() {
       var clientH = this.$el.getElementsByClassName("el-tabs--border-card")[0]
@@ -308,6 +322,7 @@ export default {
           this.form.userTags = res.data.userTag;
           this.form.userTagName = res.data.userTagName;
           this.cropImg = res.data.userPic;
+          this.form.userPic = res.data.userPic;
           this.form.userTag = StringUtils.isEmpty(tempTag)
             ? []
             : StringUtils.str2Int(tempTag.split(","));
@@ -335,6 +350,8 @@ export default {
             this.$el.querySelector(".pc-more").innerHTML = "没有更多数据了";
             this.$el.querySelector("#loading").style.display = "none";
             this.$el.querySelector("#nodata").style.display = "inline";
+          } else if (this.articleList.length < 20) {
+            this.getArticle(this.current + 1);
           }
         });
     },
@@ -369,7 +386,9 @@ export default {
       fd.append("img", blob);
       fd.append("imgeFileName", this.imgFileName);
       if (blob.size > 1041311) {
+        this.cropImg = this.form.userPic;
         this.$message.error("头像上传失败啦，图片大小仅支持120kb以内");
+        return;
       }
 
       let obj = {
@@ -380,7 +399,7 @@ export default {
         .post("/upload/uploadAvater", fd, {
           headers: {
             "Content-Type": "multipart/form-data",
-             'token': localStorage.getItem('x_token')
+            token: localStorage.getItem("x_token")
           }
         })
         .then(res => {
@@ -389,13 +408,28 @@ export default {
             this.cropImg = res.data.data;
             localStorage.setItem("x_userPic", res.data.data);
           } else {
-            this.$message.error("图片上传失败啦");
+            this.cropImg = this.form.userPic;
+            this.$message.error("头像上传失败啦，图片大小仅支持120kb以内");
           }
         });
     },
     cancelCrop() {
       this.dialogVisible = false;
-      this.cropImg = this.defaultSrc;
+      this.cropImg = this.form.userPic;
+    },
+    loginOut() {
+      this.$confirm("是否退出登录?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        this.$message({
+          type: "success",
+          message: "退出成功!"
+        });
+        localStorage.clear();
+        this.$router.push("/user-login");
+      });
     }
   }
 };
@@ -527,6 +561,13 @@ export default {
 .home-btn {
   display: none;
 }
+.login-out {
+  margin-bottom: 20px;
+  display: none;
+}
+.login-out button {
+  width: 95%;
+}
 @media only screen and (max-width: 481px) {
   .layout-main {
     width: 100%;
@@ -612,6 +653,9 @@ export default {
     margin-top: 0 !important;
   }
   .home-btn {
+    display: block;
+  }
+  .login-out {
     display: block;
   }
 }

@@ -4,7 +4,7 @@
     <Header></Header>
     <div class="layout-main">
 
-      <div class="layout-content">
+      <div class="layout-content" ref="wrapper">
         <div class="main-content" style="padding: 8px 32px 32px;">
 
           <div class="ant-list-item">
@@ -21,7 +21,7 @@
                 </div>
                 <div class="publish">
                   <span>
-                    <img :src ="article.userPic">
+                    <img :src="article.userPic">
                   </span>
                   <a href="#">{{isEdit? "我" : article.userName}}</a>于{{article.createTime}}发表了
                   <b>{{article.articleTagName}}</b> 文章 &nbsp;&nbsp;
@@ -129,10 +129,13 @@ import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 import Header from "../common/Fheader.vue";
+import Scroll from "./foreground/bScroll";
+
 export default {
   name: "details",
   components: {
-    Header
+    Header,
+    "v-scroll": Scroll
   },
   data() {
     return {
@@ -144,6 +147,9 @@ export default {
   },
   created() {
     window.scrollTo(0, 0);
+    // this.$nextTick(() => {
+    //   this.scroll = new Bscroll(this.$refs.wrapper, {});
+    // });
     this.$http
       .http("/index/detail", { articleId: this.$route.query.articleId })
       .then(res => {
@@ -286,6 +292,10 @@ export default {
   padding: 0 !important;
 }
 @media only screen and (max-width: 481px) {
+  .layout-main {
+    height: calc(100vh - 0.85rem);
+    overflow: scroll;
+  }
   .layout-main,
   .main-content,
   .ant-list-item {
@@ -295,7 +305,8 @@ export default {
     padding: 0;
   }
   .main-content {
-    width: calc(100% - 0.406897rem);
+    width: 100%;
+    box-sizing: border-box;
     padding: 0.206897rem !important;
     font-size: 14px;
   }

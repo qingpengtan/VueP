@@ -80,7 +80,7 @@ export default {
       disMore: false,
       pullup: true,
       totalPage: 1,
-      totalSize:0,
+      totalSize: 0,
       current: 1,
       articleList: [],
       articleTitle: ""
@@ -95,6 +95,14 @@ export default {
       this.articleList = [];
       this.reqData(1);
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    if (from.path.indexOf("edit-text") != -1) {
+      to.meta.keepAlive = false;
+    } else {
+      to.meta.keepAlive = true;
+    }
+    next();
   },
   methods: {
     moreData() {

@@ -5,14 +5,10 @@
     <Header></Header>
 
     <div class="layout-main">
-      <!-- <div class="header-content">
-
-        </div> -->
-
       <div class="layout-content">
         <div class="main-content" style="padding: 8px 32px 32px;">
 
-          <v-scroll :data="articleList" :pullup="pullup" @scrollToEnd="moreData()" class="v-scroll">
+          <v-scroll ref="listContent" :data="articleList" :pullup="pullup" :listenScroll="true" @scrollToEnd="moreData()" class="v-scroll" @scroll="scrollC">
             <ul>
               <li class="ant-list-item" v-for=" article in articleList" :key="article.articleId">
                 <div class="ant-list-item-meta-content">
@@ -78,18 +74,22 @@ export default {
       pullup: true,
       totalPage: 1,
       current: 1,
-      articleList: []
+      articleList: [],
+      scrollY: 0
     };
   },
   mounted() {
     this.reqData(1);
   },
-  beforeRouteLeave(to, from, next) {
-    if (to.path.indexOf("detail") == -1) {
-      from.meta.keepAlive = false;
+  activated() {
+    console.log(this.scrollY);
+    // this.$refs.listContent.scrollTo(0, this.scrollY);
+  },
+  beforeRouteEnter(to, from, next) {
+    if ((from.path.indexOf("edit-text") != -1) || (from.path.indexOf("user-login") != -1)) {
+      to.meta.keepAlive = false;
     } else {
-      console.log("aa");
-      from.meta.keepAlive = true;
+      to.meta.keepAlive = true;
     }
     next();
   },
@@ -119,6 +119,9 @@ export default {
           console.log("error");
         }
       );
+    },
+    scrollC(pos) {
+      this.scrollY = pos.y;
     }
   }
 };

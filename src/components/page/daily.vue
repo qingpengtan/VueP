@@ -84,12 +84,11 @@ export default {
   mounted() {
     this.reqData(1);
   },
-  beforeRouteLeave(to, from, next) {
-    if (to.path.indexOf("detail") == -1) {
-      from.meta.keepAlive = false;
+  beforeRouteEnter(to, from, next) {
+    if (from.path.indexOf("edit-text") != -1) {
+      to.meta.keepAlive = false;
     } else {
-      console.log("aa");
-      from.meta.keepAlive = true;
+      to.meta.keepAlive = true;
     }
     next();
   },

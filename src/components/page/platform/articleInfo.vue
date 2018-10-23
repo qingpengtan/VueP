@@ -83,14 +83,9 @@ export default {
       if (res.code == 1) {
         this.articleTag = res.data;
         let result = this.$route.query;
-        this.form.articleTitle = result.articleTitle;
-        this.form.content = result.content;
-        this.form.articleTag = StringUtils.isEmpty(result.articleTag)
-          ? 1
-          : parseInt(result.articleTag);
-        this.form.status = result.status == 1000 ? true : false;
-        this.form.articleId = result.articleId;
-        this.form.articleBrief = result.articleBrief;
+        if (!StringUtils.isEmpty(result)) {
+          this.editArticle(result.articleId);
+        }
       }
     });
   },
@@ -110,7 +105,7 @@ export default {
             content: this.form.content,
             articleTagId: this.form.articleTag,
             articleId: this.form.articleId,
-            articleBrief: this.form.articleBrief,
+            articleBrief: this.form.articleBrief.substring(0, 200),
             status: this.form.status ? 1000 : 2000
           };
           this.$http.http("/sys/article/save", params).then(res => {
@@ -127,6 +122,20 @@ export default {
           });
         } else {
           this.$message.success("提交失败！");
+        }
+      });
+    },
+    editArticle(id) {
+      this.$http.http("/sys/article/detail", { articleId: id }).then(res => {
+        if (res.code == 1) {
+          this.form.articleTitle = res.data.articleTitle;
+          this.form.content = res.data.content;
+          this.form.articleTag = StringUtils.isEmpty(res.data.articleTag)
+            ? 1
+            : parseInt(res.data.articleTag);
+          this.form.status = res.data.status == 1000 ? true : false;
+          this.form.articleId = res.data.articleId;
+          this.form.articleBrief = res.data.articleBrief;
         }
       });
     },

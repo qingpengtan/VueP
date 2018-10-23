@@ -84,6 +84,14 @@ export default {
   mounted() {
     this.reqData(1);
   },
+  beforeRouteEnter(to, from, next) {
+    if (from.path.indexOf("edit-text") != -1) {
+      to.meta.keepAlive = false;
+    } else {
+      to.meta.keepAlive = true;
+    }
+    next();
+  },
   watch: {
     $route(to, from) {
       this.$http

@@ -100,7 +100,7 @@ export default {
       this.is_search = true;
     },
     handleEdit(index, row) {
-      this.$router.push({ path: "/sys/article-edit", query: row });
+      this.$router.push({ path: "/sys/article-edit",query:{articleId:row.articleId}});
       // tabUtils.setTags(this.$tabsList,this);
     },
     handleDelete(index, row) {
