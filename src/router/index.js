@@ -159,7 +159,10 @@ export default new Router({
         },
         {
             path: '*',
-            redirect: '/404'
+            component: resolve => require(['../components/page/404.vue'], resolve),
+            meta: {
+                title: '404'
+            }
         }
     ]
 })

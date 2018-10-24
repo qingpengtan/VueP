@@ -131,7 +131,7 @@ export default {
           articleTitle: this.articleTitle,
           articleTagId: this.articleTagId,
           articleId: this.articleId,
-          articleBrief: this.articleBrief.substring(0,200)
+          articleBrief: this.articleBrief.substring(0,350)
         })
         .then(res => {
           if (res.code == 1) {

@@ -189,13 +189,13 @@ export default {
   width: 432px;
   margin: 0 auto;
   text-align: center;
-  background: #fff;
+  background: #f1f1f1;
   border-radius: 2px;
   box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
   box-sizing: border-box;
   height: 505px;
   margin-top: 64px;
-  color: white;
+  color: #999;
 }
 .header-img {
   font-size: 0;
@@ -209,6 +209,7 @@ export default {
   height: 265px;
   width: 352px;
   position: relative;
+  background: white;
 }
 .header-input >>> input {
   /* .header-input .el-form .el-form-item .el-form-item__content .el-input input { */

@@ -105,7 +105,7 @@ export default {
             content: this.form.content,
             articleTagId: this.form.articleTag,
             articleId: this.form.articleId,
-            articleBrief: this.form.articleBrief.substring(0, 200),
+            articleBrief: this.form.articleBrief.substring(0, 350),
             status: this.form.status ? 1000 : 2000
           };
           this.$http.http("/sys/article/save", params).then(res => {
