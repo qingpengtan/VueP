@@ -1,18 +1,25 @@
 <template>
 
-    <div>
+  <div>
 
-        <Header></Header>
+    <Header></Header>
 
-        <div class="layout-main">
-            <div class="layout-content">
-                <div class="main-content" style="padding: 8px 32px 32px;">
-                </div>
-            </div>
+    <div class="layout-main">
+      <div class="layout-content">
+        <div class="main-content" style="padding: 8px 32px 32px;">
+          <el-upload class="upload-demo" action="/upload/mp3" multiple :limit="1" accept="audio/mpeg" :headers="headers" name="mp3" :on-success="finishUp" :file-list="fileList">
+            <el-button size="small" type="primary">上传音乐</el-button>
+          </el-upload>
         </div>
-
-        <Footer></Footer>
+        <div v-for="music in musicList" :key="music.musicId">
+          <audio :src="music.musicUrl" controls></audio>
+          <div>{{music.musicName}}</div>
+        </div>
+      </div>
     </div>
+
+    <Footer></Footer>
+  </div>
 
 </template>
 
@@ -21,10 +28,10 @@ import Header from "../common/Fheader.vue";
 import Footer from "../common/Footer.vue";
 
 export default {
-  name: "index",
+  name: "test",
   components: {
     Header,
-    Footer,
+    Footer
   },
   data() {
     return {
@@ -32,13 +39,30 @@ export default {
       pullup: true,
       totalPage: 1,
       current: 1,
-      articleList: []
+      articleList: [],
+      fileList: [],
+      musicList: [],
+      headers: { token: localStorage.getItem("x_token") }
     };
   },
   mounted() {
+    this.getMusic();
   },
   methods: {
-
+    getMusic() {
+      this.$http.http("/index/music", {}).then(res => {
+        if (res.code == 1) {
+          this.musicList = res.data;
+        }
+      });
+    },
+    finishUp(res, file, fileList) {
+      setTimeout(() => {
+        this.fileList = [];
+      }, 3000);
+      this.getMusic();
+      console.log(res);
+    }
   }
 };
 </script>
@@ -125,6 +149,12 @@ export default {
 }
 .mobile-more {
   display: none;
+}
+
+.layout-content >>> .el-upload--text {
+  border: none;
+  width: 80px;
+  height: 32px;
 }
 @media only screen and (max-width: 481px) {
   .layout-main,

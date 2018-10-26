@@ -385,9 +385,9 @@ export default {
       var fd = new FormData();
       fd.append("img", blob);
       fd.append("imgeFileName", this.imgFileName);
-      if (blob.size > 1041311) {
+      if (blob.size > 5041311) {
         this.cropImg = this.form.userPic;
-        this.$message.error("头像上传失败啦，图片大小仅支持120kb以内");
+        this.$message.error("头像上传失败啦，图片大小仅支持500kb以内");
         return;
       }
 
@@ -409,7 +409,7 @@ export default {
             localStorage.setItem("x_userPic", res.data.data);
           } else {
             this.cropImg = this.form.userPic;
-            this.$message.error("头像上传失败啦，图片大小仅支持120kb以内");
+            this.$message.error(res.data.msg);
           }
         });
     },

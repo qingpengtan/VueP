@@ -151,7 +151,7 @@ export default {
             if (respnse.code == 1) {
               return respnse.data;
             } else {
-              this.$message.error("图片上传失败啦，图片大小仅支持1M以内");
+              this.$message.error(respnse.msg);
             }
           },
           methods: "POST", // 可选参数 图片上传方式  默认为post
