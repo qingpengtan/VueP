@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-        <Footer></Footer>
+    <Footer></Footer>
   </div>
 
 </template>
@@ -153,7 +153,6 @@ export default {
 <style scoped>
 .layout-main {
   width: 1260px;
-  height: 100%;
   margin: 0 auto;
 }
 
@@ -238,6 +237,7 @@ export default {
 .layout-content {
   height: auto;
   width: auto;
+  min-height: calc(100vh - 249px);
   background: white;
   margin-top: 20px;
 }
@@ -258,6 +258,9 @@ export default {
     margin: 0 auto;
   }
   .main-content {
+    height: calc(100vh - 0.85rem);
+    box-sizing: border-box;
+    overflow-y: scroll;
     padding: 10px !important;
   }
 
@@ -281,6 +284,12 @@ export default {
   }
   .header-navbar {
     height: 0.85rem;
+  }
+
+  .header-navbar >>> button {
+    position: relative;
+    top: -5px;
+    padding: 6px 9px;
   }
 
   .header-content {

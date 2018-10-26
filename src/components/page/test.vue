@@ -71,12 +71,12 @@ export default {
 <style scoped>
 .layout-main {
   width: 1260px;
-  height: 100%;
   margin: 0 auto;
 }
 
 .layout-content {
   height: auto;
+  min-height: calc(100vh - 249px);
   width: auto;
   background: white;
   margin-top: 20px;

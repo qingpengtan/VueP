@@ -148,20 +148,26 @@ export default {
 <style scoped>
 .layout-main {
   width: 1260px;
-  height: 100%;
   margin: 0 auto;
 }
 
 .layout-content {
   height: auto;
   width: auto;
+  min-height: calc(100vh - 249px);
   background: white;
 }
 .main-content {
   position: relative;
 }
 
-.main-content:after{ content:"."; height:0; visibility:hidden; display:block; clear:both; }
+.main-content:after {
+  content: ".";
+  height: 0;
+  visibility: hidden;
+  display: block;
+  clear: both;
+}
 
 .v-scroll {
   width: 720px;
