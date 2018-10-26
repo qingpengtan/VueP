@@ -554,9 +554,7 @@ export default {
 .pre-img {
   width: 100px;
   height: 100px;
-  background: #f8f8f8;
-  border: 1px solid #eee;
-  border-radius: 5px;
+  border: none;
 }
 .home-btn {
   display: none;

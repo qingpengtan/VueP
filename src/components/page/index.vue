@@ -48,6 +48,10 @@
 
           </v-scroll>
 
+          <div class="aside-content">
+            <FAside></FAside>
+          </div>
+
         </div>
       </div>
     </div>
@@ -60,12 +64,15 @@
 <script>
 import Header from "../common/Fheader.vue";
 import Footer from "../common/Footer.vue";
+import FAside from "../common/FAside";
 import Scroll from "./foreground/bScroll";
+
 export default {
   name: "index",
   components: {
     Header,
     Footer,
+    FAside,
     "v-scroll": Scroll
   },
   data() {
@@ -86,7 +93,10 @@ export default {
     // this.$refs.listContent.scrollTo(0, this.scrollY);
   },
   beforeRouteEnter(to, from, next) {
-    if ((from.path.indexOf("edit-text") != -1) || (from.path.indexOf("user-login") != -1)) {
+    if (
+      from.path.indexOf("edit-text") != -1 ||
+      from.path.indexOf("user-login") != -1
+    ) {
       to.meta.keepAlive = false;
     } else {
       to.meta.keepAlive = true;
@@ -143,6 +153,15 @@ export default {
 }
 .main-content {
   position: relative;
+}
+.v-scroll {
+  width: 720px;
+  display: inline-block;
+}
+.aside-content {
+  width: 360px;
+  margin: 20px;
+  float: right;
 }
 
 .ant-list-item {
@@ -227,6 +246,9 @@ export default {
     padding: 0 !important;
     font-size: 14px;
   }
+  .aside-content {
+    display: none;
+  }
   .ant-list-item {
     box-sizing: border-box;
     padding: 0.137931rem 0.172414rem;
@@ -280,6 +302,7 @@ export default {
     font-size: 14px;
   }
   .v-scroll {
+    width: 100%;
     height: calc(100vh - 0.8432rem);
     overflow: hidden;
   }

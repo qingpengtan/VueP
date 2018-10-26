@@ -9,7 +9,7 @@ export default new Router({
             path: '/',
             component: resolve => require(['../components/page/index.vue'], resolve),
             meta: {
-                title: '皇上的纪喵喵与和汪汪',
+                title: '黄桑的和萌萌与纪宝宝',
                 keepAlive: true,
             }
         },

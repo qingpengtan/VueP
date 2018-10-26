@@ -52,6 +52,10 @@
 
           </v-scroll>
 
+          <div class="aside-content">
+            <FAside></FAside>
+          </div>
+
         </div>
       </div>
     </div>
@@ -65,11 +69,13 @@
 import Header from "../common/Fheader.vue";
 import Footer from "../common/Footer.vue";
 import Scroll from "./foreground/bScroll";
+import FAside from "../common/FAside";
 export default {
   name: "index",
   components: {
     Header,
     Footer,
+    FAside,
     "v-scroll": Scroll
   },
   data() {
@@ -160,6 +166,18 @@ export default {
 }
 .main-content {
   position: relative;
+}
+
+.main-content:after{ content:"."; height:0; visibility:hidden; display:block; clear:both; }
+
+.v-scroll {
+  width: 720px;
+  display: inline-block;
+}
+.aside-content {
+  width: 360px;
+  margin: 20px;
+  float: right;
 }
 
 .ant-list-item {
@@ -297,8 +315,12 @@ export default {
     font-size: 14px;
   }
   .v-scroll {
+    width: 100%;
     height: calc(100vh - 0.8432rem);
     overflow: hidden;
+  }
+  .aside-content {
+    display: none;
   }
 }
 </style>
