@@ -184,6 +184,8 @@
         </div>
       </div>
     </div>
+        <Footer></Footer>
+
   </div>
 
 </template>
@@ -192,12 +194,14 @@
 import Header from "../common/Fheader.vue";
 import VueCropper from "vue-cropperjs";
 import cityData from "./city2.json";
+import Footer from "../common/Footer.vue";
 import StringUtils from "../../utils/StringUtils.js";
 
 export default {
   name: "index",
   components: {
     Header,
+    Footer,
     VueCropper
   },
   data() {

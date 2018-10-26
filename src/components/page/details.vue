@@ -117,9 +117,14 @@
 
           </div>
 
+          <div class="aside-content">
+            <FAside></FAside>
+          </div>
+
         </div>
       </div>
     </div>
+    <Footer></Footer>
   </div>
 
 </template>
@@ -130,11 +135,15 @@ import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 import Header from "../common/Fheader.vue";
 import Scroll from "./foreground/bScroll";
+import FAside from "../common/FAside";
+import Footer from "../common/Footer.vue";
 
 export default {
   name: "details",
   components: {
     Header,
+    FAside,
+    Footer,
     "v-scroll": Scroll
   },
   data() {
@@ -197,9 +206,24 @@ export default {
   margin-top: 20px;
 }
 
+.main-content:after {
+  content: ".";
+  height: 0;
+  visibility: hidden;
+  display: block;
+  clear: both;
+}
+
 .ant-list-item {
   padding: 20px 0;
   width: 720px;
+  display: inline-block;
+}
+
+.aside-content {
+  width: 360px;
+  margin: 20px;
+  float: right;
 }
 
 .ant-list-item-meta-content {
@@ -369,6 +393,9 @@ export default {
   }
 
   .ant-list-item >>> .el-dialog__close {
+    display: none;
+  }
+  .aside-content {
     display: none;
   }
 }

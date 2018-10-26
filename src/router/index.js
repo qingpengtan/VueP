@@ -125,14 +125,6 @@ export default new Router({
                     meta: {
                         title: '文章编辑'
                     }
-                },
-                {
-                    // 图片上传组件
-                    path: '/upload',
-                    component: resolve => require(['../components/page/Upload.vue'], resolve),
-                    meta: {
-                        title: '文件上传'
-                    }
                 }
             ]
         },
