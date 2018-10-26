@@ -33,6 +33,7 @@
         </div>
       </div>
     </div>
+        <Footer></Footer>
   </div>
 
 </template>
@@ -40,6 +41,7 @@
 <script>
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
+import Footer from "../common/Footer.vue";
 import "quill/dist/quill.bubble.css";
 import { quillRedefine } from "vue-quill-editor-upload";
 import { quillEditor } from "vue-quill-editor";
@@ -61,7 +63,8 @@ export default {
   },
   components: {
     quillEditor,
-    quillRedefine
+    quillRedefine,
+    Footer
   },
   created() {
     this.setEdirorParam();

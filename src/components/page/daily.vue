@@ -35,7 +35,6 @@
                     </div>
                   </div>
                 </div>
-                <hr>
               </li>
               <div class="mobile-more">
                 <span id="loading">
@@ -147,7 +146,13 @@ export default {
   /* overflow: auto; */
 }
 
-.main-content:after{ content:"."; height:0; visibility:hidden; display:block; clear:both; }
+.main-content:after {
+  content: ".";
+  height: 0;
+  visibility: hidden;
+  display: block;
+  clear: both;
+}
 
 .v-scroll {
   width: 720px;
@@ -162,6 +167,7 @@ export default {
 .ant-list-item {
   padding-top: 20px;
   width: 720px;
+  border-bottom: 1px solid #ddd;
 }
 
 .ant-list-item-meta-content {
@@ -245,9 +251,6 @@ export default {
     box-sizing: border-box;
     padding: 0.137931rem 0.172414rem;
     border-bottom: 5px solid #dddddd;
-  }
-  hr {
-    display: none;
   }
 
   .ant-list-item-meta-content {

@@ -494,6 +494,7 @@ export default {
 .main-content >>> .el-tabs__content {
   height: 100%;
   overflow: auto;
+  overflow-x: hidden;
 }
 .main-content >>> .el-tab-pane {
   margin-bottom: 30px;

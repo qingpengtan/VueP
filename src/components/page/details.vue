@@ -76,6 +76,11 @@
             </el-dialog>
 
             <div class="leave-word">
+
+              <div class="total-comments">
+                最新评论（363）
+              </div>
+
               <div class="leave-word-item">
                 <div class="leave-img">
                   <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="avatar">
@@ -277,7 +282,7 @@ export default {
   clear: both;
   background: #f9f9f9;
   border-radius: 5px;
-  box-shadow: 0px 0px 5px 0 #999;
+  box-shadow: 0px 0px 5px 0 #dcdcdc;
   padding: 20px;
 }
 .leave-word-item .leave-img,
@@ -286,7 +291,7 @@ export default {
 }
 .leave-word-item {
   padding: 20px 0px;
-  border-bottom: 1px solid #999;
+  border-bottom: 1px solid #ddd;
 }
 .leave-word-item:first-child {
   padding-top: 0px;
