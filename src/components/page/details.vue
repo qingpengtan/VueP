@@ -9,7 +9,16 @@
 
           <div class="ant-list-item">
             <div class="ant-list-item-meta-content">
-              <h3>{{article.articleTitle}}</h3>
+              <h2>{{article.articleTitle}}</h2>
+            </div>
+            <div class="publish">
+              <span>作者：{{article.userName}}</span>
+              <span>类型：{{article.articleTagName}}</span>
+              <span> {{article.createTime}}</span>
+                <router-link :to="{path:'/edit-text', query:{articleId:article.articleId}}" v-show="isEdit">
+                  <i class="el-icon-edit" style="color:#43bcff;font-size:14px" ></i>
+                </router-link>
+
             </div>
             <div class="ant-list-item-content">
               <div>
@@ -18,16 +27,6 @@
                     <div class="text-content" v-html=article.content>
                     </div>
                   </div>
-                </div>
-                <div class="publish">
-                  <span>
-                    <img :src="article.userPic">
-                  </span>
-                  <a href="#">{{isEdit? "我" : article.userName}}</a>于{{article.createTime}}发表了
-                  <b>{{article.articleTagName}}</b> 文章 &nbsp;&nbsp;
-                  <router-link :to="{path:'/edit-text', query:{articleId:article.articleId}}" v-show="isEdit">
-                    <i class="el-icon-edit" style="color:#43bcff">更新文章？</i>
-                  </router-link>
                 </div>
               </div>
             </div>
@@ -52,11 +51,8 @@
               </li>
 
             </ul>
-            <br>
-            <hr class="hr-line">
-
             <div class="comment">
-              <textarea name="" id="" rows="10"></textarea>
+              <textarea name="" id="" rows="6"></textarea>
               <div class="comment-btn">
                 <el-button type="primary">发表评论</el-button>
               </div>
@@ -77,7 +73,7 @@
 
             <div class="leave-word">
 
-              <div class="total-comments">
+              <div class="total-comments" style="color:#409eff">
                 最新评论（363）
               </div>
 
@@ -202,6 +198,7 @@ export default {
   width: 1260px;
   height: 100%;
   margin: 0 auto;
+  background: white;
 }
 
 .layout-content {
@@ -245,17 +242,15 @@ export default {
 }
 
 .publish {
-  margin-top: 16px;
+  font-size: 12px;
+  margin: 16px 0;
+  color: #bbbbbb;
   line-height: 1.5;
+  display: flex;
 }
-
-.publish img {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  position: relative;
-  top: 4px;
-  margin-right: 10px;
+.publish span{
+  flex: 1;
+  overflow: hidden;
 }
 
 .ant-list-item-action li {
@@ -270,52 +265,47 @@ export default {
   display: block;
 }
 .comment textarea {
-  width: 660px;
-  margin-left: 20px;
+  width: 700px;
 }
 .comment .comment-btn {
   float: right;
-  margin: 20px;
+  margin-right: 16px;
   margin-top: 10px;
 }
 .leave-word {
   clear: both;
-  background: #f9f9f9;
-  border-radius: 5px;
-  box-shadow: 0px 0px 5px 0 #dcdcdc;
-  padding: 20px;
 }
 .leave-word-item .leave-img,
 .leave-word-item .leave-comment {
   display: inline-block;
 }
 .leave-word-item {
-  padding: 20px 0px;
-  border-bottom: 1px solid #ddd;
+  padding: 16px 0px;
+  border-bottom: 1px solid #e1e1e1;
+  font-size: 13px;
 }
 .leave-word-item:first-child {
   padding-top: 0px;
 }
 .leave-img img {
-  width: 30px;
+  width: 24px;
+  position: relative;
+  top: 2px;
 }
 .leave-img span {
   display: inline-block;
   height: 30px;
   line-height: 30px;
-  margin-left: 10px;
+  margin-left: 5px;
   position: relative;
   top: -5px;
   font-weight: bold;
 }
 .leave-comment {
-  padding-left: 10px;
+  padding-left: 0px;
 }
 .mobile-commnet {
   display: none;
-}
-.hr-line {
-  display: block;
 }
 .layout-main >>> .ql-editor {
   padding: 0 !important;
@@ -339,6 +329,9 @@ export default {
     padding: 0.206897rem !important;
     font-size: 14px;
   }
+  .main-content {
+    padding-bottom: 0 !important;
+  }
   .layout-content {
     margin-top: 0;
   }
@@ -353,16 +346,7 @@ export default {
   }
 
   .publish {
-    margin-top: 5px;
-  }
-
-  .publish img {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    position: relative;
-    top: 4px;
-    margin-right: 10px;
+    margin: 10px 0;
   }
 
   .comment {
@@ -373,16 +357,18 @@ export default {
     width: 100%;
     background: #dddddd;
     padding: 5px;
+    margin-top: 10px;
     box-sizing: border-box;
   }
-  .hr-line {
-    display: none;
-  }
-
   .leave-word {
     margin-top: 10px;
     box-shadow: none;
     padding: 0px;
+    background: white;
+    font-size: 13px;
+  }
+  .leave-word-item {
+    padding: 10px 0;
   }
 
   .ant-list-item >>> .el-dialog {

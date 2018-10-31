@@ -237,7 +237,8 @@ export default {
 .layout-content {
   height: auto;
   width: auto;
-  min-height: calc(100vh - 249px);
+  min-height: calc(100vh - 194px);
+  box-sizing: border-box;
   background: white;
   margin-top: 20px;
 }
@@ -288,8 +289,8 @@ export default {
 
   .header-navbar >>> button {
     position: relative;
-    top: -5px;
-    padding: 6px 9px;
+    top: -0.051724rem;
+    padding: .103448rem .155172rem;
   }
 
   .header-content {

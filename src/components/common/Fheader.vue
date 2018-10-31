@@ -460,6 +460,9 @@ export default {
 }
 
 @media only screen and (max-width: 481px) {
+  .layout-header{
+    background: #43bcff;
+  }
   .header-main {
     width: 100%;
   }
@@ -475,7 +478,7 @@ export default {
     position: relative;
     left: 0.172414rem;
     margin-right: 0.172414rem;
-    top: 0.172414rem;
+    top: 0.202414rem;
   }
 
   .header-center >>> input {
@@ -483,8 +486,13 @@ export default {
     margin-right: 5%;
     margin-top: 0.155172rem;
   }
+
+  .header-center >>> .el-input__inner {
+    height: 0.517241rem;
+    line-height: 0.517241rem;
+  }
   .header-center >>> .el-input--small .el-input__icon {
-    line-height: 0.896552rem;
+    line-height: 0.856552rem;
     position: relative;
     right: 0.206897rem;
   }
@@ -526,7 +534,7 @@ export default {
   .header-right img {
     width: 0.568966rem;
     height: 0.568966rem;
-    top: 0.137931rem;
+    top: 0.15rem;
   }
   .header-username {
     display: none !important;

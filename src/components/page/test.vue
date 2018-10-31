@@ -1,19 +1,23 @@
 <template>
-
   <div>
-
     <Header></Header>
-
     <div class="layout-main">
       <div class="layout-content">
         <div class="main-content" style="padding: 8px 32px 32px;">
-          <el-upload class="upload-demo" action="/upload/mp3" multiple :limit="1" accept="audio/mpeg" :headers="headers" name="mp3" :on-success="finishUp" :file-list="fileList">
-            <el-button size="small" type="primary">上传音乐</el-button>
-          </el-upload>
-        </div>
-        <div v-for="music in musicList" :key="music.musicId">
-          <audio :src="music.musicUrl" controls></audio>
-          <div>{{music.musicName}}</div>
+
+          <!-- <v-scroll ref="listContent" :data="articleList" :pullup="pullup" :listenScroll="true" @scrollToEnd="moreData()" class="v-scroll"> -->
+            <!-- <el-upload class="upload-demo" action="/upload/mp3" multiple :limit="1" accept="audio/mpeg" :headers="headers" name="mp3" :on-success="finishUp" :file-list="fileList">
+              <el-button size="small" type="primary">上传音乐</el-button>
+            </el-upload> -->
+
+     <aplayer :audio="audio" :lrcType="3" />
+
+          <!-- </v-scroll> -->
+
+          <div class=" aside-content">
+            <FAside></FAside>
+          </div>
+
         </div>
       </div>
     </div>
@@ -26,12 +30,23 @@
 <script>
 import Header from "../common/Fheader.vue";
 import Footer from "../common/Footer.vue";
+import FAside from "../common/FAside";
+import Scroll from "./foreground/bScroll";
+import Aplayer from "vue-aplayer";
 
 export default {
-  name: "test",
+  // props: {
+  //   music: {
+  //     type: "Object"
+  //   }
+  // },
+  name: "music",
   components: {
     Header,
-    Footer
+    Footer,
+    FAside,
+    "v-scroll": Scroll,
+    Aplayer
   },
   data() {
     return {
@@ -39,9 +54,14 @@ export default {
       pullup: true,
       totalPage: 1,
       current: 1,
-      articleList: [],
       fileList: [],
-      musicList: [],
+        audio: {
+          name: 'ヒビカセ',
+          author: 'れをる',
+          url: 'http://pdacsgxq7.bkt.clouddn.com/mp3/hibikase.mp3',
+          pic: 'http://p1.music.126.net/cZPx3peGTuWEI_GaZB5CDg==/8892850045794893.jpg?param=300y300',
+          lrc: 'http://pdacsgxq7.bkt.clouddn.com/lrc/hibikase.lrc',
+      },
       headers: { token: localStorage.getItem("x_token") }
     };
   },
@@ -52,7 +72,16 @@ export default {
     getMusic() {
       this.$http.http("/index/music", {}).then(res => {
         if (res.code == 1) {
-          this.musicList = res.data;
+          for (let music of res.data) {
+            let tempMusic ={};
+            tempMusic['name'] = music.musicName;
+            tempMusic['artist'] = music.musicAuthor;
+            tempMusic['url'] = music.musicUrl;
+            tempMusic['cover'] = music.musicPic;
+            tempMusic['lrc'] = music.musicLrc;
+            // this.audio.push(tempMusic);
+          }
+          console.log(this.audio)
         }
       });
     },
@@ -76,21 +105,33 @@ export default {
 
 .layout-content {
   height: auto;
-  min-height: calc(100vh - 249px);
   width: auto;
+  min-height: calc(100vh - 249px);
   background: white;
   margin-top: 20px;
 }
 .main-content {
   position: relative;
 }
-
-.ant-list-item {
-  padding: 20px 0;
+.v-scroll {
   width: 720px;
+  display: inline-block;
+}
+.aside-content {
+  width: 360px;
+  margin: 20px;
+  float: right;
 }
 
-.ant-list-item-meta-content,
+.ant-list-item {
+  padding-top: 20px;
+  width: 720px;
+  border-bottom: 1px solid #ddd;
+}
+
+.ant-list-item-meta-content {
+  margin-bottom: 2px;
+}
 .ant-list-item-content {
   margin-bottom: 16px;
 }
@@ -150,28 +191,33 @@ export default {
 .mobile-more {
   display: none;
 }
-
-.layout-content >>> .el-upload--text {
-  border: none;
-  width: 80px;
-  height: 32px;
-}
 @media only screen and (max-width: 481px) {
   .layout-main,
   .main-content,
   .ant-list-item {
     width: 100%;
   }
+  .layout-content {
+    margin-top: 0;
+    padding-top: 0px;
+  }
   .main-content {
-    width: calc(100% - 0.506897rem);
-    padding: 0.206897rem !important;
+    width: 100%;
+    padding: 0 !important;
     font-size: 14px;
   }
+  .aside-content {
+    display: none;
+  }
   .ant-list-item {
-    padding: 0.137931rem 0;
+    box-sizing: border-box;
+    padding: 0.137931rem 0.172414rem;
+    border-bottom: 5px solid #dddddd;
   }
 
-  .ant-list-item-meta-content,
+  .ant-list-item-meta-content {
+    margin: 5px 0;
+  }
   .ant-list-item-content {
     margin-bottom: 0.172414rem;
   }
@@ -202,7 +248,7 @@ export default {
     padding-right: 8px;
   }
   .article-tag + a h4 {
-    max-width: 4.617931rem;
+    max-width: 4.807931rem;
   }
   .pc-more {
     display: none !important;
@@ -213,9 +259,11 @@ export default {
     font-size: 14px;
   }
   .v-scroll {
-    height: 500px;
+    width: 100%;
+    height: calc(100vh - 0.8432rem);
     overflow: hidden;
   }
 }
 </style>
+
 

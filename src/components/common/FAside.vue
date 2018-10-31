@@ -2,7 +2,7 @@
   <div>
     <div class="aside-block">
       <div class="aside-header">
-        最新文章
+        最近更新
       </div>
       <ul class="aside-list">
         <li>Python基础语法（一）</li>
@@ -19,7 +19,7 @@
     </div>
     <div class="aside-block">
       <div class="aside-header">
-        最新文章
+        我最近发布的
       </div>
       <ul class="aside-list">
         <li>Python基础语法（一）</li>
@@ -68,7 +68,7 @@ export default {
   cursor: pointer;
   box-sizing: border-box;
   padding-left: 20px;
-  border-left: 1px solid #e6e6e8;
+  border-left: 1px solid #eeeeee;
 }
 </style>
 
