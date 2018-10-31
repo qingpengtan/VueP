@@ -63,13 +63,16 @@
           <router-link to='/daily'>
             <el-menu-item index="2" @click="isCollapse = true">日志 </el-menu-item>
           </router-link>
+          <router-link to='/music'>
+            <el-menu-item index="3" @click="isCollapse = true">音乐 </el-menu-item>
+          </router-link>
           <span @click="dialogVisible = true">
-            <el-menu-item index="3" @click="isCollapse = true">写说说</el-menu-item>
+            <el-menu-item index="4" @click="isCollapse = true">写说说</el-menu-item>
           </span>
           <router-link to='/edit-text'>
-            <el-menu-item index="4"> 写文章</el-menu-item>
+            <el-menu-item index="5"> 写文章</el-menu-item>
           </router-link>
-          <el-submenu index="5">
+          <el-submenu index="6">
             <template slot="title">
               <span>论坛</span>
             </template>
@@ -110,14 +113,15 @@
 
           </el-dropdown-menu>
         </el-dropdown>
-        <!-- <li>音乐</li> -->
-        <!-- <li>视频</li> -->
         <li @click="dialogVisible = true">写说说</li>
         <li>
           <router-link to='/edit-text'>写文章</router-link>
         </li>
+        <li>
+          <router-link to='/music'>音乐</router-link>
+        </li>
       </ul>
-      <div v-show="ifSearch">
+      <!-- <div v-show="ifSearch">
 
         <ol style="display:inline-block">
           <li>
@@ -134,8 +138,8 @@
 
             </el-dropdown-menu>
           </el-dropdown>
-          <!-- <li>音乐</li> -->
-          <!-- <li>视频</li> -->
+          <li>音乐</li>
+          <li>视频</li>
           <li @click="dialogVisible = true"><i class="el-icon-edit"></i>写说说</li>
           <li>
             <i class="el-icon-edit"></i>
@@ -145,7 +149,7 @@
             <i class="el-icon-tickets"></i> {{dispayText}}
           </span>
         </ol>
-      </div>
+      </div> -->
     </div>
 
     <!--固定头-->
@@ -175,6 +179,9 @@
           <li @click="dialogVisible = true">写说说</li>
           <li>
             <router-link to='/edit-text'>写文章</router-link>
+          </li>
+          <li>
+            <router-link to='/music'>音乐</router-link>
           </li>
         </ul>
         <div class="header-right fixed-right">
@@ -460,7 +467,7 @@ export default {
 }
 
 @media only screen and (max-width: 481px) {
-  .layout-header{
+  .layout-header {
     background: #43bcff;
   }
   .header-main {

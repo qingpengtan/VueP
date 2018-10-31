@@ -14,10 +14,10 @@ export default new Router({
             }
         },
         {
-            path: '/test',
-            component: resolve => require(['../components/page/test.vue'], resolve),
+            path: '/music',
+            component: resolve => require(['../components/page/music.vue'], resolve),
             meta: {
-                title: '登录'
+                title: '音乐'
             }
         },
         {

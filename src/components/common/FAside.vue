@@ -5,16 +5,11 @@
         最近更新
       </div>
       <ul class="aside-list">
-        <li>Python基础语法（一）</li>
-        <li>Python基础语法（一）</li>
-        <li>Python基础语法（一）</li>
-        <li>Python基础语法（一）</li>
-        <li>Python基础语法（一）</li>
-        <li>Python基础语法（一）</li>
-        <li>Python基础语法（一）</li>
-        <li>Python基础语法（一）</li>
-        <li>Python基础语法（一）</li>
-        <li>Python基础语法（一）</li>
+        <li v-for="article in recentArticle" :key="article.articleId">
+          <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
+            {{article.articleTitle}}
+          </router-link>
+        </li>
       </ul>
     </div>
     <div class="aside-block">
@@ -22,16 +17,11 @@
         我最近发布的
       </div>
       <ul class="aside-list">
-        <li>Python基础语法（一）</li>
-        <li>Python基础语法（一）</li>
-        <li>Python基础语法（一）</li>
-        <li>Python基础语法（一）</li>
-        <li>Python基础语法（一）</li>
-        <li>Python基础语法（一）</li>
-        <li>Python基础语法（一）</li>
-        <li>Python基础语法（一）</li>
-        <li>Python基础语法（一）</li>
-        <li>Python基础语法（一）</li>
+        <li v-for="article in myRecentArticle" :key="article.articleId">
+          <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
+            {{article.articleTitle}}
+          </router-link>
+        </li>
       </ul>
     </div>
   </div>
@@ -39,7 +29,34 @@
 
 <script>
 export default {
-  name: "faside"
+  name: "faside",
+  data() {
+    return {
+      recentArticle: [],
+      myRecentArticle: []
+    };
+  },
+  created() {
+    this.$http.http("/index/recentArticle", {}).then(res => {
+      if (res.code == 1) {
+        this.recentArticle = res.data;
+      } else {
+        this.$message.error(res.msg);
+      }
+    });
+
+    this.$http
+      .http("/index/recentArticle", {
+        userPhone: localStorage.getItem("x_userPhone")
+      })
+      .then(res => {
+        if (res.code == 1) {
+          this.myRecentArticle = res.data;
+        } else {
+          this.$message.error(res.msg);
+        }
+      });
+  }
 };
 </script>
 <style scoped>
@@ -64,11 +81,14 @@ export default {
   height: 30px;
   line-height: 30px;
   font-size: 13px;
-  color: #43bcff;
   cursor: pointer;
   box-sizing: border-box;
   padding-left: 20px;
   border-left: 1px solid #eeeeee;
+  overflow: hidden;
+}
+.aside-list li a {
+  color: #3a8ee6;
 }
 </style>
 
