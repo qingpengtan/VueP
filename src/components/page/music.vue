@@ -6,11 +6,12 @@
         <div class="main-content" style="padding: 8px 32px 32px;">
 
           <div class="v-scroll">
+
+            <aplayer :music="audio[0]" :list="audio" v-if="flag" :showLrc="true" :volume="0.2" />
+
             <el-upload class="upload-demo" action="/upload/mp3" multiple :limit="1" accept="audio/mpeg" :headers="headers" name="mp3" :on-success="finishUp" :file-list="fileList">
               <el-button size="small" type="primary">上传音乐</el-button>
             </el-upload>
-
-            <aplayer  :music="audio[0]" :list="audio"  v-if="flag" :showLrc="true" :volume="0.2"/>
           </div>
 
           <div class=" aside-content">
@@ -49,7 +50,7 @@ export default {
   },
   data() {
     return {
-      flag:false,
+      flag: false,
       disMore: false,
       pullup: true,
       totalPage: 1,
@@ -66,6 +67,7 @@ export default {
     getMusic() {
       this.$http.http("/index/music", {}).then(res => {
         if (res.code == 1) {
+          this.audio = [];
           for (let music of res.data) {
             let tempMusic = {};
             tempMusic["title"] = music.musicName;
@@ -83,8 +85,11 @@ export default {
       setTimeout(() => {
         this.fileList = [];
       }, 3000);
-      this.getMusic();
-      console.log(res);
+      if (res.code == 1) {
+        this.getMusic();
+      } else {
+        this.$message.error(res.msg);
+      }
     }
   }
 };
@@ -125,12 +130,11 @@ export default {
   float: right;
 }
 
-.v-scroll >>> .el-upload--text{
+.v-scroll >>> .el-upload--text {
   width: 100px;
   height: 32px;
   border: none;
 }
-
 
 @media only screen and (max-width: 481px) {
   .layout-main,

@@ -101,7 +101,7 @@ export default {
           // token: sessionStorage.token,  // 可选参数 如果需要token验证，假设你的token有存放在sessionStorage
           name: "img", // 可选参数 文件的参数名 默认为img
           // size: 1024,  // 可选参数   图片限制大小，单位为Kb, 1M = 1024Kb
-          accept: "image/png, image/gif, image/jpeg, image/bmp, image/x-icon", // 可选参数 可上传的图片格式
+          accept: "image/png, image/gif, image/jpeg", // 可选参数 可上传的图片格式
           // start: function (){}
           start: () => {}, // 可选参数 接收一个函数 开始上传数据时会触发
           end: () => {}, // 可选参数 接收一个函数 上传数据完成（成功或者失败）时会触发

@@ -113,6 +113,13 @@ export default new Router({
                     }
                 },
                 {
+                    path: '/sys/music',
+                    component: resolve => require(['../components/page/platform/musicList.vue'], resolve),
+                    meta: {
+                        title: '音乐列表'
+                    }
+                },
+                {
                     path: '/sys/form',
                     component: resolve => require(['../components/page/platform/userForm.vue'], resolve),
                     meta: {

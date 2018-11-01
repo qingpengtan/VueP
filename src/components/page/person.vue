@@ -184,7 +184,7 @@
         </div>
       </div>
     </div>
-        <Footer></Footer>
+    <Footer></Footer>
 
   </div>
 
@@ -637,7 +637,13 @@ export default {
     margin-left: 0;
   }
   .text-item {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #eeeeee;
+    overflow: hidden;
+    font-size: 13px;
+    padding: 3px;
+  }
+  .text-item span {
+    font-size: 11px;
   }
   .pc-more {
     display: none !important;
