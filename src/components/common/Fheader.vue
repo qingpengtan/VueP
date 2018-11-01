@@ -485,7 +485,7 @@ export default {
     position: relative;
     left: 0.172414rem;
     margin-right: 0.172414rem;
-    top: 0.202414rem;
+    top: 0.182414rem;
   }
 
   .header-center >>> input {

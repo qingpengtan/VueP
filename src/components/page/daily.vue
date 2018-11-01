@@ -5,9 +5,6 @@
     <Header></Header>
 
     <div class="layout-main">
-      <!-- <div class="header-content">
-
-        </div> -->
 
       <div class="layout-content">
         <div class="main-content" style="padding: 8px 32px 32px;">
@@ -15,7 +12,7 @@
           <v-scroll :data="articleList" :pullup="pullup" @scrollToEnd="moreData()" class="v-scroll">
             <ul>
               <li class="ant-list-item" v-for=" article in articleList" :key="article.articleId">
-                <div class="ant-list-item-meta-content">
+                <div>
                   <span class="article-tag">{{article.articleTagName}}</span>
                   <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
                     <h4>{{article.articleTitle}}</h4>
@@ -165,15 +162,12 @@ export default {
 }
 
 .ant-list-item {
-  padding-top: 20px;
+  padding-top: 16px;
   width: 720px;
   border-bottom: 1px solid #ddd;
 }
-
-.ant-list-item-meta-content {
-  margin-bottom: 2px;
-}
 .ant-list-item-content {
+  margin-top: 5px;
   margin-bottom: 16px;
 }
 
@@ -184,7 +178,8 @@ export default {
 }
 
 .publish {
-  margin-top: 16px;
+  margin-top: 5px;
+  font-size: 13px;
 }
 
 .publish img {
@@ -192,8 +187,8 @@ export default {
   height: 20px;
   border-radius: 50%;
   position: relative;
-  top: 4px;
-  margin-right: 8px;
+  top: 6px;
+  margin-right: 2px;
 }
 
 .ant-list-item-action li {
@@ -245,19 +240,16 @@ export default {
   .main-content {
     width: 100%;
     padding: 0 !important;
-    font-size: 14px;
+    font-size: 0px;
   }
   .ant-list-item {
     box-sizing: border-box;
-    padding: 0.137931rem 0.172414rem;
-    border-bottom: 5px solid #dddddd;
+    padding: .258621rem 0.172414rem;
+    border-bottom: 5px solid #e9e9e9;
   }
 
-  .ant-list-item-meta-content {
-    margin: 5px 0;
-  }
   .ant-list-item-content {
-    margin-bottom: 0.172414rem;
+      margin: .086207rem 0;
   }
 
   .ant-list-item-content .text-content {
@@ -267,19 +259,6 @@ export default {
     word-wrap: normal;
     word-break: break-all;
     text-wrap: normal;
-  }
-
-  .publish {
-    margin-top: 0.172414rem;
-  }
-
-  .publish img {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    position: relative;
-    top: 4px;
-    margin-right: 5px;
   }
 
   .ant-list-item-action li {
@@ -298,8 +277,9 @@ export default {
   }
   .v-scroll {
     width: 100%;
-    height: calc(100vh - 0.8432rem);
+    height: calc(100vh - 0.9262rem);
     overflow: hidden;
+    font-size: 14px;
   }
   .aside-content {
     display: none;
