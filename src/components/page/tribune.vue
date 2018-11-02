@@ -302,7 +302,7 @@ export default {
   }
   .v-scroll {
     width: 100%;
-    height: calc(100vh - 0.9262rem);
+    height: calc(100vh - .852rem);
     overflow: hidden;
 
     font-size: 14px;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header  v-bind:clickPage="'music'"></Header>
+    <Header v-bind:clickPage="'music'"></Header>
     <div class="layout-main">
       <div class="layout-content">
         <div class="main-content" style="padding: 8px 32px 32px;">
@@ -12,6 +12,7 @@
             <el-upload class="upload-demo" action="/upload/mp3" multiple :limit="1" accept="audio/mpeg" :headers="headers" name="mp3" :on-success="finishUp" :file-list="fileList">
               <el-button size="small" type="primary">上传音乐</el-button>
             </el-upload>
+            <!-- <el-button size="small" type="primary" @click="downloadMusic">下载当前音乐</el-button> -->
           </div>
 
           <div class=" aside-content">
@@ -35,11 +36,6 @@ import Scroll from "./foreground/bScroll";
 import Aplayer from "vue-aplayer";
 
 export default {
-  // props: {
-  //   music: {
-  //     type: "Object"
-  //   }
-  // },
   name: "music",
   components: {
     Header,
@@ -79,6 +75,18 @@ export default {
           }
           this.flag = true;
         }
+      });
+    },
+    downloadMusic() {
+      let audio = document.querySelector(".aplayer audio");
+      let src = audio.src.split("/");
+      this.$http.http("/upload/download", { fileName: "a.mp3" }).then(res => {
+        var blob = new Blob([res], { type: "audio/mp3" });
+        // console.log(blob)
+        // var link = document.createElement("a");
+        // link.download = "xxxx";
+        // link.href = URL.createObjectURL(blob);
+        // document.getElementsByTagName("body")[0].appendChild(link);
       });
     },
     finishUp(res, file, fileList) {
