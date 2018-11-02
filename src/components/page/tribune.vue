@@ -2,7 +2,7 @@
 
   <div>
 
-    <Header></Header>
+    <Header v-bind:clickPage="'t'+articleTagId"></Header>
 
     <div class="layout-main">
       <!-- <div class="header-content">
@@ -83,10 +83,12 @@ export default {
       pullup: true,
       totalPage: 1,
       current: 1,
-      articleList: []
+      articleList: [],
+      articleTagId: ""
     };
   },
   mounted() {
+    this.articleTagId = this.$route.query.articleTagId;
     this.reqData(1);
   },
   beforeRouteEnter(to, from, next) {
@@ -99,6 +101,7 @@ export default {
   },
   watch: {
     $route(to, from) {
+      this.articleTagId = this.$route.query.articleTagId;
       this.$http
         .http("/index/list", { articleTagId: this.$route.query.articleTagId })
         .then(
@@ -252,7 +255,7 @@ export default {
   cursor: pointer;
   display: block;
 }
-.pc-more:hover{
+.pc-more:hover {
   background: #ededed;
   box-shadow: 1px 0px 3px 0 #666;
 }

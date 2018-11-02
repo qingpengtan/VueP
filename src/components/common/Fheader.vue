@@ -56,7 +56,7 @@
     </div>
 
     <div class="header-content">
-      <ul v-show="!ifSearch">
+      <ul>
         <li>
           <router-link to='/' exact>主页</router-link>
         </li>
@@ -151,7 +151,7 @@
 
     <!-- 移动端导航侧边栏 -->
     <div class="mobile-side" v-show="!isCollapse" @click="isCollapse = true">
-      <ul class="mobile-side-ul">
+      <ul class="mobile-side-ul" id="mobile-side-ul">
         <li>
           <router-link to='/' exact>主页</router-link>
         </li>
@@ -165,11 +165,11 @@
           <router-link to='/edit-text'>写文章</router-link>
         </li>
         <li @click="dialogVisible = true,isCollapse = true">写说说</li>
-        <li @click.stop><i class="el-icon-menu"></i>论坛</li>
-        <li>
-          <ul>
+        <li @click.stop="triume()"><i class="el-icon-menu"></i>论坛</li>
+        <li v-show="showSecond">
+          <ul class="mobile-ul-sec">
             <li v-for=" tag in articleTag" :key="tag.articleTagId">
-              <router-link @click.native="pushTribune()" :to="{path:'/tribune', query:{articleTagId:tag.articleTagId}}">
+              <router-link @click="pushTribune()" :to="{path:'/tribune', query:{articleTagId:tag.articleTagId}}">
                 {{tag.articleTag}}
               </router-link>
             </li>
@@ -185,7 +185,7 @@ import StringUtils from "../../utils/StringUtils.js";
 
 export default {
   name: "fhead",
-  props: ["searchWd"],
+  props: ["searchWd","clickPage"],
   data() {
     return {
       isCollapse: true,
@@ -196,7 +196,7 @@ export default {
       dialogVisible: false,
       content: "",
       articleTag: "",
-      ifSearch: false,
+      showSecond: false,
       searchContent: this.searchWd,
       dispayText: "XXXX"
     };
@@ -204,6 +204,9 @@ export default {
   watch: {
     searchWd() {
       this.searchContent = this.searchWd;
+    },
+     $route(){
+      console.log(this.clickPage)
     }
   },
   created() {
@@ -238,18 +241,20 @@ export default {
         }
       };
     },
-    selectM(e, a) {
-      console.log(a);
-    },
     searchArticle() {
       this.$router.push({
         path: "/search",
         query: { search: this.searchContent }
       });
     },
-    pushTribune() {
-      // this.ifSearch = true;
-      // this.dispayText ="论坛";
+    triume() {
+      this.showSecond = !this.showSecond;
+      var el = document.querySelector("#mobile-side-ul");
+      if (this.showSecond) {
+        el.style.width = " 2.241379rem";
+      } else {
+        el.style.width = "1.896552rem";
+      }
     },
     handleClose(done) {
       done();
@@ -526,10 +531,11 @@ export default {
     background: #1ca2ec;
     padding-top: 0.172414rem;
     box-sizing: border-box;
-    animation: myfirst 0.2s;
+    animation: myfirst 0.5s;
+    width: auto;
   }
   .mobile-side li {
-    width: 1.896552rem;
+    width: 1.206897rem;
     font-size: 0.241379rem;
   }
   .mobile-side .mobile-side-ul li {
@@ -537,6 +543,9 @@ export default {
     line-height: 0.775862rem;
     padding: 0 0.344828rem;
     color: white;
+  }
+  .mobile-side .mobile-ul-sec li{
+    animation: mysecond 0.5s;
   }
   .mobile-side ul a {
     width: 100%;
@@ -548,8 +557,16 @@ export default {
     0% {
       width: 0;
     }
+    80% {
+      width: 1.896552rem;
+    }
+  }
+  @keyframes mysecond {
+    0% {
+        height: 0;
+    }
     100% {
-      width: 2.586207rem;
+      height: .775862rem;
     }
   }
 }

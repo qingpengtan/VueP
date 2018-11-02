@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header></Header>
+    <Header  v-bind:clickPage="'music'"></Header>
     <div class="layout-main">
       <div class="layout-content">
         <div class="main-content" style="padding: 8px 32px 32px;">

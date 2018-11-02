@@ -2,7 +2,7 @@
 
   <div>
 
-    <Header></Header>
+    <Header  v-bind:clickPage="'daily'"></Header>
 
     <div class="layout-main">
 

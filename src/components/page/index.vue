@@ -2,7 +2,7 @@
 
   <div>
 
-    <Header></Header>
+    <Header  v-bind:clickPage="'index'"></Header>
 
     <div class="layout-main">
       <div class="layout-content">
