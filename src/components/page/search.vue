@@ -190,6 +190,9 @@ export default {
   line-height: 22px;
   max-height: 108px;
   overflow: hidden;
+  word-wrap: normal;
+  word-break: break-all;
+  text-wrap: normal;
 }
 
 .publish {
@@ -239,6 +242,10 @@ export default {
   cursor: pointer;
   display: block;
 }
+.pc-more:hover{
+  background: #ededed;
+  box-shadow: 1px 0px 3px 0 #666;
+}
 .mobile-more {
   display: none;
 }
@@ -259,20 +266,11 @@ export default {
   }
   .ant-list-item {
     box-sizing: border-box;
-    padding: .258621rem 0.172414rem;
+    padding: 0.258621rem 0.172414rem;
     border-bottom: 5px solid #e9e9e9;
   }
   .ant-list-item-content {
-       margin: .086207rem 0;
-  }
-
-  .ant-list-item-content .text-content {
-    line-height: 22px;
-    max-height: 108px;
-    overflow: hidden;
-    word-wrap: normal;
-    word-break: break-all;
-    text-wrap: normal;
+    margin: 0.086207rem 0;
   }
 
   .ant-list-item-action li {

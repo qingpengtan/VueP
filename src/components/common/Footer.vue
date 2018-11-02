@@ -1,7 +1,7 @@
 <template>
   <div class="footer-warp">
     <div class="footer-content">
-
+        ©2018 黄桑的和萌萌与纪宝宝 &nbsp;&nbsp;&nbsp;Power By Tang
     </div>
   </div>
 </template>
@@ -24,6 +24,10 @@ export default {
   width: 1260px;
   height: 90px;
   margin: 0 auto;
+  text-align: center;
+  line-height: 145px;
+  color: #aaaaaa;
+  font-size: 13px;
 }
 
 @media only screen and (max-width: 481px) {

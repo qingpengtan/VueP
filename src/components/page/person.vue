@@ -530,7 +530,7 @@ export default {
   font-size: 13px;
 }
 .pc-more {
-  width: 100%;
+  width: 80%;
   height: 35px;
   line-height: 35px;
   background: #f2f2f2;
@@ -540,6 +540,11 @@ export default {
   font-size: 15px;
   cursor: pointer;
   display: block;
+  margin: 5px;
+}
+.pc-more:hover{
+  background: #ededed;
+  box-shadow: 1px 0px 3px 0 #666;
 }
 .mobile-more {
   display: none;

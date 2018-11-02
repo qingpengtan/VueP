@@ -53,51 +53,12 @@
           </div>
         </div>
       </div>
-
-      <!-- 移动端导航侧边栏 -->
-      <div class="header-nav-menu" v-show="!isCollapse">
-        <el-menu class="el-menu-vertical-demo" background-color="rgb(225, 225, 225)" active-text-color="rgb(158, 150, 150)" text-color="rgb(158, 150, 150)" @select="selectM">
-          <router-link to='/' exact>
-            <el-menu-item index="1" @click="isCollapse = true">首页 </el-menu-item>
-          </router-link>
-          <router-link to='/daily'>
-            <el-menu-item index="2" @click="isCollapse = true">日志 </el-menu-item>
-          </router-link>
-          <router-link to='/music'>
-            <el-menu-item index="3" @click="isCollapse = true">音乐 </el-menu-item>
-          </router-link>
-          <span @click="dialogVisible = true">
-            <el-menu-item index="4" @click="isCollapse = true">写说说</el-menu-item>
-          </span>
-          <router-link to='/edit-text'>
-            <el-menu-item index="5"> 写文章</el-menu-item>
-          </router-link>
-          <el-submenu index="6">
-            <template slot="title">
-              <span>论坛</span>
-            </template>
-            <el-menu-item-group>
-              <div v-for=" tag in articleTag" :key="tag.articleTagId">
-                <router-link @click.native="pushTribune()" :to="{path:'/tribune', query:{articleTagId:tag.articleTagId}}">
-                  <el-menu-item :index="tag.articleTagId+''" @click="isCollapse = true">
-                    {{tag.articleTag}}
-                  </el-menu-item>
-                </router-link>
-              </div>
-            </el-menu-item-group>
-          </el-submenu>
-        </el-menu>
-
-        <div style="position:absolute;right:-34px;top:0" @click="isCollapse = true">
-          <i class="el-icon-d-arrow-left" style="font-size:24px;color:rgb(158, 150, 150);background:rgb(225, 225, 225);padding:5px"></i>
-        </div>
-      </div>
     </div>
 
     <div class="header-content">
       <ul v-show="!ifSearch">
         <li>
-          <router-link to='/' exact>首页</router-link>
+          <router-link to='/' exact>主页</router-link>
         </li>
         <li>
           <router-link to='/daily'>日志</router-link>
@@ -121,35 +82,6 @@
           <router-link to='/music'>音乐</router-link>
         </li>
       </ul>
-      <!-- <div v-show="ifSearch">
-
-        <ol style="display:inline-block">
-          <li>
-            <router-link to='/' exact>首页</router-link>
-          </li>
-          <el-dropdown trigger="click">
-            <li> <i class="el-icon-menu"></i>论坛</li>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item v-for=" tag in articleTag" :key="tag.articleTagId">
-                <router-link @click.native="pushTribune()" :to="{path:'/tribune', query:{articleTagId:tag.articleTagId}}">
-                  {{tag.articleTag}}
-                </router-link>
-              </el-dropdown-item>
-
-            </el-dropdown-menu>
-          </el-dropdown>
-          <li>音乐</li>
-          <li>视频</li>
-          <li @click="dialogVisible = true"><i class="el-icon-edit"></i>写说说</li>
-          <li>
-            <i class="el-icon-edit"></i>
-            <router-link to='/edit-text'>写文章</router-link>
-          </li>
-          <span style="color:#43bcff;font-weight:bold;font-size:20px;position:relative;left:20px;top:-16px;">
-            <i class="el-icon-tickets"></i> {{dispayText}}
-          </span>
-        </ol>
-      </div> -->
     </div>
 
     <!--固定头-->
@@ -158,7 +90,7 @@
 
         <ul>
           <li>
-            <router-link to='/' exact>首页</router-link>
+            <router-link to='/' exact>主页</router-link>
           </li>
           <li>
             <router-link to='/daily'>日志</router-link>
@@ -174,8 +106,6 @@
 
             </el-dropdown-menu>
           </el-dropdown>
-          <!-- <li>音乐</li> -->
-          <!-- <li>视频</li> -->
           <li @click="dialogVisible = true">写说说</li>
           <li>
             <router-link to='/edit-text'>写文章</router-link>
@@ -218,6 +148,35 @@
         <el-button type="primary" @click="publish()">发表</el-button>
       </span>
     </el-dialog>
+
+    <!-- 移动端导航侧边栏 -->
+    <div class="mobile-side" v-show="!isCollapse" @click="isCollapse = true">
+      <ul class="mobile-side-ul">
+        <li>
+          <router-link to='/' exact>主页</router-link>
+        </li>
+        <li>
+          <router-link to='/daily'>日志</router-link>
+        </li>
+        <li>
+          <router-link to='/music'>音乐</router-link>
+        </li>
+        <li>
+          <router-link to='/edit-text'>写文章</router-link>
+        </li>
+        <li @click="dialogVisible = true,isCollapse = true">写说说</li>
+        <li @click.stop><i class="el-icon-menu"></i>论坛</li>
+        <li>
+          <ul>
+            <li v-for=" tag in articleTag" :key="tag.articleTagId">
+              <router-link @click.native="pushTribune()" :to="{path:'/tribune', query:{articleTagId:tag.articleTagId}}">
+                {{tag.articleTag}}
+              </router-link>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -433,10 +392,6 @@ export default {
 .header-username {
   display: inline-block !important;
 }
-.header-nav-menu,
-.nav-arrow {
-  display: none;
-}
 .header-fixed {
   display: none;
   width: 100%;
@@ -546,27 +501,6 @@ export default {
   .header-username {
     display: none !important;
   }
-  .nav-arrow {
-    display: inline;
-  }
-  .header-nav-menu {
-    display: block;
-    position: absolute;
-    top: 0;
-    background: rgb(236, 236, 236);
-    z-index: 10000;
-    height: 100vh;
-    animation: myfirst 0.5s;
-  }
-  .header-nav-menu >>> .el-menu-item,
-  .header-nav-menu >>> .el-submenu__title {
-    height: 45px;
-    line-height: 45px;
-  }
-  .el-menu-vertical-demo {
-    height: 100vh;
-    overflow: scroll;
-  }
   .header-logo,
   .head-line {
     display: none;
@@ -574,12 +508,48 @@ export default {
   .header-fixed {
     display: none !important;
   }
+
+  .mobile-side {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 21, 41, 0.4);
+    z-index: 100000;
+    overflow-y: scroll;
+  }
+  .mobile-side .mobile-side-ul {
+    display: inline-block;
+    color: white;
+    height: 100vh;
+    background: #1ca2ec;
+    padding-top: 0.172414rem;
+    box-sizing: border-box;
+    animation: myfirst 0.2s;
+  }
+  .mobile-side li {
+    width: 1.896552rem;
+    font-size: 0.241379rem;
+  }
+  .mobile-side .mobile-side-ul li {
+    height: 0.775862rem;
+    line-height: 0.775862rem;
+    padding: 0 0.344828rem;
+    color: white;
+  }
+  .mobile-side ul a {
+    width: 100%;
+    display: inline-block;
+    height: 100%;
+    color: white;
+  }
   @keyframes myfirst {
     0% {
       width: 0;
     }
     100% {
-      width: 86px;
+      width: 2.586207rem;
     }
   }
 }
