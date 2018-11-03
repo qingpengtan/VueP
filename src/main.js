@@ -8,13 +8,12 @@ import 'element-ui/lib/theme-chalk/index.css'; // 默认主题
 // import '../static/css/theme-green/index.css';       // 浅绿色主题
 import "babel-polyfill";
 import StringUtils from "./utils/StringUtils.js";
+import store from './store'
 
 Vue.use(ElementUI, {
     size: 'small'
 });
 
-
-// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';  
 Vue.prototype.$axios = axios;
 Vue.prototype.$http = https;
 Vue.prototype.$prototype = function () {
@@ -112,5 +111,6 @@ Vue.filter("statusFilter", function (value) {
 
 new Vue({
     router,
+    store,
     render: h => h(App)
 }).$mount('#app');

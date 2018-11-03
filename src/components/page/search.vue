@@ -11,7 +11,7 @@
       <div class="layout-content">
         <div class="main-content" style="padding: 8px 32px 32px;">
 
-          <v-scroll :data="articleList" :pullup="pullup" @scrollToEnd="moreData()" class="v-scroll">
+          <v-scroll ref="listContent" :data="articleList" :pullup="pullup" :listenScroll="true" @scrollToEnd="moreData()" class="v-scroll" @scroll="scrollC">
             <ul>
               <li class="ant-list-item" v-for=" article in articleList" :key="article.articleId">
                 <div>
@@ -89,7 +89,10 @@ export default {
   mounted() {
     this.reqData(1);
   },
-
+  activated() {
+    this.$refs.listContent.refresh();
+    this.$refs.listContent.scrollTo(0, this.$store.getters.dailyPageScroll);
+  },
   watch: {
     $route(to, from) {
       this.articleList = [];
@@ -134,6 +137,9 @@ export default {
             console.log("error");
           }
         );
+    },
+    scrollC(pos) {
+      this.$store.commit("dailyPageScroll", pos.y);
     }
   }
 };
@@ -242,7 +248,7 @@ export default {
   cursor: pointer;
   display: block;
 }
-.pc-more:hover{
+.pc-more:hover {
   background: #ededed;
   box-shadow: 1px 0px 3px 0 #666;
 }

@@ -2,7 +2,7 @@
 
   <div>
 
-    <Header  v-bind:clickPage="'index'"></Header>
+    <Header></Header>
 
     <div class="layout-main">
       <div class="layout-content">
@@ -80,16 +80,15 @@ export default {
       pullup: true,
       totalPage: 1,
       current: 1,
-      articleList: [],
-      scrollY: 0
+      articleList: []
     };
   },
   mounted() {
     this.reqData(1);
   },
   activated() {
-    console.log(this.scrollY);
-    // this.$refs.listContent.scrollTo(0, this.scrollY);
+    this.$refs.listContent.refresh();
+    this.$refs.listContent.scrollTo(0, this.$store.getters.indexPageScroll);
   },
   beforeRouteEnter(to, from, next) {
     if (
@@ -100,6 +99,9 @@ export default {
     } else {
       to.meta.keepAlive = true;
     }
+    next();
+  },
+  beforeRouteLeave(to, from, next) {
     next();
   },
   methods: {
@@ -130,7 +132,7 @@ export default {
       );
     },
     scrollC(pos) {
-      this.scrollY = pos.y;
+      this.$store.commit("indexPageScroll", pos.y);
     }
   }
 };
@@ -230,7 +232,7 @@ export default {
   cursor: pointer;
   display: block;
 }
-.pc-more:hover{
+.pc-more:hover {
   background: #ededed;
   box-shadow: 1px 0px 3px 0 #666;
 }
@@ -281,7 +283,7 @@ export default {
   }
   .v-scroll {
     width: 100%;
-    height: calc(100vh - .852rem);
+    height: calc(100vh - 0.852rem);
     overflow: hidden;
     font-size: 14px;
   }

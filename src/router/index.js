@@ -17,7 +17,8 @@ export default new Router({
             path: '/music',
             component: resolve => require(['../components/page/music.vue'], resolve),
             meta: {
-                title: '音乐'
+                title: '音乐',
+                keepAlive: true
             }
         },
         {
@@ -70,7 +71,7 @@ export default new Router({
             component: resolve => require(['../components/page/search.vue'], resolve),
             meta: {
                 title: '搜索结果',
-                // keepAlive: true
+                keepAlive: true
             }
         },
         {

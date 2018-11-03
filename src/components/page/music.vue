@@ -59,6 +59,11 @@ export default {
   mounted() {
     this.getMusic();
   },
+  activated() {
+  },
+  beforeRouteEnter(to, from, next) {
+    next()
+  },
   methods: {
     getMusic() {
       this.$http.http("/index/music", {}).then(res => {

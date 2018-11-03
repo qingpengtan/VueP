@@ -2,17 +2,13 @@
 
   <div>
 
-    <Header v-bind:clickPage="'t'+articleTagId"></Header>
+    <Header></Header>
 
     <div class="layout-main">
-      <!-- <div class="header-content">
-
-        </div> -->
-
       <div class="layout-content">
         <div class="main-content" style="padding: 8px 32px 32px;">
 
-          <v-scroll :data="articleList" :pullup="pullup" @scrollToEnd="moreData()" class="v-scroll">
+          <v-scroll ref="listContent" :data="articleList" :pullup="pullup" :listenScroll="true" @scrollToEnd="moreData()" class="v-scroll" @scroll="scrollC">
             <ul>
               <li class="ant-list-item" v-for=" article in articleList" :key="article.articleId">
                 <div>
@@ -83,13 +79,15 @@ export default {
       pullup: true,
       totalPage: 1,
       current: 1,
-      articleList: [],
-      articleTagId: ""
+      articleList: []
     };
   },
   mounted() {
-    this.articleTagId = this.$route.query.articleTagId;
     this.reqData(1);
+  },
+  activated() {
+    this.$refs.listContent.refresh();
+    this.$refs.listContent.scrollTo(0, this.$store.getters.dailyPageScroll);
   },
   beforeRouteEnter(to, from, next) {
     if (from.path.indexOf("edit-text") != -1) {
@@ -101,7 +99,6 @@ export default {
   },
   watch: {
     $route(to, from) {
-      this.articleTagId = this.$route.query.articleTagId;
       this.$http
         .http("/index/list", { articleTagId: this.$route.query.articleTagId })
         .then(
@@ -147,6 +144,9 @@ export default {
             console.log("error");
           }
         );
+    },
+    scrollC(pos) {
+      this.$store.commit("dailyPageScroll", pos.y);
     }
   }
 };
@@ -302,7 +302,7 @@ export default {
   }
   .v-scroll {
     width: 100%;
-    height: calc(100vh - .852rem);
+    height: calc(100vh - 0.852rem);
     overflow: hidden;
 
     font-size: 14px;

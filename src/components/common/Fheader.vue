@@ -152,13 +152,13 @@
     <!-- 移动端导航侧边栏 -->
     <div class="mobile-side" v-show="!isCollapse" @click="isCollapse = true">
       <ul class="mobile-side-ul" id="mobile-side-ul">
-        <li>
+        <li @click="selectMenu($event)">
           <router-link to='/' exact>主页</router-link>
         </li>
-        <li>
+        <li @click="selectMenu($event)">
           <router-link to='/daily'>日志</router-link>
         </li>
-        <li>
+        <li @click="selectMenu($event)">
           <router-link to='/music'>音乐</router-link>
         </li>
         <li>
@@ -168,7 +168,7 @@
         <li @click.stop="triume()"><i class="el-icon-menu"></i>论坛</li>
         <li v-show="showSecond">
           <ul class="mobile-ul-sec">
-            <li v-for=" tag in articleTag" :key="tag.articleTagId">
+            <li v-for=" tag in articleTag" :key="tag.articleTagId" @click="selectMenu($event)">
               <router-link @click="pushTribune()" :to="{path:'/tribune', query:{articleTagId:tag.articleTagId}}">
                 {{tag.articleTag}}
               </router-link>
@@ -185,7 +185,7 @@ import StringUtils from "../../utils/StringUtils.js";
 
 export default {
   name: "fhead",
-  props: ["searchWd","clickPage"],
+  props: ["searchWd"],
   data() {
     return {
       isCollapse: true,
@@ -197,16 +197,12 @@ export default {
       content: "",
       articleTag: "",
       showSecond: false,
-      searchContent: this.searchWd,
-      dispayText: "XXXX"
+      searchContent: this.searchWd
     };
   },
   watch: {
     searchWd() {
       this.searchContent = this.searchWd;
-    },
-     $route(){
-      console.log(this.clickPage)
     }
   },
   created() {
@@ -258,6 +254,11 @@ export default {
     },
     handleClose(done) {
       done();
+    },
+    selectMenu(e) {
+      // document.querySelector(".mobile-side li a").style.color = 'white';
+      // console.log(e.target)
+      // e.target.style.color = "#066ac3";
     },
     publish() {
       if (this.content.trim() == "") {
@@ -544,7 +545,7 @@ export default {
     padding: 0 0.344828rem;
     color: white;
   }
-  .mobile-side .mobile-ul-sec li{
+  .mobile-side .mobile-ul-sec li {
     animation: mysecond 0.5s;
   }
   .mobile-side ul a {
@@ -563,10 +564,10 @@ export default {
   }
   @keyframes mysecond {
     0% {
-        height: 0;
+      height: 0;
     }
     100% {
-      height: .775862rem;
+      height: 0.775862rem;
     }
   }
 }
