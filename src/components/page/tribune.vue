@@ -86,14 +86,14 @@ export default {
     this.reqData(1);
   },
   activated() {
-    this.$refs.listContent.refresh();
-    this.$refs.listContent.scrollTo(0, this.$store.getters.dailyPageScroll);
+    // this.$refs.listContent.refresh();
+    // this.$refs.listContent.scrollTo(0, this.$store.getters.dailyPageScroll);
   },
   beforeRouteEnter(to, from, next) {
-    if (from.path.indexOf("edit-text") != -1) {
-      to.meta.keepAlive = false;
-    } else {
+    if (from.path.indexOf("detail") != -1) {
       to.meta.keepAlive = true;
+    } else {
+      to.meta.keepAlive = false;
     }
     next();
   },

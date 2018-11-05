@@ -10,7 +10,7 @@ export default new Router({
             component: resolve => require(['../components/page/index.vue'], resolve),
             meta: {
                 title: '黄桑的和萌萌与纪宝宝',
-                keepAlive: true,
+                // keepAlive: true,
             }
         },
         {
@@ -18,7 +18,7 @@ export default new Router({
             component: resolve => require(['../components/page/music.vue'], resolve),
             meta: {
                 title: '音乐',
-                keepAlive: true
+                // keepAlive: true
             }
         },
         {
@@ -47,7 +47,7 @@ export default new Router({
             component: resolve => require(['../components/page/person.vue'], resolve),
             meta: {
                 title: '个人中心',
-                keepAlive: true,
+                // keepAlive: true,
             }
         },
         {
@@ -55,7 +55,7 @@ export default new Router({
             component: resolve => require(['../components/page/tribune.vue'], resolve),
             meta: {
                 title: '论坛',
-                keepAlive: true
+                // keepAlive: true
             }
         },
         {
@@ -63,7 +63,7 @@ export default new Router({
             component: resolve => require(['../components/page/daily.vue'], resolve),
             meta: {
                 title: '心情日志',
-                keepAlive: true
+                // keepAlive: true
             }
         },
         {
@@ -71,7 +71,7 @@ export default new Router({
             component: resolve => require(['../components/page/search.vue'], resolve),
             meta: {
                 title: '搜索结果',
-                keepAlive: true
+                // keepAlive: true
             }
         },
         {

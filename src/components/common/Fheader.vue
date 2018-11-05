@@ -57,12 +57,9 @@
 
     <div class="header-content">
       <ul>
-        <li>
-          <router-link to='/' exact>主页</router-link>
-        </li>
-        <li>
-          <router-link to='/daily'>日志</router-link>
-        </li>
+        <router-link tag="li" to='/' exact>主页</router-link>
+        <router-link tag="li" to='/daily'>日志</router-link>
+        <router-link tag="li" to='/music'>音乐</router-link>
         <el-dropdown trigger="click">
           <li> <i class="el-icon-menu"></i>论坛</li>
           <el-dropdown-menu slot="dropdown">
@@ -75,26 +72,17 @@
           </el-dropdown-menu>
         </el-dropdown>
         <li @click="dialogVisible = true">写说说</li>
-        <li>
-          <router-link to='/edit-text'>写文章</router-link>
-        </li>
-        <li>
-          <router-link to='/music'>音乐</router-link>
-        </li>
+        <router-link tag="li" to='/edit-text'>写文章</router-link>
       </ul>
     </div>
 
     <!--固定头-->
     <div class="header-content header-fixed">
       <div class=" fixed-header">
-
         <ul>
-          <li>
-            <router-link to='/' exact>主页</router-link>
-          </li>
-          <li>
-            <router-link to='/daily'>日志</router-link>
-          </li>
+          <router-link tag="li" to='/' exact>主页</router-link>
+          <router-link tag="li" to='/daily'>日志</router-link>
+          <router-link tag="li" to='/music'>音乐</router-link>
           <el-dropdown trigger="click">
             <li> <i class="el-icon-menu"></i>论坛</li>
             <el-dropdown-menu slot="dropdown">
@@ -107,12 +95,7 @@
             </el-dropdown-menu>
           </el-dropdown>
           <li @click="dialogVisible = true">写说说</li>
-          <li>
-            <router-link to='/edit-text'>写文章</router-link>
-          </li>
-          <li>
-            <router-link to='/music'>音乐</router-link>
-          </li>
+          <router-link tag="li" to='/edit-text'>写文章</router-link>
         </ul>
         <div class="header-right fixed-right">
           <div class="fixed-search">
@@ -206,6 +189,9 @@ export default {
     }
   },
   created() {
+    document.querySelector(".mobile-side li a").style.color = "white";
+    console.log(this.$store.getters.navMenuSelect);
+    // e.target.style.color = "#066ac3";
     this.loginStatus = StringUtils.isEmpty(localStorage.getItem("x_token"))
       ? false
       : true;
@@ -230,6 +216,7 @@ export default {
       )[0];
       window.onscroll = () => {
         var scrolltop = document.getElementsByTagName("html")[0].scrollTop;
+        // console.log(fixedHeader.parentNode.nextElementSibling);
         if (scrolltop > 64) {
           fixedHeader.style.display = "block";
         } else {
@@ -256,9 +243,7 @@ export default {
       done();
     },
     selectMenu(e) {
-      // document.querySelector(".mobile-side li a").style.color = 'white';
-      // console.log(e.target)
-      // e.target.style.color = "#066ac3";
+      this.$store.commit("navMenuSelect", "xxx");
     },
     publish() {
       if (this.content.trim() == "") {
@@ -323,6 +308,7 @@ export default {
 .header-content ul {
   width: 1260px;
   margin: 0 auto;
+  height: 50px;
 }
 .header-content li {
   float: left;
@@ -534,6 +520,9 @@ export default {
     box-sizing: border-box;
     animation: myfirst 0.5s;
     width: auto;
+  }
+  .testColor {
+    color: black;
   }
   .mobile-side li {
     width: 1.206897rem;
