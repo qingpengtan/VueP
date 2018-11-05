@@ -8,7 +8,7 @@ export default new vuex.Store({
         dailyPageScroll:0,
         tribunePageScroll:0,
         searchPageScroll:0,
-        navMenuSelect:"index",
+        navMenuSelect:"主页",
     },
     getters:{
         indexPageScroll(state){

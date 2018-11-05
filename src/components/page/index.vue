@@ -7,45 +7,46 @@
     <div class="layout-main">
       <div class="layout-content">
         <div class="main-content" style="padding: 8px 32px 32px;">
-
-          <v-scroll ref="listContent" :data="articleList" :pullup="pullup" :listenScroll="true" @scrollToEnd="moreData()" class="v-scroll" @scroll="scrollC">
-            <ul>
-              <li class="ant-list-item" v-for=" article in articleList" :key="article.articleId">
-                <div>
-                  <span class="article-tag">{{article.articleTagName}}</span>
-                  <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
-                    <h4>{{article.articleTitle}}</h4>
-                  </router-link>
-                </div>
-                <div class="ant-list-item-content">
+          <keep-alive>
+            <v-scroll ref="listContent" :data="articleList" :pullup="pullup" :listenScroll="true" @scrollToEnd="moreData()" class="v-scroll" @scroll="scrollC">
+              <ul>
+                <li class="ant-list-item" v-for=" article in articleList" :key="article.articleId">
                   <div>
-                    <div class="text-content">
-                      {{article.articleBrief}}
-                    </div>
-                    <div class="publish">
-                      <span>
-                        <img :src="article.userPic">
-                      </span>
-                      <a href="https://ant.design">{{article.userName}}</a> 发布于
-                      {{article.createTime}}
+                    <span class="article-tag">{{article.articleTagName}}</span>
+                    <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
+                      <h4>{{article.articleTitle}}</h4>
+                    </router-link>
+                  </div>
+                  <div class="ant-list-item-content">
+                    <div>
+                      <div class="text-content">
+                        {{article.articleBrief}}
+                      </div>
+                      <div class="publish">
+                        <span>
+                          <img :src="article.userPic">
+                        </span>
+                        <a href="https://ant.design">{{article.userName}}</a> 发布于
+                        {{article.createTime}}
+                      </div>
                     </div>
                   </div>
+                </li>
+                <div class="mobile-more">
+                  <span id="loading">
+                    正在加载中 <i class="el-icon-loading"></i>
+                  </span>
+                  <span id="nodata" style="display:none">
+                    没有更多数据啦
+                  </span>
                 </div>
-              </li>
-              <div class="mobile-more">
-                <span id="loading">
-                  正在加载中 <i class="el-icon-loading"></i>
-                </span>
-                <span id="nodata" style="display:none">
-                  没有更多数据啦
-                </span>
+              </ul>
+              <div class="pc-more" @click="moreData" v-show="disMore">
+                查看更多
               </div>
-            </ul>
-            <div class="pc-more" @click="moreData" v-show="disMore">
-              查看更多
-            </div>
 
-          </v-scroll>
+            </v-scroll>
+          </keep-alive>
 
           <div class="aside-content">
             <FAside></FAside>
@@ -84,22 +85,19 @@ export default {
     };
   },
   mounted() {
+    // this.$refs.listContent.scrollTo(0, this.$store.getters.indexPageScroll);
     this.reqData(1);
   },
-  activated() {
-    // this.$refs.listContent.refresh();
-    // this.$refs.listContent.scrollTo(0, this.$store.getters.indexPageScroll);
-  },
   beforeRouteEnter(to, from, next) {
-    if (
-      // from.path.indexOf("edit-text") != -1 ||
-      // from.path.indexOf("user-login") != -1
-      from.path.indexOf("detail") != -1
-    ) {
-      to.meta.keepAlive = true;
-    } else {
-      to.meta.keepAlive = false;
-    }
+    // if (
+    //   // from.path.indexOf("edit-text") != -1 ||
+    //   // from.path.indexOf("user-login") != -1
+    //   from.path.indexOf("detail") != -1
+    // ) {
+    //   to.meta.keepAlive = true;
+    // } else {
+    //   to.meta.keepAlive = false;
+    // }
     next();
   },
   beforeRouteLeave(to, from, next) {

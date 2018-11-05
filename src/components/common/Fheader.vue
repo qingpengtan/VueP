@@ -180,18 +180,30 @@ export default {
       content: "",
       articleTag: "",
       showSecond: false,
-      searchContent: this.searchWd
+      searchContent: this.searchWd,
+      flag: false
     };
   },
   watch: {
     searchWd() {
       this.searchContent = this.searchWd;
+    },
+    $route(to, from) {
+      if (this.flag) {
+        let fMenuUl = document.getElementsByClassName("mobile-side-ul")[0];
+        let fMenuLi = fMenuUl.getElementsByTagName("li");
+        Array.from(fMenuLi).forEach(element => {
+          if (this.$store.getters.navMenuSelect == element.innerText.trim()) {
+            element.firstElementChild.style.color = "#066ac3";
+          } else {
+            if(element.firstElementChild)
+              element.firstElementChild.style.color = "white";
+          }
+        });
+      }
     }
   },
   created() {
-    document.querySelector(".mobile-side li a").style.color = "white";
-    console.log(this.$store.getters.navMenuSelect);
-    // e.target.style.color = "#066ac3";
     this.loginStatus = StringUtils.isEmpty(localStorage.getItem("x_token"))
       ? false
       : true;
@@ -199,14 +211,25 @@ export default {
       this.userName = localStorage.getItem("x_userPhone");
       this.userPic = localStorage.getItem("x_userPic");
     }
-
-    this.$http.http("/index/classify", { exculde: "yes" }).then(res => {
-      if (res.code == 1) {
-        this.articleTag = res.data;
-      }
-    });
   },
   mounted() {
+    this.$http
+      .http("/index/classify", { exculde: "yes" })
+      .then(res => {
+        if (res.code == 1) {
+          this.articleTag = res.data;
+        }
+      })
+      .then(() => {
+        let fMenuUl = document.getElementsByClassName("mobile-side-ul")[0];
+        let fMenuLi = fMenuUl.getElementsByTagName("li");
+        this.flag = true;
+        Array.from(fMenuLi).forEach(element => {
+          if (this.$store.getters.navMenuSelect == element.innerText.trim()) {
+            element.firstElementChild.style.color = "#066ac3";
+          }
+        });
+      });
     this.wscroll();
   },
   methods: {
@@ -243,7 +266,38 @@ export default {
       done();
     },
     selectMenu(e) {
-      this.$store.commit("navMenuSelect", "xxx");
+      let menu = e.target.innerText;
+      switch (menu) {
+        case "主页":
+          this.$store.commit("navMenuSelect", "主页");
+          break;
+        case "日志":
+          this.$store.commit("navMenuSelect", "日志");
+          break;
+        case "音乐":
+          this.$store.commit("navMenuSelect", "音乐");
+          break;
+        case "Java":
+          this.$store.commit("navMenuSelect", "Java");
+          break;
+        case "Web开发":
+          this.$store.commit("navMenuSelect", "Web开发");
+          break;
+        case "Go语言":
+          this.$store.commit("navMenuSelect", "Go语言");
+          break;
+        case "大数据":
+          this.$store.commit("navMenuSelect", "大数据");
+          break;
+        case "Python":
+          this.$store.commit("navMenuSelect", "Python");
+          break;
+        case "其他":
+          this.$store.commit("navMenuSelect", "其他");
+          break;
+        default:
+          this.$store.commit("navMenuSelect", "主页");
+      }
     },
     publish() {
       if (this.content.trim() == "") {
