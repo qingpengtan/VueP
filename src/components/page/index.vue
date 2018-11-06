@@ -232,8 +232,9 @@ export default {
   display: block;
 }
 .pc-more:hover {
-  background: #ededed;
-  box-shadow: 1px 0px 3px 0 #666;
+  background: #dddddd;
+  color: #666;
+  /* box-shadow: 1px 0px 3px 0 #666; */
 }
 .mobile-more {
   display: none;

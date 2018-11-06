@@ -64,7 +64,7 @@
           <li> <i class="el-icon-menu"></i>论坛</li>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item v-for=" tag in articleTag" :key="tag.articleTagId">
-              <router-link @click.native="pushTribune()" :to="{path:'/tribune', query:{articleTagId:tag.articleTagId}}">
+              <router-link @click="pushTribune()" :to="{path:'/tribune', query:{articleTagId:tag.articleTagId}}">
                 {{tag.articleTag}}
               </router-link>
             </el-dropdown-item>
@@ -87,7 +87,7 @@
             <li> <i class="el-icon-menu"></i>论坛</li>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item v-for=" tag in articleTag" :key="tag.articleTagId">
-                <router-link @click.native="pushTribune()" :to="{path:'/tribune', query:{articleTagId:tag.articleTagId}}">
+                <router-link @click="pushTribune()" :to="{path:'/tribune', query:{articleTagId:tag.articleTagId}}">
                   {{tag.articleTag}}
                 </router-link>
               </el-dropdown-item>
@@ -196,7 +196,7 @@ export default {
           if (this.$store.getters.navMenuSelect == element.innerText.trim()) {
             element.firstElementChild.style.color = "#066ac3";
           } else {
-            if(element.firstElementChild)
+            if (element.firstElementChild)
               element.firstElementChild.style.color = "white";
           }
         });
@@ -204,6 +204,9 @@ export default {
     }
   },
   created() {
+    if (this.$route.path.indexOf("/search") != -1) {
+      this.$store.commit("navMenuSelect", "");
+    }
     this.loginStatus = StringUtils.isEmpty(localStorage.getItem("x_token"))
       ? false
       : true;
@@ -296,7 +299,7 @@ export default {
           this.$store.commit("navMenuSelect", "其他");
           break;
         default:
-          this.$store.commit("navMenuSelect", "主页");
+          this.$store.commit("navMenuSelect", "");
       }
     },
     publish() {
