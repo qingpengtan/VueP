@@ -236,8 +236,14 @@ export default {
 
 .publish-daily .daily-breif {
   padding: 0px 0 16px 0;
+  line-height: 22px;
+  max-height: 108px;
+  overflow: hidden;
+  word-wrap: normal;
+  word-break: break-all;
+  font-size: 14px;
 }
-.publish-daily .daily-breif a{
+.publish-daily .daily-breif a {
   color: #3a8ee6;
 }
 
