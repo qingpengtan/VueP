@@ -148,7 +148,7 @@
           <router-link to='/edit-text'>写文章</router-link>
         </li>
         <li @click="dialogVisible = true,isCollapse = true">写说说</li>
-        <li @click.stop="triume()"><i class="el-icon-menu"></i>论坛</li>
+        <li @click.stop="triume()">论坛 <i id="triArrow" class="el-icon-arrow-down"></i></li>
         <li v-show="showSecond">
           <ul class="mobile-ul-sec">
             <li v-for=" tag in articleTag" :key="tag.articleTagId" @click="selectMenu($event)">
@@ -258,10 +258,14 @@ export default {
     },
     triume() {
       this.showSecond = !this.showSecond;
+      var arrow = document.getElementById("triArrow");
+      arrow.style.transition="all 0.2s";
       var el = document.querySelector("#mobile-side-ul");
       if (this.showSecond) {
+        arrow.style.transform = "rotate(-180deg)";
         el.style.width = " 2.241379rem";
       } else {
+        arrow.style.transform = "rotate(0deg)";
         el.style.width = "1.896552rem";
       }
     },
@@ -575,6 +579,7 @@ export default {
     background: #1ca2ec;
     padding-top: 0.172414rem;
     box-sizing: border-box;
+    transition: all 0.5s;
     animation: myfirst 0.5s;
     width: auto;
   }
