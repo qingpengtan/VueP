@@ -473,6 +473,10 @@ export default {
 .fixed-info .right-span {
   line-height: 50px;
 }
+.header-content li:hover{
+  background: #43bcff;
+  color: white;
+}
 
 @media only screen and (max-width: 481px) {
   .layout-header {

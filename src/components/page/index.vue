@@ -11,23 +11,45 @@
             <v-scroll ref="listContent" :data="articleList" :pullup="pullup" :listenScroll="true" @scrollToEnd="moreData()" class="v-scroll" @scroll="scrollC">
               <ul>
                 <li class="ant-list-item" v-for=" article in articleList" :key="article.articleId">
-                  <div>
-                    <span class="article-tag">{{article.articleTagName}}</span>
-                    <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
-                      <h4>{{article.articleTitle}}</h4>
-                    </router-link>
-                  </div>
-                  <div class="ant-list-item-content">
+                  <div v-if="article.articleTag !=1">
                     <div>
-                      <div class="text-content">
-                        {{article.articleBrief}}
+                      <span class="article-tag">{{article.articleTagName}}</span>
+                      <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
+                        <h4>{{article.articleTitle}}</h4>
+                      </router-link>
+                    </div>
+                    <div class="ant-list-item-content">
+                      <div>
+                        <div class="text-content">
+                          {{article.articleBrief}}
+                        </div>
+                        <div class="publish">
+                          <span>
+                            <img :src="article.userPic">
+                          </span>
+                          <a href="https://ant.design">{{article.userName}}</a> 发布于
+                          {{article.createTime}}
+                        </div>
                       </div>
-                      <div class="publish">
-                        <span>
-                          <img :src="article.userPic">
+                    </div>
+                  </div>
+                  <div v-else>
+                    <div class="publish publish-daily">
+                      <div class="daily-title">
+                        <img :src="article.userPic">
+                        <span class="daily-user">
+                          {{article.userName}}<br>
+                          <span style="font-size:11px;position:relative;top:-5px;color:#aaa">
+                            {{article.createTime}}
+                          </span>
                         </span>
-                        <a href="https://ant.design">{{article.userName}}</a> 发布于
-                        {{article.createTime}}
+
+                      </div>
+                      <div class="daily-breif">
+                        {{article.articleBrief}}
+                        <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
+                          查看全文
+                        </router-link>
                       </div>
                     </div>
                   </div>
@@ -198,6 +220,32 @@ export default {
   margin-right: 2px;
 }
 
+.publish-daily {
+  margin-top: 0;
+  position: relative;
+}
+.publish-daily .daily-title {
+  font-size: 14px;
+}
+.publish-daily .daily-title img {
+  top: -4px;
+  margin-right: 5px;
+  width: 30px;
+  height: 30px;
+}
+
+.publish-daily .daily-breif {
+  padding: 0px 0 16px 0;
+}
+.publish-daily .daily-breif a{
+  color: #3a8ee6;
+}
+
+.publish-daily .daily-title .daily-user {
+  position: relative;
+  display: inline-block;
+}
+
 .ant-list-item-action li {
   float: left;
   padding-right: 16px;
@@ -268,6 +316,10 @@ export default {
 
   .ant-list-item-action li {
     padding-right: 8px;
+  }
+
+  .publish-daily .daily-breif {
+    padding-bottom: 0;
   }
   .article-tag + a h4 {
     max-width: 4.807931rem;
