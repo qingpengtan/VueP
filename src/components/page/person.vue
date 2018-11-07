@@ -118,8 +118,8 @@
                   <el-row :gutter="20">
                     <el-col :xs="20" :sm="8">
                       <el-form-item label="年龄">
-                        <span v-show="!isEdit">{{form.age}}</span>
-                        <el-input v-model="form.age" v-show="isEdit"></el-input>
+                        <span>{{form.age}}</span>
+                        <!-- <el-input v-model="form.age" v-show="isEdit"></el-input> -->
                       </el-form-item>
                     </el-col>
 
@@ -156,7 +156,7 @@
               </div>
             </el-tab-pane>
             <el-tab-pane label="我的文章" name="article">
-              <el-card class="box-card" @touchmove.native="tuchMove()">
+              <el-card class="box-card" @touchmove.native="touchMove()">
 
                 <div v-for="article in articleList" :key=article.articleId class="text-item">
                   <span>{{article.articleTagName}}</span>
@@ -220,9 +220,7 @@ export default {
       activeName: "info",
       imgFileName: "",
       form: {
-        // ---------------
         userName: "",
-        userUuid: "",
         userPhone: "",
         birthday: "",
         sex: "",
@@ -234,7 +232,6 @@ export default {
         address: "",
         userTag: [],
         createTime: "",
-        userUuid: "",
         userTagName: "",
         userPic: ""
       }
@@ -248,9 +245,6 @@ export default {
       }
     });
     this.getArticle(this.current);
-    // document.addEventListener("touchstart", function(e) {
-    //   e.preventDefault();
-    // });
   },
   //   beforeRouteEnter(to, from, next) {
   //   if ((from.path.indexOf("edit-text") != -1) || (from.path.indexOf("user-login") != -1)) {
@@ -261,7 +255,7 @@ export default {
   //   next();
   // },
   methods: {
-    tuchMove() {
+    touchMove() {
       var clientH = this.$el.getElementsByClassName("el-tabs--border-card")[0]
         .clientHeight;
       var scrollTops = this.$el.getElementsByClassName("el-tabs__content")[0]
@@ -290,20 +284,18 @@ export default {
         userName: this.form.userName,
         birthday: this.form.birthday,
         sex: this.form.sex,
-        age: this.form.age,
         province: this.form.province[0],
         city: this.form.province[1],
         address: this.form.address,
         userTag: StringUtils.isEmpty(tempTag) ? "" : tempTag.join(","),
-        userUuid: this.form.userUuid
       };
 
       this.$http.http("/user/save", params).then(res => {
         if (res.code == 1) {
           this.getUser();
-          this.$message.success("提交成功！");
+          this.$message.success("更改成功");
         } else {
-          this.$message.success(res.msg);
+          this.$message.warning(res.msg);
         }
       });
     },
@@ -313,7 +305,6 @@ export default {
         if (res.code == 1) {
           let tempTag = res.data.userTag;
           this.form.userName = res.data.userName;
-          this.form.userUuid = res.data.userUuid;
           this.form.userPhone = res.data.userPhone;
           this.form.birthday = res.data.birthday;
           this.form.sex = res.data.sex;
@@ -330,7 +321,6 @@ export default {
           this.form.userTag = StringUtils.isEmpty(tempTag)
             ? []
             : StringUtils.str2Int(tempTag.split(","));
-          this.form.userUuid = res.data.userUuid;
         }
       });
     },

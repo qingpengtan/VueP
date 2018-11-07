@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="Faside-content">
     <div class="aside-block">
       <div class="aside-header">
         最近更新
@@ -60,6 +60,9 @@ export default {
 };
 </script>
 <style scoped>
+.Faside-content{
+  min-height: 700px;
+}
 .aside-block:first-child {
   margin-top: 0px;
 }
