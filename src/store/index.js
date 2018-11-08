@@ -9,6 +9,7 @@ export default new vuex.Store({
         tribunePageScroll:0,
         searchPageScroll:0,
         navMenuSelect:"主页",
+        pageScrollY:0,
     },
     getters:{
         indexPageScroll(state){
@@ -25,6 +26,9 @@ export default new vuex.Store({
         },
         navMenuSelect(state){
             return state.navMenuSelect;
+        },
+        pageScrollY(state){
+            return state.pageScrollY;
         }
     },
     mutations:{
@@ -42,6 +46,9 @@ export default new vuex.Store({
         },
         navMenuSelect(state,currentMenu){
             state.navMenuSelect = currentMenu;
+        },
+        pageScrollY(state,pageScrollY){
+            state.pageScrollY = pageScrollY;
         }
     },
 

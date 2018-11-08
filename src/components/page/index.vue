@@ -1,9 +1,7 @@
 <template>
 
   <div>
-
     <Header></Header>
-
     <div class="layout-main">
       <div class="layout-content">
         <div class="main-content" style="padding: 8px 32px 32px;">
@@ -27,8 +25,8 @@
                           <span>
                             <img :src="article.userPic">
                           </span>
-                          <a href="https://ant.design">{{article.userName}}</a> 发布于
-                          {{article.createTime}}
+                          {{article.userName}} 
+                          <span style="color:#aaa;font-size:11px;">发布于 {{article.createTime}}</span>
                         </div>
                       </div>
                     </div>
@@ -79,6 +77,7 @@
     </div>
 
     <Footer></Footer>
+    <BackTop></BackTop>
   </div>
 
 </template>
@@ -87,12 +86,14 @@
 import Header from "../common/Fheader.vue";
 import Footer from "../common/Footer.vue";
 import FAside from "../common/FAside";
+import BackTop from "../common/BackTop.vue";
 import Scroll from "./foreground/bScroll";
 
 export default {
   name: "index",
   components: {
     Header,
+    BackTop,
     Footer,
     FAside,
     "v-scroll": Scroll
@@ -281,7 +282,7 @@ export default {
   border-radius: 4px;
   color: #999999;
   text-align: center;
-  font-size: 15px;
+  font-size: 13px;
   cursor: pointer;
   display: block;
 }

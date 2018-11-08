@@ -93,6 +93,9 @@ export default {
 .aside-list li a {
   color: #3a8ee6;
 }
+.aside-list li a:hover {
+  color: #0454a9;
+}
 </style>
 
 

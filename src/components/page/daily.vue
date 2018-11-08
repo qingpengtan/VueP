@@ -28,8 +28,8 @@
                           <span>
                             <img :src="article.userPic">
                           </span>
-                          <a href="https://ant.design">{{article.userName}}</a> 发布于
-                          {{article.createTime}}
+                          {{article.userName}} 
+                          <span style="color:#aaa;font-size:11px;">发布于 {{article.createTime}}</span>
                         </div>
                       </div>
                     </div>
@@ -78,6 +78,7 @@
     </div>
 
     <Footer></Footer>
+    <BackTop></BackTop>
   </div>
 
 </template>
@@ -87,12 +88,14 @@ import Header from "../common/Fheader.vue";
 import Footer from "../common/Footer.vue";
 import Scroll from "./foreground/bScroll";
 import FAside from "../common/FAside";
+import BackTop from "../common/BackTop.vue";
 export default {
   name: "daily",
   components: {
     Header,
     FAside,
     Footer,
+    BackTop,
     "v-scroll": Scroll
   },
   data() {
@@ -284,7 +287,7 @@ export default {
   border-radius: 4px;
   color: #999999;
   text-align: center;
-  font-size: 15px;
+  font-size: 13px;
   cursor: pointer;
   display: block;
 }

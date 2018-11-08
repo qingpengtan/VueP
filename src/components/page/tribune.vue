@@ -26,8 +26,8 @@
                         <span>
                           <img :src="article.userPic">
                         </span>
-                        <a href="https://ant.design">{{article.userName}}</a> 发布于
-                        {{article.createTime}}
+                          {{article.userName}} 
+                          <span style="color:#aaa;font-size:11px;">发布于 {{article.createTime}}</span>
                       </div>
                     </div>
                   </div>
@@ -56,6 +56,7 @@
     </div>
 
     <Footer></Footer>
+    <BackTop></BackTop>
   </div>
 
 </template>
@@ -65,12 +66,14 @@ import Header from "../common/Fheader.vue";
 import Footer from "../common/Footer.vue";
 import Scroll from "./foreground/bScroll";
 import FAside from "../common/FAside";
+import BackTop from "../common/BackTop.vue";
 export default {
   name: "index",
   components: {
     Header,
     Footer,
     FAside,
+    BackTop,
     "v-scroll": Scroll
   },
   data() {
@@ -127,6 +130,8 @@ export default {
       this.current++;
       if (this.current > this.totalPage) {
         this.$el.querySelector(".pc-more").innerHTML = "没有更多数据了";
+        this.$el.querySelector("#loading").style.display = "none";
+        this.$el.querySelector("#nodata").style.display = "inline";
         return;
       }
       this.reqData(this.current);
@@ -260,7 +265,7 @@ export default {
   border-radius: 4px;
   color: #999999;
   text-align: center;
-  font-size: 15px;
+  font-size: 13px;
   cursor: pointer;
   display: block;
 }

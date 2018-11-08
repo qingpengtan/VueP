@@ -126,6 +126,7 @@
       </div>
     </div>
     <Footer></Footer>
+    <BackTop></BackTop>
   </div>
 
 </template>
@@ -138,6 +139,7 @@ import Header from "../common/Fheader.vue";
 import Scroll from "./foreground/bScroll";
 import FAside from "../common/FAside";
 import Footer from "../common/Footer.vue";
+import BackTop from "../common/BackTop.vue";
 
 export default {
   name: "details",
@@ -145,6 +147,7 @@ export default {
     Header,
     FAside,
     Footer,
+    BackTop,
     "v-scroll": Scroll
   },
   data() {

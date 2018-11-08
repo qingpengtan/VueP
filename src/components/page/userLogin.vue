@@ -27,7 +27,7 @@
           <button class="login" style="margin-top:25px" @click="login('ruleForm')">登录</button>
 
           <div class="login-footer">
-            XXXXXXXXXXXXXXXXXX
+            纸上得来终觉浅，绝知此事要躬行
           </div>
 
         </div>

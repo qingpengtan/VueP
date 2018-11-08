@@ -237,12 +237,13 @@ export default {
   },
   methods: {
     wscroll() {
-      var fixedHeader = document.getElementsByClassName(
+      let fixedHeader = document.getElementsByClassName(
         "header-content header-fixed"
       )[0];
+      let $html = document.getElementsByTagName("html")[0];
       window.onscroll = () => {
-        var scrolltop = document.getElementsByTagName("html")[0].scrollTop;
-        // console.log(fixedHeader.parentNode.nextElementSibling);
+        let scrolltop = $html.scrollTop;
+          this.$store.commit("pageScrollY", scrolltop);
         if (scrolltop > 64) {
           fixedHeader.style.display = "block";
         } else {

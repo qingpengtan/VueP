@@ -519,6 +519,9 @@ export default {
   color: white;
   font-size: 13px;
 }
+.text-item a:hover{
+ color: #0381c6!important;
+}
 .pc-more {
   width: 80%;
   height: 35px;
@@ -527,7 +530,7 @@ export default {
   border-radius: 4px;
   color: #999999;
   text-align: center;
-  font-size: 15px;
+  font-size: 13px;
   cursor: pointer;
   display: block;
   margin: 5px;

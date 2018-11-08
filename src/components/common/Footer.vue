@@ -25,7 +25,7 @@ export default {
   height: 90px;
   margin: 0 auto;
   text-align: center;
-  line-height: 145px;
+  line-height: 140px;
   color: #aaaaaa;
   font-size: 13px;
 }

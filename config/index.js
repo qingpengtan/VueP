@@ -1,6 +1,4 @@
 'use strict'
-// Template version: 1.2.7
-// see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
 const serverUrl = "http://119.29.230.48"
@@ -8,8 +6,7 @@ const serverUrl = "http://119.29.230.48"
 
 module.exports = {
   dev: {
-
-    // Paths
+    
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
