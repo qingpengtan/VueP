@@ -117,13 +117,14 @@ export default {
     //   // from.path.indexOf("user-login") != -1
     //   from.path.indexOf("detail") != -1
     // ) {
-    //   to.meta.keepAlive = true;
+      // to.meta.keepAlive = true;
     // } else {
     //   to.meta.keepAlive = false;
     // }
     next();
   },
   beforeRouteLeave(to, from, next) {
+    // from.meta.keepAlive = false;
     next();
   },
   methods: {

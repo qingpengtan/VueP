@@ -138,8 +138,8 @@ export default {
         })
         .then(res => {
           if (res.code == 1) {
-            this.$router.push({ path: "/" });
-            this.$message.success("提交成功！");
+            this.$router.go(-1);
+            this.$message.success("发表成功");
           } else {
             this.$message.error(res.msg);
           }
@@ -290,7 +290,7 @@ export default {
   .header-navbar >>> button {
     position: relative;
     top: -0.051724rem;
-    padding: .103448rem .155172rem;
+    padding: 0.103448rem 0.155172rem;
   }
 
   .header-content {

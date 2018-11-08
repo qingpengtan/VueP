@@ -9,18 +9,25 @@
       <div class="layout-content">
         <div class="main-content" style="padding: 8px 32px 32px;">
           <keep-alive>
-            <v-scroll ref="listContent" :data="articleList" :pullup="pullup" :listenScroll="true" @scrollToEnd="moreData()" class="v-scroll" @scroll="scrollC">
+            <v-scroll ref="listContent" :pullup="pullup" :listenScroll="true" class="v-scroll">
               <div>
                 <aplayer :music="audio[0]" :list="audio" v-if="flag" :showLrc="true" :volume="0.2" />
-
-                <el-upload class="upload-demo" action="/upload/mp3" multiple :limit="1" accept="audio/mpeg" :headers="headers" name="mp3" :on-success="finishUp" :file-list="fileList">
-                  <el-button size="small" type="primary">上传音乐 <i class="el-icon-upload2 el-icon--right"></i></el-button>
-                </el-upload>
-                <el-button type="success" @click="downloadMusic">下载当前音乐<i class="el-icon-download el-icon--right"></i></el-button>
+                <div class="music-operate">
+                  <div>
+                    <el-button @click="pushMusicPlayer">进入播放器<i class="el-icon-caret-right el-icon--right"></i></el-button>
+                  </div>
+                  <div>
+                    <el-upload class="upload-demo" action="/upload/mp3" multiple :limit="1" accept="audio/mpeg" :headers="headers" name="mp3" :on-success="finishUp" :file-list="fileList">
+                      <el-button size="small" type="primary">上传音乐 <i class="el-icon-upload2 el-icon--right"></i></el-button>
+                    </el-upload>
+                  </div>
+                  <div>
+                    <el-button type="success" @click="downloadMusic">下载当前音乐<i class="el-icon-download el-icon--right"></i></el-button>
+                  </div>
+                </div>
               </div>
             </v-scroll>
           </keep-alive>
-
           <div class="aside-content">
             <FAside></FAside>
           </div>
@@ -109,6 +116,11 @@ export default {
       } else {
         this.$message.error(res.msg);
       }
+    },
+    pushMusicPlayer() {
+      this.$router.push({
+        path: "/music-player"
+      });
     }
   }
 };
@@ -131,6 +143,15 @@ export default {
 .main-content {
   position: relative;
 }
+
+.main-content:after {
+  content: ".";
+  height: 0;
+  visibility: hidden;
+  display: block;
+  clear: both;
+}
+
 .v-scroll {
   width: 720px;
   display: inline-block;
@@ -219,6 +240,14 @@ export default {
   width: 105px;
   height: 32px;
   border: none;
+}
+.music-operate {
+  display: flex;
+  margin-top: 10px;
+}
+.music-operate div {
+  margin: 0px 5px;
+  flex: 1;
 }
 @media only screen and (max-width: 481px) {
   .layout-main,

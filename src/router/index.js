@@ -22,6 +22,13 @@ export default new Router({
             }
         },
         {
+            path: '/music-player',
+            component: resolve => require(['../components/page/musicPlayer.vue'], resolve),
+            meta: {
+                title: '音乐播放器',
+            }
+        },
+        {
             path: '/user-login',
             component: resolve => require(['../components/page/userLogin.vue'], resolve),
             meta: {

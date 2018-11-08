@@ -243,7 +243,7 @@ export default {
       let $html = document.getElementsByTagName("html")[0];
       window.onscroll = () => {
         let scrolltop = $html.scrollTop;
-          this.$store.commit("pageScrollY", scrolltop);
+        this.$store.commit("pageScrollY", scrolltop);
         if (scrolltop > 64) {
           fixedHeader.style.display = "block";
         } else {
@@ -260,7 +260,7 @@ export default {
     triume() {
       this.showSecond = !this.showSecond;
       var arrow = document.getElementById("triArrow");
-      arrow.style.transition="all 0.2s";
+      arrow.style.transition = "all 0.2s";
       var el = document.querySelector("#mobile-side-ul");
       if (this.showSecond) {
         arrow.style.transform = "rotate(-180deg)";
@@ -319,7 +319,7 @@ export default {
         .then(res => {
           if (res.code == 1) {
             this.dialogVisible = false;
-            this.$message.success("提交成功！");
+            this.$message.success("发表成功");
           } else {
             this.$message.error(res.msg);
           }
@@ -474,7 +474,7 @@ export default {
 .fixed-info .right-span {
   line-height: 50px;
 }
-.header-content li:hover{
+.header-content li:hover {
   background: #43bcff;
   color: white;
 }
