@@ -28,17 +28,6 @@ export default {
     }
   },
   methods: {
-    wscroll() {
-      var backTop = document.getElementsByClassName("back-top")[0];
-      window.onscroll = () => {
-        var scrolltop = document.getElementsByTagName("html")[0].scrollTop;
-        if (scrolltop > document.body.clientHeight / 2) {
-          backTop.style.display = "block";
-        } else {
-          backTop.style.display = "none";
-        }
-      };
-    },
     backTop() {
       clearInterval(pointTime);
       let pointTime = setInterval(function() {

@@ -8,7 +8,6 @@
     <div class="layout-main">
       <div class="layout-content">
         <div class="main-content" style="padding: 8px 32px 32px;">
-          <keep-alive>
             <v-scroll ref="listContent" :pullup="pullup" :listenScroll="true" class="v-scroll">
               <div>
                 <aplayer :music="audio[0]" :list="audio" v-if="flag" :showLrc="true" :volume="0.2" />
@@ -27,7 +26,6 @@
                 </div>
               </div>
             </v-scroll>
-          </keep-alive>
           <div class="aside-content">
             <FAside></FAside>
           </div>

@@ -34,6 +34,7 @@
       </div>
     </div>
     <Footer></Footer>
+    <BackTop></BackTop>
   </div>
 
 </template>
@@ -46,6 +47,7 @@ import "quill/dist/quill.bubble.css";
 import { quillRedefine } from "vue-quill-editor-upload";
 import { quillEditor } from "vue-quill-editor";
 import StringUtils from "../../utils/StringUtils.js";
+import BackTop from "../common/BackTop.vue";
 export default {
   name: "editor",
   data: function() {
@@ -64,7 +66,8 @@ export default {
   components: {
     quillEditor,
     quillRedefine,
-    Footer
+    Footer,
+    BackTop
   },
   created() {
     this.setEdirorParam();

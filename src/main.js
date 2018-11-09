@@ -20,6 +20,10 @@ Vue.prototype.$prototype = function () {
     return Vue.prototype;
 }
 
+let $html = document.getElementsByTagName("html")[0];
+window.onscroll = () => {
+    store.commit("pageScrollY", $html.scrollTop);
+}
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
     const token = localStorage.getItem('x_token');

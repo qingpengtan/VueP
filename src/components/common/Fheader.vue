@@ -184,11 +184,29 @@ export default {
       flag: false
     };
   },
+  activated() {
+    let fixedHeader = document.getElementsByClassName(
+      "header-content header-fixed"
+    )[0];
+    if (this.pageScrollY > 64) {
+      fixedHeader.style.display = "block";
+    } else {
+      fixedHeader.style.display = "none";
+    }
+  },
+  computed: {
+    pageScrollY() {
+      return this.$store.getters.pageScrollY;
+    }
+  },
   watch: {
     searchWd() {
       this.searchContent = this.searchWd;
     },
     $route(to, from) {
+      if (to.path.indexOf("edit-text") != -1) {
+        return;
+      }
       if (this.flag) {
         let fMenuUl = document.getElementsByClassName("mobile-side-ul")[0];
         let fMenuLi = fMenuUl.getElementsByTagName("li");
@@ -200,6 +218,19 @@ export default {
               element.firstElementChild.style.color = "white";
           }
         });
+      }
+    },
+    pageScrollY() {
+      let fixedHeader = document.getElementsByClassName(
+        "header-content header-fixed"
+      )[0];
+      if (!fixedHeader) {
+        return;
+      }
+      if (this.pageScrollY > 64) {
+        fixedHeader.style.display = "block";
+      } else {
+        fixedHeader.style.display = "none";
       }
     }
   },
@@ -233,24 +264,19 @@ export default {
           }
         });
       });
-    this.wscroll();
+    let fixedHeader = document.getElementsByClassName(
+      "header-content header-fixed"
+    )[0];
+    if (!fixedHeader) {
+      return;
+    }
+    if (this.pageScrollY > 64) {
+      fixedHeader.style.display = "block";
+    } else {
+      fixedHeader.style.display = "none";
+    }
   },
   methods: {
-    wscroll() {
-      let fixedHeader = document.getElementsByClassName(
-        "header-content header-fixed"
-      )[0];
-      let $html = document.getElementsByTagName("html")[0];
-      window.onscroll = () => {
-        let scrolltop = $html.scrollTop;
-        this.$store.commit("pageScrollY", scrolltop);
-        if (scrolltop > 64) {
-          fixedHeader.style.display = "block";
-        } else {
-          fixedHeader.style.display = "none";
-        }
-      };
-    },
     searchArticle() {
       this.$router.push({
         path: "/search",

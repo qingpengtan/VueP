@@ -7,7 +7,6 @@
     <div class="layout-main">
       <div class="layout-content">
         <div class="main-content" style="padding: 8px 32px 32px;">
-          <keep-alive>
             <v-scroll ref="listContent" :data="articleList" :pullup="pullup" :listenScroll="true" @scrollToEnd="moreData()" class="v-scroll" @scroll="scrollC">
               <ul>
                 <li class="ant-list-item" v-for=" article in articleList" :key="article.articleId">
@@ -46,7 +45,6 @@
               </div>
 
             </v-scroll>
-          </keep-alive>
           <div class="aside-content">
             <FAside></FAside>
           </div>
@@ -92,12 +90,12 @@ export default {
     // this.$refs.listContent.refresh();
     // this.$refs.listContent.scrollTo(0, this.$store.getters.dailyPageScroll);
   },
-  beforeRouteEnter(to, from, next) {
-    // if (from.path.indexOf("detail") != -1) {
-    //   to.meta.keepAlive = true;
-    // } else {
-    //   to.meta.keepAlive = false;
-    // }
+  beforeRouteLeave(to, from, next) {
+    if (to.path.indexOf("edit-text") != -1) {
+      from.meta.keepAlive = false;
+    } else {
+      from.meta.keepAlive = true;
+    }
     next();
   },
   watch: {
