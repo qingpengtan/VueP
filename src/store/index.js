@@ -10,6 +10,7 @@ export default new vuex.Store({
         searchPageScroll:0,
         navMenuSelect:"主页",
         pageScrollY:0,
+        currentMusic:""
     },
     getters:{
         indexPageScroll(state){
@@ -29,7 +30,10 @@ export default new vuex.Store({
         },
         pageScrollY(state){
             return state.pageScrollY;
-        }
+        },
+        currentMusic(state){
+            return state.currentMusic;
+        },
     },
     mutations:{
         indexPageScroll(state,scrollY){
@@ -49,6 +53,9 @@ export default new vuex.Store({
         },
         pageScrollY(state,pageScrollY){
             state.pageScrollY = pageScrollY;
+        },
+        currentMusic(state,currentMusic){
+            state.currentMusic = currentMusic;
         }
     },
 

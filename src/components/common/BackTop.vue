@@ -19,7 +19,8 @@ export default {
   },
   watch: {
     pageScrollY() {
-      var backTop = document.getElementsByClassName("back-top")[0];
+      let backTop = document.getElementsByClassName("back-top")[0];
+      if(!backTop) return;
       if (this.pageScrollY > document.body.clientHeight / 2) {
         backTop.style.display = "block";
       } else {

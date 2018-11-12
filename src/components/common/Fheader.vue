@@ -193,6 +193,13 @@ export default {
     } else {
       fixedHeader.style.display = "none";
     }
+    let fMenuUl = document.getElementsByClassName("mobile-side-ul")[0];
+    let fMenuLi = fMenuUl.getElementsByTagName("li");
+    Array.from(fMenuLi).forEach(element => {
+      if (this.$store.getters.navMenuSelect == element.innerText.trim()) {
+        element.firstElementChild.style.color = "#066ac3";
+      }
+    });
   },
   computed: {
     pageScrollY() {
@@ -204,12 +211,10 @@ export default {
       this.searchContent = this.searchWd;
     },
     $route(to, from) {
-      if (to.path.indexOf("edit-text") != -1) {
-        return;
-      }
+      let fMenuUl = document.getElementsByClassName("mobile-side-ul")[0];
+      if (!fMenuUl) return;
+      let fMenuLi = fMenuUl.getElementsByTagName("li");
       if (this.flag) {
-        let fMenuUl = document.getElementsByClassName("mobile-side-ul")[0];
-        let fMenuLi = fMenuUl.getElementsByTagName("li");
         Array.from(fMenuLi).forEach(element => {
           if (this.$store.getters.navMenuSelect == element.innerText.trim()) {
             element.firstElementChild.style.color = "#066ac3";
@@ -504,6 +509,9 @@ export default {
   background: #43bcff;
   color: white;
 }
+.nav-arrow {
+  display: none;
+}
 
 @media only screen and (max-width: 481px) {
   .layout-header {
@@ -635,6 +643,9 @@ export default {
     display: inline-block;
     height: 100%;
     color: white;
+  }
+  .nav-arrow {
+    display: block;
   }
   @keyframes myfirst {
     0% {

@@ -8,24 +8,24 @@
     <div class="layout-main">
       <div class="layout-content">
         <div class="main-content" style="padding: 8px 32px 32px;">
-            <v-scroll ref="listContent" :pullup="pullup" :listenScroll="true" class="v-scroll">
-              <div>
-                <aplayer :music="audio[0]" :list="audio" v-if="flag" :showLrc="true" :volume="0.2" />
-                <div class="music-operate">
-                  <div>
-                    <el-button @click="pushMusicPlayer">进入播放器<i class="el-icon-caret-right el-icon--right"></i></el-button>
-                  </div>
-                  <div>
-                    <el-upload class="upload-demo" action="/upload/mp3" multiple :limit="1" accept="audio/mpeg" :headers="headers" name="mp3" :on-success="finishUp" :file-list="fileList">
-                      <el-button size="small" type="primary">上传音乐 <i class="el-icon-upload2 el-icon--right"></i></el-button>
-                    </el-upload>
-                  </div>
-                  <div>
-                    <el-button type="success" @click="downloadMusic">下载当前音乐<i class="el-icon-download el-icon--right"></i></el-button>
-                  </div>
+          <v-scroll ref="listContent" :pullup="pullup" :listenScroll="true" class="v-scroll">
+            <div>
+              <aplayer :music="audio[0]" :list="audio" v-if="flag" :showLrc="true" :volume="0.2" />
+              <div class="music-operate">
+                <div>
+                  <el-button @click="pushMusicPlayer">进入播放器<i class="el-icon-caret-right el-icon--right"></i></el-button>
+                </div>
+                <div>
+                  <el-upload class="upload-demo" action="/upload/mp3" multiple :limit="1" accept="audio/mpeg" :headers="headers" name="mp3" :on-success="finishUp" :file-list="fileList">
+                    <el-button size="small" type="primary">上传音乐 <i class="el-icon-upload2 el-icon--right"></i></el-button>
+                  </el-upload>
+                </div>
+                <div>
+                  <el-button type="success" @click="downloadMusic">下载当前音乐<i class="el-icon-download el-icon--right"></i></el-button>
                 </div>
               </div>
-            </v-scroll>
+            </div>
+          </v-scroll>
           <div class="aside-content">
             <FAside></FAside>
           </div>
@@ -116,8 +116,12 @@ export default {
       }
     },
     pushMusicPlayer() {
+      let audio = document.querySelector(".aplayer audio");
       this.$router.push({
-        path: "/music-player"
+        path: "/music-player",
+        query:{
+          url:audio.src
+        }
       });
     }
   }
@@ -160,80 +164,6 @@ export default {
   float: right;
 }
 
-.ant-list-item {
-  padding-top: 16px;
-  width: 720px;
-  border-bottom: 1px solid #ddd;
-}
-
-.ant-list-item-content {
-  margin-top: 5px;
-  margin-bottom: 16px;
-}
-
-.ant-list-item-content .text-content {
-  line-height: 22px;
-  max-height: 108px;
-  overflow: hidden;
-  word-wrap: normal;
-  word-break: break-all;
-  text-wrap: normal;
-}
-
-.publish {
-  margin-top: 5px;
-  font-size: 13px;
-}
-
-.publish img {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  position: relative;
-  top: 6px;
-  margin-right: 2px;
-}
-
-.ant-list-item-action li {
-  float: left;
-  padding-right: 16px;
-  cursor: pointer;
-}
-.article-tag + a h4 {
-  display: inline-block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.article-tag {
-  padding: 1px 4px;
-  border-radius: 3px;
-  box-shadow: 0 0 1px 0 #43bcff;
-  background: #43bcff;
-  color: white;
-  font-size: 11px;
-  position: relative;
-  top: -6px;
-}
-.pc-more {
-  width: 720px;
-  height: 35px;
-  line-height: 35px;
-  background: #f2f2f2;
-  border-radius: 4px;
-  color: #999999;
-  text-align: center;
-  font-size: 15px;
-  cursor: pointer;
-  display: block;
-}
-.pc-more:hover {
-  background: #ededed;
-  box-shadow: 1px 0px 3px 0 #666;
-}
-.mobile-more {
-  display: none;
-}
 .layout-content >>> .el-upload--text {
   width: 105px;
   height: 32px;
@@ -265,30 +195,7 @@ export default {
   .aside-content {
     display: none;
   }
-  .ant-list-item {
-    box-sizing: border-box;
-    padding: 0.258621rem 0.172414rem;
-    border-bottom: 5px solid #e9e9e9;
-  }
-
-  .ant-list-item-content {
-    margin: 0.086207rem 0;
-  }
-
-  .ant-list-item-action li {
-    padding-right: 8px;
-  }
-  .article-tag + a h4 {
-    max-width: 4.807931rem;
-  }
-  .pc-more {
-    display: none !important;
-  }
-  .mobile-more {
-    display: block;
-    text-align: center;
-    font-size: 14px;
-  }
+ 
   .v-scroll {
     width: 100%;
     height: calc(100vh - 0.852rem);

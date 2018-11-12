@@ -86,6 +86,7 @@ import Footer from "../common/Footer.vue";
 import FAside from "../common/FAside";
 import BackTop from "../common/BackTop.vue";
 import Scroll from "./foreground/bScroll";
+import store from '../../store/index.js'
 
 export default {
   name: "index",
@@ -109,7 +110,12 @@ export default {
     this.reqData(1);
   },
   activated() {
+    // this.$store.commit("navMenuSelect", "主页");
     // this.$refs.listContent.scrollTo(0, this.$store.getters.indexPageScroll);
+  },
+  beforeRouteEnter(to, from, next){
+    store.commit("navMenuSelect", "主页");
+    next();
   },
   beforeRouteLeave(to, from, next) {
     if (to.path.indexOf("edit-text") != -1) {

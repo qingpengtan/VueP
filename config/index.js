@@ -37,6 +37,13 @@ module.exports = {
       pathRewrite:{
         '^upload/*':'^upload/*'
       }
+    },
+    '/ROO':{
+      target:serverUrl,
+      changeOrigin:true,
+      pathRewrite:{
+        '^ROO/*':'^ROO/*'
+      }
     }
   },
     // Various Dev Server settings
