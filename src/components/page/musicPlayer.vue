@@ -75,6 +75,7 @@ export default {
     let xhr = new XMLHttpRequest();
     let url = this.$route.query.url;
     this.title = this.$route.query.title;
+    document.title = "音乐 - "+this.title;
     this.ac = new (window.AudioContext || window.webkitAudioContext)();
     this.analyser = this.ac.createAnalyser();
     this.loadMusic(xhr, url.split("ROO")[1]);
@@ -242,16 +243,18 @@ export default {
 .music-mask {
   position: absolute;
   background: rgba(0, 0, 0, 0.4);
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
+  width: 40%;
+  height: 40%;
+  left: 100%;
+  top: 100%;
+  margin-left: -70%;
+  margin-top: -40%;
   text-align: center;
   color: white;
 }
 .mask-img {
   animation: circle 6s linear 0s infinite;
-  margin-top: 100px;
+  margin-top: 20px;
   /* animation:circle 1.5s infinite linear; */
 }
 @keyframes circle {
@@ -286,6 +289,18 @@ export default {
     overflow: hidden;
     font-size: 14px;
   }
+  .music-mask {
+  width: 100%;
+  height: 100%;
+  left: 0%;
+  top: 0%;
+  margin-left: 0%;
+  margin-top: 0%;
+}
+.mask-img {
+  margin-top: 150px;
+  /* animation:circle 1.5s infinite linear; */
+}
 }
 </style>
 
