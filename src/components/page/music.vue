@@ -117,10 +117,12 @@ export default {
     },
     pushMusicPlayer() {
       let audio = document.querySelector(".aplayer audio");
+      let title = document.querySelector(".aplayer-title");
       this.$router.push({
         path: "/music-player",
         query:{
-          url:audio.src
+          url:audio.src,
+          title:title.innerText
         }
       });
     }

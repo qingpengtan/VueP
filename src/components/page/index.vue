@@ -245,6 +245,7 @@ export default {
   font-size: 14px;
 }
 .publish-daily .daily-breif a {
+  font-size: 13px;
   color: #3a8ee6;
 }
 

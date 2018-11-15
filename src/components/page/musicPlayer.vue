@@ -2,15 +2,14 @@
 <template>
 
   <div>
-
     <Header></Header>
-
     <div class="layout-main">
       <div class="layout-content">
         <div class="main-content" style="padding: 8px 32px 32px;">
           <v-scroll ref="listContent" class="v-scroll">
-            <div>
+            <div style="margin:10px;">
               音量：<input type="range" min="0" max="100" v-model="changeValue" @change="changeVolume">
+              歌曲：{{title}}
             </div>
             <div id="player" class="music-player">
 
@@ -66,7 +65,8 @@ export default {
       analyser: "",
       ctx: "",
       size: 128,
-      objColor: []
+      objColor: [],
+      title:""
     };
   },
   mounted() {
@@ -74,6 +74,7 @@ export default {
     this.changeColor();
     let xhr = new XMLHttpRequest();
     let url = this.$route.query.url;
+    this.title = this.$route.query.title;
     this.ac = new (window.AudioContext || window.webkitAudioContext)();
     this.analyser = this.ac.createAnalyser();
     this.loadMusic(xhr, url.split("ROO")[1]);

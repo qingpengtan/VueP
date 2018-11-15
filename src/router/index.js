@@ -5,6 +5,13 @@ Vue.use(Router);
 
 export default new Router({
     linkActiveClass: 'active-class',
+    scrollBehavior(to,form,savePosition){
+        if(savePosition){
+            return savePosition
+        }else{
+            return{x:0,y:0}
+        }
+    },
     routes: [{
             path: '/',
             component: resolve => require(['../components/page/index.vue'], resolve),
