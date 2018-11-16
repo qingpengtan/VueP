@@ -185,6 +185,9 @@ export default {
     };
   },
   activated() {
+    if (this.$route.path.indexOf("/search") == -1) {
+      this.searchContent = "";
+    }
     let fixedHeader = document.getElementsByClassName(
       "header-content header-fixed"
     )[0];
@@ -283,9 +286,10 @@ export default {
   },
   methods: {
     searchArticle() {
+      if (!this.searchContent) return;
       this.$router.push({
         path: "/search",
-        query: { search: this.searchContent }
+        query: { search: this.searchContent.trim() }
       });
     },
     triume() {

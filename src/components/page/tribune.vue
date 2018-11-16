@@ -7,44 +7,44 @@
     <div class="layout-main">
       <div class="layout-content">
         <div class="main-content" style="padding: 8px 32px 32px;">
-            <v-scroll ref="listContent" :data="articleList" :pullup="pullup" :listenScroll="true" @scrollToEnd="moreData()" class="v-scroll" @scroll="scrollC">
-              <ul>
-                <li class="ant-list-item" v-for=" article in articleList" :key="article.articleId">
+          <v-scroll ref="listContent" :data="articleList" :pullup="pullup" :listenScroll="true" @scrollToEnd="moreData()" class="v-scroll" @scroll="scrollC">
+            <ul>
+              <li class="ant-list-item" v-for=" article in articleList" :key="article.articleId">
+                <div>
+                  <span class="article-tag">{{article.articleTagName}}</span>
+                  <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
+                    <h4>{{article.articleTitle}}</h4>
+                  </router-link>
+                </div>
+                <div class="ant-list-item-content">
                   <div>
-                    <span class="article-tag">{{article.articleTagName}}</span>
-                    <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
-                      <h4>{{article.articleTitle}}</h4>
-                    </router-link>
-                  </div>
-                  <div class="ant-list-item-content">
-                    <div>
-                      <div class="text-content">
-                        {{article.articleBrief}}
-                      </div>
-                      <div class="publish">
-                        <span>
-                          <img :src="article.userPic">
-                        </span>
-                          {{article.userName}} 
-                          <span style="color:#aaa;font-size:11px;">发布于 {{article.createTime}}</span>
-                      </div>
+                    <div class="text-content">
+                      {{article.articleBrief}}
+                    </div>
+                    <div class="publish">
+                      <span>
+                        <img :src="article.userPic">
+                      </span>
+                      {{article.userName}}
+                      <span style="color:#aaa;font-size:11px;">发布于 {{article.createTime}}</span>
                     </div>
                   </div>
-                </li>
-                <div class="mobile-more">
-                  <span id="loading">
-                    正在加载中 <i class="el-icon-loading"></i>
-                  </span>
-                  <span id="nodata" style="display:none">
-                    没有更多数据啦
-                  </span>
                 </div>
-              </ul>
-              <div class="pc-more" @click="moreData" v-show="disMore">
-                查看更多
+              </li>
+              <div class="mobile-more">
+                <span id="loading">
+                  正在加载中 <i class="el-icon-loading"></i>
+                </span>
+                <span id="nodata" style="display:none">
+                  没有更多数据啦
+                </span>
               </div>
+            </ul>
+            <div class="pc-more" @click="moreData" v-show="disMore">
+              查看更多
+            </div>
 
-            </v-scroll>
+          </v-scroll>
           <div class="aside-content">
             <FAside></FAside>
           </div>
@@ -66,7 +66,7 @@ import Scroll from "./foreground/bScroll";
 import FAside from "../common/FAside";
 import BackTop from "../common/BackTop.vue";
 export default {
-  name: "index",
+  name: "tribune",
   components: {
     Header,
     Footer,
@@ -87,6 +87,7 @@ export default {
     this.reqData(1);
   },
   activated() {
+    console.log(this);
     // this.$refs.listContent.refresh();
     // this.$refs.listContent.scrollTo(0, this.$store.getters.dailyPageScroll);
   },
@@ -100,27 +101,31 @@ export default {
   },
   watch: {
     $route(to, from) {
-      this.$http
-        .http("/index/list", { articleTagId: this.$route.query.articleTagId })
-        .then(
-          res => {
-            this.totalPage = res.data.totalPage;
-            this.current = res.data.current;
-            this.articleList = res.data.articleList;
-            if (res.data.articleList.length < 10) {
-              this.$el.querySelector(".pc-more").innerHTML = "没有更多数据了";
-              this.$el.querySelector("#loading").style.display = "none";
-              this.$el.querySelector("#nodata").style.display = "inline";
-            } else {
-              this.$el.querySelector(".pc-more").innerHTML = "查看更多";
-              this.$el.querySelector("#loading").style.display = "inline";
-              this.$el.querySelector("#nodata").style.display = "none";
+      if(from.path.indexOf("detail") != -1) return;
+      if (to.path.indexOf("/tribune") != -1) {
+        this.articleList = [];
+        this.$http
+          .http("/index/list", { articleTagId: this.$route.query.articleTagId })
+          .then(
+            res => {
+              this.totalPage = res.data.totalPage;
+              this.current = res.data.current;
+              this.articleList = res.data.articleList;
+              if (res.data.articleList.length < 10) {
+                this.$el.querySelector(".pc-more").innerHTML = "没有更多数据了";
+                this.$el.querySelector("#loading").style.display = "none";
+                this.$el.querySelector("#nodata").style.display = "inline";
+              } else {
+                this.$el.querySelector(".pc-more").innerHTML = "查看更多";
+                this.$el.querySelector("#loading").style.display = "inline";
+                this.$el.querySelector("#nodata").style.display = "none";
+              }
+            },
+            response => {
+              console.log("error");
             }
-          },
-          response => {
-            console.log("error");
-          }
-        );
+          );
+      }
     }
   },
   methods: {

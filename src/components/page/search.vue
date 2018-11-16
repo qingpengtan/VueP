@@ -6,7 +6,7 @@
 
     <div class="layout-main">
       <div style="width:100%;color:#999;font-size:13px;text-align:center">
-        共搜索到了{{totalSize}}篇文章
+        共搜索到了{{totalSize}}篇 “{{articleTitle}}” 的相关文章
       </div>
       <div class="layout-content">
         <div class="main-content" style="padding: 8px 32px 32px;">
