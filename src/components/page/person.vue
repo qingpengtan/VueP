@@ -10,7 +10,7 @@
 
         <div class="header-bg">
 
-          <div style="position:absolute;top:14px;left:18px" class="home-btn">
+          <div style="position:absolute;top:8px;left:14px" class="home-btn">
             <router-link to='/'>
               <img src="../../assets/HOME.png" alt="">
             </router-link>
@@ -149,7 +149,7 @@
                     </div>
                   </div>
 
-                  <div class="login-out">
+                  <div class="login-out" v-show="!isEdit">
                     <el-button type="danger" @click="loginOut">退出登录</el-button>
                   </div>
                 </el-form>
@@ -578,11 +578,11 @@ export default {
     margin-top: 0;
   }
   .header-bg {
-    height: 3.448276rem;
+    height: 2.748276rem;
   }
   .header-bg .header-avater {
     left: -0.344828rem;
-    top: 1.965517rem;
+    top: 1.265517rem;
   }
   .header-bg .header-avater img {
     width: 1.724138rem;
@@ -599,6 +599,7 @@ export default {
   .header-right-contatin {
     margin-right: 0.344828rem;
     margin-top: 2.413793rem;
+    display:none;
   }
   .header-right-contatin .header-right-div {
     margin-left: 0.344828rem;
@@ -619,7 +620,7 @@ export default {
     margin-bottom: 0px;
   }
   .main-content >>> .el-tabs--border-card {
-    height: calc(100vh - 20px - 3.448276rem);
+    height: calc(100vh - 20px - 2.748276rem);
     border: none;
   }
   .main-content >>> .el-tabs__content {

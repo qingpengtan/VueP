@@ -12,13 +12,15 @@
               <h2>{{article.articleTitle}}</h2>
             </div>
             <div class="publish">
-              <span>作者：{{article.userName}}</span>
-              <span>类型：{{article.articleTagName}}</span>
+              <span class="avater">
+                <img :src="article.userPic" alt="">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{article.userName}}
+                </span>
               <span> {{article.createTime}}</span>
-                <router-link :to="{path:'/edit-text', query:{articleId:article.articleId}}" v-show="isEdit">
-                  <i class="el-icon-edit" style="color:#43bcff;font-size:14px" ></i>
-                </router-link>
-
+              &nbsp;&nbsp;类型:{{article.articleTagName}}&nbsp;&nbsp;
+              <router-link :to="{path:'/edit-text', query:{articleId:article.articleId}}" v-show="isEdit">
+                <i class="el-icon-edit" style="color:#43bcff;font-size:14px"></i>
+              </router-link>
             </div>
             <div class="ant-list-item-content">
               <div>
@@ -250,9 +252,17 @@ export default {
   line-height: 1.5;
   display: flex;
 }
-.publish span{
+.publish span {
   flex: 1;
   overflow: hidden;
+  position: relative;
+}
+.publish .avater img{
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px
 }
 
 .ant-list-item-action li {

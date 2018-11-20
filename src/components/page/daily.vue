@@ -232,7 +232,7 @@ export default {
   font-size: 14px;
 }
 .publish-daily .daily-title img {
-  top: -4px;
+  top: -5px;
   margin-right: 5px;
   width: 30px;
   height: 30px;
