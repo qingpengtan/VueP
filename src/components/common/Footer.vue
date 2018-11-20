@@ -1,7 +1,7 @@
 <template>
   <div class="footer-warp">
     <div class="footer-content">
-        ©2018 就让你走 &nbsp;&nbsp;&nbsp;Power By Tang
+        ©2018 就让你走 &nbsp;&nbsp;&nbsp;Created By Tang
     </div>
   </div>
 </template>

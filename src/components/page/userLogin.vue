@@ -6,72 +6,74 @@
 
       <div class="header-img">
         <img src="../../assets/timg.gif" alt="">
-            </div>
-        <div class="header-input" v-show="isLogin">
+      </div>
+      <div class="header-input" v-show="isLogin">
 
-          <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
+        <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
 
-            <el-form-item prop="username" :error="errorMsg">
-              <el-input type="text" v-model="ruleForm.username" placeholder="请输入手机号或者用户名"></el-input>
-            </el-form-item>
+          <el-form-item prop="username" :error="errorMsg">
+            <el-input type="text" v-model="ruleForm.username" placeholder="请输入手机号或者用户名"></el-input>
+          </el-form-item>
 
-            <el-form-item prop="password">
-              <el-input type="password" v-model="ruleForm.password" placeholder="请输入密码"  @keyup.enter.native="login('ruleForm')"></el-input>
-            </el-form-item>
-          </el-form>
-          <div class="forget-pswd">
-            <span style="float:right">
-              忘记密码
-            </span>
-          </div>
-          <button class="login" style="margin-top:25px" @click="login('ruleForm')">登录</button>
-
-          <div class="login-footer">
-            纸上得来终觉浅，绝知此事要躬行
-          </div>
-
+          <el-form-item prop="password">
+            <el-input type="password" v-model="ruleForm.password" placeholder="请输入密码" @keyup.enter.native="login('ruleForm')"></el-input>
+          </el-form-item>
+        </el-form>
+        <div class="forget-pswd">
+          <span style="float:right">
+            忘记密码
+          </span>
         </div>
+        <button class="login" style="margin-top:25px" @click="login('ruleForm')">登录</button>
 
-        <div class="header-input" v-show="!isLogin">
-
-          <el-form :model="registerForm" :rules="registerRule" ref="registerForm">
-            <el-form-item prop="userPhone" :error="errorRegister">
-              <el-input type="text" v-model="registerForm.userPhone" placeholder="请输入手机号"></el-input>
-            </el-form-item>
-
-            <el-form-item prop="password">
-              <el-input type="password" v-model="registerForm.password" placeholder="请输入密码"></el-input>
-            </el-form-item>
-
-            <el-form-item>
-              <el-input type="text" v-model="registerForm.imageCode" placeholder="请输入验证码"></el-input>
-            </el-form-item>
-          </el-form>
-
-          <div class="send-code" @click="changeCode()">
-            <img :src=imageCode alt="">
-          </div>
-
-            <button class="register" @click="register('registerForm')">注册</button>
-
-            <div class="register-footer">
-              查看用户协议
-            </div>
-
-          </div>
-
-          <div class="login-tip">
-            <span v-show="!isLogin">
-              已有账号？<span @click="isLogin=!isLogin" class="point">登录</span>
-            </span>
-            <span v-show="isLogin">
-              没有账号？<span @click="isLogin=!isLogin" class="point">注册</span>
-            </span>
-          </div>
-
+        <div class="login-footer">
+          纸上得来终觉浅，绝知此事要躬行
+          <br>
+           &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- Created By Tang 就让你走
         </div>
 
       </div>
+
+      <div class="header-input" v-show="!isLogin">
+
+        <el-form :model="registerForm" :rules="registerRule" ref="registerForm">
+          <el-form-item prop="userPhone" :error="errorRegister">
+            <el-input type="text" v-model="registerForm.userPhone" placeholder="请输入手机号"></el-input>
+          </el-form-item>
+
+          <el-form-item prop="password">
+            <el-input type="password" v-model="registerForm.password" placeholder="请输入密码"></el-input>
+          </el-form-item>
+
+          <el-form-item>
+            <el-input type="text" v-model="registerForm.imageCode" placeholder="请输入验证码"></el-input>
+          </el-form-item>
+        </el-form>
+
+        <div class="send-code" @click="changeCode()">
+          <img :src=imageCode alt="">
+        </div>
+
+        <button class="register" @click="register('registerForm')">注册</button>
+
+        <div class="register-footer">
+          查看用户协议
+        </div>
+
+      </div>
+
+      <div class="login-tip">
+        <span v-show="!isLogin">
+          已有账号？<span @click="isLogin=!isLogin" class="point">登录</span>
+        </span>
+        <span v-show="isLogin">
+          没有账号？<span @click="isLogin=!isLogin" class="point">注册</span>
+        </span>
+      </div>
+
+    </div>
+
+  </div>
 
 </template>
 <script>
@@ -121,7 +123,7 @@ export default {
                 localStorage.setItem("x_userName", res.data.userName);
                 localStorage.setItem("x_userPhone", res.data.userPhone);
                 localStorage.setItem("x_role", res.data.role);
-                localStorage.setItem("x_userPic",res.data.userPic);
+                localStorage.setItem("x_userPic", res.data.userPic);
                 this.$router.push("/");
               } else {
                 this.errorMsg = res.msg;
@@ -259,7 +261,7 @@ export default {
   margin-top: 30px;
   width: 100%;
   text-align: center;
-    color: #999999;
+  color: #999999;
 }
 .register-footer {
   color: #999999;
@@ -275,7 +277,7 @@ export default {
 }
 .login-tip .point {
   cursor: pointer;
-  color:#2ab1ea;
+  color: #2ab1ea;
 }
 .send-code {
   position: absolute;
@@ -297,7 +299,8 @@ export default {
 @media only screen and (max-width: 481px) {
   .login-register-home {
     width: 100%;
-    margin-top: 1.37931rem;
+    margin-top: 2.37931rem;
+    position: relative;
   }
   .header-input {
     padding: 0 40px 36px 40px;
@@ -308,12 +311,35 @@ export default {
     height: 0.62069rem;
     width: 2.068966rem;
     left: 3.706897rem;
+    top: 154px;
     line-height: 0.62069rem;
   }
 
   .send-code img {
     height: 0.62069rem;
     width: 2.068966rem;
+  }
+  .header-img {
+    display: none;
+  }
+  .login-register-home {
+    background: none;
+    color: white;
+    font-weight: bold;
+  }
+  .header-input {
+    background: none;
+  }
+  .login-footer,
+  .register-footer {
+    color: white;
+  }
+  .login-tip {
+    font-weight: bold;
+    color: white;
+  }
+  .login-tip .point {
+    font-weight: bold;
   }
 }
 </style>
