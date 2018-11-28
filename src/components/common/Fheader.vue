@@ -610,10 +610,9 @@ export default {
     left: 0;
     top: 0;
     width: 100%;
-    height: 100%;
     background: rgba(0, 21, 41, 0.4);
     z-index: 100000;
-    overflow: hidden;
+    font-size: 0;
   }
   .mobile-side-ul{
     overflow-y: scroll;
