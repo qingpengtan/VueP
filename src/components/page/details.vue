@@ -208,7 +208,7 @@ import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 import Header from "../common/Fheader.vue";
-import Scroll from "./foreground/bScroll";
+import Scroll from "./publics/bScroll";
 import FAside from "../common/FAside";
 import Footer from "../common/Footer.vue";
 import BackTop from "../common/BackTop.vue";

@@ -152,28 +152,28 @@ export default new Router({
         },
         {
             path: '/404',
-            component: resolve => require(['../components/page/404.vue'], resolve),
+            component: resolve => require(['../components/page/publics/404.vue'], resolve),
             meta: {
                 title: '404'
             }
         },
         {
             path: '/403',
-            component: resolve => require(['../components/page/403.vue'], resolve),
+            component: resolve => require(['../components/page/publics/403.vue'], resolve),
             meta: {
                 title: '403'
             }
         },
         {
             path: '/500',
-            component: resolve => require(['../components/page/500.vue'], resolve),
+            component: resolve => require(['../components/page/publics/500.vue'], resolve),
             meta: {
                 title: '500'
             }
         },
         {
             path: '*',
-            component: resolve => require(['../components/page/404.vue'], resolve),
+            component: resolve => require(['../components/page/publics/404.vue'], resolve),
             meta: {
                 title: '404'
             }

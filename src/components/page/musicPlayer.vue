@@ -44,7 +44,7 @@
 import Header from "../common/Fheader.vue";
 import Footer from "../common/Footer.vue";
 import FAside from "../common/FAside";
-import Scroll from "./foreground/bScroll";
+import Scroll from "./publics/bScroll";
 import store from "../../store/index.js";
 
 export default {

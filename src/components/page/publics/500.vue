@@ -1,11 +1,11 @@
 <template>
     <div class="error-page">
         <div class="img-tip">
-            <img src="../../assets/404.jpg" alt="">
+            <img src="../../../assets/500.png" alt="">
         </div>
         <div class="error-handle">
           <router-link to="/">
-            <el-button type="primary">返回首页</el-button>
+            <el-button type="primary" >返回首页</el-button>
           </router-link>
           <el-button class="error-btn" type="primary" @click="goBack">返回上一页</el-button>
       </div>
@@ -44,8 +44,8 @@ export default {
 }
 @media only screen and (max-width: 481px) {
   .img-tip,.img-tip img {
-      margin-top: 100px;
     width: 100%;
+    margin-top: 100px;
   }
 }
 </style>

@@ -79,7 +79,7 @@
     <div class="header-content header-fixed">
       <div class=" fixed-header">
         <ul>
-          <router-link tag="li" to='/' style="padding:0;top:-8px;position:relative" class="header-logo">
+          <router-link tag="li" to='/' style="padding:0;top:-8px;position:relative;border-bottom:none" class="header-logo">
             <img class="header-left" src="../../assets/let.png" />
           </router-link>
           <router-link tag="li" to='/' exact>主页</router-link>
@@ -151,7 +151,7 @@
         </li>
         <li @click="dialogVisible = true,isCollapse = true">写说说</li>
         <li @click.stop="triume()">论坛 <i id="triArrow" class="el-icon-arrow-down"></i></li>
-        <li v-show="showSecond">
+        <li v-show="showSecond" >
           <ul class="mobile-ul-sec">
             <li v-for=" tag in articleTag" :key="tag.articleTagId" @click="selectMenu($event)">
               <router-link @click="pushTribune()" :to="{path:`/tribune/${tag.articleTagId}`}">
@@ -613,7 +613,11 @@ export default {
     height: 100%;
     background: rgba(0, 21, 41, 0.4);
     z-index: 100000;
+    overflow: hidden;
+  }
+  .mobile-side-ul{
     overflow-y: scroll;
+
   }
    .mobile-side li a{
      border: none;
