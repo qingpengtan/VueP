@@ -68,7 +68,7 @@ export default new Router({
             path: '/tribune/:id',
             component: resolve => require(['../components/page/tribune.vue'], resolve),
             meta: {
-                title: '论坛',
+                // title: '论坛',
                 keepAlive: true
             }
         },

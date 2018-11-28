@@ -4,10 +4,25 @@
     <Header></Header>
     <div class="layout-main">
       <div class="layout-content">
-        <div class="main-content" style="padding: 8px 32px 32px;">
-          <v-scroll ref="listContent" :data="articleList" :pullup="pullup" :listenScroll="true" @scrollToEnd="moreData()" class="v-scroll" @scroll="scrollC">
+        <div
+          class="main-content"
+          style="padding: 8px 32px 32px;"
+        >
+          <v-scroll
+            ref="listContent"
+            :data="articleList"
+            :pullup="pullup"
+            :listenScroll="true"
+            @scrollToEnd="moreData()"
+            class="v-scroll"
+            @scroll="scrollC"
+          >
             <ul>
-              <li class="ant-list-item" v-for=" article in articleList" :key="article.articleId">
+              <li
+                class="ant-list-item"
+                v-for=" article in articleList"
+                :key="article.articleId"
+              >
                 <div v-if="article.articleTag !=1">
                   <div>
                     <span class="article-tag">{{article.articleTagName}}</span>
@@ -40,13 +55,14 @@
                           {{article.createTime}}
                         </span>
                       </span>
-
+                      <span class="daily-detail">
+                        <router-link :to="{path:`/detail/${article.articleId}`}">
+                          <img src="../../assets/detail.png" style="width:20px;height:20px" alt="详情" title="详情">
+                        </router-link>
+                      </span>
                     </div>
                     <div class="daily-breif">
                       {{article.articleBrief}}
-                      <router-link :to="{path:`/detail/${article.articleId}`}">
-                        查看全文
-                      </router-link>
                     </div>
                   </div>
                 </div>
@@ -55,13 +71,20 @@
                 <span id="loading">
                   正在加载中 <i class="el-icon-loading"></i>
                 </span>
-                <span id="nodata" style="display:none">
+                <span
+                  id="nodata"
+                  style="display:none"
+                >
                   没有更多数据啦
                 </span>
               </div>
             </ul>
-            <div class="pc-more" @click="moreData" v-show="disMore">
-              查看更多
+            <div
+              class="pc-more"
+              @click="moreData"
+              v-show="disMore"
+            >
+              加载更多
             </div>
 
           </v-scroll>
@@ -86,7 +109,7 @@ import Footer from "../common/Footer.vue";
 import FAside from "../common/FAside";
 import BackTop from "../common/BackTop.vue";
 import Scroll from "./publics/bScroll";
-import store from '../../store/index.js'
+import store from "../../store/index.js";
 
 export default {
   name: "index",
@@ -113,7 +136,7 @@ export default {
     // this.$store.commit("navMenuSelect", "主页");
     // this.$refs.listContent.scrollTo(0, this.$store.getters.indexPageScroll);
   },
-  beforeRouteEnter(to, from, next){
+  beforeRouteEnter(to, from, next) {
     store.commit("navMenuSelect", "主页");
     next();
   },
@@ -227,6 +250,13 @@ export default {
 }
 .publish-daily .daily-title {
   font-size: 14px;
+  position: relative;
+}
+
+.daily-detail{
+  position: absolute;
+  right: 0;
+  top: 2px;
 }
 .publish-daily .daily-title img {
   top: -5px;
@@ -276,10 +306,12 @@ export default {
   top: -6px;
 }
 .pc-more {
-  width: 720px;
+  width: 120px;
   height: 35px;
+  margin: 0 auto;
+  margin-top: 15px;
   line-height: 35px;
-  background: #f2f2f2;
+  border: 1px solid #999999;
   border-radius: 4px;
   color: #999999;
   text-align: center;
@@ -288,8 +320,8 @@ export default {
   display: block;
 }
 .pc-more:hover {
-  background: #dddddd;
-  color: #666;
+  border: 1px solid #43bcff;
+  color:  #43bcff;
 }
 .mobile-more {
   display: none;

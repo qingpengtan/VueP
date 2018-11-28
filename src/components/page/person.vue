@@ -173,7 +173,7 @@
                   </span>
                 </div>
                 <div class="pc-more" @click="moreData" v-show="disMore">
-                  查看更多
+                  加载更多
                 </div>
 
               </el-card>
@@ -523,21 +523,22 @@ export default {
  color: #0381c6!important;
 }
 .pc-more {
-  width: 80%;
+  width: 120px;
   height: 35px;
+  margin: 0 auto;
+  margin-top: 15px;
   line-height: 35px;
-  background: #f2f2f2;
+  border: 1px solid #999999;
   border-radius: 4px;
   color: #999999;
   text-align: center;
   font-size: 13px;
   cursor: pointer;
   display: block;
-  margin: 5px;
 }
-.pc-more:hover{
-  background: #dddddd;
-  color: #666;
+.pc-more:hover {
+  border: 1px solid #43bcff;
+  color:  #43bcff;
 }
 .mobile-more {
   display: none;

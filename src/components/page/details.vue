@@ -341,7 +341,7 @@ export default {
   height: 15px;
   border-radius: 50%;
   position: absolute;
-  top: 2px;
+  top: 1px;
 }
 
 .ant-list-item-action li {

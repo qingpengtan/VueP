@@ -16,7 +16,7 @@
             </div>
             <div class="music-operate">
               <el-button type="primary" small @click="play">播放</el-button>
-              <el-button type="primary" small @click="pause">暂停</el-button>
+              <el-button type="primary" small @click="pause">停止</el-button>
               <el-button type="primary" small @click="changeColor">切换颜色</el-button>
             </div>
             <div class="music-mask">

@@ -6,10 +6,25 @@
 
     <div class="layout-main">
       <div class="layout-content">
-        <div class="main-content" style="padding: 8px 32px 32px;">
-          <v-scroll ref="listContent" :data="articleList" :pullup="pullup" :listenScroll="true" @scrollToEnd="moreData()" class="v-scroll" @scroll="scrollC">
+        <div
+          class="main-content"
+          style="padding: 8px 32px 32px;"
+        >
+          <v-scroll
+            ref="listContent"
+            :data="articleList"
+            :pullup="pullup"
+            :listenScroll="true"
+            @scrollToEnd="moreData()"
+            class="v-scroll"
+            @scroll="scrollC"
+          >
             <ul>
-              <li class="ant-list-item" v-for=" article in articleList" :key="article.articleId">
+              <li
+                class="ant-list-item"
+                v-for=" article in articleList"
+                :key="article.articleId"
+              >
                 <div>
                   <span class="article-tag">{{article.articleTagName}}</span>
                   <router-link :to="{path:`/detail/${article.articleId}`}">
@@ -35,13 +50,20 @@
                 <span id="loading">
                   正在加载中 <i class="el-icon-loading"></i>
                 </span>
-                <span id="nodata" style="display:none">
+                <span
+                  id="nodata"
+                  style="display:none"
+                >
                   没有更多数据啦
                 </span>
               </div>
             </ul>
-            <div class="pc-more" @click="moreData" v-show="disMore">
-              查看更多
+            <div
+              class="pc-more"
+              @click="moreData"
+              v-show="disMore"
+            >
+              加载更多
             </div>
 
           </v-scroll>
@@ -85,6 +107,7 @@ export default {
   },
   mounted() {
     this.reqData(1);
+    this.setTitle();
   },
   activated() {
     // this.$refs.listContent.refresh();
@@ -100,8 +123,9 @@ export default {
   },
   watch: {
     $route(to, from) {
-      if(from.path.indexOf("detail") != -1) return;
+      if (from.path.indexOf("detail") != -1) return;
       if (to.path.indexOf("/tribune") != -1) {
+        this.setTitle();
         this.articleList = [];
         this.$http
           .http("/index/list", { articleTagId: this.$route.params.id })
@@ -115,7 +139,7 @@ export default {
                 this.$el.querySelector("#loading").style.display = "none";
                 this.$el.querySelector("#nodata").style.display = "inline";
               } else {
-                this.$el.querySelector(".pc-more").innerHTML = "查看更多";
+                this.$el.querySelector(".pc-more").innerHTML = "加载更多";
                 this.$el.querySelector("#loading").style.display = "inline";
                 this.$el.querySelector("#nodata").style.display = "none";
               }
@@ -163,6 +187,32 @@ export default {
     },
     scrollC(pos) {
       this.$store.commit("dailyPageScroll", pos.y);
+    },
+    setTitle() {
+      let id = this.$route.params.id;
+      switch (id) {
+        case "2":
+          document.title = "Java论坛";
+          break;
+        case "3":
+          document.title = "Web开发论坛";
+          break;
+        case "8":
+          document.title = "NodeJS论坛";
+          break;
+        case "4":
+          document.title = "Go语言论坛";
+          break;
+        case "5":
+          document.title = "大数据论坛";
+          break;
+        case "6":
+          document.title = "Python论坛";
+          break;
+        default:
+          document.title = "其他论坛";
+          break;
+      }
     }
   }
 };
@@ -260,10 +310,12 @@ export default {
   top: -6px;
 }
 .pc-more {
-  width: 720px;
+  width: 120px;
   height: 35px;
+  margin: 0 auto;
+  margin-top: 15px;
   line-height: 35px;
-  background: #f2f2f2;
+  border: 1px solid #999999;
   border-radius: 4px;
   color: #999999;
   text-align: center;
@@ -272,8 +324,8 @@ export default {
   display: block;
 }
 .pc-more:hover {
-  background: #dddddd;
-  color: #666;
+  border: 1px solid #43bcff;
+  color: #43bcff;
 }
 .mobile-more {
   display: none;
