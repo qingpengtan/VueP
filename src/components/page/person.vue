@@ -11,7 +11,7 @@
         <div class="header-bg">
 
           <div style="position:absolute;top:8px;left:14px" class="home-btn">
-            <router-link to='/'>
+            <router-link to='/' style="border-bottom:none">
               <img src="../../assets/HOME.png" alt="">
             </router-link>
           </div>

@@ -11,7 +11,7 @@
                 <div v-if="article.articleTag !=1">
                   <div>
                     <span class="article-tag">{{article.articleTagName}}</span>
-                    <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
+                    <router-link :to="{path:`/detail/${article.articleId}`}">
                       <h4>{{article.articleTitle}}</h4>
                     </router-link>
                   </div>
@@ -44,7 +44,7 @@
                     </div>
                     <div class="daily-breif">
                       {{article.articleBrief}}
-                      <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
+                      <router-link :to="{path:`/detail/${article.articleId}`}">
                         查看全文
                       </router-link>
                     </div>

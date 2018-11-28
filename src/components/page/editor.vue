@@ -6,7 +6,7 @@
 
         <div class="header-navbar">
           <router-link to='/'>
-            <img class="header-left" src="../../assets/logo.gif" />
+            <img class="header-left" src="../../assets/let.png" />
           </router-link>
           <div class="header-right">
             <span class="right-span">
@@ -201,11 +201,14 @@ export default {
 .header-left {
   cursor: pointer;
   font-size: 20px;
-  line-height: 64px;
   transition: all 0.3s, padding 0s;
-  width: 68px;
-  height: 64px;
+  height: 50px;
+  position: relative;
+  top: 7px;
   display: inline-block;
+}
+.header-navbar a{
+  border-bottom: none;
 }
 
 .header-right {
@@ -318,12 +321,7 @@ export default {
   }
 
   .header-left {
-    cursor: pointer;
-    font-size: 20px;
-    height: 0.85rem;
-    line-height: 0.85rem;
-    transition: all 0.3s, padding 0s;
-    width: 0.85rem;
+    height: .689655rem;
     display: inline-block;
   }
 

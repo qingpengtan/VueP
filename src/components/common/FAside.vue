@@ -6,7 +6,7 @@
       </div>
       <ul class="aside-list">
         <li v-for="article in recentArticle" :key="article.articleId">
-          <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
+          <router-link :to="{path:`/detail/${article.articleId}`}">
             {{article.articleTitle}}
           </router-link>
         </li>
@@ -18,7 +18,7 @@
       </div>
       <ul class="aside-list">
         <li v-for="article in myRecentArticle" :key="article.articleId">
-          <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
+          <router-link :to="{path:`/detail/${article.articleId}`}">
             {{article.articleTitle}}
           </router-link>
         </li>
@@ -92,6 +92,7 @@ export default {
 }
 .aside-list li a {
   color: #3a8ee6;
+  border-bottom: none;
 }
 .aside-list li a:hover {
   color: #0454a9;

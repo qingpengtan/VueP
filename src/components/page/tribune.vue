@@ -12,7 +12,7 @@
               <li class="ant-list-item" v-for=" article in articleList" :key="article.articleId">
                 <div>
                   <span class="article-tag">{{article.articleTagName}}</span>
-                  <router-link :to="{path:'/detail', query:{articleId:article.articleId}}">
+                  <router-link :to="{path:`/detail/${article.articleId}`}">
                     <h4>{{article.articleTitle}}</h4>
                   </router-link>
                 </div>
@@ -87,7 +87,6 @@ export default {
     this.reqData(1);
   },
   activated() {
-    console.log(this);
     // this.$refs.listContent.refresh();
     // this.$refs.listContent.scrollTo(0, this.$store.getters.dailyPageScroll);
   },
@@ -105,7 +104,7 @@ export default {
       if (to.path.indexOf("/tribune") != -1) {
         this.articleList = [];
         this.$http
-          .http("/index/list", { articleTagId: this.$route.query.articleTagId })
+          .http("/index/list", { articleTagId: this.$route.params.id })
           .then(
             res => {
               this.totalPage = res.data.totalPage;
@@ -143,7 +142,7 @@ export default {
       this.$http
         .http("/index/list", {
           page: page,
-          articleTagId: this.$route.query.articleTagId
+          articleTagId: this.$route.params.id
         })
         .then(
           res => {

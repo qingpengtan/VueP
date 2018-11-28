@@ -44,7 +44,7 @@ export default new Router({
         },
 
         {
-            path: '/detail',
+            path: '/detail/:id',
             component: resolve => require(['../components/page/details.vue'], resolve),
         },
 
@@ -65,7 +65,7 @@ export default new Router({
             }
         },
         {
-            path: '/tribune',
+            path: '/tribune/:id',
             component: resolve => require(['../components/page/tribune.vue'], resolve),
             meta: {
                 title: '论坛',

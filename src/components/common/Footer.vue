@@ -1,7 +1,10 @@
 <template>
   <div class="footer-warp">
     <div class="footer-content">
+      <div class="footer-text">
+      山河远阔，人间烟火，无一是你，无一不是你。<br>
         ©2018 就让你走 &nbsp;&nbsp;&nbsp;Created By Tang
+      </div>
     </div>
   </div>
 </template>
@@ -25,13 +28,19 @@ export default {
   height: 90px;
   margin: 0 auto;
   text-align: center;
-  line-height: 140px;
   color: #aaaaaa;
   font-size: 13px;
+  position: relative;
 }
-
+.footer-content .footer-text{
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  margin-left: -50%;
+  bottom: 10px;
+}
 @media only screen and (max-width: 481px) {
-  .footer-warp{
+  .footer-warp {
     display: none;
   }
   .footer-warp .footer-content {

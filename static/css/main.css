@@ -31,7 +31,8 @@ a {
     color: #555555;
 }
 .active-class{
-    color: #43BCFF; 
+  border-bottom:2px solid #43bcff;
+  color:  #43bcff;
 }
 
 .content-box {

@@ -5,9 +5,8 @@
 
         <div class="header-navbar">
           <router-link to='/' class="header-logo">
-            <img class="header-left" src="../../assets/logo.gif" />
+            <img class="header-left" src="../../assets/let.png" />
           </router-link>
-          <div class="head-line"></div>
           <div class="nav-arrow" @click="isCollapse = false">
             <img class="header-left" src="../../assets/nav-menu.png" />
           </div>
@@ -58,13 +57,13 @@
     <div class="header-content">
       <ul>
         <router-link tag="li" to='/' exact>主页</router-link>
-        <router-link tag="li" to='/daily'>日志</router-link>
+        <router-link tag="li" to='/daily'>日记</router-link>
         <router-link tag="li" to='/music'>音乐</router-link>
         <el-dropdown trigger="click">
           <li> <i class="el-icon-menu"></i>论坛</li>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item v-for=" tag in articleTag" :key="tag.articleTagId">
-              <router-link @click="pushTribune()" :to="{path:'/tribune', query:{articleTagId:tag.articleTagId}}">
+              <router-link @click="pushTribune()" :to="{path:`/tribune/${tag.articleTagId}`}">
                 {{tag.articleTag}}
               </router-link>
             </el-dropdown-item>
@@ -80,14 +79,17 @@
     <div class="header-content header-fixed">
       <div class=" fixed-header">
         <ul>
+          <router-link tag="li" to='/' style="padding:0;top:-8px;position:relative" class="header-logo">
+            <img class="header-left" src="../../assets/let.png" />
+          </router-link>
           <router-link tag="li" to='/' exact>主页</router-link>
-          <router-link tag="li" to='/daily'>日志</router-link>
+          <router-link tag="li" to='/daily'>日记</router-link>
           <router-link tag="li" to='/music'>音乐</router-link>
           <el-dropdown trigger="click">
             <li> <i class="el-icon-menu"></i>论坛</li>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item v-for=" tag in articleTag" :key="tag.articleTagId">
-                <router-link @click="pushTribune()" :to="{path:'/tribune', query:{articleTagId:tag.articleTagId}}">
+                <router-link @click="pushTribune()" :to="{path:`/tribune/${tag.articleTagId}`}">
                   {{tag.articleTag}}
                 </router-link>
               </el-dropdown-item>
@@ -139,7 +141,7 @@
           <router-link to='/' exact>主页</router-link>
         </li>
         <li @click="selectMenu($event)">
-          <router-link to='/daily'>日志</router-link>
+          <router-link to='/daily'>日记</router-link>
         </li>
         <li @click="selectMenu($event)">
           <router-link to='/music'>音乐</router-link>
@@ -152,7 +154,7 @@
         <li v-show="showSecond">
           <ul class="mobile-ul-sec">
             <li v-for=" tag in articleTag" :key="tag.articleTagId" @click="selectMenu($event)">
-              <router-link @click="pushTribune()" :to="{path:'/tribune', query:{articleTagId:tag.articleTagId}}">
+              <router-link @click="pushTribune()" :to="{path:`/tribune/${tag.articleTagId}`}">
                 {{tag.articleTag}}
               </router-link>
             </li>
@@ -314,8 +316,8 @@ export default {
         case "主页":
           this.$store.commit("navMenuSelect", "主页");
           break;
-        case "日志":
-          this.$store.commit("navMenuSelect", "日志");
+        case "日记":
+          this.$store.commit("navMenuSelect", "日记");
           break;
         case "音乐":
           this.$store.commit("navMenuSelect", "音乐");
@@ -419,22 +421,18 @@ export default {
 .header-left {
   cursor: pointer;
   font-size: 20px;
-  height: 80px;
+  height:50px;
+  position: relative;
+  top: 7px;
   line-height: 64px;
   transition: all 0.3s, padding 0s;
-  width: 68px;
   display: inline-block;
-  transform: scale(-1, 1);
+}
+.header-logo{
+  border-bottom: none;
 }
 
-.head-line {
-  width: 770px;
-  display: inline-block;
-  height: 2px;
-  background: #a5a5b5;
-  position: absolute;
-  bottom: 12px;
-}
+
 .header-center {
   flex: 1;
 }
@@ -510,13 +508,16 @@ export default {
   line-height: 50px;
 }
 .header-content li:hover {
-  background: #43bcff;
-  color: white;
+  border-bottom:2px solid #43bcff;
+  color:  #43bcff;
 }
 .nav-arrow {
   display: none;
 }
-
+>>> .el-dropdown-menu__item a{
+  border-bottom: none;
+  color: #666;
+}
 @media only screen and (max-width: 481px) {
   .layout-header {
     background: #43bcff;
@@ -597,8 +598,7 @@ export default {
   .header-username {
     display: none !important;
   }
-  .header-logo,
-  .head-line {
+  .header-logo {
     display: none;
   }
   .header-fixed {
@@ -615,6 +615,9 @@ export default {
     z-index: 100000;
     overflow-y: scroll;
   }
+   .mobile-side li a{
+     border: none;
+   }
   .mobile-side .mobile-side-ul {
     display: inline-block;
     color: white;

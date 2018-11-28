@@ -27,9 +27,9 @@
         <button class="login" style="margin-top:25px" @click="login('ruleForm')">登录</button>
 
         <div class="login-footer">
-          纸上得来终觉浅，绝知此事要躬行
+          山河远阔，人间烟火，无一是你，无一不是你。
           <br>
-           &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- Created By Tang 就让你走
+           &nbsp; &nbsp; -- Created By Tang 就让你走
         </div>
 
       </div>
@@ -260,12 +260,14 @@ export default {
 .login-footer {
   margin-top: 30px;
   width: 100%;
+  font-size: 12px;
   text-align: center;
   color: #999999;
 }
 .register-footer {
   color: #999999;
   margin-top: 10px;
+  font-size: 12px;
 }
 .login-tip {
   /* padding: 0 40px; */
@@ -308,7 +310,7 @@ export default {
     position: relative;
   }
   .send-code {
-    height: 0.62069rem;
+    height: .517241rem;
     width: 2.068966rem;
     left: 3.706897rem;
     top: 154px;
@@ -316,7 +318,7 @@ export default {
   }
 
   .send-code img {
-    height: 0.62069rem;
+    height:.517241rem;
     width: 2.068966rem;
   }
   .header-img {
