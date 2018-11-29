@@ -30,7 +30,7 @@ router.beforeEach((to, from, next) => {
     const role = localStorage.getItem('x_role');
     if (to.meta.title) {
         document.title = to.meta.title;
-      }
+    }
     // 当用户未登录
     if (StringUtils.isEmpty(token) && (to.path.indexOf('sys') == -1) && to.path != '/user-login') {
         next('/user-login');
@@ -100,7 +100,6 @@ Vue.filter("emptyValue", function (value) {
 
 
 Vue.filter("statusFilter", function (value) {
-
     if (value == 1000) {
         return "正常";
     } else if (value == 2000) {
@@ -110,7 +109,25 @@ Vue.filter("statusFilter", function (value) {
     } else {
         return value;
     }
+});
 
+
+Vue.filter("tagToIcon", function (value) {
+    if (value == "Java") {
+        return "static/img/tag/java.png";
+    } else if (value == "Web开发") {
+        return "static/img/tag/web.png";
+    } else if (value == "NodeJS") {
+        return "static/img/tag/nodejs.png";
+    } else if (value == "Go语言") {
+        return "static/img/tag/golang.png";
+    } else if (value == "大数据") {
+        return "static/img/tag/hadoop-online.png";
+    } else if (value == "Python") {
+        return "static/img/tag/python.png";
+    } else {
+        return "static/img/tag/other.png";
+    }
 });
 
 new Vue({

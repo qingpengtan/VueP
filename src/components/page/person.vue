@@ -160,7 +160,7 @@
 
                 <div v-for="article in articleList" :key=article.articleId class="text-item">
                   <span>{{article.articleTagName}}</span>
-                  <router-link :to="{path:'/detail', query:{articleId:article.articleId}}" style="color:#6cb5ff">
+                  <router-link :to="{path:`/detail/${article.articleId}`}" style="color:#6cb5ff">
                     {{article.articleTitle }}
                   </router-link>
                 </div>

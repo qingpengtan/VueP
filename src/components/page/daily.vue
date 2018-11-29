@@ -22,52 +22,32 @@
           >
             <ul>
               <li
-                class="ant-list-item"
+                class="ant-list-item item-animation"
                 v-for=" article in articleList"
                 :key="article.articleId"
               >
-                <div v-if="article.articleTag !=1">
-                  <div>
-                    <span class="article-tag">{{article.articleTagName}}</span>
-                    <router-link :to="{path:`/detail/${article.articleId}`}">
-                      <h4>{{article.articleTitle}}</h4>
-                    </router-link>
-                  </div>
-                  <div class="ant-list-item-content">
-                    <div>
-                      <div class="text-content">
-                        {{article.articleBrief}}
-                      </div>
-                      <div class="publish">
-                        <span>
-                          <img :src="article.userPic">
-                        </span>
-                        {{article.userName}}
-                        <span style="color:#aaa;font-size:11px;">发布于 {{article.createTime}}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div v-else>
-                  <div class="publish publish-daily">
-                    <div class="daily-title">
-                      <img :src="article.userPic">
-                      <span class="daily-user">
-                        {{article.userName}}<br>
-                        <span style="font-size:11px;position:relative;top:-5px;color:#aaa">
-                          {{article.createTime}}
-                        </span>
+                <div class="publish publish-daily">
+                  <div class="daily-title">
+                    <img :src="article.userPic">
+                    <span class="daily-user">
+                      {{article.userName}}<br>
+                      <span style="font-size:11px;position:relative;top:-5px;color:#aaa">
+                        {{article.createTime}}
                       </span>
-                      <span class="daily-detail">
-                        <router-link :to="{path:`/detail/${article.articleId}`}">
-                          <img src="../../assets/detail.png" style="width:20px;height:20px" alt="详情" title="详情">
-                        </router-link>
-                      </span>
-                    </div>
-                    <div class="daily-breif">
-                      {{article.articleBrief}}
-
-                    </div>
+                    </span>
+                    <span class="daily-detail">
+                      <router-link :to="{path:`/detail/${article.articleId}`}">
+                        <img
+                          src="../../assets/detail.png"
+                          style="width:20px;height:20px"
+                          alt="详情"
+                          title="详情"
+                        >
+                      </router-link>
+                    </span>
+                  </div>
+                  <div class="daily-breif">
+                    {{article.articleBrief}}
                   </div>
                 </div>
               </li>
@@ -180,6 +160,20 @@ export default {
 
 
 <style scoped>
+.item-animation {
+  animation: topIn 2s ease;
+}
+@keyframes topIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
 .layout-main {
   width: 1260px;
   margin: 0 auto;
@@ -221,7 +215,6 @@ export default {
   border-bottom: 1px solid #ddd;
 }
 .ant-list-item-content {
-  margin-top: 5px;
   margin-bottom: 16px;
 }
 
@@ -256,7 +249,7 @@ export default {
   font-size: 14px;
   position: relative;
 }
-.daily-detail{
+.daily-detail {
   position: absolute;
   right: 0;
   top: 2px;
@@ -292,22 +285,6 @@ export default {
   padding-right: 16px;
   cursor: pointer;
 }
-.article-tag + a h4 {
-  display: inline-block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.article-tag {
-  padding: 1px 4px;
-  border-radius: 3px;
-  box-shadow: 0 0 1px 0 #43bcff;
-  background: #43bcff;
-  color: white;
-  font-size: 11px;
-  position: relative;
-  top: -6px;
-}
 .pc-more {
   width: 120px;
   height: 35px;
@@ -324,7 +301,7 @@ export default {
 }
 .pc-more:hover {
   border: 1px solid #43bcff;
-  color:  #43bcff;
+  color: #43bcff;
 }
 .mobile-more {
   display: none;
@@ -351,16 +328,13 @@ export default {
   }
 
   .ant-list-item-content {
-    margin: 0.086207rem 0;
+    margin: 0;
   }
   .ant-list-item-action li {
     padding-right: 8px;
   }
   .publish-daily .daily-breif {
     padding-bottom: 0;
-  }
-  .article-tag + a h4 {
-    max-width: 4.807931rem;
   }
   .pc-more {
     display: none !important;
