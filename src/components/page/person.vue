@@ -10,9 +10,18 @@
 
         <div class="header-bg">
 
-          <div style="position:absolute;top:8px;left:14px" class="home-btn">
-            <router-link to='/' style="border-bottom:none">
-              <img src="../../assets/HOME.png" alt="">
+          <div
+            style="position:absolute;top:8px;left:14px"
+            class="home-btn"
+          >
+            <router-link
+              to='/'
+              style="border-bottom:none"
+            >
+              <img
+                src="../../assets/HOME.png"
+                alt=""
+              >
             </router-link>
           </div>
 
@@ -24,23 +33,55 @@
 -->
           <div class="header-avater">
             <div class="header-avatar-div">
-              <img :src="cropImg" class="pre-img">
-              <input class="crop-input" type="file" name="image" accept="image/*" @change="setImage" />
+              <img
+                :src="cropImg"
+                class="pre-img"
+              >
+              <input
+                class="crop-input"
+                type="file"
+                name="image"
+                accept="image/*"
+                @change="setImage"
+              />
             </div>
-            <el-dialog title="裁剪图片" :visible.sync="dialogVisible" width="50%">
+            <el-dialog
+              title="裁剪图片"
+              :visible.sync="dialogVisible"
+              width="50%"
+            >
               <!-- <vue-cropper ref='cropper' :src="imgSrc" :ready="cropImage" :zoom="cropImage" :cropmove="cropImage" style="width:100%;height:300px;"></vue-cropper> -->
-              <vue-cropper ref='cropper' :src="imgSrc" style="width:100%;height:300px;"></vue-cropper>
-              <span slot="footer" class="dialog-footer">
+              <vue-cropper
+                ref='cropper'
+                :src="imgSrc"
+                style="width:100%;height:300px;"
+              ></vue-cropper>
+              <span
+                slot="footer"
+                class="dialog-footer"
+              >
                 <el-button @click="cancelCrop">取 消</el-button>
-                <el-button type="primary" @click="uploadImage()">确 定</el-button>
+                <el-button
+                  type="primary"
+                  @click="uploadImage()"
+                >确 定</el-button>
               </span>
             </el-dialog>
-            <div class="header-avatar-div mobile-style" style="margin-top:30px">
+            <div
+              class="header-avatar-div mobile-style"
+              style="margin-top:30px"
+            >
               <div>
                 <h1>{{form.userName}}</h1>
               </div>
-              <div style="margin-top:5px" v-if="form.provinceN">{{form.provinceN}} {{form.cityN}}</div>
-              <div style="margin-top:5px" v-else>暂无居住地</div>
+              <div
+                style="margin-top:5px"
+                v-if="form.provinceN"
+              >{{form.provinceN}} {{form.cityN}}</div>
+              <div
+                style="margin-top:5px"
+                v-else
+              >暂无居住地</div>
             </div>
           </div>
           <div class="header-right-contatin">
@@ -58,22 +99,45 @@
             </div>
           </div>
         </div>
-        <div class="main-content" style="padding: 50px 50px 32px 80px">
+        <div
+          class="main-content"
+          style="padding: 50px 50px 32px 80px"
+        >
 
-          <el-tabs value="first" tab-position="left" type="border-card" v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane label="个人资料" name="info">
+          <el-tabs
+            value="first"
+            tab-position="left"
+            type="border-card"
+            v-model="activeName"
+            @tab-click="handleClick"
+          >
+            <el-tab-pane
+              label="个人资料"
+              name="info"
+            >
 
               <div class="person-info-edit">
-                <el-form ref="form" :model="form" style="margin-top:10px" label-width="80px">
+                <el-form
+                  ref="form"
+                  :model="form"
+                  style="margin-top:10px"
+                  label-width="80px"
+                >
 
                   <el-row :gutter="20">
-                    <el-col :xs="20" :sm="8">
+                    <el-col
+                      :xs="20"
+                      :sm="8"
+                    >
                       <el-form-item label="电话">
                         <span>{{form.userPhone}}</span>
                       </el-form-item>
                     </el-col>
 
-                    <el-col :xs="20" :sm="8">
+                    <el-col
+                      :xs="20"
+                      :sm="8"
+                    >
                       <el-form-item label="角色">
                         <span>{{form.roleId == 1 ? '普通' : 'XX'}}</span>
                       </el-form-item>
@@ -83,50 +147,95 @@
                   </el-row>
 
                   <el-row :gutter="20">
-                    <el-col :xs="20" :sm="8">
+                    <el-col
+                      :xs="20"
+                      :sm="8"
+                    >
                       <el-form-item label="用户名">
                         <span v-show="!isEdit"> {{form.userName}}</span>
-                        <el-input v-model="form.userName" v-show="isEdit"></el-input>
+                        <el-input
+                          v-model="form.userName"
+                          v-show="isEdit"
+                        ></el-input>
                       </el-form-item>
                     </el-col>
-                    <el-col :xs="20" :sm="8">
+                    <el-col
+                      :xs="20"
+                      :sm="8"
+                    >
                       <el-form-item label="性别">
                         <span v-show="!isEdit">{{form.sex}}</span>
-                        <el-radio v-model="form.sex" label="男" v-show="isEdit">男</el-radio>
-                        <el-radio v-model="form.sex" label="女" v-show="isEdit">女</el-radio>
+                        <el-radio
+                          v-model="form.sex"
+                          label="男"
+                          v-show="isEdit"
+                        >男</el-radio>
+                        <el-radio
+                          v-model="form.sex"
+                          label="女"
+                          v-show="isEdit"
+                        >女</el-radio>
                       </el-form-item>
                     </el-col>
 
                   </el-row>
 
                   <el-row :gutter="20">
-                    <el-col :xs="20" :sm="8">
+                    <el-col
+                      :xs="20"
+                      :sm="8"
+                    >
                       <el-form-item label="出生日期">
                         <span v-show="!isEdit">{{form.birthday}}</span>
-                        <el-date-picker type="date" v-show="isEdit" placeholder="选择日期" value-format="yyyy-MM-dd" v-model="form.birthday" style="width: 100%;"></el-date-picker>
+                        <el-date-picker
+                          type="date"
+                          v-show="isEdit"
+                          placeholder="选择日期"
+                          value-format="yyyy-MM-dd"
+                          v-model="form.birthday"
+                          style="width: 100%;"
+                        ></el-date-picker>
                       </el-form-item>
                     </el-col>
-                    <el-col :xs="20" :sm="8">
+                    <el-col
+                      :xs="20"
+                      :sm="8"
+                    >
                       <el-form-item label="省份/城市">
                         <span v-show="!isEdit">{{form.provinceN}} {{form.cityN}}</span>
-                        <el-cascader :options="options" v-model="form.province" v-show="isEdit"></el-cascader>
+                        <el-cascader
+                          :options="options"
+                          v-model="form.province"
+                          v-show="isEdit"
+                        ></el-cascader>
                       </el-form-item>
                     </el-col>
 
                   </el-row>
 
                   <el-row :gutter="20">
-                    <el-col :xs="20" :sm="8">
+                    <el-col
+                      :xs="20"
+                      :sm="8"
+                    >
                       <el-form-item label="年龄">
                         <span>{{form.age}}</span>
                         <!-- <el-input v-model="form.age" v-show="isEdit"></el-input> -->
                       </el-form-item>
                     </el-col>
 
-                    <el-col :xs="20" :sm="8">
+                    <el-col
+                      :xs="20"
+                      :sm="8"
+                    >
                       <el-form-item label="详细住址">
                         <span v-show="!isEdit">{{form.address}}</span>
-                        <el-input type="textarea" rows="1" v-model="form.address" v-show="isEdit"></el-input>
+                        <el-input
+                          type="textarea"
+                          rows="1"
+                          v-model="form.address"
+                          v-show="isEdit"
+                        ></el-input>
                       </el-form-item>
                     </el-col>
 
@@ -134,51 +243,102 @@
 
                   <el-form-item label="兴趣标签">
                     <span v-show="!isEdit">{{form.userTagName}}</span>
-                    <el-checkbox-group v-model="form.userTag" v-show="isEdit">
-                      <el-checkbox v-for=" tag in articleTag" :key=tag.articleTagId :label=tag.articleTagId>{{tag.articleTag}}</el-checkbox>
+                    <el-checkbox-group
+                      v-model="form.userTag"
+                      v-show="isEdit"
+                    >
+                      <el-checkbox
+                        v-for=" tag in articleTag"
+                        :key=tag.articleTagId
+                        :label=tag.articleTagId
+                      >{{tag.articleTag}}</el-checkbox>
                     </el-checkbox-group>
                   </el-form-item>
 
                   <div class="finish-btn">
                     <div v-show="isEdit">
-                      <i class="el-icon-close" @click="isEdit = !isEdit"></i> &nbsp;
-                      <i class="el-icon-check" @click="updateInfo('form')"></i>
+                      <i
+                        class="el-icon-close"
+                        @click="isEdit = !isEdit"
+                      ></i> &nbsp;
+                      <i
+                        class="el-icon-check"
+                        @click="updateInfo('form')"
+                      ></i>
                     </div>
                     <div v-show="!isEdit">
-                      <i class="el-icon-edit-outline" @click="isEdit = !isEdit"></i>
+                      <i
+                        class="el-icon-edit-outline"
+                        @click="isEdit = !isEdit"
+                      ></i>
                     </div>
                   </div>
 
-                  <div class="login-out" v-show="!isEdit">
-                    <el-button type="danger" @click="loginOut">退出登录</el-button>
+                  <div
+                    class="login-out"
+                    v-show="!isEdit"
+                  >
+                    <el-button
+                      type="danger"
+                      @click="loginOut"
+                    >退出登录</el-button>
                   </div>
                 </el-form>
               </div>
             </el-tab-pane>
-            <el-tab-pane label="我的文章" name="article">
-              <el-card class="box-card" @touchmove.native="touchMove()">
-
-                <div v-for="article in articleList" :key=article.articleId class="text-item">
-                  <span>{{article.articleTagName}}</span>
-                  <router-link :to="{path:`/detail/${article.articleId}`}" style="color:#6cb5ff">
-                    {{article.articleTitle }}
-                  </router-link>
+            <el-tab-pane
+              label="我的文章"
+              name="article"
+            >
+              <el-card
+                class="box-card"
+                @touchmove.native="touchMove()"
+              >
+                <div
+                  v-for="article in articleList"
+                  :key=article.articleId
+                  class="text-item"
+                >
+                  <div class="img-tag">
+                    <img
+                      :src="article.articleTagName | tagToIcon"
+                      alt=""
+                    >
+                  </div>
+                  <div class="title">
+                    <router-link :to="{path:`/detail/${article.articleId}`}">
+                      {{article.articleTitle }}
+                    </router-link>
+                    <div class="time">
+                      发布时间：{{article.createTime}}
+                    </div>
+                  </div>
                 </div>
                 <div class="mobile-more">
                   <span id="loading">
                     正在加载中 <i class="el-icon-loading"></i>
                   </span>
-                  <span id="nodata" style="display:none">
+                  <span
+                    id="nodata"
+                    style="display:none"
+                  >
                     没有更多数据啦
                   </span>
                 </div>
-                <div class="pc-more" @click="moreData" v-show="disMore">
+                <div
+                  class="pc-more"
+                  @click="moreData"
+                  v-show="disMore"
+                >
                   加载更多
                 </div>
 
               </el-card>
             </el-tab-pane>
-            <el-tab-pane label="" name="a"></el-tab-pane>
+            <el-tab-pane
+              label=""
+              name="a"
+            ></el-tab-pane>
           </el-tabs>
 
         </div>
@@ -287,7 +447,7 @@ export default {
         province: this.form.province[0],
         city: this.form.province[1],
         address: this.form.address,
-        userTag: StringUtils.isEmpty(tempTag) ? "" : tempTag.join(","),
+        userTag: StringUtils.isEmpty(tempTag) ? "" : tempTag.join(",")
       };
 
       this.$http.http("/user/save", params).then(res => {
@@ -345,7 +505,7 @@ export default {
             this.$el.querySelector("#loading").style.display = "none";
             this.$el.querySelector("#nodata").style.display = "inline";
           } else if (this.articleList.length < 20) {
-            this.getArticle(this.current + 1);
+            // this.getArticle(this.current + 1);
           }
         });
     },
@@ -506,22 +666,22 @@ export default {
   padding: 0;
 }
 .text-item {
-  padding: 5px;
-  font-size: 14px;
-  line-height: 1.5;
+  padding: 5px 0;
 }
-.text-item span {
-  padding: 1px 3px;
-  margin-right: 5px;
-  border-radius: 3px;
-  box-shadow: 0 0 2px 0 #43bcff;
-  background: #43bcff;
-  color: white;
-  font-size: 13px;
+.text-item .title a {
+  font-weight: 600;
 }
-.text-item a:hover{
- color: #0381c6!important;
+.text-item .title .time {
+  font-size: 12px;
+  color: #999999;
 }
+.text-item .img-tag {
+  float: left;
+  margin-right: 10px;
+  position: relative;
+  top: 5px;
+}
+
 .pc-more {
   width: 120px;
   height: 35px;
@@ -538,7 +698,7 @@ export default {
 }
 .pc-more:hover {
   border: 1px solid #43bcff;
-  color:  #43bcff;
+  color: #43bcff;
 }
 .mobile-more {
   display: none;
@@ -600,7 +760,7 @@ export default {
   .header-right-contatin {
     margin-right: 0.344828rem;
     margin-top: 2.413793rem;
-    display:none;
+    display: none;
   }
   .header-right-contatin .header-right-div {
     margin-left: 0.344828rem;
@@ -638,13 +798,16 @@ export default {
   }
   .text-item {
     border-bottom: 1px solid #eeeeee;
+  }
+  .text-item a {
+    display: inline-block;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     font-size: 13px;
-    padding: 3px;
+    max-width: 3.3rem;
   }
-  .text-item span {
-    font-size: 11px;
-  }
+
   .pc-more {
     display: none !important;
   }
