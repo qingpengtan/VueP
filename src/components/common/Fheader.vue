@@ -4,25 +4,50 @@
       <div class="header-main">
 
         <div class="header-navbar">
-          <router-link to='/' class="header-logo">
-            <img class="header-left" src="../../assets/let.png" />
+          <router-link
+            to='/'
+            class="header-logo"
+          >
+            <img
+              class="header-left"
+              src="../../assets/let.png"
+            />
           </router-link>
-          <div class="nav-arrow" @click="isCollapse = false">
-            <img class="header-left" src="../../assets/nav-menu.png" />
+          <div
+            class="nav-arrow"
+            @click="isCollapse = false"
+          >
+            <img
+              class="header-left"
+              src="../../assets/nav-menu.png"
+            />
           </div>
 
           <div class="header-center">
-            <el-input placeholder="搜索文章" v-model="searchContent" @keyup.enter.native="searchArticle()">
-              <i class="el-icon-search el-input__icon" slot="suffix">
+            <el-input
+              placeholder="搜索文章"
+              v-model="searchContent"
+              @keyup.enter.native="searchArticle()"
+            >
+              <i
+                class="el-icon-search el-input__icon"
+                slot="suffix"
+              >
               </i>
             </el-input>
           </div>
 
           <div class="header-right">
             <el-dropdown trigger="click">
-              <span class="avatar right-span" v-show="loginStatus">
+              <span
+                class="avatar right-span"
+                v-show="loginStatus"
+              >
                 <span>
-                  <img :src="userPic" alt="avatar">
+                  <img
+                    :src="userPic"
+                    alt="avatar"
+                  >
                 </span>
                 <span class="header-username">{{userName}}</span>
               </span>
@@ -36,17 +61,29 @@
             </el-dropdown>
 
             <div class="mobile-sapn">
-              <span class="avatar right-span " v-show="loginStatus">
+              <span
+                class="avatar right-span "
+                v-show="loginStatus"
+              >
                 <span>
-                  <router-link to="/person-info"><img :src="userPic" alt="avatar"></router-link>
+                  <router-link to="/person-info"><img
+                      :src="userPic"
+                      alt="avatar"
+                    ></router-link>
                 </span>
                 <span class="header-username">{{userName}}</span>
               </span>
             </div>
 
-            <span class="right-span" v-show="!loginStatus">
+            <span
+              class="right-span"
+              v-show="!loginStatus"
+            >
               <router-link to='/user-login'>
-                <el-button type="primary" plain>登录</el-button>
+                <el-button
+                  type="primary"
+                  plain
+                >登录</el-button>
               </router-link>
             </span>
           </div>
@@ -54,63 +91,70 @@
       </div>
     </div>
 
-    <div class="header-content">
-      <ul>
-        <router-link tag="li" to='/' exact>主页</router-link>
-        <router-link tag="li" to='/daily'>日记</router-link>
-        <router-link tag="li" to='/music'>音乐</router-link>
-        <el-dropdown trigger="click">
-          <li> <i class="el-icon-menu"></i>论坛</li>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item v-for=" tag in articleTag" :key="tag.articleTagId">
-              <router-link @click="pushTribune()" :to="{path:`/tribune/${tag.articleTagId}`}">
-                {{tag.articleTag}}
-              </router-link>
-            </el-dropdown-item>
-
-          </el-dropdown-menu>
-        </el-dropdown>
-        <li @click="dialogVisible = true">写说说</li>
-        <router-link tag="li" to='/edit-text'>写文章</router-link>
-      </ul>
-    </div>
+    <div class="header-empty"></div>
 
     <!--固定头-->
     <div class="header-content header-fixed">
       <div class=" fixed-header">
         <ul>
-          <router-link tag="li" to='/' style="padding:0;top:-8px;position:relative;border-bottom:none" class="header-logo">
-            <img class="header-left" src="../../assets/let.png" />
+          <router-link
+            tag="li"
+            to='/'
+            style="padding:0;top:-8px;position:relative;border-bottom:none"
+            class="header-logo"
+          >
+            <img
+              class="header-left"
+              src="../../assets/let.png"
+            />
           </router-link>
-          <router-link tag="li" to='/' exact>主页</router-link>
-          <router-link tag="li" to='/daily'>日记</router-link>
-          <router-link tag="li" to='/music'>音乐</router-link>
+          <router-link
+            tag="li"
+            to='/music'
+          >音乐</router-link>
           <el-dropdown trigger="click">
-            <li> <i class="el-icon-menu"></i>论坛</li>
+            <li> <i class="el-icon-menu"></i>版块</li>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item v-for=" tag in articleTag" :key="tag.articleTagId">
-                <router-link @click="pushTribune()" :to="{path:`/tribune/${tag.articleTagId}`}">
+              <el-dropdown-item
+                v-for=" tag in articleTag"
+                :key="tag.articleTagId"
+              >
+                <router-link
+                  @click="pushTribune()"
+                  :to="{path:`/tribune/${tag.articleTagId}`}"
+                >
                   {{tag.articleTag}}
                 </router-link>
               </el-dropdown-item>
 
             </el-dropdown-menu>
           </el-dropdown>
-          <li @click="dialogVisible = true">写说说</li>
-          <router-link tag="li" to='/edit-text'>写文章</router-link>
         </ul>
         <div class="header-right fixed-right">
           <div class="fixed-search">
-            <el-input placeholder="搜索文章" v-model="searchContent" @keyup.enter.native="searchArticle()">
-              <i class="el-icon-search el-input__icon" slot="suffix">
+            <el-input
+              placeholder="搜索文章"
+              v-model="searchContent"
+              @keyup.enter.native="searchArticle()"
+            >
+              <i
+                class="el-icon-search el-input__icon"
+                slot="suffix"
+              >
               </i>
             </el-input>
           </div>
           <div class="fixed-info">
             <el-dropdown trigger="click">
-              <span class="avatar right-span" v-show="loginStatus">
+              <span
+                class="avatar right-span"
+                v-show="loginStatus"
+              >
                 <span>
-                  <img :src="userPic" alt="avatar">
+                  <img
+                    :src="userPic"
+                    alt="avatar"
+                  >
                 </span>
                 <span class="header-username">{{userName}}</span>
               </span>
@@ -118,27 +162,56 @@
                 <el-dropdown-item>
                   <router-link to="/person-info">个人中心</router-link>
                 </el-dropdown-item>
+                <el-dropdown-item>
+                  <router-link to='/edit-text'> 写文章</router-link>
+                </el-dropdown-item>
+                <el-dropdown-item @click.native="dialogVisible = true">记日志</el-dropdown-item>
                 <el-dropdown-item @click.native="loginOut()">退出登录</el-dropdown-item>
-
               </el-dropdown-menu>
             </el-dropdown>
           </div>
         </div>
       </div>
     </div>
-    <el-dialog title="说说记录" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
-      <el-input type="textarea" v-model="content" :rows="5" placeholder="记录美好生活">
+    <el-dialog
+      title="说说记录"
+      :visible.sync="dialogVisible"
+      width="30%"
+      :before-close="handleClose"
+    >
+      <el-input
+        type="textarea"
+        v-model="content"
+        :rows="5"
+        placeholder="记录美好生活"
+      >
       </el-input>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="publish()">发表</el-button>
+      <span
+        slot="footer"
+        class="dialog-footer"
+      >
+        <el-button
+          type="primary"
+          @click="publish()"
+        >发表</el-button>
       </span>
     </el-dialog>
 
     <!-- 移动端导航侧边栏 -->
-    <div class="mobile-side" v-show="!isCollapse" @click="isCollapse = true">
-      <ul class="mobile-side-ul" id="mobile-side-ul">
+    <div
+      class="mobile-side"
+      v-show="!isCollapse"
+      @click="isCollapse = true"
+    >
+      <ul
+        class="mobile-side-ul"
+        id="mobile-side-ul"
+      >
         <li @click="selectMenu($event)">
-          <router-link to='/' exact>主页</router-link>
+          <router-link
+            to='/'
+            exact
+          >主页</router-link>
         </li>
         <li @click="selectMenu($event)">
           <router-link to='/daily'>日记</router-link>
@@ -150,11 +223,21 @@
           <router-link to='/edit-text'>写文章</router-link>
         </li>
         <li @click="dialogVisible = true,isCollapse = true">写说说</li>
-        <li @click.stop="triume()">论坛 <i id="triArrow" class="el-icon-arrow-down"></i></li>
-        <li v-show="showSecond" >
+        <li @click.stop="triume()">版块 <i
+            id="triArrow"
+            class="el-icon-arrow-down"
+          ></i></li>
+        <li v-show="showSecond">
           <ul class="mobile-ul-sec">
-            <li v-for=" tag in articleTag" :key="tag.articleTagId" @click="selectMenu($event)">
-              <router-link @click="pushTribune()" :to="{path:`/tribune/${tag.articleTagId}`}">
+            <li
+              v-for=" tag in articleTag"
+              :key="tag.articleTagId"
+              @click="selectMenu($event)"
+            >
+              <router-link
+                @click="pushTribune()"
+                :to="{path:`/tribune/${tag.articleTagId}`}"
+              >
                 {{tag.articleTag}}
               </router-link>
             </li>
@@ -190,14 +273,6 @@ export default {
     if (this.$route.path.indexOf("/search") == -1) {
       this.searchContent = "";
     }
-    let fixedHeader = document.getElementsByClassName(
-      "header-content header-fixed"
-    )[0];
-    if (this.pageScrollY > 64) {
-      fixedHeader.style.display = "block";
-    } else {
-      fixedHeader.style.display = "none";
-    }
     let fMenuUl = document.getElementsByClassName("mobile-side-ul")[0];
     let fMenuLi = fMenuUl.getElementsByTagName("li");
     Array.from(fMenuLi).forEach(element => {
@@ -230,19 +305,7 @@ export default {
         });
       }
     },
-    pageScrollY() {
-      let fixedHeader = document.getElementsByClassName(
-        "header-content header-fixed"
-      )[0];
-      if (!fixedHeader) {
-        return;
-      }
-      if (this.pageScrollY > 64) {
-        fixedHeader.style.display = "block";
-      } else {
-        fixedHeader.style.display = "none";
-      }
-    }
+    pageScrollY() {}
   },
   created() {
     if (this.$route.path.indexOf("/search") != -1) {
@@ -274,17 +337,6 @@ export default {
           }
         });
       });
-    let fixedHeader = document.getElementsByClassName(
-      "header-content header-fixed"
-    )[0];
-    if (!fixedHeader) {
-      return;
-    }
-    if (this.pageScrollY > 64) {
-      fixedHeader.style.display = "block";
-    } else {
-      fixedHeader.style.display = "none";
-    }
   },
   methods: {
     searchArticle() {
@@ -389,6 +441,7 @@ export default {
   display: flex;
   display: -webkit-flex;
   position: relative;
+  display: none;
 }
 
 .header-content {
@@ -396,10 +449,13 @@ export default {
   min-height: 50px;
   width: auto;
   margin-top: 1px;
-  border-bottom: 1px solid #e8e8e8;
-  background: white;
+  border-bottom: 1px solid #409eff;
+  box-shadow: 0 0 5px;
+  background: #409eff;
 }
-
+.header-empty{
+  height: 50px;
+}
 >>> .el-dialog__body {
   padding: 10px 20px !important;
 }
@@ -413,7 +469,7 @@ export default {
   float: left;
   min-height: 50px;
   line-height: 50px;
-  padding: 0 32px;
+  padding: 0 20px;
   letter-spacing: 2px;
   cursor: pointer;
 }
@@ -421,17 +477,16 @@ export default {
 .header-left {
   cursor: pointer;
   font-size: 20px;
-  height:50px;
+  height: 50px;
   position: relative;
   top: 7px;
   line-height: 64px;
   transition: all 0.3s, padding 0s;
   display: inline-block;
 }
-.header-logo{
+.header-logo {
   border-bottom: none;
 }
-
 
 .header-center {
   flex: 1;
@@ -480,7 +535,6 @@ export default {
   display: inline-block !important;
 }
 .header-fixed {
-  display: none;
   width: 100%;
   top: -1px;
   position: fixed;
@@ -493,6 +547,7 @@ export default {
 .fixed-header ul {
   float: left;
   width: auto;
+  color: white;
 }
 .fixed-header .fixed-right {
   float: right;
@@ -508,13 +563,16 @@ export default {
   line-height: 50px;
 }
 .header-content li:hover {
-  border-bottom:2px solid #43bcff;
-  color:  #43bcff;
+  border-bottom: 2px solid white;
+  color: white;
 }
 .nav-arrow {
   display: none;
 }
->>> .el-dropdown-menu__item a{
+>>> .el-dropdown {
+  color: white;
+}
+>>> .el-dropdown-menu__item a {
   border-bottom: none;
   color: #666;
 }
@@ -529,6 +587,7 @@ export default {
     margin-right: 0;
   }
   .header-navbar {
+    display: flex;
     height: 0.85rem;
   }
   .header-left {
@@ -565,7 +624,7 @@ export default {
     padding-left: 0;
     line-height: 0.85rem;
   }
-  .header-content {
+  .header-content,.header-empty {
     display: none;
   }
   .header-content ul {
@@ -614,13 +673,12 @@ export default {
     z-index: 100000;
     font-size: 0;
   }
-  .mobile-side-ul{
+  .mobile-side-ul {
     overflow-y: scroll;
-
   }
-   .mobile-side li a{
-     border: none;
-   }
+  .mobile-side li a {
+    border: none;
+  }
   .mobile-side .mobile-side-ul {
     display: inline-block;
     color: white;

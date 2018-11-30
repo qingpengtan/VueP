@@ -198,25 +198,25 @@ export default {
       let id = this.$route.params.id;
       switch (id) {
         case "2":
-          document.title = "Java论坛";
+          document.title = "Java版块";
           break;
         case "3":
-          document.title = "Web开发论坛";
+          document.title = "Web开发版块";
           break;
         case "8":
-          document.title = "NodeJS论坛";
+          document.title = "NodeJS版块";
           break;
         case "4":
-          document.title = "Go语言论坛";
+          document.title = "Go语言版块";
           break;
         case "5":
-          document.title = "大数据论坛";
+          document.title = "大数据版块";
           break;
         case "6":
-          document.title = "Python论坛";
+          document.title = "Python版块";
           break;
         default:
-          document.title = "其他论坛";
+          document.title = "其他版块";
           break;
       }
     }
