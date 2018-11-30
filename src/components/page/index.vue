@@ -152,17 +152,20 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     store.commit("navMenuSelect", "主页");
-    next();
-  },
-  beforeRouteLeave(to, from, next) {
-    if (to.path.indexOf("edit-text") != -1) {
-      from.meta.keepAlive = false;
+    if (
+      store.getters.updateArticleNum ==
+      store.getters.currentArticleNum
+    ) {
+      to.meta.keepAlive = true;
     } else {
-      from.meta.keepAlive = true;
+      store.commit(
+        "currentArticleNum",
+         store.getters.updateArticleNum
+      );
+      to.meta.keepAlive = false;
     }
     next();
   },
-
   methods: {
     moreData() {
       this.current++;
@@ -387,7 +390,7 @@ h3 {
 }
 
 .pc-more:hover {
-  border:1px solid #43bcff;
+  border: 1px solid #43bcff;
   color: #43bcff;
 }
 .mobile-more {

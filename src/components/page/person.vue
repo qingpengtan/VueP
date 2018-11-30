@@ -358,7 +358,7 @@ import Footer from "../common/Footer.vue";
 import StringUtils from "../../utils/StringUtils.js";
 
 export default {
-  name: "index",
+  name: "personInfo",
   components: {
     Header,
     Footer,
@@ -605,7 +605,7 @@ export default {
 }
 .header-bg {
   width: 100%;
-  height: 200px;
+  height: 180px;
   background-image: url(../../assets/5b6910e90001549a20000560.jpg);
   background-size: cover;
   position: relative;
@@ -613,7 +613,7 @@ export default {
 .header-bg .header-avater {
   position: absolute;
   left: 100px;
-  top: 90px;
+  top: 70px;
 }
 .header-bg .header-avater img {
   width: 140px;
@@ -627,7 +627,7 @@ export default {
 }
 .header-right-contatin {
   float: right;
-  margin-top: 130px;
+  margin-top: 110px;
   margin-right: 150px;
   color: #dfdfdf;
   text-align: center;

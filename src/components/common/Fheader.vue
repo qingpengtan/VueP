@@ -131,6 +131,13 @@
           </el-dropdown>
         </ul>
         <div class="header-right fixed-right">
+          <el-switch
+            v-model="randomColor"
+            active-color="#13ce66"
+            style="float:left;margin:15px"
+            @click.native="randomCo"
+          >
+          </el-switch>
           <div class="fixed-search">
             <el-input
               placeholder="搜索文章"
@@ -174,7 +181,7 @@
       </div>
     </div>
     <el-dialog
-      title="说说记录"
+      title="记日志"
       :visible.sync="dialogVisible"
       width="30%"
       :before-close="handleClose"
@@ -222,7 +229,7 @@
         <li>
           <router-link to='/edit-text'>写文章</router-link>
         </li>
-        <li @click="dialogVisible = true,isCollapse = true">写说说</li>
+        <li @click="dialogVisible = true,isCollapse = true">记日志</li>
         <li @click.stop="triume()">版块 <i
             id="triArrow"
             class="el-icon-arrow-down"
@@ -258,6 +265,7 @@ export default {
     return {
       isCollapse: true,
       loginStatus: false,
+      randomColor: false,
       userName: "",
       userPic: "",
       textarea: "",
@@ -266,7 +274,8 @@ export default {
       articleTag: "",
       showSecond: false,
       searchContent: this.searchWd,
-      flag: false
+      flag: false,
+      timer: ""
     };
   },
   activated() {
@@ -362,6 +371,18 @@ export default {
     handleClose(done) {
       done();
     },
+    getColor() {
+      let str = "123456789abcde";
+      let color = "#";
+      for (let i = 0; i < 6; i++) {
+        color += str[parseInt(Math.random() * str.length)];
+      }
+      return color;
+    },
+    randomCo() {
+      let color = this.getColor();
+      this.$el.querySelector(".header-content").style.background = color;
+    },
     selectMenu(e) {
       let menu = e.target.innerText;
       switch (menu) {
@@ -409,6 +430,9 @@ export default {
           if (res.code == 1) {
             this.dialogVisible = false;
             this.$message.success("发表成功");
+            let num = this.$store.getters.updateArticleNum;
+            num++;
+            this.$store.commit("updateArticleNum", num);
           } else {
             this.$message.error(res.msg);
           }
@@ -453,7 +477,7 @@ export default {
   box-shadow: 0 0 5px;
   background: #409eff;
 }
-.header-empty{
+.header-empty {
   height: 50px;
 }
 >>> .el-dialog__body {
@@ -624,7 +648,8 @@ export default {
     padding-left: 0;
     line-height: 0.85rem;
   }
-  .header-content,.header-empty {
+  .header-content,
+  .header-empty {
     display: none;
   }
   .header-content ul {

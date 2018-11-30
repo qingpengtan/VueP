@@ -10,7 +10,9 @@ export default new vuex.Store({
         searchPageScroll:0,
         navMenuSelect:"主页",
         pageScrollY:0,
-        currentMusic:""
+        currentMusic:"",
+        currentArticleNum:0,
+        updateArticleNum:0,
     },
     getters:{
         indexPageScroll(state){
@@ -34,6 +36,12 @@ export default new vuex.Store({
         currentMusic(state){
             return state.currentMusic;
         },
+        currentArticleNum(state){
+            return state.currentArticleNum;
+        },
+        updateArticleNum(state){
+            return state.updateArticleNum;
+        },
     },
     mutations:{
         indexPageScroll(state,scrollY){
@@ -56,7 +64,13 @@ export default new vuex.Store({
         },
         currentMusic(state,currentMusic){
             state.currentMusic = currentMusic;
-        }
+        },
+        currentArticleNum(state,num){
+            state.currentArticleNum = num;
+        },
+        updateArticleNum(state,num){
+            state.updateArticleNum = num;
+        },
     },
 
 

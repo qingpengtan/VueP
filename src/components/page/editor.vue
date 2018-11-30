@@ -6,11 +6,17 @@
 
         <div class="header-navbar">
           <router-link to='/'>
-            <img class="header-left" src="../../assets/let.png" />
+            <img
+              class="header-left"
+              src="../../assets/let.png"
+            />
           </router-link>
           <div class="header-right">
             <span class="right-span">
-              <el-button type="primary" @click="publish()">发表</el-button>
+              <el-button
+                type="primary"
+                @click="publish()"
+              >发表</el-button>
             </span>
           </div>
         </div>
@@ -20,14 +26,40 @@
     <div class="layout-main">
 
       <div class="layout-content">
-        <div class="main-content" style="padding: 8px 32px 32px;">
+        <div
+          class="main-content"
+          style="padding: 8px 32px 32px;"
+        >
           <div>
-            <input type="text" class="editor-title" placeholder="标题" v-model="articleTitle">
-            <input type="text" v-show="false" v-model="articleId">
-            <el-select placeholder="请选择" v-model="articleTagId" class="select">
-              <el-option v-for=" tag in articleTag" :key=tag.articleTagId :label=tag.articleTag :value=tag.articleTagId></el-option>
+            <input
+              type="text"
+              class="editor-title"
+              placeholder="标题"
+              v-model="articleTitle"
+            >
+            <input
+              type="text"
+              v-show="false"
+              v-model="articleId"
+            >
+            <el-select
+              placeholder="请选择"
+              v-model="articleTagId"
+              class="select"
+            >
+              <el-option
+                v-for=" tag in articleTag"
+                :key=tag.articleTagId
+                :label=tag.articleTag
+                :value=tag.articleTagId
+              ></el-option>
             </el-select>
-            <quill-editor ref="myTextEditor" v-model="content" :options="editorOption" @change="onEditorChange($event)"></quill-editor>
+            <quill-editor
+              ref="myTextEditor"
+              v-model="content"
+              :options="editorOption"
+              @change="onEditorChange($event)"
+            ></quill-editor>
           </div>
 
         </div>
@@ -143,6 +175,9 @@ export default {
           if (res.code == 1) {
             this.$router.go(-1);
             this.$message.success("发表成功");
+            let num = this.$store.getters.updateArticleNum;
+            num++;
+            this.$store.commit("updateArticleNum", num);
           } else {
             this.$message.error(res.msg);
           }
@@ -207,7 +242,7 @@ export default {
   top: 7px;
   display: inline-block;
 }
-.header-navbar a{
+.header-navbar a {
   border-bottom: none;
 }
 
@@ -321,7 +356,7 @@ export default {
   }
 
   .header-left {
-    height: .689655rem;
+    height: 0.689655rem;
     display: inline-block;
   }
 
