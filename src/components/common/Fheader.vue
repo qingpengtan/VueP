@@ -131,13 +131,13 @@
           </el-dropdown>
         </ul>
         <div class="header-right fixed-right">
-          <el-switch
+          <!-- <el-switch
             v-model="randomColor"
             active-color="#13ce66"
             style="float:left;margin:15px"
             @click.native="randomCo"
           >
-          </el-switch>
+          </el-switch> -->
           <div class="fixed-search">
             <el-input
               placeholder="搜索文章"
@@ -562,7 +562,7 @@ export default {
   width: 100%;
   top: -1px;
   position: fixed;
-  z-index: 10000;
+  z-index: 100;
 }
 .fixed-header {
   width: 1260px;

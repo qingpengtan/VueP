@@ -35,6 +35,7 @@
                       :src="article.articleTagName | tagToIcon"
                       alt=""
                     >
+                    <img v-if="article.isStick == 2000" class="article-tag" src="../../assets/stick.png" alt="">
                   </div>
                   <div class="ant-list-item-content">
                     <div>

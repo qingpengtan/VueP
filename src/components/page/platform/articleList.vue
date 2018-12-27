@@ -27,6 +27,12 @@
         </el-table-column>
         <el-table-column prop="articleTagName" label="文章类型">
         </el-table-column>
+        <el-table-column label="置顶">
+          <template scope="scope">
+            <p v-if="scope.row.isStick == '1000'">否</p>
+            <p v-else>是</p>
+          </template>
+        </el-table-column>
         <el-table-column label="状态">
           <template scope="scope">
             <p>{{ scope.row.status | statusFilter }}</p>

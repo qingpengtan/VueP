@@ -1,8 +1,8 @@
 'use strict'
 
 const path = require('path')
-const serverUrl = "http://119.29.230.48"
-// const serverUrl = "http://localhost:8080" 
+// const serverUrl = "http://119.29.230.48"
+const serverUrl = "http://localhost:8080" 
 
 module.exports = {
   dev: {

@@ -25,7 +25,11 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-
+            <el-form-item label="置顶">
+              <el-switch v-model="form.isStick"></el-switch>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
             <el-form-item label="状态">
               <el-switch v-model="form.status"></el-switch>
             </el-form-item>
@@ -64,6 +68,7 @@ export default {
         articleTitle: "",
         articleTag: "",
         status: "",
+        isStick: "",
         articleBrief: "",
         content: "",
         articleId: 1
@@ -106,7 +111,8 @@ export default {
             articleTagId: this.form.articleTag,
             articleId: this.form.articleId,
             articleBrief: this.form.articleBrief.substring(0, 350),
-            status: this.form.status ? 1000 : 2000
+            status: this.form.status ? 1000 : 2000,
+            isStick: this.form.isStick ? 2000 : 1000
           };
           this.$http.http("/sys/article/save", params).then(res => {
             if (res.code == 1) {
@@ -133,6 +139,7 @@ export default {
           this.form.articleTag = StringUtils.isEmpty(res.data.articleTag)
             ? 1
             : parseInt(res.data.articleTag);
+          this.form.isStick = res.data.isStick == 1000 ? false : true;
           this.form.status = res.data.status == 1000 ? true : false;
           this.form.articleId = res.data.articleId;
           this.form.articleBrief = res.data.articleBrief;

@@ -63,22 +63,18 @@ axios.interceptors.response.use(response => {
     let msg = response.data.msg;
 
     if (code == 500211) {
-        new Vue().$message.warning(msg);
         localStorage.clear();
-        router.push({
-            path: "/"
-        });
+        new Vue().$message.warning(msg);
+        setTimeout(() => {
+            router.push({
+                path: "/"
+            });
+        }, 500);
     } else if (code == 500217) {
         router.push({
             path: "/403"
         });
     } else if (code == 500100) {
-        // new Vue().$message({
-        //     showClose: true,
-        //     duration: 10000,
-        //     message: msg,
-        //     type: 'warning'
-        // });
         router.push({
             path: "/500"
         });

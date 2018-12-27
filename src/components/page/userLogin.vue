@@ -5,7 +5,7 @@
     <div class="login-register-home">
 
       <div class="header-img">
-        <img src="../../assets/timg.gif" alt="">
+        <!-- <img src="../../assets/timg.gif" alt=""> -->
       </div>
       <div class="header-input" v-show="isLogin">
 
@@ -191,7 +191,7 @@ export default {
   width: 432px;
   margin: 0 auto;
   text-align: center;
-  background: #f1f1f1;
+  background: white;
   border-radius: 2px;
   box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
   box-sizing: border-box;
@@ -200,18 +200,19 @@ export default {
   color: #999;
 }
 .header-img {
-  font-size: 0;
-}
-.header-img img {
   width: 100%;
   height: 150px;
+  background: url('../../assets/bg.jpg');
+  background-size: 100%;
+
 }
+
 .header-input {
   padding: 0 40px 36px 40px;
   height: 265px;
   width: 352px;
   position: relative;
-  background: white;
+  background: #F6F7F9;
 }
 .header-input >>> input {
   /* .header-input .el-form .el-form-item .el-form-item__content .el-input input { */
@@ -286,7 +287,7 @@ export default {
   height: 36px;
   width: 120px;
   left: 270px;
-  top: 142px;
+  top: 155px;
   background: white;
   color: #536dfd;
   font-size: 15px;
@@ -299,9 +300,12 @@ export default {
   height: 36px;
 }
 @media only screen and (max-width: 481px) {
+  .login-register-page{
+    background: #2B3B4A;
+  }
   .login-register-home {
     width: 100%;
-    margin-top: 2.37931rem;
+    margin-top: 1.27931rem;
     position: relative;
   }
   .header-input {
@@ -322,12 +326,16 @@ export default {
     width: 2.068966rem;
   }
   .header-img {
+    background: url('../../assets/login-bag.png');
+    background-size: 100%;
+    height: 3.103448rem;
+  }
+  .forget-pswd{
     display: none;
   }
   .login-register-home {
     background: none;
     color: white;
-    font-weight: bold;
   }
   .header-input {
     background: none;
@@ -337,11 +345,8 @@ export default {
     color: white;
   }
   .login-tip {
-    font-weight: bold;
     color: white;
   }
-  .login-tip .point {
-    font-weight: bold;
-  }
+
 }
 </style>
