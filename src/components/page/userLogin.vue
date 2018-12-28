@@ -79,6 +79,7 @@
 
 </template>
 <script>
+import md5 from 'md5';
 export default {
   name: "login",
   data() {
@@ -110,6 +111,9 @@ export default {
       }
     };
   },
+  created(){
+    this.ruleForm.username = document.cookie;
+  },
   methods: {
     login(formName) {
       this.$refs[formName].validate(valid => {
@@ -117,10 +121,11 @@ export default {
           this.$http
             .http("/user/login", {
               userName: this.ruleForm.username,
-              password: this.ruleForm.password
+              password: md5(this.ruleForm.password)
             })
             .then(res => {
               if (res.code == 1) {
+                document.cookie =  res.data.userPhone;
                 localStorage.setItem("x_token", res.data.token);
                 localStorage.setItem("x_userName", res.data.userName);
                 localStorage.setItem("x_userPhone", res.data.userPhone);
@@ -152,13 +157,13 @@ export default {
           this.$http
             .http("/user/regist", {
               userPhone: this.registerForm.userPhone,
-              password: this.registerForm.password,
+              password: md5(this.registerForm.password),
               imageCode: this.registerForm.imageCode
             })
             .then(res => {
               if (res.code == 1) {
                 this.isLogin = true;
-                // this.registerForm.resetFields();
+                this.$refs[formName].resetFields();
                 this.$message.success("注册成功！");
               } else {
                 this.errorRegister = res.msg;
