@@ -45,15 +45,17 @@
             <el-input type="password" v-model="registerForm.password" placeholder="请输入密码"></el-input>
           </el-form-item>
 
-          <el-form-item>
-            <el-input type="text" v-model="registerForm.imageCode" placeholder="请输入验证码"></el-input>
+          <el-form-item> 
+          <el-row :gutter="20"> 
+            <el-col :xs="15" :sm="15"> 
+            <el-input type="text" v-model="registerForm.imageCode" placeholder="请输入验证码"></el-input> 
+            </el-col> 
+            <el-col :xs="5" :sm="5"> 
+          <img :src=imageCode alt="" @click="changeCode()" style="margin-top:16px;  cursor: pointer;" title="看不清？换一张">
+            </el-col> 
+          </el-row> 
           </el-form-item>
         </el-form>
-
-        <div class="send-code" @click="changeCode()">
-          <img :src=imageCode alt="">
-        </div>
-
         <button class="register" @click="register('registerForm')">注册</button>
 
         <div class="register-footer">
@@ -282,23 +284,6 @@ export default {
   cursor: pointer;
   color: #2ab1ea;
 }
-.send-code {
-  position: absolute;
-  height: 36px;
-  width: 120px;
-  left: 270px;
-  top: 155px;
-  background: white;
-  color: #536dfd;
-  font-size: 15px;
-  line-height: 36px;
-  border-radius: 3px;
-  cursor: pointer;
-}
-.send-code img {
-  width: 120px;
-  height: 36px;
-}
 @media only screen and (max-width: 481px) {
   .login-register-page{
     background: #2B3B4A;
@@ -312,18 +297,6 @@ export default {
     padding: 0 40px 36px 40px;
     width: calc(100% - 80px);
     position: relative;
-  }
-  .send-code {
-    height: .517241rem;
-    width: 2.068966rem;
-    left: 3.706897rem;
-    top: 154px;
-    line-height: 0.62069rem;
-  }
-
-  .send-code img {
-    height:.517241rem;
-    width: 2.068966rem;
   }
   .header-img {
     background: url('../../assets/login-bag.png');

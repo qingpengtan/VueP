@@ -25,7 +25,7 @@
                 >
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{article.userName}}
               </span>
-              <span> {{article.createTime}}</span>
+              <span> {{article.createTime | filterTime}}</span>
               &nbsp;&nbsp;类型:{{article.articleTagName}}&nbsp;&nbsp;
               <router-link
                 :to="{path:'/edit-text', query:{articleId:article.articleId}}"
@@ -133,7 +133,9 @@
                 >发表</el-button>
               </span>
             </el-dialog>
-
+            <!-- <div style="clear:both">
+              上一篇文章 下一篇文章
+            </div> -->
             <div class="leave-word">
 
               <div

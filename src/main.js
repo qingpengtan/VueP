@@ -9,6 +9,7 @@ import 'element-ui/lib/theme-chalk/index.css'; // 默认主题
 import "babel-polyfill";
 import StringUtils from "./utils/StringUtils.js";
 import store from './store'
+import './utils/filter'
 
 Vue.use(ElementUI, {
     size: 'small'
@@ -85,46 +86,6 @@ axios.interceptors.response.use(response => {
 })
 
 
-Vue.filter("emptyValue", function (value) {
-    if (StringUtils.isEmpty(value)) {
-        return "";
-    } else {
-        return value;
-    }
-});
-
-
-
-Vue.filter("statusFilter", function (value) {
-    if (value == 1000) {
-        return "正常";
-    } else if (value == 2000) {
-        return "禁用";
-    } else if (StringUtils.isEmpty(value)) {
-        return "";
-    } else {
-        return value;
-    }
-});
-
-
-Vue.filter("tagToIcon", function (value) {
-    if (value == "Java") {
-        return "static/img/tag/java.png";
-    } else if (value == "Web开发") {
-        return "static/img/tag/web.png";
-    } else if (value == "NodeJS") {
-        return "static/img/tag/nodejs.png";
-    } else if (value == "Go语言") {
-        return "static/img/tag/golang.png";
-    } else if (value == "大数据") {
-        return "static/img/tag/hadoop-online.png";
-    } else if (value == "Python") {
-        return "static/img/tag/python.png";
-    } else {
-        return "static/img/tag/other.png";
-    }
-});
 
 new Vue({
     router,

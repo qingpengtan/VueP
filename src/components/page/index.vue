@@ -47,7 +47,7 @@
                           <img :src="article.userPic">
                         </span>
                         {{article.userName}}
-                        <span style="color:#aaa;font-size:11px;">发布于 {{article.createTime}}</span>
+                        <span style="color:#aaa;font-size:11px;">发布于 {{article.createTime | filterTime}}</span>
                       </div>
                     </div>
                   </div>
@@ -59,7 +59,7 @@
                       <span class="daily-user">
                         {{article.userName}}<br>
                         <span style="font-size:11px;position:relative;top:-5px;color:#aaa">
-                          {{article.createTime}}
+                          {{article.createTime | filterTime}}
                         </span>
                       </span>
                       <span class="daily-detail">
@@ -125,6 +125,8 @@ import FAside from "../common/FAside";
 import BackTop from "../common/BackTop.vue";
 import Scroll from "./publics/bScroll";
 import store from "../../store/index.js";
+import moment from 'moment';
+
 
 export default {
   name: "index",
@@ -145,6 +147,10 @@ export default {
     };
   },
   mounted() {
+    var m1 = moment(moment().format('YYYY-MM-DD HH:mm:ss')),
+    m2 = moment('2017-12-19 10:10:00'),
+    du = m1-m2;
+    console.log(du);
     this.reqData(1);
   },
   activated() {

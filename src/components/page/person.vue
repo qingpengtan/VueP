@@ -310,7 +310,7 @@
                       {{article.articleTitle }}
                     </router-link>
                     <div class="time">
-                      发布时间：{{article.createTime}}
+                      发布时间： {{article.createTime | filterTime}}
                     </div>
                   </div>
                 </div>

@@ -47,7 +47,7 @@
                         <img :src="article.userPic">
                       </span>
                       {{article.userName}}
-                      <span style="color:#aaa;font-size:11px;">发布于 {{article.createTime}}</span>
+                      <span style="color:#aaa;font-size:11px;">发布于  {{article.createTime | filterTime}}</span>
                     </div>
                   </div>
                 </div>

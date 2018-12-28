@@ -51,7 +51,7 @@
                           <img :src="article.userPic">
                         </span>
                         {{article.userName}}
-                        <span style="color:#aaa;font-size:11px;">发布于 {{article.createTime}}</span>
+                        <span style="color:#aaa;font-size:11px;">发布于  {{article.createTime | filterTime}}</span>
                       </div>
                     </div>
                   </div>
@@ -63,7 +63,7 @@
                       <span class="daily-user">
                         {{article.userName}}<br>
                         <span style="font-size:11px;position:relative;top:-5px;color:#aaa">
-                          {{article.createTime}}
+                           {{article.createTime | filterTime}}
                         </span>
                       </span>
                       <span class="daily-detail">

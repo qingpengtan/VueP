@@ -16,6 +16,7 @@
     "body-parser": "^1.18.3",
     "element-ui": "2.3.3",
     "mavon-editor": "^2.5.4",
+    "moment": "^2.23.0",
     "tween": "^0.9.0",
     "vue": "^2.5.16",
     "vue-aplayer": "^1.6.1",

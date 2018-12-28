@@ -136,13 +136,14 @@ export default {
         if (res.code == 1) {
           this.form.articleTitle = res.data.articleTitle;
           this.form.content = res.data.content;
-          this.form.articleTag = StringUtils.isEmpty(res.data.articleTag)
+          this.form.articleTag = StringUtils.isEmpty(res.data.articleTagId)
             ? 1
-            : parseInt(res.data.articleTag);
+            : parseInt(res.data.articleTagId);
           this.form.isStick = res.data.isStick == 1000 ? false : true;
           this.form.status = res.data.status == 1000 ? true : false;
           this.form.articleId = res.data.articleId;
           this.form.articleBrief = res.data.articleBrief;
+          console.log(this.form)
         }
       });
     },
