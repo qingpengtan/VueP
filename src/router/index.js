@@ -5,6 +5,7 @@ Vue.use(Router);
 
 export default new Router({
     linkActiveClass: 'active-class',
+    // mode: 'history',
     scrollBehavior(to,form,savePosition){
         if(savePosition){
             return savePosition

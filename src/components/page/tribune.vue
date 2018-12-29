@@ -74,7 +74,9 @@
 
           </v-scroll>
           <div class="aside-content">
+            <keep-alive>
             <FAside></FAside>
+            </keep-alive>
           </div>
 
         </div>

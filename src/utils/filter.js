@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import moment from 'moment';
+import StringUtils from './StringUtils'
 
 
 
@@ -46,11 +47,11 @@ Vue.filter("tagToIcon", function (value) {
 
 Vue.filter("filterTime", function (value) {
     let current = moment().format('YYYY-MM-DD HH:mm:ss');
-    let time = moment(value).subtract(-3, "days").format("YYYY-MM-DD HH:mm:ss");
+    let time = moment(value).subtract(-4, "days").format("YYYY-MM-DD HH:mm:ss");
     let currentDv = moment(current) - moment(value);
     let threeDv = moment(time) - moment(value);
     if(currentDv > threeDv){
-        return value;
+        return moment(value).format("YYYY-MM-DD");
     }else{
         moment.locale('zh-cn') 
         return moment(value, "YYYY-MM-DD hh:mm:ss").fromNow()

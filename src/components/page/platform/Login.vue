@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import md5 from 'md5'
 export default {
   data: function() {
     return {
@@ -41,7 +42,7 @@ export default {
           this.$http
             .http("/sys/user/login", {
               userName: this.ruleForm.username,
-              password: this.ruleForm.password
+              password: md5(this.ruleForm.password)
             })
             .then(res => {
               if (res.code == 1) {
