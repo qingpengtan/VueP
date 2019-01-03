@@ -263,12 +263,11 @@ export default {
 }
 
 .ant-list-item-content .text-content {
-  line-height: 22px;
+  line-height: 27px;
   max-height: 108px;
   overflow: hidden;
   word-wrap: normal;
   word-break: break-all;
-  text-wrap: normal;
 }
 
 .publish {
@@ -307,7 +306,7 @@ export default {
 
 .publish-daily .daily-breif {
   padding: 0px 0 16px 0;
-  line-height: 22px;
+  line-height: 27px;
   max-height: 108px;
   overflow: hidden;
   word-wrap: normal;

@@ -286,12 +286,11 @@ export default {
 }
 
 .ant-list-item-content .text-content {
-  line-height: 22px;
+  line-height: 27px;
   max-height: 108px;
   overflow: hidden;
   word-wrap: normal;
   word-break: break-all;
-  text-wrap: normal;
 }
 
 .publish {

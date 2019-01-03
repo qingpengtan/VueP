@@ -325,7 +325,7 @@ export default {
 }
 
 .ant-list-item-content .text-content {
-  line-height: 22px;
+  line-height: 27px;
 }
 
 .publish {
@@ -434,10 +434,6 @@ export default {
   .ant-list-item-meta-content,
   .ant-list-item-content {
     margin-bottom: 8px;
-  }
-
-  .ant-list-item-content .text-content {
-    line-height: 22px;
   }
 
   .publish {
