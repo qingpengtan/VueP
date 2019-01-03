@@ -62,23 +62,14 @@ router.beforeEach((to, from, next) => {
 axios.interceptors.response.use(response => {
     let code = response.data.code;
     let msg = response.data.msg;
-
     if (code == 500211) {
         localStorage.clear();
         new Vue().$message.warning(msg);
-        setTimeout(() => {
-            router.push({
-                path: "/"
-            });
-        }, 500);
+        router.push('/user-login')
     } else if (code == 500217) {
-        router.push({
-            path: "/403"
-        });
+        router.push('/403')
     } else if (code == 500100) {
-        router.push({
-            path: "/500"
-        });
+        router.push('/404')
     }
     return response
 }, err => {

@@ -149,10 +149,6 @@ export default {
     };
   },
   mounted() {
-    var m1 = moment(moment().format('YYYY-MM-DD HH:mm:ss')),
-    m2 = moment('2017-12-19 10:10:00'),
-    du = m1-m2;
-    console.log(du);
     this.reqData(1);
   },
   activated() {
@@ -172,6 +168,9 @@ export default {
          store.getters.updateArticleNum
       );
       to.meta.keepAlive = false;
+    }
+    if(from.path.indexOf('user-login') != -1){
+       to.meta.keepAlive = false;
     }
     next();
   },
