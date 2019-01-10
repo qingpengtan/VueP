@@ -458,7 +458,7 @@ export default {
 }
 >>> .el-dropdown-menu__item a {
   border-bottom: none;
-  color: #666;
+  color: #666 !important;
 }
 @media only screen and (max-width: 481px) {
   .layout-header {
@@ -582,11 +582,14 @@ export default {
     width: 1.206897rem;
     font-size: 0.241379rem;
   }
+  .mobile-side a {
+    color: #004684;
+  }
   .mobile-side .mobile-side-ul li {
     height: 0.775862rem;
     line-height: 0.775862rem;
     padding: 0 0.344828rem;
-    color: #222;
+    color: #004684;
   }
   .mobile-side .mobile-ul-sec li {
     animation: mysecond 0.5s;

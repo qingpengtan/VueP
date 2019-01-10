@@ -536,6 +536,11 @@ export default {
   margin-right: 10px;
   position: relative;
   top: 5px;
+  
+}
+.img-tag img{
+  width: 20px;
+  height: 20px;
 }
 
 .pc-more {

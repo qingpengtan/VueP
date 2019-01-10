@@ -97,11 +97,11 @@ export default {
   overflow: hidden;
 }
 .aside-list li a {
-  color: #3a8ee6;
+  color: #3a8ee6 !important;
   border-bottom: none;
 }
 .aside-list li a:hover {
-  color: #0454a9;
+  color: #0454a9 !important;
 }
 </style>
 
