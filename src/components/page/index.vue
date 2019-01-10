@@ -30,7 +30,7 @@
                     <img class="article-tag" :src="article.articleTagName | tagToIcon" alt>
                     <img
                       v-if="article.isStick == 2000"
-                      class="article-tag"
+                      class="stick-tag"
                       src="../../assets/stick.png"
                       alt
                     >
@@ -368,7 +368,12 @@ h3 {
   white-space: nowrap;
 }
 .article-tag {
-  width: 18px;
+  width: 16px;
+  position: relative;
+  top: -3px;
+}
+.stick-tag {
+  width: 30px;
   position: relative;
   top: -3px;
 }

@@ -23,7 +23,9 @@
                   :src="article.userPic"
                   alt=""
                 >
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{article.userName}}
+                <span style="margin-left: 16px">
+                  {{article.userName}}
+                  </span>
               </span>
               <span> {{article.createTime | filterTime}}</span>
               &nbsp;&nbsp;类型:{{article.articleTagName}}&nbsp;&nbsp;
