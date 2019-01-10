@@ -1,26 +1,22 @@
 <template>
   <div class="Faside-content">
     <div class="aside-block">
-      <div class="aside-header">
-        最近更新
-      </div>
+      <div class="aside-header">最近更新</div>
       <ul class="aside-list">
         <li v-for="article in recentArticle" :key="article.articleId">
-          <router-link :to="{path:`/detail/${article.articleId}`}">
-            {{article.articleTitle}}
-          </router-link>
+          <router-link
+            :to="{path:`/detail/${jiami(article.articleId)}/${md(jiami(article.articleId))}`}"
+          >{{article.articleTitle}}</router-link>
         </li>
       </ul>
     </div>
     <div class="aside-block">
-      <div class="aside-header">
-        我最近发布的
-      </div>
+      <div class="aside-header">我最近发布的</div>
       <ul class="aside-list">
         <li v-for="article in myRecentArticle" :key="article.articleId">
-          <router-link :to="{path:`/detail/${article.articleId}`}">
-            {{article.articleTitle}}
-          </router-link>
+          <router-link
+            :to="{path:`/detail/${jiami(article.articleId)}/${md(jiami(article.articleId))}`}"
+          >{{article.articleTitle}}</router-link>
         </li>
       </ul>
     </div>
@@ -28,6 +24,8 @@
 </template>
 
 <script>
+import Base64 from "../../utils/Base64.js";
+import md5 from "md5";
 export default {
   name: "faside",
   data() {
@@ -56,11 +54,19 @@ export default {
           this.$message.error(res.msg);
         }
       });
+  },
+  methods: {
+    jiami(value) {
+      return Base64.encode(value);
+    },
+    md(value) {
+      return md5(value);
+    }
   }
 };
 </script>
 <style scoped>
-.Faside-content{
+.Faside-content {
   min-height: 700px;
 }
 .aside-block:first-child {

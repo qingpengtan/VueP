@@ -216,6 +216,8 @@ import Scroll from "./publics/bScroll";
 import FAside from "../common/FAside";
 import Footer from "../common/Footer.vue";
 import BackTop from "../common/BackTop.vue";
+import Base64 from '../../utils/Base64.js'
+
 
 export default {
   name: "details",
@@ -249,7 +251,7 @@ export default {
   methods: {
     articleDetail() {
       this.$http
-        .http("/index/detail", { articleId: this.$route.params.id })
+        .http("/index/detail", { articleId: Base64.decode(this.$route.params.id) })
         .then(res => {
           this.article = res.data;
           document.title = this.article.articleTitle;

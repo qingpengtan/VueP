@@ -1,6 +1,7 @@
 <template>
   <div>
     <Header></Header>
+
     <div class="layout-main">
       <div class="layout-content">
         <div class="main-content" style="padding: 8px 32px 32px;">
@@ -23,7 +24,7 @@
                   <div>
                     <h3>
                       <router-link
-                        :to="{path:`/detail/${article.articleId}`}"
+                        :to="{path:`/detail/${jiami(article.articleId)}/${md(jiami(article.articleId))}`}"
                       >{{article.articleTitle}}</router-link>
                     </h3>
                     <img class="article-tag" :src="article.articleTagName | tagToIcon" alt>
@@ -61,7 +62,9 @@
                         >{{article.createTime | filterTime}}</span>
                       </span>
                       <span class="daily-detail">
-                        <router-link :to="{path:`/detail/${article.articleId}`}">
+                        <router-link
+                          :to="{path:`/detail/${jiami(article.articleId)}/${md(jiami(article.articleId))}`}"
+                        >
                           <img
                             src="../../assets/detail.png"
                             style="width:20px;height:20px"
@@ -111,7 +114,8 @@ import BackTop from "../common/BackTop.vue";
 import Scroll from "./publics/bScroll";
 import store from "../../store/index.js";
 import moment from "moment";
-
+import Base64 from "../../utils/Base64.js";
+import md5 from "md5";
 export default {
   name: "index",
   components: {
@@ -150,13 +154,19 @@ export default {
     // }
     next();
   },
-    beforeRouteLeave(to, from, next) {
+  beforeRouteLeave(to, from, next) {
     if (to.path.indexOf("user-login") != -1) {
       this.$destroy();
     }
     next();
   },
   methods: {
+    jiami(value) {
+      return Base64.encode(value);
+    },
+    md(value) {
+      return md5(value);
+    },
     moreData() {
       this.current++;
       if (this.current > this.totalPage) {

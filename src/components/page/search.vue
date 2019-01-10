@@ -1,18 +1,13 @@
 <template>
-
   <div>
-
     <Header v-bind:searchWd="articleTitle"></Header>
 
     <div class="layout-main">
-      <div style="width:100%;color:#999;font-size:13px;text-align:center">
-        共搜索到了{{totalSize}}篇 “{{articleTitle}}” 的相关文章
-      </div>
+      <div
+        style="width:100%;color:#999;font-size:13px;text-align:center"
+      >共搜索到了{{totalSize}}篇 “{{articleTitle}}” 的相关文章</div>
       <div class="layout-content">
-        <div
-          class="main-content"
-          style="padding: 8px 32px 32px;"
-        >
+        <div class="main-content" style="padding: 8px 32px 32px;">
           <v-scroll
             ref="listContent"
             :data="articleList"
@@ -31,27 +26,29 @@
                 <div v-if="article.articleTag !=1">
                   <div>
                     <h3>
-                      <router-link :to="{path:`/detail/${article.articleId}`}">
-                        {{article.articleTitle}}
-                      </router-link>
+                      <router-link
+                        :to="{path:`/detail/${jiami(article.articleId)}/${md(jiami(article.articleId))}`}"
+                      >{{article.articleTitle}}</router-link>
                     </h3>
+                    <img class="article-tag" :src="article.articleTagName | tagToIcon" alt>
                     <img
+                      v-if="article.isStick == 2000"
                       class="article-tag"
-                      :src="article.articleTagName | tagToIcon"
-                      alt=""
+                      src="../../assets/stick.png"
+                      alt
                     >
                   </div>
                   <div class="ant-list-item-content">
                     <div>
-                      <div class="text-content">
-                        {{article.articleBrief}}
-                      </div>
+                      <div class="text-content">{{article.articleBrief}}</div>
                       <div class="publish">
                         <span>
                           <img :src="article.userPic">
                         </span>
                         {{article.userName}}
-                        <span style="color:#aaa;font-size:11px;">发布于  {{article.createTime | filterTime}}</span>
+                        <span
+                          style="color:#aaa;font-size:11px;"
+                        >发布于 {{article.createTime | filterTime}}</span>
                       </div>
                     </div>
                   </div>
@@ -61,13 +58,16 @@
                     <div class="daily-title">
                       <img :src="article.userPic">
                       <span class="daily-user">
-                        {{article.userName}}<br>
-                        <span style="font-size:11px;position:relative;top:-5px;color:#aaa">
-                           {{article.createTime | filterTime}}
-                        </span>
+                        {{article.userName}}
+                        <br>
+                        <span
+                          style="font-size:11px;position:relative;top:-5px;color:#aaa"
+                        >{{article.createTime | filterTime}}</span>
                       </span>
                       <span class="daily-detail">
-                        <router-link :to="{path:`/detail/${article.articleId}`}">
+                        <router-link
+                          :to="{path:`/detail/${jiami(article.articleId)}/${md(jiami(article.articleId))}`}"
+                        >
                           <img
                             src="../../assets/detail.png"
                             style="width:20px;height:20px"
@@ -77,36 +77,22 @@
                         </router-link>
                       </span>
                     </div>
-                    <div class="daily-breif">
-                      {{article.articleBrief}}
-                    </div>
+                    <div class="daily-breif">{{article.articleBrief}}</div>
                   </div>
                 </div>
               </li>
               <div class="mobile-more">
-                <span id="loading">
-                  正在加载中 <i class="el-icon-loading"></i>
+                <span id="loading">正在加载中
+                  <i class="el-icon-loading"></i>
                 </span>
-                <span
-                  id="nodata"
-                  style="display:none"
-                >
-                  没有更多数据啦
-                </span>
+                <span id="nodata" style="display:none">没有更多数据啦</span>
               </div>
             </ul>
-            <div
-              class="pc-more"
-              @click="moreData"
-              v-show="disMore"
-            >
-              加载更多
-            </div>
-
+            <div class="pc-more" @click="moreData" v-show="disMore">加载更多</div>
           </v-scroll>
           <div class="aside-content">
             <keep-alive>
-            <FAside></FAside>
+              <FAside></FAside>
             </keep-alive>
           </div>
         </div>
@@ -116,7 +102,6 @@
     <Footer></Footer>
     <BackTop></BackTop>
   </div>
-
 </template>
 
 <script>
@@ -125,6 +110,8 @@ import Footer from "../common/Footer.vue";
 import Scroll from "./publics/bScroll";
 import FAside from "../common/FAside";
 import BackTop from "../common/BackTop.vue";
+import Base64 from "../../utils/Base64.js";
+import md5 from "md5";
 export default {
   name: "search",
   components: {
@@ -167,6 +154,12 @@ export default {
     next();
   },
   methods: {
+    jiami(value) {
+      return Base64.encode(value);
+    },
+    md(value) {
+      return md5(value);
+    },
     moreData() {
       this.current++;
       if (this.current > this.totalPage) {

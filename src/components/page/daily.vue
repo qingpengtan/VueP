@@ -1,16 +1,10 @@
 <template>
-
   <div>
-
     <Header></Header>
 
     <div class="layout-main">
-
       <div class="layout-content">
-        <div
-          class="main-content"
-          style="padding: 8px 32px 32px;"
-        >
+        <div class="main-content" style="padding: 8px 32px 32px;">
           <v-scroll
             ref="listContent"
             :data="articleList"
@@ -30,13 +24,16 @@
                   <div class="daily-title">
                     <img :src="article.userPic">
                     <span class="daily-user">
-                      {{article.userName}}<br>
-                      <span style="font-size:11px;position:relative;top:-5px;color:#aaa">
-                        {{article.createTime}}
-                      </span>
+                      {{article.userName}}
+                      <br>
+                      <span
+                        style="font-size:11px;position:relative;top:-5px;color:#aaa"
+                      >{{article.createTime}}</span>
                     </span>
                     <span class="daily-detail">
-                      <router-link :to="{path:`/detail/${article.articleId}`}">
+                      <router-link
+                        :to="{path:`/detail/${jiami(article.articleId)}/${md(jiami(article.articleId))}`}"
+                      >
                         <img
                           src="../../assets/detail.png"
                           style="width:20px;height:20px"
@@ -46,35 +43,21 @@
                       </router-link>
                     </span>
                   </div>
-                  <div class="daily-breif">
-                    {{article.articleBrief}}
-                  </div>
+                  <div class="daily-breif">{{article.articleBrief}}</div>
                 </div>
               </li>
               <div class="mobile-more">
-                <span id="loading">
-                  正在加载中 <i class="el-icon-loading"></i>
+                <span id="loading">正在加载中
+                  <i class="el-icon-loading"></i>
                 </span>
-                <span
-                  id="nodata"
-                  style="display:none"
-                >
-                  没有更多数据啦
-                </span>
+                <span id="nodata" style="display:none">没有更多数据啦</span>
               </div>
             </ul>
-            <div
-              class="pc-more"
-              @click="moreData"
-              v-show="disMore"
-            >
-              加载更多
-            </div>
-
+            <div class="pc-more" @click="moreData" v-show="disMore">加载更多</div>
           </v-scroll>
           <div class="aside-content">
             <keep-alive>
-            <FAside></FAside>
+              <FAside></FAside>
             </keep-alive>
           </div>
         </div>
@@ -84,7 +67,6 @@
     <Footer></Footer>
     <BackTop></BackTop>
   </div>
-
 </template>
 
 <script>
@@ -93,6 +75,8 @@ import Footer from "../common/Footer.vue";
 import Scroll from "./publics/bScroll";
 import FAside from "../common/FAside";
 import BackTop from "../common/BackTop.vue";
+import Base64 from "../../utils/Base64.js";
+import md5 from "md5";
 export default {
   name: "daily",
   components: {
@@ -127,6 +111,12 @@ export default {
     // this.$refs.listContent.scrollTo(0, this.$store.getters.dailyPageScroll);
   },
   methods: {
+    jiami(value) {
+      return Base64.encode(value);
+    },
+    md(value) {
+      return md5(value);
+    },
     moreData() {
       this.current++;
       if (this.current > this.totalPage) {

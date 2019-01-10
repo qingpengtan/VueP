@@ -10,12 +10,15 @@
     "build:dll": "webpack --config build/webpack.dll.conf.js"
   },
   "dependencies": {
+    "animate.css": "^3.7.0",
     "axios": "^0.15.3",
     "babel-polyfill": "^6.23.0",
     "better-scroll": "^1.13.2",
     "body-parser": "^1.18.3",
     "element-ui": "2.3.3",
+    "hls.js": "^0.12.2",
     "mavon-editor": "^2.5.4",
+    "md5": "^2.2.1",
     "moment": "^2.23.0",
     "tween": "^0.9.0",
     "vue": "^2.5.16",

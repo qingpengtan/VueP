@@ -2,25 +2,12 @@
   <div>
     <div class="layout-header">
       <div class="header-main">
-
         <div class="header-navbar">
-          <router-link
-            to='/'
-            class="header-logo"
-          >
-            <img
-              class="header-left"
-              src="../../assets/let.png"
-            />
+          <router-link to="/" class="header-logo">
+            <img class="header-left" src="../../assets/let.png">
           </router-link>
-          <div
-            class="nav-arrow"
-            @click="isCollapse = false"
-          >
-            <img
-              class="header-left"
-              src="../../assets/nav-menu.png"
-            />
+          <div class="nav-arrow" @click="isCollapse = false">
+            <img class="header-left" src="../../assets/nav-menu.png">
           </div>
 
           <div class="header-center">
@@ -29,25 +16,15 @@
               v-model="searchContent"
               @keyup.enter.native="searchArticle()"
             >
-              <i
-                class="el-icon-search el-input__icon"
-                slot="suffix"
-              >
-              </i>
+              <i class="el-icon-search el-input__icon" slot="suffix"></i>
             </el-input>
           </div>
 
           <div class="header-right">
             <el-dropdown trigger="click">
-              <span
-                class="avatar right-span"
-                v-show="loginStatus"
-              >
+              <span class="avatar right-span" v-show="loginStatus">
                 <span>
-                  <img
-                    :src="userPic"
-                    alt="avatar"
-                  >
+                  <img :src="userPic" alt="avatar">
                 </span>
                 <span class="header-username">{{userName}}</span>
               </span>
@@ -56,34 +33,23 @@
                   <router-link to="/person-info">个人中心</router-link>
                 </el-dropdown-item>
                 <el-dropdown-item @click.native="loginOut()">退出登录</el-dropdown-item>
-
               </el-dropdown-menu>
             </el-dropdown>
 
             <div class="mobile-sapn">
-              <span
-                class="avatar right-span "
-                v-show="loginStatus"
-              >
+              <span class="avatar right-span" v-show="loginStatus">
                 <span>
-                  <router-link to="/person-info"><img
-                      :src="userPic"
-                      alt="avatar"
-                    ></router-link>
+                  <router-link to="/person-info">
+                    <img :src="userPic" alt="avatar">
+                  </router-link>
                 </span>
                 <span class="header-username">{{userName}}</span>
               </span>
             </div>
 
-            <span
-              class="right-span"
-              v-show="!loginStatus"
-            >
-              <router-link to='/user-login'>
-                <el-button
-                  type="primary"
-                  plain
-                >登录</el-button>
+            <span class="right-span" v-show="!loginStatus">
+              <router-link to="/user-login">
+                <el-button type="primary" plain>登录</el-button>
               </router-link>
             </span>
           </div>
@@ -95,38 +61,28 @@
 
     <!--固定头-->
     <div class="header-content header-fixed">
-      <div class=" fixed-header">
+      <div class="fixed-header">
         <ul>
           <router-link
             tag="li"
-            to='/'
+            to="/"
             style="padding:0;top:-8px;position:relative;border-bottom:none"
             class="header-logo"
           >
-            <img
-              class="header-left"
-              src="../../assets/let.png"
-            />
+            <img class="header-left" src="../../assets/let.png">
           </router-link>
-          <router-link
-            tag="li"
-            to='/music'
-          >音乐</router-link>
+          <router-link tag="li" to="/music">音乐</router-link>
           <el-dropdown trigger="click">
-            <li> <i class="el-icon-menu"></i>版块</li>
+            <li>
+              <i class="el-icon-menu"></i>版块
+            </li>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item
-                v-for=" tag in articleTag"
-                :key="tag.articleTagId"
-              >
+              <el-dropdown-item v-for=" tag in articleTag" :key="tag.articleTagId">
                 <router-link
                   @click="pushTribune()"
-                  :to="{path:`/tribune/${tag.articleTagId}`}"
-                >
-                  {{tag.articleTag}}
-                </router-link>
+                  :to="{path:`/tribune/${md(tag.articleTagId)}`}"
+                >{{tag.articleTag}}</router-link>
               </el-dropdown-item>
-
             </el-dropdown-menu>
           </el-dropdown>
         </ul>
@@ -137,31 +93,21 @@
             style="float:left;margin:15px"
             @click.native="randomCo"
           >
-          </el-switch> -->
+          </el-switch>-->
           <div class="fixed-search">
             <el-input
               placeholder="搜索文章"
               v-model="searchContent"
               @keyup.enter.native="searchArticle()"
             >
-              <i
-                class="el-icon-search el-input__icon"
-                slot="suffix"
-              >
-              </i>
+              <i class="el-icon-search el-input__icon" slot="suffix"></i>
             </el-input>
           </div>
           <div class="fixed-info">
             <el-dropdown trigger="click">
-              <span
-                class="avatar right-span"
-                v-show="loginStatus"
-              >
+              <span class="avatar right-span" v-show="loginStatus">
                 <span>
-                  <img
-                    :src="userPic"
-                    alt="avatar"
-                  >
+                  <img :src="userPic" alt="avatar">
                 </span>
                 <span class="header-username">{{userName}}</span>
               </span>
@@ -170,7 +116,7 @@
                   <router-link to="/person-info">个人中心</router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
-                  <router-link to='/edit-text'> 写文章</router-link>
+                  <router-link to="/edit-text">写文章</router-link>
                 </el-dropdown-item>
                 <el-dropdown-item @click.native="dialogVisible = true">记日志</el-dropdown-item>
                 <el-dropdown-item @click.native="loginOut()">退出登录</el-dropdown-item>
@@ -180,73 +126,40 @@
         </div>
       </div>
     </div>
-    <el-dialog
-      title="记日志"
-      :visible.sync="dialogVisible"
-      width="30%"
-      :before-close="handleClose"
-    >
-      <el-input
-        type="textarea"
-        v-model="content"
-        :rows="5"
-        placeholder="记录美好生活"
-      >
-      </el-input>
-      <span
-        slot="footer"
-        class="dialog-footer"
-      >
-        <el-button
-          type="primary"
-          @click="publish()"
-        >发表</el-button>
+    <el-dialog title="记日志" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+      <el-input type="textarea" v-model="content" :rows="5" placeholder="记录美好生活"></el-input>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="publish()">发表</el-button>
       </span>
     </el-dialog>
 
     <!-- 移动端导航侧边栏 -->
-    <div
-      class="mobile-side"
-      v-show="!isCollapse"
-      @click="isCollapse = true"
-    >
-      <ul
-        class="mobile-side-ul"
-        id="mobile-side-ul"
-      >
+    <div class="mobile-side" v-show="!isCollapse" @click="isCollapse = true">
+      <ul class="mobile-side-ul" id="mobile-side-ul">
         <li @click="selectMenu($event)">
-          <router-link
-            to='/'
-            exact
-          >主页</router-link>
+          <router-link to="/" exact>主页</router-link>
         </li>
         <li @click="selectMenu($event)">
-          <router-link to='/daily'>日记</router-link>
+          <router-link to="/daily">日记</router-link>
         </li>
         <li @click="selectMenu($event)">
-          <router-link to='/music'>音乐</router-link>
+          <router-link to="/music">音乐</router-link>
         </li>
         <li>
-          <router-link to='/edit-text'>写文章</router-link>
+          <router-link to="/edit-text">写文章</router-link>
         </li>
         <li @click="dialogVisible = true,isCollapse = true">记日志</li>
-        <li @click.stop="triume()">版块 <i
-            id="triArrow"
-            class="el-icon-arrow-down"
-          ></i></li>
+        <li @click.stop="triume()">
+          版块
+          <i id="triArrow" class="el-icon-arrow-down"></i>
+        </li>
         <li v-show="showSecond">
           <ul class="mobile-ul-sec">
-            <li
-              v-for=" tag in articleTag"
-              :key="tag.articleTagId"
-              @click="selectMenu($event)"
-            >
+            <li v-for=" tag in articleTag" :key="tag.articleTagId" @click="selectMenu($event)">
               <router-link
                 @click="pushTribune()"
-                :to="{path:`/tribune/${tag.articleTagId}`}"
-              >
-                {{tag.articleTag}}
-              </router-link>
+                :to="{path:`/tribune/${md(tag.articleTagId)}`}"
+              >{{tag.articleTag}}</router-link>
             </li>
           </ul>
         </li>
@@ -257,6 +170,7 @@
 
 <script>
 import StringUtils from "../../utils/StringUtils.js";
+import md5 from "md5";
 
 export default {
   name: "fhead",
@@ -439,8 +353,13 @@ export default {
         });
     },
     loginOut() {
+      let x_userPhone = localStorage.getItem("x_userPhone");
       localStorage.clear();
+      localStorage.setItem("userPhone",x_userPhone);
       this.$router.push("/user-login");
+    },
+    md(value) {
+      return md5(value).slice(0,8) + value;
     }
   }
 };

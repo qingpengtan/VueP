@@ -45,7 +45,7 @@ export default new Router({
         },
 
         {
-            path: '/detail/:id',
+            path: '/detail/:id/:xx',
             component: resolve => require(['../components/page/details.vue'], resolve),
         },
 

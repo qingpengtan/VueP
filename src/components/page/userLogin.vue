@@ -112,7 +112,7 @@ export default {
     };
   },
   created(){
-    this.ruleForm.username = document.cookie;
+    this.ruleForm.username = localStorage.getItem("userPhone")
   },
   methods: {
     login(formName) {
@@ -125,7 +125,6 @@ export default {
             })
             .then(res => {
               if (res.code == 1) {
-                document.cookie =  res.data.userPhone;
                 localStorage.setItem("x_token", res.data.token);
                 localStorage.setItem("x_userName", res.data.userName);
                 localStorage.setItem("x_userPhone", res.data.userPhone);

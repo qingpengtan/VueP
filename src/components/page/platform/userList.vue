@@ -3,7 +3,8 @@
     <div class="crumbs">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item>
-          <i class="el-icon-tickets"></i> 用户列表</el-breadcrumb-item>
+          <i class="el-icon-tickets"></i> 用户列表
+        </el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="container">
@@ -12,42 +13,37 @@
         <el-select v-model="select_cate" placeholder="筛选省份" class="handle-select mr10">
           <el-option key="1" label="广东省" value="广东省"></el-option>
           <el-option key="2" label="湖南省" value="湖南省"></el-option>
-        </el-select> -->
+        </el-select>-->
         <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
         <el-button type="primary" icon="search" @click="search">搜索</el-button>
         <el-button type="primary" icon="search" @click="addUser">新增</el-button>
       </div>
       <el-table :data="tableData" border style="width: 100%">
         <el-table-column label="编号/用户名">
-          <template scope="scope">
+          <template slot-scope="scope">
             <p>{{ scope.row.userUuid}}/{{scope.row.userName | emptyValue}}</p>
           </template>
         </el-table-column>
-        <el-table-column prop="userPhone" label="电话">
-        </el-table-column>
-        <el-table-column prop="roleId" label="角色">
-        </el-table-column>
+        <el-table-column prop="userPhone" label="电话"></el-table-column>
+        <el-table-column prop="roleId" label="角色"></el-table-column>
         <el-table-column label="性别/年龄/出生日期">
-          <template scope="scope">
+          <template slot-scope="scope">
             <p>{{ scope.row.sex | emptyValue}}/{{ scope.row.age | emptyValue}}/{{scope.row.birthday | emptyValue}}</p>
           </template>
         </el-table-column>
         <el-table-column label="省份/城市">
-          <template scope="scope">
+          <template slot-scope="scope">
             <p>{{ scope.row.province | emptyValue }}/{{scope.row.city | emptyValue}}</p>
           </template>
         </el-table-column>
-        <el-table-column prop="address" label="详细住址">
-        </el-table-column>
-        <el-table-column prop="userTagName" label="用户标签">
-        </el-table-column>
+        <el-table-column prop="address" label="详细住址"></el-table-column>
+        <el-table-column prop="userTagName" label="用户标签"></el-table-column>
         <el-table-column label="状态">
-          <template scope="scope">
+          <template slot-scope="scope">
             <p>{{ scope.row.status | statusFilter }}</p>
           </template>
         </el-table-column>
-        <el-table-column prop="createTime" label="创建时间">
-        </el-table-column>
+        <el-table-column prop="createTime" label="创建时间"></el-table-column>
         <el-table-column label="操作" width="180">
           <template slot-scope="scope">
             <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -56,9 +52,14 @@
         </el-table-column>
       </el-table>
       <div class="pagination">
-
-        <el-pagination background @current-change="handleCurrentChange" :current-page="current" :page-size="10" layout="total, prev, pager, next, jumper" :total="totalSize">
-        </el-pagination>
+        <el-pagination
+          background
+          @current-change="handleCurrentChange"
+          :current-page="current"
+          :page-size="10"
+          layout="total, prev, pager, next, jumper"
+          :total="totalSize"
+        ></el-pagination>
       </div>
     </div>
 
@@ -90,20 +91,20 @@ export default {
     };
   },
   created() {
-    this.$http.http("/sys/user/list", {}).then(res => {
-      this.current = res.data.current;
-      this.totalSize = res.data.totalSize;
-      this.tableData = res.data.userList;
-    });
+   this.userList();
   },
   methods: {
-    // 分页导航
-    handleCurrentChange(val) {
-      this.$http.http("/sys/user/list", {page:val}).then(res => {
+    userList(params) {
+      this.$http.http("/sys/user/list", params).then(res => {
         this.current = res.data.current;
         this.totalSize = res.data.totalSize;
         this.tableData = res.data.userList;
       });
+    },
+
+    // 分页导航
+    handleCurrentChange(val) {
+      this.userList({page:val,userPhone:this.select_word})
     },
 
     addUser() {
@@ -111,6 +112,7 @@ export default {
     },
     search() {
       this.is_search = true;
+      this.userList({userPhone:this.select_word})
     },
     handleEdit(index, row) {
       this.$router.push({ path: "/sys/form", query: row });

@@ -3,7 +3,8 @@
     <div class="crumbs">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item>
-          <i class="el-icon-tickets"></i> 文章列表</el-breadcrumb-item>
+          <i class="el-icon-tickets"></i> 文章列表
+        </el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="container">
@@ -12,34 +13,31 @@
         <el-select v-model="select_cate" placeholder="筛选省份" class="handle-select mr10">
           <el-option key="1" label="广东省" value="广东省"></el-option>
           <el-option key="2" label="湖南省" value="湖南省"></el-option>
-        </el-select> -->
+        </el-select>-->
         <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
         <el-button type="primary" icon="search" @click="search">搜索</el-button>
         <el-button type="primary" icon="search" @click="addUser">新增</el-button>
       </div>
       <el-table :data="tableData" border style="width: 100%">
-        <el-table-column prop="articleTitle" label="标题">
-        </el-table-column>
+        <el-table-column prop="articleTitle" label="标题"></el-table-column>
         <el-table-column label="用户">
-          <template scope="scope">
+          <template slot-scope="scope">
             <p>{{scope.row.userPhone}}/{{ scope.row.userName | emptyValue }}</p>
           </template>
         </el-table-column>
-        <el-table-column prop="articleTagName" label="文章类型">
-        </el-table-column>
+        <el-table-column prop="articleTagName" label="文章类型"></el-table-column>
         <el-table-column label="置顶">
-          <template scope="scope">
+          <template slot-scope="scope">
             <p v-if="scope.row.isStick == '1000'">否</p>
             <p v-else>是</p>
           </template>
         </el-table-column>
         <el-table-column label="状态">
-          <template scope="scope">
+          <template slot-scope="scope">
             <p>{{ scope.row.status | statusFilter }}</p>
           </template>
         </el-table-column>
-        <el-table-column prop="createTime" label="发表时间">
-        </el-table-column>
+        <el-table-column prop="createTime" label="发表时间"></el-table-column>
         <el-table-column label="操作" width="180">
           <template slot-scope="scope">
             <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -48,8 +46,14 @@
         </el-table-column>
       </el-table>
       <div class="pagination">
-        <el-pagination background @current-change="handleCurrentChange" :current-page="current" :page-size="10" layout="total, prev, pager, next, jumper" :total="totalSize">
-        </el-pagination>
+        <el-pagination
+          background
+          @current-change="handleCurrentChange"
+          :current-page="current"
+          :page-size="10"
+          layout="total, prev, pager, next, jumper"
+          :total="totalSize"
+        ></el-pagination>
       </div>
     </div>
 
@@ -82,20 +86,19 @@ export default {
     };
   },
   created() {
-    this.$http.http("/sys/article/list", {}).then(res => {
-      this.current = res.data.current;
-      this.totalSize = res.data.totalSize;
-      this.tableData = res.data.articleList;
-    });
+    this.articleLists();
   },
   methods: {
-    // 分页导航
-    handleCurrentChange(val) {
-      this.$http.http("/sys/article/list", {page:val}).then(res => {
+    articleLists(params) {
+      this.$http.http("/sys/article/list", params).then(res => {
         this.current = res.data.current;
         this.totalSize = res.data.totalSize;
         this.tableData = res.data.articleList;
       });
+    },
+    // 分页导航
+    handleCurrentChange(val) {
+      this.articleLists({ page: val, articleTitle: this.select_word });
     },
 
     addUser() {
@@ -104,9 +107,13 @@ export default {
     },
     search() {
       this.is_search = true;
+      this.articleLists({articleTitle:this.select_word})
     },
     handleEdit(index, row) {
-      this.$router.push({ path: "/sys/article-edit",query:{articleId:row.articleId}});
+      this.$router.push({
+        path: "/sys/article-edit",
+        query: { articleId: row.articleId }
+      });
       // tabUtils.setTags(this.$tabsList,this);
     },
     handleDelete(index, row) {

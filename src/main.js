@@ -9,6 +9,7 @@ import 'element-ui/lib/theme-chalk/index.css'; // 默认主题
 import "babel-polyfill";
 import StringUtils from "./utils/StringUtils.js";
 import store from './store'
+import 'animate.css'
 import './utils/filter'
 
 Vue.use(ElementUI, {
@@ -63,7 +64,9 @@ axios.interceptors.response.use(response => {
     let code = response.data.code;
     let msg = response.data.msg;
     if (code == 500211) {
+        let x_userPhone = localStorage.getItem("x_userPhone");
         localStorage.clear();
+        localStorage.setItem("userPhone",x_userPhone);
         new Vue().$message.warning(msg);
         router.push('/user-login')
     } else if (code == 500217) {
