@@ -142,7 +142,6 @@ export default {
     // this.$refs.listContent.scrollTo(0, this.$store.getters.indexPageScroll);
   },
   beforeRouteEnter(to, from, next) {
-    store.commit("navMenuSelect", "主页");
     if (store.getters.updateArticleNum == store.getters.currentArticleNum) {
       to.meta.keepAlive = true;
     } else {

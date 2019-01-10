@@ -27,7 +27,7 @@ body {
 
 a {
     text-decoration: none;
-    color: #555555;
+    color: #222;
 }
 .active-class{
   border-bottom:2px solid white;

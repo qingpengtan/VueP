@@ -8,7 +8,6 @@ export default new vuex.Store({
         dailyPageScroll:0,
         tribunePageScroll:0,
         searchPageScroll:0,
-        navMenuSelect:"主页",
         pageScrollY:0,
         currentMusic:"",
         currentArticleNum:0,
@@ -26,9 +25,6 @@ export default new vuex.Store({
         },
         searchPageScroll(state){
             return state.searchPageScroll;
-        },
-        navMenuSelect(state){
-            return state.navMenuSelect;
         },
         pageScrollY(state){
             return state.pageScrollY;
@@ -55,9 +51,6 @@ export default new vuex.Store({
         },
         searchPageScroll(state,scrollY){
             state.searchPageScroll = scrollY;
-        },
-        navMenuSelect(state,currentMenu){
-            state.navMenuSelect = currentMenu;
         },
         pageScrollY(state,pageScrollY){
             state.pageScrollY = pageScrollY;

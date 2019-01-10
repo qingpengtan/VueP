@@ -196,13 +196,6 @@ export default {
     if (this.$route.path.indexOf("/search") == -1) {
       this.searchContent = "";
     }
-    let fMenuUl = document.getElementsByClassName("mobile-side-ul")[0];
-    let fMenuLi = fMenuUl.getElementsByTagName("li");
-    Array.from(fMenuLi).forEach(element => {
-      if (this.$store.getters.navMenuSelect == element.innerText.trim()) {
-        element.firstElementChild.style.color = "#066ac3";
-      }
-    });
   },
   computed: {
     pageScrollY() {
@@ -212,23 +205,7 @@ export default {
   watch: {
     searchWd() {
       this.searchContent = this.searchWd;
-    },
-    $route(to, from) {
-      let fMenuUl = document.getElementsByClassName("mobile-side-ul")[0];
-      if (!fMenuUl) return;
-      let fMenuLi = fMenuUl.getElementsByTagName("li");
-      if (this.flag) {
-        Array.from(fMenuLi).forEach(element => {
-          if (this.$store.getters.navMenuSelect == element.innerText.trim()) {
-            element.firstElementChild.style.color = "#066ac3";
-          } else {
-            if (element.firstElementChild)
-              element.firstElementChild.style.color = "white";
-          }
-        });
-      }
-    },
-    pageScrollY() {}
+    }
   },
   created() {
     if (this.$route.path.indexOf("/search") != -1) {
@@ -254,11 +231,6 @@ export default {
         let fMenuUl = document.getElementsByClassName("mobile-side-ul")[0];
         let fMenuLi = fMenuUl.getElementsByTagName("li");
         this.flag = true;
-        Array.from(fMenuLi).forEach(element => {
-          if (this.$store.getters.navMenuSelect == element.innerText.trim()) {
-            element.firstElementChild.style.color = "#066ac3";
-          }
-        });
       });
   },
   methods: {
@@ -299,37 +271,6 @@ export default {
     },
     selectMenu(e) {
       let menu = e.target.innerText;
-      switch (menu) {
-        case "主页":
-          this.$store.commit("navMenuSelect", "主页");
-          break;
-        case "日记":
-          this.$store.commit("navMenuSelect", "日记");
-          break;
-        case "音乐":
-          this.$store.commit("navMenuSelect", "音乐");
-          break;
-        case "Java":
-          this.$store.commit("navMenuSelect", "Java");
-          break;
-        case "Web开发":
-          this.$store.commit("navMenuSelect", "Web开发");
-          break;
-        case "Go语言":
-          this.$store.commit("navMenuSelect", "Go语言");
-          break;
-        case "大数据":
-          this.$store.commit("navMenuSelect", "大数据");
-          break;
-        case "Python":
-          this.$store.commit("navMenuSelect", "Python");
-          break;
-        case "其他":
-          this.$store.commit("navMenuSelect", "其他");
-          break;
-        default:
-          this.$store.commit("navMenuSelect", "");
-      }
     },
     publish() {
       if (this.content.trim() == "") {
@@ -355,11 +296,11 @@ export default {
     loginOut() {
       let x_userPhone = localStorage.getItem("x_userPhone");
       localStorage.clear();
-      localStorage.setItem("userPhone",x_userPhone);
+      localStorage.setItem("userPhone", x_userPhone);
       this.$router.push("/user-login");
     },
     md(value) {
-      return md5(value).slice(0,8) + value;
+      return md5(value).slice(0, 8) + value;
     }
   }
 };
@@ -617,6 +558,7 @@ export default {
     z-index: 100000;
     font-size: 0;
   }
+
   .mobile-side-ul {
     overflow-y: scroll;
   }
@@ -625,7 +567,6 @@ export default {
   }
   .mobile-side .mobile-side-ul {
     display: inline-block;
-    color: white;
     height: 100vh;
     background: #1ca2ec;
     padding-top: 0.172414rem;
@@ -645,7 +586,7 @@ export default {
     height: 0.775862rem;
     line-height: 0.775862rem;
     padding: 0 0.344828rem;
-    color: white;
+    color: #222;
   }
   .mobile-side .mobile-ul-sec li {
     animation: mysecond 0.5s;
@@ -654,7 +595,6 @@ export default {
     width: 100%;
     display: inline-block;
     height: 100%;
-    color: white;
   }
   .nav-arrow {
     display: block;
