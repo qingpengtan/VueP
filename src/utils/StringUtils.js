@@ -11,8 +11,12 @@ export default {
         } else if (typeof obj.trim === 'function') {
             if (obj.trim().length == 0 || obj == '')
                 return true;
-            else
-                return false;
+            else{
+                if(obj == 'null')
+                    return true
+                else
+                    return false;
+            }
         } else
             return false;
     },

@@ -65,7 +65,7 @@ axios.interceptors.response.use(response => {
     let msg = response.data.msg;
     if (code == 500211) {
         let x_userPhone = localStorage.getItem("x_userPhone");
-        x_userPhone == null ? localStorage.getItem("userPhone") : x_userPhone;
+        x_userPhone = StringUtils.isEmpty(x_userPhone) ? localStorage.getItem("userPhone") : x_userPhone;
         localStorage.clear();
         localStorage.setItem("userPhone",x_userPhone);
         new Vue().$message.warning(msg);
