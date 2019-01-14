@@ -63,12 +63,7 @@
     <div class="header-content header-fixed">
       <div class="fixed-header">
         <ul>
-          <router-link
-            tag="li"
-            to="/"
-            style="padding:0;top:-8px;position:relative;border-bottom:none"
-            class="header-logo"
-          >
+          <router-link tag="li" to="/" class="fixed-logo header-logo">
             <img class="header-left" src="../../assets/let.png">
           </router-link>
           <router-link tag="li" to="/music">音乐</router-link>
@@ -367,6 +362,13 @@ export default {
   line-height: 64px;
   transition: all 0.3s, padding 0s;
   display: inline-block;
+}
+.fixed-logo {
+  padding: 0;
+  top: -7px;
+  position: relative;
+  margin-right: 8px;
+  border-bottom: none;
 }
 .header-logo {
   border-bottom: none;

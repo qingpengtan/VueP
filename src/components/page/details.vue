@@ -319,10 +319,6 @@ export default {
   float: right;
 }
 
-.ant-list-item-meta-content {
-  /* color: #43bcff; */
-}
-
 .ant-list-item-meta-content,
 .ant-list-item-content {
   margin-bottom: 16px;

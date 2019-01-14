@@ -250,6 +250,7 @@ export default {
   line-height: 40px;
   padding-left: 40px;
   color: white;
+  box-sizing: border-box;
 }
 .layout-content {
   height: auto;
