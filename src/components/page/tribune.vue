@@ -4,6 +4,7 @@
 
     <div class="layout-main">
       <div class="layout-content">
+        <div class="layout-title">{{articleTag}}</div>
         <div class="main-content" style="padding: 8px 32px 32px;">
           <v-scroll
             ref="listContent"
@@ -96,7 +97,8 @@ export default {
       pullup: true,
       totalPage: 1,
       current: 1,
-      articleList: []
+      articleList: [],
+      articleTag: ""
     };
   },
   mounted() {
@@ -192,27 +194,28 @@ export default {
     },
     setTitle() {
       let id = this.$route.params.id;
+      id = id.slice(8, id.length);
       switch (id) {
         case "2":
-          document.title = "Java版块";
+          document.title = this.articleTag = "Java版块";
           break;
         case "3":
-          document.title = "Web开发版块";
+          document.title =  this.articleTag = "Web开发版块";
           break;
         case "8":
-          document.title = "NodeJS版块";
+          document.title =  this.articleTag = "NodeJS版块";
           break;
         case "4":
-          document.title = "Go语言版块";
+          document.title =  this.articleTag = "Go语言版块";
           break;
         case "5":
-          document.title = "大数据版块";
+          document.title =  this.articleTag = "大数据版块";
           break;
         case "6":
-          document.title = "Python版块";
+          document.title =  this.articleTag =  "Python版块";
           break;
         default:
-          document.title = "其他版块";
+          document.title =  this.articleTag = "其他版块";
           break;
       }
     }
@@ -236,10 +239,18 @@ export default {
   }
 }
 .layout-main {
-  width: 1260px;
+  width: 1180px;
   margin: 0 auto;
 }
-
+.layout-title {
+  width: 680px;
+  float: left;
+  height: 40px;
+  background: linear-gradient( left ,#7697b9, white);
+  line-height: 40px;
+  padding-left: 40px;
+  color: white;
+}
 .layout-content {
   height: auto;
   width: auto;
@@ -260,18 +271,18 @@ export default {
 }
 
 .v-scroll {
-  width: 720px;
+  width: 680px;
   display: inline-block;
 }
 .aside-content {
   width: 360px;
-  margin: 20px;
+  margin-top: -20px;
   float: right;
 }
 
 .ant-list-item {
   padding-top: 16px;
-  width: 720px;
+  width: 680px;
   border-bottom: 1px solid #ddd;
 }
 
@@ -328,9 +339,9 @@ h3 {
   margin: 0 auto;
   margin-top: 15px;
   line-height: 35px;
-  border: 1px solid #999999;
+  border: 1px solid #999;
   border-radius: 4px;
-  color: #999999;
+  color: #999;
   text-align: center;
   font-size: 13px;
   cursor: pointer;
@@ -348,6 +359,13 @@ h3 {
   .main-content,
   .ant-list-item {
     width: 100%;
+  }
+  .layout-title {
+    width: 100%;
+    height:24px;
+    line-height: 24px;
+    font-size: 14px;
+    padding-left: 16px;
   }
   .layout-content {
     margin-top: 0;
@@ -387,7 +405,7 @@ h3 {
   }
   .v-scroll {
     width: 100%;
-    height: calc(100vh - 0.852rem);
+    height: calc(100vh - 0.852rem - 24px);
     overflow: hidden;
 
     font-size: 14px;

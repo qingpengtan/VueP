@@ -315,7 +315,7 @@ export default {
 }
 
 .header-main {
-  width: 1260px;
+  width: 1180px;
   margin: 0 auto;
 }
 
@@ -345,7 +345,7 @@ export default {
 }
 
 .header-content ul {
-  width: 1260px;
+  width: 1180px;
   margin: 0 auto;
   height: 50px;
 }
@@ -425,7 +425,7 @@ export default {
   z-index: 100;
 }
 .fixed-header {
-  width: 1260px;
+  width: 1180px;
   margin: 0 auto;
 }
 .fixed-header ul {

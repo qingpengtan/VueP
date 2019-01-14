@@ -190,7 +190,7 @@ export default {
 
 <style scoped>
 .layout-main {
-  width: 1260px;
+  width: 1180px;
   margin: 0 auto;
 }
 
@@ -203,12 +203,12 @@ export default {
 }
 
 .header-main {
-  width: 1260px;
+  width: 1180px;
   margin: 0 auto;
 }
 
 .header-navbar {
-  height: 64px;
+  height: 57px;
   width: 100%;
 }
 
@@ -222,7 +222,7 @@ export default {
 }
 
 .header-content ul {
-  width: 1260px;
+  width: 1180px;
   margin: 0 auto;
 }
 .header-content li {
@@ -258,7 +258,7 @@ export default {
   display: inline-block;
   height: 100%;
   transition: all 0.3s;
-  line-height: 64px;
+  line-height: 57px;
 }
 
 .header-right .avatar span {
@@ -284,7 +284,7 @@ export default {
   margin-top: 20px;
 }
 .editor-title {
-  width: 79%;
+  width: 77%;
   height: 40px;
   margin: 20px;
   border: none;
@@ -344,7 +344,7 @@ export default {
   }
 
   .header-content ul {
-    width: 1260px;
+    width: 1180px;
     margin: 0 auto;
   }
   .header-content li {

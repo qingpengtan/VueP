@@ -260,7 +260,7 @@ export default {
   }
 }
 .layout-main {
-  width: 1260px;
+  width: 1180px;
   margin: 0 auto;
 }
 
@@ -274,19 +274,27 @@ export default {
 .main-content {
   position: relative;
 }
+
+.main-content:after {
+  content: ".";
+  height: 0;
+  visibility: hidden;
+  display: block;
+  clear: both;
+}
 .v-scroll {
-  width: 720px;
+  width: 680px;
   display: inline-block;
 }
 .aside-content {
   width: 360px;
-  margin: 20px;
+  margin: 16px;
   float: right;
 }
 
 .ant-list-item {
   padding-top: 16px;
-  width: 720px;
+  width: 680px;
   border-bottom: 1px solid #ddd;
 }
 

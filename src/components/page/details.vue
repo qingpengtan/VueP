@@ -286,7 +286,7 @@ export default {
 
 <style scoped>
 .layout-main {
-  width: 1260px;
+  width: 1180px;
   height: 100%;
   margin: 0 auto;
   background: white;
@@ -309,13 +309,13 @@ export default {
 
 .ant-list-item {
   padding: 20px 0;
-  width: 720px;
+  width: 680px;
   display: inline-block;
 }
 
 .aside-content {
   width: 360px;
-  margin: 20px;
+  margin: 16px;
   float: right;
 }
 

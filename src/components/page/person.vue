@@ -448,7 +448,7 @@ export default {
 
 <style scoped>
 .layout-main {
-  width: 1260px;
+  width: 1180px;
   height: 100%;
   margin: 0 auto;
 }
@@ -529,7 +529,7 @@ export default {
 }
 .text-item .title .time {
   font-size: 12px;
-  color: #999999;
+  color: #999;
 }
 .text-item .img-tag {
   float: left;

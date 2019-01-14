@@ -24,7 +24,7 @@ export default {
   border-top: 1px solid #ddd;
 }
 .footer-warp .footer-content {
-  width: 1260px;
+  width: 1180px;
   height: 90px;
   margin: 0 auto;
   text-align: center;
