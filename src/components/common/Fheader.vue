@@ -456,9 +456,9 @@ export default {
 >>> .el-dropdown {
   color: white;
 }
->>> .el-dropdown-menu__item a {
+>>> .el-dropdown-menu__item .active-class {
+  color: #0454a9 !important;
   border-bottom: none;
-  color: #666 !important;
 }
 @media only screen and (max-width: 481px) {
   .layout-header {

@@ -98,11 +98,14 @@ export default {
   overflow: hidden;
 }
 .aside-list li a {
-  color: #777 !important;
+  color: #777;
   border-bottom: none;
 }
 .aside-list li a:hover {
   color: #0454a9 !important;
+}
+.active-class {
+  color: #0454a9!important;
 }
 </style>
 
