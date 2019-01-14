@@ -568,7 +568,7 @@ export default {
   .mobile-side .mobile-side-ul {
     display: inline-block;
     height: 100vh;
-    background: #1ca2ec;
+    background: #7697b9;
     padding-top: 0.172414rem;
     box-sizing: border-box;
     transition: all 0.5s;
@@ -582,14 +582,10 @@ export default {
     width: 1.206897rem;
     font-size: 0.241379rem;
   }
-  .mobile-side a {
-    color: #004684;
-  }
   .mobile-side .mobile-side-ul li {
     height: 0.775862rem;
     line-height: 0.775862rem;
     padding: 0 0.344828rem;
-    color: #004684;
   }
   .mobile-side .mobile-ul-sec li {
     animation: mysecond 0.5s;
