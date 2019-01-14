@@ -246,7 +246,10 @@ export default {
   width: 680px;
   float: left;
   height: 40px;
-  background: linear-gradient( left ,#7697b9, white);
+  background: -webkit-linear-gradient(left,#7697b9, white); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right,#7697b9, white); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(right,#7697b9, white); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right,#7697b9, white); /* 标准的语法 */
   line-height: 40px;
   padding-left: 40px;
   color: white;
