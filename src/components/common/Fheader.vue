@@ -4,7 +4,7 @@
       <div class="header-main">
         <div class="header-navbar">
           <router-link to="/" class="header-logo">
-            <img class="header-left" src="../../assets/let.png">
+            <img class="header-left" src="../../assets/let.png" title="主页">
           </router-link>
           <div class="nav-arrow" @click="isCollapse = false">
             <img class="header-left" src="../../assets/nav-menu.png">
@@ -64,7 +64,7 @@
       <div class="fixed-header">
         <ul>
           <router-link tag="li" to="/" class="fixed-logo header-logo">
-            <img class="header-left" src="../../assets/let.png">
+            <img class="header-left" src="../../assets/let.png" title="主页">
           </router-link>
           <router-link tag="li" to="/music">音乐</router-link>
           <el-dropdown trigger="click">
@@ -371,7 +371,7 @@ export default {
   border-bottom: none;
 }
 .header-logo {
-  border-bottom: none;
+  border-bottom: none !important;
 }
 
 .header-center {

@@ -8,7 +8,7 @@
           <router-link to='/'>
             <img
               class="header-left"
-              src="../../assets/let.png"
+              src="../../assets/let.png" title="主页"
             />
           </router-link>
           <div class="header-right">
