@@ -17,7 +17,7 @@ export default new Router({
             path: '/',
             component: resolve => require(['../components/page/index.vue'], resolve),
             meta: {
-                title: '就让你走',
+                title: '山河远阔，人间烟火',
                 keepAlive: true,
             }
         },

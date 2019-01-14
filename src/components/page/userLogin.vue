@@ -29,7 +29,7 @@
         <div class="login-footer">
           山河远阔，人间烟火，无一是你，无一不是你。
           <br>
-           &nbsp; &nbsp; -- Created By Tang 就让你走
+           &nbsp; &nbsp; -- Created By Tang 
         </div>
 
       </div>

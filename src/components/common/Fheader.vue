@@ -333,9 +333,9 @@ export default {
   min-height: 50px;
   width: auto;
   margin-top: 1px;
-  border-bottom: 1px solid #409eff;
+  border-bottom: 1px solid #7697b9;
   box-shadow: 0 0 5px;
-  background: #409eff;
+  background: #7697b9;
 }
 .header-empty {
   height: 50px;
@@ -462,7 +462,7 @@ export default {
 }
 @media only screen and (max-width: 481px) {
   .layout-header {
-    background: #43bcff;
+    background: #7697b9;
   }
   .header-main {
     width: 100%;
