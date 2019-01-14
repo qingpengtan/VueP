@@ -203,7 +203,7 @@ export default {
   box-sizing: border-box;
   height: 505px;
   margin-top: 64px;
-  color: #999;
+  color: white;
 }
 .header-img {
   width: 100%;
@@ -218,7 +218,7 @@ export default {
   height: 265px;
   width: 352px;
   position: relative;
-  background: #F6F7F9;
+  background: #90CAF8;
 }
 .header-input >>> input {
   /* .header-input .el-form .el-form-item .el-form-item__content .el-input input { */
@@ -227,11 +227,10 @@ export default {
   height: 36px !important;
   border: none;
   outline: none;
-  color: #999999;
   font-size: 16px;
   border-bottom: 1px solid #ddd;
 }
-.header-input input::-webkit-input-placeholder {
+/* .header-input input::-webkit-input-placeholder {
   color: #dcdcdc;
 }
 .header-input input:-webkit-input-placeholder {
@@ -244,9 +243,8 @@ export default {
   color: #dcdcdc;
 }
 .header-input input:-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
   color: #dcdcdc;
-}
+} */
 
 .header-input .forget-pswd {
   margin-top: 12px;
@@ -269,10 +267,10 @@ export default {
   width: 100%;
   font-size: 12px;
   text-align: center;
-  color: #999999;
+  color: white;
 }
 .register-footer {
-  color: #999999;
+  color: white;
   margin-top: 10px;
   font-size: 12px;
 }
@@ -287,6 +285,10 @@ export default {
 .login-tip .point {
   cursor: pointer;
   color: #2ab1ea;
+}
+
+button.login,button.register{
+    letter-spacing:10px;
 }
 @media only screen and (max-width: 481px) {
   .login-register-page{
@@ -303,7 +305,7 @@ export default {
     position: relative;
   }
   .header-img {
-    background: url('../../assets/login-bag.png');
+    background: url('../../assets/login-bag.png') no-repeat;
     background-size: 100%;
     height: 3.103448rem;
   }

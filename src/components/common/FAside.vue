@@ -82,6 +82,7 @@ export default {
   height: 40px;
   line-height: 40px;
   padding-left: 20px;
+  color: #3a8ee6 !important;
   box-sizing: border-box;
   background: #f5f7fa;
 }
@@ -97,7 +98,7 @@ export default {
   overflow: hidden;
 }
 .aside-list li a {
-  color: #3a8ee6 !important;
+  color: #777 !important;
   border-bottom: none;
 }
 .aside-list li a:hover {

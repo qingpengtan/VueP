@@ -168,7 +168,7 @@ export default {
       this.$http
         .http("/index/list", {
           page: page,
-          articleTagId: id.slice(8, id.length) 
+          articleTagId: id.slice(8, id.length)
         })
         .then(
           res => {
@@ -371,6 +371,11 @@ h3 {
   }
   .ant-list-item-action li {
     padding-right: 8px;
+  }
+
+  .article-tag,
+  .stick-tag {
+    top: -0.096207rem;
   }
   .pc-more {
     display: none !important;
