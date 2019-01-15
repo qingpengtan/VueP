@@ -73,7 +73,7 @@ axios.interceptors.response.use(response => {
     } else if (code == 500217) {
         router.push('/403')
     } else if (code == 500100) {
-        router.push('/404')
+        router.push('/500')
     }
     return response
 }, err => {

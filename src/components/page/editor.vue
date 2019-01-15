@@ -293,6 +293,12 @@ export default {
   display: inline-block;
 }
 
+.layout-main>>>.ql-snow .ql-editor pre.ql-syntax {
+  background-color: #7697b9!important;
+  font-size: 15px!important;
+  font-family: Consolas!important;
+}
+
 @media only screen and (max-width: 481px) {
   .layout-main {
     width: 100%;
