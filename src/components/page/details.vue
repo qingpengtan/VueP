@@ -1,151 +1,100 @@
 <template>
-
   <div>
     <Header></Header>
     <div class="layout-main">
-
-      <div
-        class="layout-content"
-        ref="wrapper"
-      >
-        <div
-          class="main-content"
-          style="padding: 8px 32px 32px;"
-        >
-
+      <div class="layout-content" ref="wrapper">
+        <div class="main-content" style="padding: 8px 32px 32px;">
           <div class="ant-list-item">
             <div class="ant-list-item-meta-content">
               <h2>{{article.articleTitle}}</h2>
             </div>
             <div class="publish">
               <span class="avater">
-                <img
-                  :src="article.userPic"
-                  alt=""
-                >
-                <span style="margin-left: 16px">
-                  {{article.userName}}
-                  </span>
+                <img :src="article.userPic" alt>
+                <span style="margin-left: 16px">{{article.userName}}</span>
               </span>
-              <span> {{article.createTime | filterTime}}</span>
+              <span>{{article.createTime | filterTime}}</span>
               &nbsp;&nbsp;类型:{{article.articleTagName}}&nbsp;&nbsp;
               <router-link
                 :to="{path:'/edit-text', query:{articleId:article.articleId}}"
                 v-show="isEdit"
               >
-                <i
-                  class="el-icon-edit"
-                  style="color:#43bcff;font-size:14px"
-                ></i>
+                <i class="el-icon-edit" style="color:#43bcff;font-size:14px"></i>
               </router-link>
             </div>
             <div class="ant-list-item-content">
               <div>
                 <div class="ql-snow">
                   <div class="ql-editor">
-                    <div
-                      class="text-content"
-                      v-html=article.content
-                    >
-                    </div>
+                    <div class="text-content" v-html="article.content"></div>
                   </div>
                 </div>
               </div>
             </div>
-            <ul
-              class="ant-list-item-action"
-              style="height:18px"
-            >
+            <ul class="ant-list-item-action" style="height:18px">
               <li>
                 <span>
-                  <i
-                    class="anticon anticon-star-o"
-                    style="margin-right: 8px;"
-                  >
+                  <i class="anticon anticon-star-o" style="margin-right: 8px;">
                     <svg
                       viewBox="64 64 896 896"
-                      class=""
+                      class
                       data-icon="star"
                       width="1em"
                       height="1em"
                       fill="currentColor"
                       aria-hidden="true"
                     >
-                      <path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 0 0 .6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0 0 46.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3zM664.8 561.6l36.1 210.3L512 672.7 323.1 772l36.1-210.3-152.8-149L417.6 382 512 190.7 606.4 382l211.2 30.7-152.8 148.9z"></path>
+                      <path
+                        d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 0 0 .6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0 0 46.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3zM664.8 561.6l36.1 210.3L512 672.7 323.1 772l36.1-210.3-152.8-149L417.6 382 512 190.7 606.4 382l211.2 30.7-152.8 148.9z"
+                      ></path>
                     </svg>
-                  </i>183</span>
+                  </i>183
+                </span>
                 <em class="ant-list-item-action-split"></em>
               </li>
               <li>
                 <span>
-                  <i
-                    class="anticon anticon-like-o"
-                    style="margin-right: 8px;"
-                  >
+                  <i class="anticon anticon-like-o" style="margin-right: 8px;">
                     <svg
                       viewBox="64 64 896 896"
-                      class=""
+                      class
                       data-icon="like"
                       width="1em"
                       height="1em"
                       fill="currentColor"
                       aria-hidden="true"
                     >
-                      <path d="M885.9 533.7c16.8-22.2 26.1-49.4 26.1-77.7 0-44.9-25.1-87.4-65.5-111.1a67.67 67.67 0 0 0-34.3-9.3H572.4l6-122.9c1.4-29.7-9.1-57.9-29.5-79.4A106.62 106.62 0 0 0 471 99.9c-52 0-98 35-111.8 85.1l-85.9 311H144c-17.7 0-32 14.3-32 32v364c0 17.7 14.3 32 32 32h601.3c9.2 0 18.2-1.8 26.5-5.4 47.6-20.3 78.3-66.8 78.3-118.4 0-12.6-1.8-25-5.4-37 16.8-22.2 26.1-49.4 26.1-77.7 0-12.6-1.8-25-5.4-37 16.8-22.2 26.1-49.4 26.1-77.7-.2-12.6-2-25.1-5.6-37.1zM184 852V568h81v284h-81zm636.4-353l-21.9 19 13.9 25.4a56.2 56.2 0 0 1 6.9 27.3c0 16.5-7.2 32.2-19.6 43l-21.9 19 13.9 25.4a56.2 56.2 0 0 1 6.9 27.3c0 16.5-7.2 32.2-19.6 43l-21.9 19 13.9 25.4a56.2 56.2 0 0 1 6.9 27.3c0 22.4-13.2 42.6-33.6 51.8H329V564.8l99.5-360.5a44.1 44.1 0 0 1 42.2-32.3c7.6 0 15.1 2.2 21.1 6.7 9.9 7.4 15.2 18.6 14.6 30.5l-9.6 198.4h314.4C829 418.5 840 436.9 840 456c0 16.5-7.2 32.1-19.6 43z"></path>
+                      <path
+                        d="M885.9 533.7c16.8-22.2 26.1-49.4 26.1-77.7 0-44.9-25.1-87.4-65.5-111.1a67.67 67.67 0 0 0-34.3-9.3H572.4l6-122.9c1.4-29.7-9.1-57.9-29.5-79.4A106.62 106.62 0 0 0 471 99.9c-52 0-98 35-111.8 85.1l-85.9 311H144c-17.7 0-32 14.3-32 32v364c0 17.7 14.3 32 32 32h601.3c9.2 0 18.2-1.8 26.5-5.4 47.6-20.3 78.3-66.8 78.3-118.4 0-12.6-1.8-25-5.4-37 16.8-22.2 26.1-49.4 26.1-77.7 0-12.6-1.8-25-5.4-37 16.8-22.2 26.1-49.4 26.1-77.7-.2-12.6-2-25.1-5.6-37.1zM184 852V568h81v284h-81zm636.4-353l-21.9 19 13.9 25.4a56.2 56.2 0 0 1 6.9 27.3c0 16.5-7.2 32.2-19.6 43l-21.9 19 13.9 25.4a56.2 56.2 0 0 1 6.9 27.3c0 16.5-7.2 32.2-19.6 43l-21.9 19 13.9 25.4a56.2 56.2 0 0 1 6.9 27.3c0 22.4-13.2 42.6-33.6 51.8H329V564.8l99.5-360.5a44.1 44.1 0 0 1 42.2-32.3c7.6 0 15.1 2.2 21.1 6.7 9.9 7.4 15.2 18.6 14.6 30.5l-9.6 198.4h314.4C829 418.5 840 436.9 840 456c0 16.5-7.2 32.1-19.6 43z"
+                      ></path>
                     </svg>
-                  </i>130</span>
+                  </i>130
+                </span>
                 <em class="ant-list-item-action-split"></em>
               </li>
-
             </ul>
             <div class="comment">
-              <textarea
-                name=""
-                id=""
-                rows="6"
-              ></textarea>
+              <textarea name id rows="6"></textarea>
               <div class="comment-btn">
                 <el-button type="primary">发表评论</el-button>
               </div>
-
             </div>
 
-            <div
-              class="mobile-commnet"
-              @click="dialogVisible = true"
-            >
+            <div class="mobile-commnet" @click="dialogVisible = true">
               <i class="el-icon-edit"></i>发表你的评论
             </div>
 
             <el-dialog :visible.sync="dialogVisible">
-              <el-input
-                type="textarea"
-                v-model="comment"
-                :rows="5"
-                placeholder="发表你的评论"
-              >
-              </el-input>
-              <span
-                slot="footer"
-                class="dialog-footer"
-              >
-                <el-button
-                  type="primary"
-                  @click="publish()"
-                >发表</el-button>
+              <el-input type="textarea" v-model="comment" :rows="5" placeholder="发表你的评论"></el-input>
+              <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="publish()">发表</el-button>
               </span>
             </el-dialog>
             <!-- <div style="clear:both">
               上一篇文章 下一篇文章
-            </div> -->
+            </div>-->
             <div class="leave-word">
-
-              <div
-                class="total-comments"
-                style="color:#409eff"
-              >
-                最新评论（363）
-              </div>
+              <div class="total-comments" style="color:#409eff">最新评论（363）</div>
 
               <div class="leave-word-item">
                 <div class="leave-img">
@@ -153,20 +102,12 @@
                     src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"
                     alt="avatar"
                   >
-                  <span>
-                    我是星空
-                  </span>
-                  <span>
-                    2018-09-18 11:19
-                  </span>
+                  <span>我是星空</span>
+                  <span>2018-09-18 11:19</span>
                 </div>
                 <div class="leave-comment">
-
-                  <div>
-                    段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发
-                  </div>
+                  <div>段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发</div>
                 </div>
-
               </div>
               <div class="leave-word-item">
                 <div class="leave-img">
@@ -174,39 +115,27 @@
                     src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"
                     alt="avatar"
                   >
-                  <span>
-                    我是星空
-                  </span>
-                  <span>
-                    2018-09-18 11:19
-                  </span>
-
+                  <span>我是星空</span>
+                  <span>2018-09-18 11:19</span>
                 </div>
                 <div class="leave-comment">
-
-                  <div>
-                    段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发
-                  </div>
+                  <div>段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发</div>
                 </div>
-
               </div>
             </div>
-
           </div>
 
           <div class="aside-content">
             <keep-alive>
-            <FAside></FAside>
+              <FAside></FAside>
             </keep-alive>
           </div>
-
         </div>
       </div>
     </div>
     <Footer></Footer>
     <BackTop></BackTop>
   </div>
-
 </template>
 
 <script>
@@ -218,8 +147,7 @@ import Scroll from "./publics/bScroll";
 import FAside from "../common/FAside";
 import Footer from "../common/Footer.vue";
 import BackTop from "../common/BackTop.vue";
-import Base64 from '../../utils/Base64.js'
-
+import Base64 from "../../utils/Base64.js";
 
 export default {
   name: "details",
@@ -253,7 +181,9 @@ export default {
   methods: {
     articleDetail() {
       this.$http
-        .http("/index/detail", { articleId: Base64.decode(this.$route.params.id) })
+        .http("/index/detail", {
+          articleId: Base64.decode(this.$route.params.id)
+        })
         .then(res => {
           this.article = res.data;
           document.title = this.article.articleTitle;
@@ -405,10 +335,11 @@ export default {
 .layout-main >>> .ql-editor {
   padding: 0 !important;
 }
-.layout-main >>>.ql-snow .ql-editor pre.ql-syntax {
-  background-color: #7697b9!important;
-  font-size: 15px!important;
-  font-family: Consolas!important;
+.layout-main >>> .ql-snow .ql-editor pre.ql-syntax {
+  background-color: rgb(40, 43, 46) !important;
+  font-size: 15px !important;
+  font-family: Consolas, Inconsolata, Courier, monospace !important;
+  color: rgb(169, 183, 198);
 }
 @media only screen and (max-width: 481px) {
   .layout-main {
