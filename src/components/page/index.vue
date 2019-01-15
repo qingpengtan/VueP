@@ -148,9 +148,6 @@ export default {
       store.commit("currentArticleNum", store.getters.updateArticleNum);
       to.meta.keepAlive = false;
     }
-    // if (from.path.indexOf("user-login") != -1) {
-    //   to.meta.keepAlive = false;
-    // }
     next();
   },
   beforeRouteLeave(to, from, next) {

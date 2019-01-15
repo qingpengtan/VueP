@@ -1,18 +1,16 @@
 <template>
   <div id="app">
-    <keep-alive>
-      <!-- <transition
+    <!-- <transition
         name="custom-classes-transition"
         enter-active-class="animated bounceInLeft"
         leave-active-class="animated bounceOutRight"
-      > -->
-      <transition name='fold-right'>
+    >-->
+    <!-- <transition name="fold-right"> -->
+      <keep-alive>
         <router-view v-if="$route.meta.keepAlive"></router-view>
-      </transition>
-    </keep-alive>
-    <transition name="fold-right">
+      </keep-alive>
+    <!-- </transition> -->
       <router-view v-if="!$route.meta.keepAlive"></router-view>
-    </transition>
   </div>
 </template>
 <script>
@@ -27,58 +25,58 @@ export default {};
 /*@import "../static/css/theme-green/color-green.css";   浅绿色主题*/
 
 .fold-left-enter-active {
-    animation-name: fold-left-in;
-    animation-duration: .3s;
-  }
-  .fold-left-leave-active {
-    animation-name: fold-left-out;
-    animation-duration: .3s;
-  }
+  animation-name: fold-left-in;
+  animation-duration: 0.5s;
+}
+.fold-left-leave-active {
+  animation-name: fold-left-out;
+  animation-duration: 0.5s;
+}
 .fold-right-enter-active {
-    animation-name: fold-right-in;
-    animation-duration: .3s;
-  }
-  .fold-right-leave-active {
-    animation-name: fold-right-out;
-    animation-duration: .3s;
-  }
+  animation-name: fold-right-in;
+  animation-duration: 0.5s;
+}
+.fold-right-leave-active {
+  animation-name: fold-right-out;
+  animation-duration: 0.5s;
+}
 
 @keyframes fold-left-in {
-    0% {
-      transform: translate3d(100%, 0, 0);
-    }
-    100% {
-      transform: translate3d(0, 0, 0);
-    }
+  0% {
+    transform: translate3d(100%, 0, 0);
   }
-  @keyframes fold-left-out {
-    0% {
-      transform: translate3d(0, 0, 0);
-    }
-    100% {
-      transform: translate3d(-100%, 0, 0);
-    }
+  100% {
+    transform: translate3d(0, 0, 0);
   }
+}
+@keyframes fold-left-out {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
 @keyframes fold-right-in {
-    0% {
-      transform: translate3d(-100%, 0, 0);
-      opacity: 0;
-    }
-    100% {
-      transform: translate3d(0, 0, 0);
-      opacity: 1;
-    }
+  0% {
+    transform: translate3d(-100%, 0, 0);
+    opacity: 0;
   }
-  @keyframes fold-right-out {
-    0% {
-      transform: translate3d(0, 0, 0);
-      opacity: 1;
-    }
-    100% {
-      transform: translate3d(100%, 0, 0);
-      opacity: 0;
-    }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
   }
+}
+@keyframes fold-right-out {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(100%, 0, 0);
+    opacity: 0;
+  }
+}
 
 .slide-fade-enter-active,
 .slide-fade-leave-active {
