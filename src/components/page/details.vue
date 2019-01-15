@@ -74,7 +74,7 @@
               </li>
             </ul>
             <div class="comment">
-              <textarea name id rows="6"></textarea>
+              <textarea rows="2" class="text-area" v-model='comment'></textarea>
               <div class="comment-btn">
                 <el-button type="primary">发表评论</el-button>
               </div>
@@ -94,33 +94,27 @@
               上一篇文章 下一篇文章
             </div>-->
             <div class="leave-word">
-              <div class="total-comments" style="color:#409eff">最新评论（363）</div>
-
+              <div class="total-comments" style="color:#409eff">最新评论（{{comments.length}}）</div>
+              <!-- 
               <div class="leave-word-item">
                 <div class="leave-img">
                   <img
                     src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"
                     alt="avatar"
                   >
-                  <span>我是星空</span>
-                  <span>2018-09-18 11:19</span>
+                  <span style="font-size:14px;color:#409EFF">我是星空</span>
+                  <span style="color:#888;margin-left:16px;font-size:12px">2018-09-18 11:19</span>
+                  <br>
+                  <span>蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接</span>
                 </div>
-                <div class="leave-comment">
-                  <div>段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发</div>
-                </div>
-              </div>
-              <div class="leave-word-item">
-                <div class="leave-img">
-                  <img
-                    src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"
-                    alt="avatar"
-                  >
-                  <span>我是星空</span>
-                  <span>2018-09-18 11:19</span>
-                </div>
-                <div class="leave-comment">
-                  <div>段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发</div>
-                </div>
+              </div>-->
+              <div
+                v-if="comments.length == 0"
+                class="leave-word-item"
+                style="text-align:center;color:rgb(78, 202, 251)"
+              >
+                <img src="../../assets/no-comment.png" alt>
+                <br>暂无评论
               </div>
             </div>
           </div>
@@ -163,7 +157,8 @@ export default {
       article: "",
       dialogVisible: false,
       comment: "",
-      isEdit: false
+      isEdit: false,
+      comments: []
     };
   },
   created() {
@@ -176,6 +171,12 @@ export default {
   watch: {
     $route(to, from) {
       this.articleDetail();
+    },
+    comment(){
+      let rows = parseInt(this.comment.length / 42);
+      if( rows > 2 ){
+        document.querySelector('.text-area').setAttribute('rows',rows)
+      }
     }
   },
   methods: {
@@ -291,10 +292,20 @@ export default {
 }
 .comment textarea {
   width: 700px;
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 4px 12px;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+textarea:focus{
+  outline: none;
+  border: 1px solid #409EFF;
 }
 .comment .comment-btn {
   float: right;
-  margin-right: 16px;
+  margin-right: -22px;
   margin-top: 10px;
 }
 .leave-word {
@@ -313,22 +324,14 @@ export default {
   padding-top: 0px;
 }
 .leave-img img {
-  width: 24px;
+  width: 32px;
+  margin-right: 8px;
   position: relative;
   top: 2px;
+  vertical-align: top;
+  float: left;
 }
-.leave-img span {
-  display: inline-block;
-  height: 30px;
-  line-height: 30px;
-  margin-left: 5px;
-  position: relative;
-  top: -5px;
-  font-weight: bold;
-}
-.leave-comment {
-  padding-left: 0px;
-}
+
 .mobile-commnet {
   display: none;
 }
