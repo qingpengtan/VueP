@@ -21,7 +21,7 @@
           </div>
 
           <div class="header-right">
-            <el-dropdown trigger="click">
+            <el-dropdown>
               <span class="avatar right-span" v-show="loginStatus">
                 <span>
                   <img :src="userPic" alt="avatar">
@@ -67,11 +67,11 @@
             <img class="header-left" src="../../assets/let.png" title="主页">
           </router-link>
           <router-link tag="li" to="/music">音乐</router-link>
-          <el-dropdown trigger="click">
+          <el-dropdown>
             <li>
               <i class="el-icon-menu"></i>版块
             </li>
-            <el-dropdown-menu slot="dropdown">
+            <el-dropdown-menu slot="dropdown" >
               <el-dropdown-item v-for=" tag in articleTag" :key="tag.articleTagId">
                 <router-link
                   @click="pushTribune()"
@@ -99,7 +99,7 @@
             </el-input>
           </div>
           <div class="fixed-info">
-            <el-dropdown trigger="click">
+            <el-dropdown>
               <span class="avatar right-span" v-show="loginStatus">
                 <span>
                   <img :src="userPic" alt="avatar">

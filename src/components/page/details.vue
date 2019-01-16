@@ -50,7 +50,6 @@
                     </svg>
                   </i>183
                 </span>
-                <em class="ant-list-item-action-split"></em>
               </li>
               <li>
                 <span>
@@ -70,7 +69,6 @@
                     </svg>
                   </i>130
                 </span>
-                <em class="ant-list-item-action-split"></em>
               </li>
             </ul>
             <div class="comment">
@@ -176,6 +174,9 @@ export default {
     },
     comment() {
       let rows = parseInt(this.comment.length / 28);
+      if(rows == document.querySelector(".text-area").getAttribute("rows") || rows > 6){
+        return;
+      }
       if (rows >= 2) {
         document.querySelector(".text-area").setAttribute("rows", rows);
       }
@@ -201,6 +202,9 @@ export default {
       if (this.comment.trim() == "") {
         return;
       }
+      if(this.comment.length > 250 ){
+         return  this.$message.error("评论超出220个字");
+      }
       this.$http
         .http("/index/comment/comment", {
           comment: this.comment,
@@ -210,7 +214,7 @@ export default {
           if (res.code == 1) {
             this.dialogVisible = false;
             this.comment = "";
-            this.$message.success("评论成功！");
+            // this.$message.success("评论成功！");
             this.commentsList();
           } else {
             this.$message.error(res.msg);
@@ -224,7 +228,6 @@ export default {
         })
         .then(res => {
           if (res.code == 1) {
-            console.log(res.data);
             this.comments = res.data;
           } else {
             this.$message.error(res.msg);
