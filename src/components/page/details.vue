@@ -74,9 +74,9 @@
               </li>
             </ul>
             <div class="comment">
-              <textarea rows="2" class="text-area" v-model='comment'></textarea>
+              <textarea rows="2" class="text-area" v-model="comment"></textarea>
               <div class="comment-btn">
-                <el-button type="primary">发表评论</el-button>
+                <el-button type="primary" @click="publish()">发表评论</el-button>
               </div>
             </div>
 
@@ -95,19 +95,19 @@
             </div>-->
             <div class="leave-word">
               <div class="total-comments" style="color:#409eff">最新评论（{{comments.length}}）</div>
-              <!-- 
-              <div class="leave-word-item">
+              
+              <div class="leave-word-item" v-for="(item,index) in comments" :key="index">
                 <div class="leave-img">
                   <img
-                    src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"
+                    :src="item.userPic"
                     alt="avatar"
                   >
-                  <span style="font-size:14px;color:#409EFF">我是星空</span>
-                  <span style="color:#888;margin-left:16px;font-size:12px">2018-09-18 11:19</span>
+                  <span style="font-size:14px;color:#409EFF">{{item.userName}}</span>
+                  <span style="color:#888;margin-left:16px;font-size:12px">{{item.createTime}}</span>
                   <br>
-                  <span>蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发 段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接</span>
+                  <span>{{item.comment}}</span>
                 </div>
-              </div>-->
+              </div>
               <div
                 v-if="comments.length == 0"
                 class="leave-word-item"
@@ -166,16 +166,18 @@ export default {
     //   this.scroll = new Bscroll(this.$refs.wrapper, {});
     // });
     this.articleDetail();
+    this.commentsList();
   },
 
   watch: {
     $route(to, from) {
       this.articleDetail();
+      this.commentsList();
     },
-    comment(){
-      let rows = parseInt(this.comment.length / 42);
-      if( rows > 2 ){
-        document.querySelector('.text-area').setAttribute('rows',rows)
+    comment() {
+      let rows = parseInt(this.comment.length / 28);
+      if (rows >= 2) {
+        document.querySelector(".text-area").setAttribute("rows", rows);
       }
     }
   },
@@ -196,19 +198,38 @@ export default {
         });
     },
     publish() {
-      this.dialogVisible = false;
-
       if (this.comment.trim() == "") {
         return;
       }
-      // this.$http.http("/index/save", { content: this.content }).then(res => {
-      //   if (res.code == 1) {
-      //     this.dialogVisible = false;
-      //     this.$message.success("提交成功！");
-      //   } else {
-      //     this.$message.error(res.msg);
-      //   }
-      // });
+      this.$http
+        .http("/index/comment/comment", {
+          comment: this.comment,
+          articleId: Base64.decode(this.$route.params.id)
+        })
+        .then(res => {
+          if (res.code == 1) {
+            this.dialogVisible = false;
+            this.comment = "";
+            this.$message.success("评论成功！");
+            this.commentsList();
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+    },
+    commentsList() {
+      this.$http
+        .http("/index/comment/commentList", {
+          articleId: Base64.decode(this.$route.params.id)
+        })
+        .then(res => {
+          if (res.code == 1) {
+            console.log(res.data);
+            this.comments = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
     }
   }
 };
@@ -299,9 +320,9 @@ export default {
   border-radius: 4px;
 }
 
-textarea:focus{
+textarea:focus {
   outline: none;
-  border: 1px solid #409EFF;
+  border: 1px solid #409eff;
 }
 .comment .comment-btn {
   float: right;
