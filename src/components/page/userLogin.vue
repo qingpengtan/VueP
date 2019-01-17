@@ -204,8 +204,9 @@ export default {
 .header-img {
   width: 100%;
   height: 150px;
-  background: url("../../assets/bg.jpg");
+  background-image: url("../../assets/bg.jpg");
   background-size: 100%;
+  background-color: #90caf8;
 }
 
 .header-input {

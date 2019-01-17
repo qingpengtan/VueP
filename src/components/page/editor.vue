@@ -1,57 +1,31 @@
 <template>
-
   <div>
     <div class="layout-header">
       <div class="header-main">
-
         <div class="header-navbar">
-          <router-link to='/'>
-            <img
-              class="header-left"
-              src="../../assets/let.png" title="主页"
-            />
+          <router-link to="/">
+            <img class="header-left" src="../../assets/let.png" title="主页">
           </router-link>
           <div class="header-right">
             <span class="right-span">
-              <el-button
-                type="primary"
-                @click="publish()"
-              >发表</el-button>
+              <el-button type="primary" @click="publish()">发表</el-button>
             </span>
           </div>
         </div>
       </div>
-
     </div>
     <div class="layout-main">
-
       <div class="layout-content">
-        <div
-          class="main-content"
-          style="padding: 8px 32px 32px;"
-        >
+        <div class="main-content" style="padding: 8px 32px 32px;">
           <div>
-            <input
-              type="text"
-              class="editor-title"
-              placeholder="标题"
-              v-model="articleTitle"
-            >
-            <input
-              type="text"
-              v-show="false"
-              v-model="articleId"
-            >
-            <el-select
-              placeholder="请选择"
-              v-model="articleTagId"
-              class="select"
-            >
+            <input type="text" class="editor-title" placeholder="标题" v-model="articleTitle">
+            <input type="text" v-show="false" v-model="articleId">
+            <el-select placeholder="请选择" v-model="articleTagId" class="select">
               <el-option
                 v-for=" tag in articleTag"
-                :key=tag.articleTagId
-                :label=tag.articleTag
-                :value=tag.articleTagId
+                :key="tag.articleTagId"
+                :label="tag.articleTag"
+                :value="tag.articleTagId"
               ></el-option>
             </el-select>
             <quill-editor
@@ -61,14 +35,12 @@
               @change="onEditorChange($event)"
             ></quill-editor>
           </div>
-
         </div>
       </div>
     </div>
     <Footer></Footer>
     <BackTop></BackTop>
   </div>
-
 </template>
 
 <script>
@@ -298,6 +270,10 @@ export default {
   font-size: 15px !important;
   font-family: Consolas, Inconsolata, Courier, monospace !important;
   color: rgb(169, 183, 198);
+}
+
+.layout-main >>> .ql-toolbar.ql-snow {
+    
 }
 
 @media only screen and (max-width: 481px) {
