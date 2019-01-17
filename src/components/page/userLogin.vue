@@ -1,41 +1,35 @@
 <template>
-
   <div class="login-register-page">
-
     <div class="login-register-home">
-
       <div class="header-img">
         <!-- <img src="../../assets/timg.gif" alt=""> -->
       </div>
       <div class="header-input" v-show="isLogin">
-
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
-
           <el-form-item prop="username" :error="errorMsg">
             <el-input type="text" v-model="ruleForm.username" placeholder="请输入手机号或者用户名"></el-input>
           </el-form-item>
 
           <el-form-item prop="password">
-            <el-input type="password" v-model="ruleForm.password" placeholder="请输入密码" @keyup.enter.native="login('ruleForm')"></el-input>
+            <el-input
+              type="password"
+              v-model="ruleForm.password"
+              placeholder="请输入密码"
+              @keyup.enter.native="login('ruleForm')"
+            ></el-input>
           </el-form-item>
         </el-form>
         <div class="forget-pswd">
-          <span style="float:right">
-            忘记密码
-          </span>
+          <span style="float:right">忘记密码</span>
         </div>
         <button class="login" style="margin-top:25px" @click="login('ruleForm')">登录</button>
 
-        <div class="login-footer">
-          山河远阔，人间烟火，无一是你，无一不是你。
-          <br>
-           &nbsp; &nbsp; -- Created By Tang 
+        <div class="login-footer">山河远阔，人间烟火，无一是你，无一不是你。
+          <br>&nbsp; &nbsp; -- Created By Tang
         </div>
-
       </div>
 
       <div class="header-input" v-show="!isLogin">
-
         <el-form :model="registerForm" :rules="registerRule" ref="registerForm">
           <el-form-item prop="userPhone" :error="errorRegister">
             <el-input type="text" v-model="registerForm.userPhone" placeholder="请输入手机号"></el-input>
@@ -45,41 +39,41 @@
             <el-input type="password" v-model="registerForm.password" placeholder="请输入密码"></el-input>
           </el-form-item>
 
-          <el-form-item> 
-          <el-row :gutter="20"> 
-            <el-col :xs="15" :sm="15"> 
-            <el-input type="text" v-model="registerForm.imageCode" placeholder="请输入验证码"></el-input> 
-            </el-col> 
-            <el-col :xs="5" :sm="5"> 
-          <img :src=imageCode alt="" @click="changeCode()" style="margin-top:16px;  cursor: pointer;" title="看不清？换一张">
-            </el-col> 
-          </el-row> 
+          <el-form-item>
+            <el-row :gutter="20">
+              <el-col :xs="15" :sm="15">
+                <el-input type="text" v-model="registerForm.imageCode" placeholder="请输入验证码"></el-input>
+              </el-col>
+              <el-col :xs="5" :sm="5">
+                <img
+                  :src="imageCode"
+                  alt
+                  @click="changeCode()"
+                  style="margin-top:16px;  cursor: pointer;"
+                  title="看不清？换一张"
+                >
+              </el-col>
+            </el-row>
           </el-form-item>
         </el-form>
         <button class="register" @click="register('registerForm')">注册</button>
 
-        <div class="register-footer">
-          查看用户协议
-        </div>
-
+        <div class="register-footer">查看用户协议</div>
       </div>
 
       <div class="login-tip">
-        <span v-show="!isLogin">
-          已有账号？<span @click="isLogin=!isLogin" class="point">登录</span>
+        <span v-show="!isLogin">已有账号？
+          <span @click="isLogin=!isLogin" class="point">登录</span>
         </span>
-        <span v-show="isLogin">
-          没有账号？<span @click="isLogin=!isLogin" class="point">注册</span>
+        <span v-show="isLogin">没有账号？
+          <span @click="isLogin=!isLogin" class="point">注册</span>
         </span>
       </div>
-
     </div>
-
   </div>
-
 </template>
 <script>
-import md5 from 'md5';
+import md5 from "md5";
 export default {
   name: "login",
   data() {
@@ -111,8 +105,8 @@ export default {
       }
     };
   },
-  created(){
-    this.ruleForm.username = localStorage.getItem("userPhone")
+  created() {
+    this.ruleForm.username = localStorage.getItem("userPhone");
   },
   methods: {
     login(formName) {
@@ -161,6 +155,8 @@ export default {
             })
             .then(res => {
               if (res.code == 1) {
+                this.ruleForm.username = this.registerForm.userPhone;
+                localStorage.setItem("userPhone", this.registerForm.userPhone);
                 this.isLogin = true;
                 this.$refs[formName].resetFields();
                 this.$message.success("注册成功！");
@@ -208,9 +204,8 @@ export default {
 .header-img {
   width: 100%;
   height: 150px;
-  background: url('../../assets/bg.jpg');
+  background: url("../../assets/bg.jpg");
   background-size: 100%;
-
 }
 
 .header-input {
@@ -218,7 +213,7 @@ export default {
   height: 265px;
   width: 352px;
   position: relative;
-  background: #90CAF8;
+  background: #90caf8;
 }
 .header-input >>> input {
   /* .header-input .el-form .el-form-item .el-form-item__content .el-input input { */
@@ -287,12 +282,13 @@ export default {
   color: #2ab1ea;
 }
 
-button.login,button.register{
-    letter-spacing:10px;
+button.login,
+button.register {
+  letter-spacing: 10px;
 }
 @media only screen and (max-width: 481px) {
-  .login-register-page{
-    background: #2B3B4A;
+  .login-register-page {
+    background: #2b3b4a;
   }
   .login-register-home {
     width: 100%;
@@ -305,11 +301,11 @@ button.login,button.register{
     position: relative;
   }
   .header-img {
-    background: url('../../assets/login-bag.png') no-repeat;
+    background: url("../../assets/login-bag.png") no-repeat;
     background-size: 100%;
     height: 3.103448rem;
   }
-  .forget-pswd{
+  .forget-pswd {
     display: none;
   }
   .login-register-home {
@@ -326,6 +322,5 @@ button.login,button.register{
   .login-tip {
     color: white;
   }
-
 }
 </style>

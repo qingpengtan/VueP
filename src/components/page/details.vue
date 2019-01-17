@@ -203,7 +203,7 @@ export default {
         return;
       }
       if(this.comment.length > 250 ){
-         return  this.$message.error("评论超出220个字");
+         return  this.$message.error("评论超出250个字");
       }
       this.$http
         .http("/index/comment/comment", {
