@@ -5,28 +5,58 @@
       <div class="layout-content" ref="wrapper">
         <div class="main-content" style="padding: 8px 32px 32px;">
           <div class="ant-list-item">
-            <div class="ant-list-item-meta-content">
-              <h2>{{article.articleTitle}}</h2>
+            <div v-if="article.articleTag !=1">
+              <div class="ant-list-item-meta-content">
+                <h2>{{article.articleTitle}}</h2>
+              </div>
+              <div class="publish">
+                <span class="avater">
+                  <img :src="article.userPic" alt>
+                  <span style="margin-left: 16px">{{article.userName}}</span>
+                </span>
+                <span>{{article.createTime | filterTime}}</span>
+                &nbsp;&nbsp;类型:{{article.articleTagName}}&nbsp;&nbsp;
+                <router-link
+                  :to="{path:'/edit-text', query:{articleId:article.articleId}}"
+                  v-show="isEdit"
+                >
+                  <i class="el-icon-edit" style="color:#43bcff;font-size:14px"></i>
+                </router-link>
+              </div>
+              <div class="ant-list-item-content">
+                <div>
+                  <div class="ql-snow">
+                    <div class="ql-editor">
+                      <div class="text-content" v-html="article.content"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="publish">
-              <span class="avater">
-                <img :src="article.userPic" alt>
-                <span style="margin-left: 16px">{{article.userName}}</span>
-              </span>
-              <span>{{article.createTime | filterTime}}</span>
-              &nbsp;&nbsp;类型:{{article.articleTagName}}&nbsp;&nbsp;
-              <router-link
-                :to="{path:'/edit-text', query:{articleId:article.articleId}}"
-                v-show="isEdit"
-              >
-                <i class="el-icon-edit" style="color:#43bcff;font-size:14px"></i>
-              </router-link>
-            </div>
-            <div class="ant-list-item-content">
-              <div>
-                <div class="ql-snow">
-                  <div class="ql-editor">
-                    <div class="text-content" v-html="article.content"></div>
+            <div v-else>
+              <div style="display:flex;margin-bottom:10px;">
+                <div>
+                  <img :src="article.userPic" alt style="width:32px;border-radius:50%">
+                </div>
+                <div style="flex:1;margin-left:10px">
+                  <p>
+                    {{article.userName}}
+                    <router-link
+                      :to="{path:'/edit-text', query:{articleId:article.articleId}}"
+                      v-show="isEdit"
+                    >
+                      <i class="el-icon-edit" style="color:#43bcff;font-size:16px;float:right"></i>
+                    </router-link>
+                  </p>
+                  <span style="font-size:12px;color:#888">{{article.createTime | filterTime}}</span>
+                </div>
+              </div>
+              <div class="ant-list-item-content">
+                <div>
+                  <div class="ql-snow">
+                    <div class="ql-editor">
+                      <div class="text-content" v-html="article.content"></div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -93,17 +123,18 @@
             </div>-->
             <div class="leave-word">
               <div class="total-comments" style="color:#409eff">最新评论（{{comments.length}}）</div>
-              
+
               <div class="leave-word-item" v-for="(item,index) in comments" :key="index">
                 <div class="leave-img">
-                  <img
-                    :src="item.userPic"
-                    alt="avatar"
-                  >
-                  <span style="font-size:14px;color:#409EFF">{{item.userName}}</span>
-                  <span style="color:#888;margin-left:16px;font-size:12px">{{item.createTime}}</span>
+                  <div>
+                    <img :src="item.userPic" alt="avatar">
+                  </div>
+                  <div class="comment-content">
+                    <span style="font-size:14px;color:#409EFF">{{item.userName}}：</span>
+                    <span>{{item.comment}}</span>
+                    <div style="color:#888;font-size:12px">{{item.createTime}}</div>
+                  </div>
                   <br>
-                  <span>{{item.comment}}</span>
                 </div>
               </div>
               <div
@@ -116,7 +147,6 @@
               </div>
             </div>
           </div>
-
           <div class="aside-content">
             <keep-alive>
               <FAside></FAside>
@@ -174,7 +204,10 @@ export default {
     },
     comment() {
       let rows = parseInt(this.comment.length / 28);
-      if(rows == document.querySelector(".text-area").getAttribute("rows") || rows > 6){
+      if (
+        rows == document.querySelector(".text-area").getAttribute("rows") ||
+        rows > 6
+      ) {
         return;
       }
       if (rows >= 2) {
@@ -202,8 +235,8 @@ export default {
       if (this.comment.trim() == "") {
         return;
       }
-      if(this.comment.length > 250 ){
-         return  this.$message.error("评论超出250个字");
+      if (this.comment.length > 250) {
+        return this.$message.error("评论超出250个字");
       }
       this.$http
         .http("/index/comment/comment", {
@@ -335,7 +368,6 @@ textarea:focus {
 .leave-word {
   clear: both;
 }
-.leave-word-item .leave-img,
 .leave-word-item .leave-comment {
   display: inline-block;
 }
@@ -347,13 +379,19 @@ textarea:focus {
 .leave-word-item:first-child {
   padding-top: 0px;
 }
+.leave-img {
+  display: flex;
+}
+.comment-content {
+  flex: 1;
+}
 .leave-img img {
   width: 32px;
   margin-right: 8px;
   position: relative;
   top: 2px;
   vertical-align: top;
-  float: left;
+  border-radius: 50%;
 }
 
 .mobile-commnet {
