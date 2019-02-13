@@ -3,7 +3,7 @@
     <div class="footer-content">
       <div class="footer-text">
       山河远阔，人间烟火，无一是你，无一不是你。<br>
-        ©2018 就让你走 &nbsp;&nbsp;&nbsp;Created By <a href="http://119.29.230.48/jianli/">Tang</a>
+        ©2018 就让你走 &nbsp;&nbsp;&nbsp;Created By <a href="http://119.29.230.48/res/jianli/">Tang</a>
       </div>
     </div>
   </div>
