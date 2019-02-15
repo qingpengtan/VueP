@@ -2,7 +2,7 @@
   <div class="footer-warp">
     <div class="footer-content">
       <div class="footer-text">
-        当前访问人数：{{res.visterNum}}，当前设备信息： 
+        总访问量：{{res.visterNum}}，当前设备信息： 
         IP：{{res.ip}} Browser：{{res.browser}} OS：{{res.os}}
         <br>
         山河远阔，人间烟火，无一是你，无一不是你。
