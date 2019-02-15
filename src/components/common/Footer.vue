@@ -2,8 +2,12 @@
   <div class="footer-warp">
     <div class="footer-content">
       <div class="footer-text">
-      山河远阔，人间烟火，无一是你，无一不是你。<br>
-        ©2018 就让你走 &nbsp;&nbsp;&nbsp;Created By <a href="http://119.29.230.48/res/jianli/">Tang</a>
+        当前访问人数：{{res.visterNum}}，当前设备信息： 
+        IP：{{res.ip}} Browser：{{res.browser}} OS：{{res.os}}
+        <br>
+        山河远阔，人间烟火，无一是你，无一不是你。
+        <br>©2018 就让你走 &nbsp;&nbsp;&nbsp;Created By
+        <a href="http://119.29.230.48/res/jianli/">Tang</a>
       </div>
     </div>
   </div>
@@ -13,7 +17,17 @@
 import StringUtils from "../../utils/StringUtils.js";
 
 export default {
-  name: "footer"
+  name: "footer",
+  data() {
+    return {
+      res:''
+    };
+  },
+  created() {
+    this.$http.http("/index/visitInfo",{}).then(res => {
+      this.res = res.data;
+    });
+  }
 };
 </script>
 <style scoped>
@@ -25,14 +39,14 @@ export default {
 }
 .footer-warp .footer-content {
   width: 1180px;
-  height: 90px;
+  height: 80px;
   margin: 0 auto;
   text-align: center;
   color: #aaaaaa;
   font-size: 13px;
   position: relative;
 }
-.footer-content .footer-text{
+.footer-content .footer-text {
   position: absolute;
   width: 100%;
   left: 50%;
