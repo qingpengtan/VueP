@@ -11,6 +11,9 @@ import StringUtils from "./utils/StringUtils.js";
 import store from './store'
 import 'animate.css'
 import './utils/filter'
+import hljs from 'highlight.js/lib/highlight';
+import 'highlight.js/lib';
+import 'highlight.js/styles/atom-one-dark.css';
 
 Vue.use(ElementUI, {
     size: 'small'
@@ -21,6 +24,14 @@ Vue.prototype.$http = https;
 Vue.prototype.$prototype = function () {
     return Vue.prototype;
 }
+
+
+Vue.directive('highlight',function (el) {
+    let blocks = el.querySelectorAll('pre');
+        blocks.forEach((block)=>{
+        hljs.highlightBlock(block)
+    })
+  });
 
 let $html = document.getElementsByTagName("html")[0];
 window.onscroll = () => {

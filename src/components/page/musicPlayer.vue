@@ -80,7 +80,7 @@ export default {
     document.title = "音乐 - "+this.title;
     this.ac = new (window.AudioContext || window.webkitAudioContext)();
     this.analyser = this.ac.createAnalyser();
-    this.loadMusic(xhr, url.split("ROO")[1]);
+    this.loadMusic(xhr, url);
     this.visualizer(this.analyser);
   },
   beforeRouteEnter(to, from, next) {
@@ -150,7 +150,7 @@ export default {
       this.analyser.fftSize = this.size * 2;
       this.analyser.connect(this.gainNode);
       xhr.abort();
-      xhr.open("GET", "/ROO" + url);
+      xhr.open("GET", url);
       xhr.responseType = "arraybuffer";
       let mask = document.getElementsByClassName("music-mask")[0];
       mask.style.display = "block";

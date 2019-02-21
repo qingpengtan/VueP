@@ -113,7 +113,7 @@
                 <el-dropdown-item>
                   <router-link to="/edit-text">写文章</router-link>
                 </el-dropdown-item>
-                <el-dropdown-item @click.native="dialogVisible = true">记日志</el-dropdown-item>
+                <el-dropdown-item @click.native="dialogVisible = true">笔录</el-dropdown-item>
                 <el-dropdown-item @click.native="loginOut()">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -121,8 +121,8 @@
         </div>
       </div>
     </div>
-    <el-dialog title="记日志" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
-      <el-input type="textarea" v-model="content" :rows="5" placeholder="记录美好生活"></el-input>
+    <el-dialog title="杂谈笔录" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+      <el-input type="textarea" v-model="content" :rows="5" placeholder="该说点什么呢"></el-input>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="publish()">发表</el-button>
       </span>
@@ -135,7 +135,7 @@
           <router-link to="/" exact>主页</router-link>
         </li>
         <li @click="selectMenu($event)">
-          <router-link to="/daily">日记</router-link>
+          <router-link to="/daily">杂谈</router-link>
         </li>
         <li @click="selectMenu($event)">
           <router-link to="/music">音乐</router-link>
@@ -143,7 +143,7 @@
         <li>
           <router-link to="/edit-text">写文章</router-link>
         </li>
-        <li @click="dialogVisible = true,isCollapse = true">记日志</li>
+        <li @click="dialogVisible = true,isCollapse = true">笔录</li>
         <li @click.stop="triume()">
           版块
           <i id="triArrow" class="el-icon-arrow-down"></i>

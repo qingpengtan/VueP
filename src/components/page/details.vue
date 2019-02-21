@@ -24,13 +24,11 @@
                 </router-link>
               </div>
               <div class="ant-list-item-content">
-                <div>
                   <div class="ql-snow">
                     <div class="ql-editor">
-                      <div class="text-content" v-html="article.content"></div>
+                      <div class="text-content" v-html="article.content" v-highlight></div>
                     </div>
                   </div>
-                </div>
               </div>
             </div>
             <div v-else>

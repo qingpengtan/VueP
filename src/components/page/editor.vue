@@ -44,6 +44,7 @@
 </template>
 
 <script>
+
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import Footer from "../common/Footer.vue";
@@ -56,9 +57,7 @@ export default {
   name: "editor",
   data: function() {
     return {
-      editorOption: {
-        placeholder: "Hello World"
-      },
+      editorOption: {},
       content: "",
       articleTitle: "",
       articleTagId: 1,
@@ -84,6 +83,7 @@ export default {
       }
     });
   },
+  mounted() {},
   methods: {
     onEditorChange(quill) {
       this.articleBrief = quill.quill.container.textContent;
@@ -272,9 +272,6 @@ export default {
   color: rgb(169, 183, 198);
 }
 
-.layout-main >>> .ql-toolbar.ql-snow {
-    
-}
 
 @media only screen and (max-width: 481px) {
   .layout-main {
