@@ -25,7 +25,7 @@
         <button class="login" style="margin-top:25px" @click="login('ruleForm')">登录</button>
 
         <div class="login-footer">山河远阔，人间烟火，无一是你，无一不是你。
-          <br>-- Created By <a style="color:white" href="http://119.29.230.48/res/jianli/">Tang</a>
+          <br>-- Created By <a style="color:white" href="http://www.zhiroad.cn/res/jianli/">Tang</a>
         </div>
       </div>
 

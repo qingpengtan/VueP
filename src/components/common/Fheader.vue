@@ -158,6 +158,10 @@
             </li>
           </ul>
         </li>
+
+        <li>
+          <a href="http://www.zhiroad.cn">清新版</a>
+        </li>
       </ul>
     </div>
   </div>

@@ -2,12 +2,13 @@
   <div class="footer-warp">
     <div class="footer-content">
       <div class="footer-text">
-        总访问量：{{res.visterNum}}，当前设备信息： 
+        总访问量：{{res.visterNum}}，当前设备信息：
         IP：{{res.ip}} Browser：{{res.browser}} OS：{{res.os}}
-        <br>
-        山河远阔，人间烟火，无一是你，无一不是你。
+        <br>山河远阔，人间烟火，无一是你，无一不是你。
         <br>©2018 就让你走 &nbsp;&nbsp;&nbsp;Created By
-        <a href="http://119.29.230.48/res/jianli/">Tang</a>
+        <a href="http://www.zhiroad.cn/res/jianli/">Tang</a>
+         | 
+        <a href="http://www.zhiroad.cn/">清新版</a>
       </div>
     </div>
   </div>
@@ -20,11 +21,11 @@ export default {
   name: "footer",
   data() {
     return {
-      res:''
+      res: ""
     };
   },
   created() {
-    this.$http.http("/index/visitInfo",{}).then(res => {
+    this.$http.http("/index/visitInfo", {}).then(res => {
       this.res = res.data;
     });
   }
