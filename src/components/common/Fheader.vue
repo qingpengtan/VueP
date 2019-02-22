@@ -71,7 +71,7 @@
             <li>
               <i class="el-icon-menu"></i>版块
             </li>
-            <el-dropdown-menu slot="dropdown" >
+            <el-dropdown-menu slot="dropdown">
               <el-dropdown-item v-for=" tag in articleTag" :key="tag.articleTagId">
                 <router-link
                   @click="pushTribune()"
@@ -131,6 +131,9 @@
     <!-- 移动端导航侧边栏 -->
     <div class="mobile-side" v-show="!isCollapse" @click="isCollapse = true">
       <ul class="mobile-side-ul" id="mobile-side-ul">
+        <li>
+          <a href="http://www.zhiroad.cn" style="color:rgba(199, 93, 42, 0.7)">> 清新版</a>
+        </li>
         <li @click="selectMenu($event)">
           <router-link to="/" exact>主页</router-link>
         </li>
@@ -157,10 +160,6 @@
               >{{tag.articleTag}}</router-link>
             </li>
           </ul>
-        </li>
-
-        <li>
-          <a href="http://www.zhiroad.cn">清新版</a>
         </li>
       </ul>
     </div>
