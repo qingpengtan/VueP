@@ -18,7 +18,7 @@
                 &nbsp;&nbsp;类型:{{article.articleTagName}}&nbsp;&nbsp;
                 <router-link
                   :to="{path:'/edit-text', query:{articleId:article.articleId}}"
-                  v-show="isEdit"
+                  v-if="isEdit"
                 >
                   <i class="el-icon-edit" style="color:#43bcff;font-size:14px"></i>
                 </router-link>
@@ -129,7 +129,7 @@
                   </div>
                   <div class="comment-content">
                     <span style="font-size:14px;color:#409EFF">{{item.userName}}：</span>
-                    <span>{{item.comment}}</span>
+                    <div v-html="item.comment" v-highlight></div>
                     <div style="color:#888;font-size:12px">{{item.createTime}}</div>
                   </div>
                   <br>
@@ -168,6 +168,7 @@ import FAside from "../common/FAside";
 import Footer from "../common/Footer.vue";
 import BackTop from "../common/BackTop.vue";
 import Base64 from "../../utils/Base64.js";
+import marked from "marked";
 
 export default {
   name: "details",
@@ -193,6 +194,19 @@ export default {
     // });
     this.articleDetail();
     this.commentsList();
+  },
+
+  mounted(){
+    marked.setOptions({
+      renderer: new marked.Renderer(),
+      gfm: true,
+      tables: true,
+      breaks: false,
+      pedantic: false,
+      sanitize: false,
+      smartLists: true,
+      smartypants: false
+    });
   },
 
   watch: {
@@ -238,7 +252,7 @@ export default {
       }
       this.$http
         .http("/index/comment/comment", {
-          comment: this.comment,
+          comment: marked(this.comment, { sanitize: true }),
           articleId: Base64.decode(this.$route.params.id)
         })
         .then(res => {

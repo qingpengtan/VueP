@@ -124,7 +124,8 @@ export default {
                 localStorage.setItem("x_userPhone", res.data.userPhone);
                 localStorage.setItem("x_role", res.data.role);
                 localStorage.setItem("x_userPic", res.data.userPic);
-                this.$router.push("/");
+                // this.$router.push("/");
+                window.location.href = 'http://www.zhiroad.cn'
               } else {
                 this.errorMsg = res.msg;
               }
