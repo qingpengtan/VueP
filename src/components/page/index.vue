@@ -37,7 +37,13 @@
                   </div>
                   <div class="ant-list-item-content">
                     <div>
-                      <div class="text-content">{{article.articleBrief}}</div>
+                      <div class="text-content">
+                        {{article.articleBrief}}
+                        <router-link
+                          :to="{path:`/detail/${jiami(article.articleId)}/${md(jiami(article.articleId))}`}"
+                          style="font-size:13px;color:#3a8ee6"
+                        >查看更多</router-link>
+                      </div>
                       <div class="publish">
                         <span>
                           <img :src="article.userPic">
@@ -74,7 +80,12 @@
                         </router-link>
                       </span>
                     </div>
-                    <div class="daily-breif">{{article.articleBrief}}</div>
+                    <div class="daily-breif">
+                      {{article.articleBrief}}
+                      <router-link
+                        :to="{path:`/detail/${jiami(article.articleId)}/${md(jiami(article.articleId))}`}"
+                      >查看更多</router-link>
+                    </div>
                   </div>
                 </div>
               </li>
@@ -441,8 +452,9 @@ h3 {
   .publish-daily .daily-breif {
     padding-bottom: 0;
   }
-  .article-tag,.stick-tag{
-    top:-0.096207rem
+  .article-tag,
+  .stick-tag {
+    top: -0.096207rem;
   }
   .pc-more {
     display: none !important;

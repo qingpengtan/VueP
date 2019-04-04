@@ -1,8 +1,6 @@
 
 <template>
-
   <div>
-
     <Header></Header>
 
     <div class="layout-main">
@@ -10,35 +8,59 @@
         <div class="main-content" style="padding: 8px 32px 32px;">
           <v-scroll ref="listContent" :pullup="pullup" :listenScroll="true" class="v-scroll">
             <div>
-              <aplayer :music="audio[0]" :list="audio" v-if="flag" :showLrc="true" :volume="0.2" />
+              <aplayer
+                :music="audio[0]"
+                :list="audio"
+                v-if="flag"
+                :showLrc="true"
+                :volume="0.2"
+                listMaxHeight="500px"
+              />
               <div class="music-operate">
                 <div>
-                  <el-button @click="pushMusicPlayer">进入播放器<i class="el-icon-caret-right el-icon--right"></i></el-button>
+                  <el-button @click="pushMusicPlayer">
+                    进入播放器
+                    <i class="el-icon-caret-right el-icon--right"></i>
+                  </el-button>
                 </div>
                 <div>
-                  <el-upload class="upload-demo" action="/upload/mp3" multiple :limit="1" accept="audio/mpeg" :headers="headers" name="mp3" :on-success="finishUp" :file-list="fileList">
-                    <el-button size="small" type="primary">上传音乐 <i class="el-icon-upload2 el-icon--right"></i></el-button>
+                  <el-upload
+                    class="upload-demo"
+                    action="/upload/mp3"
+                    multiple
+                    :limit="1"
+                    accept="audio/mpeg"
+                    :headers="headers"
+                    name="mp3"
+                    :on-success="finishUp"
+                    :file-list="fileList"
+                  >
+                    <el-button size="small" type="primary">
+                      上传音乐
+                      <i class="el-icon-upload2 el-icon--right"></i>
+                    </el-button>
                   </el-upload>
                 </div>
                 <div>
-                  <el-button type="success" @click="downloadMusic">下载当前音乐<i class="el-icon-download el-icon--right"></i></el-button>
+                  <el-button type="success" @click="downloadMusic">
+                    下载当前音乐
+                    <i class="el-icon-download el-icon--right"></i>
+                  </el-button>
                 </div>
               </div>
             </div>
           </v-scroll>
           <div class="aside-content">
             <keep-alive>
-            <FAside></FAside>
+              <FAside></FAside>
             </keep-alive>
           </div>
-
         </div>
       </div>
     </div>
 
     <Footer></Footer>
   </div>
-
 </template>
 
 <script>
@@ -86,7 +108,8 @@ export default {
             tempMusic["title"] = music.musicName;
             tempMusic["artist"] = " ";
             tempMusic["src"] = music.musicUrl;
-            tempMusic["pic"] = music.musicPic;
+            tempMusic["pic"] =
+              music.musicPic || "http://119.29.230.48/upload/image/youke.jpg";
             tempMusic["lrc"] = "[00:00.00]暂无歌词";
             this.audio.push(tempMusic);
           }
@@ -122,9 +145,9 @@ export default {
       let title = document.querySelector(".aplayer-title");
       this.$router.push({
         path: "/music-player",
-        query:{
-          url:audio.src,
-          title:title.innerText
+        query: {
+          url: audio.src,
+          title: title.innerText
         }
       });
     }
@@ -199,7 +222,7 @@ export default {
   .aside-content {
     display: none;
   }
- 
+
   .v-scroll {
     width: 100%;
     height: calc(100vh - 0.852rem);

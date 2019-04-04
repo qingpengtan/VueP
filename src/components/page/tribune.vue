@@ -37,7 +37,13 @@
                 </div>
                 <div class="ant-list-item-content">
                   <div>
-                    <div class="text-content">{{article.articleBrief}}</div>
+                    <div class="text-content">
+                      {{article.articleBrief}}
+                      <router-link
+                        :to="{path:`/detail/${jiami(article.articleId)}/${md(jiami(article.articleId))}`}"
+                        style="font-size:13px;color:#3a8ee6"
+                      >查看更多</router-link>
+                    </div>
                     <div class="publish">
                       <span>
                         <img :src="article.userPic">
@@ -200,22 +206,22 @@ export default {
           document.title = this.articleTag = "Java版块";
           break;
         case "3":
-          document.title =  this.articleTag = "Web开发版块";
+          document.title = this.articleTag = "Web开发版块";
           break;
         case "8":
-          document.title =  this.articleTag = "NodeJS版块";
+          document.title = this.articleTag = "NodeJS版块";
           break;
         case "4":
-          document.title =  this.articleTag = "Go语言版块";
+          document.title = this.articleTag = "Go语言版块";
           break;
         case "5":
-          document.title =  this.articleTag = "大数据版块";
+          document.title = this.articleTag = "大数据版块";
           break;
         case "6":
-          document.title =  this.articleTag =  "Python版块";
+          document.title = this.articleTag = "Python版块";
           break;
         default:
-          document.title =  this.articleTag = "其他版块";
+          document.title = this.articleTag = "其他版块";
           break;
       }
     }
@@ -246,10 +252,18 @@ export default {
   width: 680px;
   float: left;
   height: 40px;
-  background: -webkit-linear-gradient(left,#7697b9, white); /* Safari 5.1 - 6.0 */
-  background: -o-linear-gradient(right,#7697b9, white); /* Opera 11.1 - 12.0 */
-  background: -moz-linear-gradient(right,#7697b9, white); /* Firefox 3.6 - 15 */
-  background: linear-gradient(to right,#7697b9, white); /* 标准的语法 */
+  background: -webkit-linear-gradient(
+    left,
+    #7697b9,
+    white
+  ); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right, #7697b9, white); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(
+    right,
+    #7697b9,
+    white
+  ); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right, #7697b9, white); /* 标准的语法 */
   line-height: 40px;
   padding-left: 40px;
   color: white;
@@ -366,7 +380,7 @@ h3 {
   }
   .layout-title {
     width: 100%;
-    height:24px;
+    height: 24px;
     line-height: 24px;
     font-size: 14px;
     padding-left: 16px;

@@ -44,7 +44,6 @@
 </template>
 
 <script>
-
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import Footer from "../common/Footer.vue";
@@ -86,7 +85,35 @@ export default {
   mounted() {},
   methods: {
     onEditorChange(quill) {
-      this.articleBrief = quill.quill.container.textContent;
+      let length = quill.quill.container.textContent.length;
+      if (length > 6000) {
+        this.articleBrief = quill.quill.container.textContent.substring(
+          0,
+          length / 50
+        );
+      } else if (3000 < length && length < 6000) {
+        this.articleBrief = quill.quill.container.textContent.substring(
+          0,
+          length / 20
+        );
+      } else if (1000 < length && length < 3000) {
+        this.articleBrief = quill.quill.container.textContent.substring(
+          0,
+          length / 10
+        );
+      }else if (500 < length && length < 1000) {
+        this.articleBrief = quill.quill.container.textContent.substring(
+          0,
+          length / 5
+        );
+      } else if (100 < length && length < 500) {
+        this.articleBrief = quill.quill.container.textContent.substring(
+          0,
+          length / 2
+        );
+      } else if ( length < 100) {
+        this.articleBrief = quill.quill.container.textContent;
+      } 
     },
 
     setEdirorParam() {
@@ -141,7 +168,7 @@ export default {
           articleTitle: this.articleTitle,
           articleTagId: this.articleTagId,
           articleId: this.articleId,
-          articleBrief: this.articleBrief.substring(0, 350)
+          articleBrief: this.articleBrief
         })
         .then(res => {
           if (res.code == 1) {
@@ -271,7 +298,6 @@ export default {
   font-family: Consolas, Inconsolata, Courier, monospace !important;
   color: rgb(169, 183, 198);
 }
-
 
 @media only screen and (max-width: 481px) {
   .layout-main {
